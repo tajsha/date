@@ -5,6 +5,7 @@ Dating::Application.routes.draw do
   
   resources :users
   resources :sessions
+  resources :password_resets
   
   root to: 'users#new'
 
