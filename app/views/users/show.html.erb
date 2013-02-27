@@ -1,10 +1,9 @@
-<<<<<<< HEAD
 <h1><%= @user.username %></h1>
-
+ 
 <h2>Basics</h2>
-
-<%= form_for(@user, :url => {:action => :create}) do |f| %>
-					
+ 
+<%= form_for @user do |f| %>
+  				
 	<div class="field">
 		<%= f.label :height %><br/>
 		<%= f.select :about_me, [['Feet', nil], '4', '5', '6'] %>
@@ -48,10 +47,6 @@
 		<%= f.label :about_me %><br/>
 		<%= f.text_field :about_me %>
 	<div class="actions"><%= f.submit %></div>
-
+ 
 <% end %>
 <% end %>
-=======
-<% provide(:title, @user.username) %>
-<h1><%= @user.username %></h1>
->>>>>>> parent of fbc8f4e... working on user profile
