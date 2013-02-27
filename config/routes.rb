@@ -3,6 +3,7 @@ Dating::Application.routes.draw do
   get 'login' => 'sessions#new'
   get 'logout' => 'sessions#destroy'
   get 'edit' => 'users#edit'
+  get "/profile/:id" => "users#show"
   
   resources :users
   resources :sessions

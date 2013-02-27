@@ -2,7 +2,7 @@
 
 <h2>Basics</h2>
 
-<%= form_for @user do |f| %>
+<%= form_for(@user, :url => {:action => :create}) do |f| %>
 					
 	<div class="field">
 		<%= f.label :height %><br/>
