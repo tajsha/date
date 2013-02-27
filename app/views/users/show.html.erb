@@ -1,2 +1,52 @@
-<% provide(:title, @user.username) %>
 <h1><%= @user.username %></h1>
+
+<h2>Basics</h2>
+
+<%= form_for @user do |f| %>
+					
+	<div class="field">
+		<%= f.label :height %><br/>
+		<%= f.select :about_me, [['Feet', nil], '4', '5', '6'] %>
+		<%= f.select :about_me, [['Inches', nil], '0', '1', '2', '3', '4', 				 	
+								'5', '6', '7', '8', '9', '10', '11'] %>
+		</div>
+	<div class="field">
+		<%= f.label :children %><br/>
+		<%= f.select :children, [['Do you have or want kids?', nil], 'Yes, they live with me', 'I want kids now', 'I want one someday', 'Not for me']%>
+		</div>
+	<div class="field">
+		<%= f.label :religion %><br/>
+		<%= f.select :religion, [['What is your faith?', nil], 'Agnostic', 'Atheist', 'Christian', 'Catholic', 'Buddhist', 'Hindu', 'Jewish', 'Muslim', 'Spiritual without affiliation', 'Other', 'None', 'Prefer not to say'  ]%><br/>
+		<%= f.select :religion, [['How important is this to you?', nil], 'Very Important', 'Somewhat Important', 'Not Important']%>
+		</div>
+	<div class="field">
+		<%= f.label :career %><br/>
+		<%= f.text_field :career %>
+	</div>
+	<div class="field">
+		<%= f.label :education %><br/>
+		<%= f.select :education, [['What is your education level?', nil], 'High school', 'Some college', 'Undergraduate', "Bachelor's", "Master's ", 'PhD', 'Business school', 'Law school', 'Medical school' ]%>
+		</div>
+	<div class="field">
+		<%= f.label :ethnicity %><br/>
+		<%= f.select :ethnicity, [['What is your ethnicity?', nil], 'Asian', 'Black', 'Biracial', 'Indian', 'Hispanic/Latin', 'Middle Eastern', 'Native American', 'Pacific Islander', 'White', 'Other' ]%>
+		</div>
+		<%= f.label :user_drink %><br/>
+		<%= f.select :user_drink, [['How much do you drink?', nil], 'Often Drinks', 'Sometimes drinks', 'Never drinks', 'No comment' ]%>
+		</div><br/>
+		<%= f.label :user_smoke %><br/>
+		<%= f.select :user_smoke, [['How often do you smoke?', nil], 'Often smokes', 'Sometimes smokes', 'Never smokes'] %>
+		</div>
+	<div class="actions"><%= f.submit %></div>
+	
+	<h3>About Me</h3>
+	
+	<%= form_for @user do |f| %>
+	
+	<div class="field">
+		<%= f.label :about_me %><br/>
+		<%= f.text_field :about_me %>
+	<div class="actions"><%= f.submit %></div>
+
+<% end %>
+<% end %>
