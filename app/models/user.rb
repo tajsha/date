@@ -30,7 +30,11 @@
 
 class User < ActiveRecord::Base
   has_secure_password
+<<<<<<< HEAD
   attr_accessible :password_confirmation, :about_me, :password, :birthday, :career, :children, :education, :email, :ethnicity, :gender, :height, :name, :password_digest, :politics, :religion, :sexuality, :user_drink, :user_smoke, :username, :zip_code
+=======
+  attr_accessible :about_me, :password, :password_confirmation, :birthday, :career, :children, :education, :email, :ethnicity, :gender, :height, :name, :password_digest, :politics, :religion, :sexuality, :user_drink, :user_smoke, :username, :zip_code
+>>>>>>> 90831cb1170b72a27e74714ec85f81fd4add0648
   validates_uniqueness_of :email
   validates :username, presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
