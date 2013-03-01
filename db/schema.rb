@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130225153556) do
+ActiveRecord::Schema.define(:version => 20130228160445) do
+
+  create_table "galleries", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "name"
+  end
+
+  create_table "photos", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "image"
+    t.string   "name"
+    t.integer  "gallery_id"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email"
@@ -37,6 +51,9 @@ ActiveRecord::Schema.define(:version => 20130225153556) do
     t.string   "auth_token"
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
+    t.boolean  "admin"
+    t.integer  "feet"
+    t.integer  "inches"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

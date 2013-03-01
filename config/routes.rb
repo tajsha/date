@@ -8,8 +8,11 @@ Dating::Application.routes.draw do
   resources :users
   resources :sessions
   resources :password_resets
+  resources :galleries
+  resources :photos
   
   root to: 'users#new'
+  root to: 'galleries#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

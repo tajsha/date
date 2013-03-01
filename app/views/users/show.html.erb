@@ -6,8 +6,8 @@
   				
 	<div class="field">
 		<%= f.label :height %><br/>
-		<%= f.select :about_me, [['Feet', nil], '4', '5', '6'] %>
-		<%= f.select :about_me, [['Inches', nil], '0', '1', '2', '3', '4', 				 	
+		<%= f.select :feet, [['Feet', nil], '4', '5', '6'] %>
+		<%= f.select :inches, [['Inches', nil], '0', '1', '2', '3', '4', 				 	
 								'5', '6', '7', '8', '9', '10', '11'] %>
 		</div>
 	<div class="field">
@@ -16,7 +16,7 @@
 		</div>
 	<div class="field">
 		<%= f.label :religion %><br/>
-		<%= f.select :religion, [['What is your faith?', nil], 'Agnostic', 'Atheist', 'Christian', 'Catholic', 'Buddhist', 'Hindu', 'Jewish', 'Muslim', 'Spiritual without affiliation', 'Other', 'None', 'Prefer not to say'  ]%><br/>
+		<%= f.select :religion, [['What is your faith?', nil], 'Agnostic', 'Atheist', 'Christian', 'Catholic', 'Buddhist', 'Hindu', 'Jewish', 'Muslim', 'Spiritual without affiliation', 'Other', 'None', 'Prefer not to say']%><br/>
 		<%= f.select :religion, [['How important is this to you?', nil], 'Very Important', 'Somewhat Important', 'Not Important']%>
 		</div>
 	<div class="field">

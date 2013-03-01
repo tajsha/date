@@ -19,7 +19,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string :user_smoke
       t.string :user_drink
       t.string :about_me
-
+      t.string :inches
+      t.string :feet
       t.timestamps
     end
   end
