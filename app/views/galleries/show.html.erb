@@ -4,8 +4,12 @@
 		<%= image_tag photo.image_url(:thumb).to_s %>
 		<div class="name"><%= photo.name %></div>
 		<div class="actions">
+			<% if can? :edit, photo %>
 			<%= link_to "edit", edit_photo_path(photo) %> |
+			<% end %>
+			<% if can? :remove, photo %>
 			<%= link_to "remove", photo, :confirm => 'Are you sure?', :method => :delete %>
+			<% end %>
 		</div>
 	  </div>
 	<% end %>

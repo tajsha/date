@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 ruby '2.0.0'
-
 gem 'rails', '3.2.12'
 
 # Bundle edge Rails instead:
@@ -10,6 +9,7 @@ gem 'rails', '3.2.12'
 gem 'mysql2'
 gem 'carrierwave'
 gem 'rmagick'
+gem 'cancan'
 
 
 # Gems used only for assets and not required
@@ -43,4 +43,13 @@ gem 'jquery-rails'
 
 group :development do
   gem 'annotate'
+end
+
+gem 'rspec-rails', :group => [:test, :development]
+gem 'database_cleaner', :group => [:test, :development]
+group :test do
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'guard-rspec'
+  gem 'rb-fsevent'
 end

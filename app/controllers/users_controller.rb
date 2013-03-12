@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  
   def new
     @user = User.new
   end
@@ -20,10 +21,12 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    authorize! :update, @user
   end
   
     def edit
       @user = User.find(params[:id])
+      authorize! :update, @user
 end
   
   def index
@@ -41,6 +44,7 @@ def update
     if @user.update_attributes(params[:user])
       flash[:success] = "Account updated"
       redirect_to @user
+      authorize! :update, @user
     else
       render 'edit'
     end

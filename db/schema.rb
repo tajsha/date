@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130228160445) do
+ActiveRecord::Schema.define(:version => 20130312033218) do
 
   create_table "galleries", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -54,6 +54,8 @@ ActiveRecord::Schema.define(:version => 20130228160445) do
     t.boolean  "admin"
     t.integer  "feet"
     t.integer  "inches"
+    t.string   "role"
+    t.integer  "roles_mask"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
