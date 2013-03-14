@@ -38,11 +38,14 @@ end
    end
   
 def update
-    @user = User.find(params[:id])
+    @user = if current_user.role?(:admin)
+       User.find(params[:id])
+     else
+       current_user
+     end
     if @user.update_attributes(params[:user])
       flash[:success] = "Account updated"
       redirect_to @user
-      authorize! :update, @user
     else
       render 'edit'
     end
