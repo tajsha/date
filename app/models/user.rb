@@ -30,23 +30,12 @@
 
 class User < ActiveRecord::Base
   has_secure_password
-  attr_accessible :password_confirmation, :role, :about_me, :feet, :inches, :password, :birthday, :career, :children, :education, :email, :ethnicity, :gender, :height, :name, :password_digest, :politics, :religion, :sexuality, :user_drink, :user_smoke, :username, :zip_code
+  attr_accessible :password_confirmation, :about_me, :feet, :inches, :password, :birthday, :career, :children, :education, :email, :ethnicity, :gender, :height, :name, :password_digest, :politics, :religion, :sexuality, :user_drink, :user_smoke, :username, :zip_code
   validates_uniqueness_of :email
   validates_presence_of :password, :on => :create
   before_create { generate_token(:auth_token) }
   ROLES = %w[admin user guest banned]
-
-  def roles=(roles)
-    self.roles_mask = (roles & ROLES).map { |r| 2**ROLES.index(r) }.sum
-  end
   
-  def roles
-    ROLES.reject { |r| ((roles_mask || 0) & 2**ROLES.index(r)).zero? }
-  end
-  
-  def role?(role)
-    roles.include? role.to_s
-  end
   
   def send_password_reset
     generate_token(:password_reset_token)
