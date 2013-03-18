@@ -38,7 +38,7 @@ end
    end
   
 def update
-    @user = if current_user.role?(:admin)
+    @user = if current_user.has_role?(:admin)
        User.find(params[:id])
      else
        current_user

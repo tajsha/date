@@ -30,12 +30,18 @@
 
 class User < ActiveRecord::Base
   has_secure_password
-  attr_accessible :password_confirmation, :about_me, :feet, :inches, :password, :birthday, :career, :children, :education, :email, :ethnicity, :gender, :height, :name, :password_digest, :politics, :religion, :sexuality, :user_drink, :user_smoke, :username, :zip_code
+  attr_accessible :role, :password_confirmation, :about_me, :feet, :inches, :password, :birthday, :career, :children, :education, :email, :ethnicity, :gender, :height, :name, :password_digest, :politics, :religion, :sexuality, :user_drink, :user_smoke, :username, :zip_code
   validates_uniqueness_of :email
   validates_presence_of :password, :on => :create
   before_create { generate_token(:auth_token) }
   ROLES = %w[admin user guest banned]
   
+  def to_s; username
+  end
+  
+  def has_role?(role_name)
+    role.present? && role.to_sym == role_name.to_sym
+  end
   
   def send_password_reset
     generate_token(:password_reset_token)
