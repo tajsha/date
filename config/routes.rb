@@ -4,12 +4,18 @@ Dating::Application.routes.draw do
   get 'logout' => 'sessions#destroy'
   get 'edit' => 'users#edit'
   get "/profile/:id" => "users#show"
+  get "profile/:id/settings" => 'users#edit'
+  match 'settings' => 'users#settings'
   
   resources :users
   resources :sessions
   resources :password_resets
   resources :galleries
   resources :photos
+  
+  resources :users do  
+      get 'settings', on: :member  
+  end
   
   root to: 'users#new'
   root to: 'galleries#index'

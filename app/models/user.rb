@@ -32,7 +32,10 @@ class User < ActiveRecord::Base
   has_secure_password
   attr_accessible :role, :password_confirmation, :about_me, :feet, :inches, :password, :birthday, :career, :children, :education, :email, :ethnicity, :gender, :height, :name, :password_digest, :politics, :religion, :sexuality, :user_drink, :user_smoke, :username, :zip_code
   validates_uniqueness_of :email
+  validates_format_of :email, with: /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i
   validates_presence_of :password, :on => :create
+  has_one :galleries
+  has_many :photos, :through => :galleries
   before_create { generate_token(:auth_token) }
   ROLES = %w[admin user guest banned]
   

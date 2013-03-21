@@ -1,4 +1,10 @@
 class UsersController < ApplicationController
+  respond_to :html, :json
+  
+  def settings
+    @user = User.find(params[:id])
+  end
+    
   
   def new
     @user = User.new
@@ -43,11 +49,7 @@ def update
      else
        current_user
      end
-    if @user.update_attributes(params[:user])
-      flash[:success] = "Account updated"
-      redirect_to @user
-    else
-      render 'edit'
+    @user.update_attributes(params[:user])
+    respond_with @user
     end
-end
 end
