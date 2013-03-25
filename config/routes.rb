@@ -5,7 +5,7 @@ Dating::Application.routes.draw do
   get 'edit' => 'users#edit'
   get "/profile/:id" => "users#show"
   get "profile/:id/settings" => 'users#edit'
-  match 'settings' => 'users#settings'
+  match 'settings/:id' => 'users#settings'
   
   resources :users
   resources :sessions
@@ -19,6 +19,14 @@ Dating::Application.routes.draw do
   
   root to: 'users#new'
   root to: 'galleries#index'
+  
+  resources :users do |user|
+    resources :messages do
+      collection do
+        post 'delete_multiple'
+      end
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

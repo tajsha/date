@@ -30,15 +30,30 @@
 
 class User < ActiveRecord::Base
   has_secure_password
-  attr_accessible :role, :password_confirmation, :about_me, :feet, :inches, :password, :birthday, :career, :children, :education, :email, :ethnicity, :gender, :height, :name, :password_digest, :politics, :religion, :sexuality, :user_drink, :user_smoke, :username, :zip_code
+  attr_accessible :role, :age, :age_end, :password_confirmation, :about_me, :feet, :inches, :password, :birthday, :career, :children, :education, :email, :ethnicity, :gender, :height, :name, :password_digest, :politics, :religion, :sexuality, :user_drink, :user_smoke, :username, :zip_code
   validates_uniqueness_of :email
   validates_format_of :email, with: /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i
   validates_presence_of :password, :on => :create
   has_one :galleries
   has_many :photos, :through => :galleries
+  has_many :received_messages,
+  :class_name => 'Message',
+  :primary_key => 'user_id',
+  :foreign_key => 'recepient_id',
+  :order => "messages.created_at DESC",
+  :conditions => ["messages.recepient_deleted = ?", false]
   before_create { generate_token(:auth_token) }
   ROLES = %w[admin user guest banned]
-  
+ 
+ def unread_messages?
+   unread_message_count > 0 ? true : false
+ end
+ 
+ # Returns the number of unread messages for this user
+ def unread_message_count
+   eval 'messages.count(:conditions => ["recepient_id = ? AND read_at IS NULL", self.user_id])'
+ end
+ 
   def to_s; username
   end
   

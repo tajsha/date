@@ -4,4 +4,4 @@
 		<p>Password: <%= best_in_place @user, :password %></p>
 		<p>Password Confirmation: <%= best_in_place @user, :password_confirmation %></p>
 		<p>Zip Code: <%= best_in_place @user, :zip_code %></p>
-		<p>Birthdate: <%= best_in_place @user, :birthday %></p>
+		<p>Birthdate: <%= @user.birthday %>
