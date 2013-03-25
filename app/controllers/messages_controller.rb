@@ -41,7 +41,7 @@ class MessagesController < ApplicationController
       if params[:delete]
         params[:delete].each { |id|
           @message = Message.find(id)
-          @message.mark_message_deleted(@message.id,@user.user_id) unless @message.nil?
+          @message.mark_message_deleted(@message.id,@user_id) unless @message.nil?
         }
         flash[:notice] = "Messages deleted"
       end
