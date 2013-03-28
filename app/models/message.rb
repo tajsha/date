@@ -4,11 +4,9 @@ class Message < ActiveRecord::Base
 
 	belongs_to :sender,
 	:class_name => 'User',
-	:primary_key => 'user_id',
 	:foreign_key => 'sender_id'
 	belongs_to :recepient,
 	:class_name => 'User',
-	:primary_key => 'user_id',
 	:foreign_key => 'recepient_id'
 
     # marks a message as deleted by either the sender or the recepient, which ever the user that was passed is.

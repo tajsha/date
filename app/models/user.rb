@@ -38,7 +38,6 @@ class User < ActiveRecord::Base
   has_many :photos, :through => :galleries
   has_many :received_messages,
   :class_name => 'Message',
-  :primary_key => 'user_id',
   :foreign_key => 'recepient_id',
   :order => "messages.created_at DESC",
   :conditions => ["messages.recepient_deleted = ?", false]

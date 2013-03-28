@@ -1,7 +1,4 @@
-<h2>Sent Messages</h2>
-<% if @messages.size == 0 %>
-No Sent messages
-<% else %>
+
 		<%= form_tag delete_multiple_user_messages_path, :method=>:post do %>
 			<table class="table table-bordered">
 				<tr>
@@ -22,4 +19,3 @@ No Sent messages
 		<%= submit_tag "Delete selected" %>
 		<% end %>
 	<%= link_to "View Inbox", user_messages_path(current_user, :mailbox=>:inbox)%>
-<% end %>
