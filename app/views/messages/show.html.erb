@@ -1,6 +1,6 @@
 <p>
 	<strong>From:</strong> 
-	<%= @message.sender == @user ? "You" : "#{@message.sender.first_name} #{@message.sender.last_name}" %>
+	<%= @message.sender == @user_id %>
 </p>
 
 <p>
@@ -9,7 +9,7 @@
 </p>
 <p>
 	<strong>To:</strong> 
-	<%= @message.recepient == @user ? "You" : "#{@message.recepient.first_name} #{@message.recepient.last_name}" %>
+	<%= @message.recepient == @user_id %>
 </p>
 
 <p>
@@ -18,7 +18,7 @@
 </p>
 <p>
 	<% if @message.recepient == @user %>
-	<%= link_to "Reply", new_user_message_path(@user, :reply_to => @message.sender.user_id) %> |
+	<%= link_to "Reply", new_user_message_path(@user, :reply_to => @user_id) %> |
 	<% end %>
 	<%= link_to "Inbox", user_messages_path(current_user, :mailbox=>:inbox)%>
 </p>

@@ -34,7 +34,7 @@ class MessagesController < ApplicationController
   end
 
   def show
-    @message = Message.readingmessage(params[:id],@user_id)
+    @message = Message.find(params[:id])
   end
   
   def delete_multiple

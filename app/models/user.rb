@@ -36,13 +36,12 @@ class User < ActiveRecord::Base
   validates_presence_of :password, :on => :create
   has_one :galleries
   has_many :photos, :through => :galleries
-  has_many :received_messages,
-  :class_name => 'Message',
-  :foreign_key => 'recepient_id',
-  :order => "messages.created_at DESC",
-  :conditions => ["messages.recepient_deleted = ?", false]
   before_create { generate_token(:auth_token) }
   ROLES = %w[admin user guest banned]
+  
+  def received_messages
+      Message.received_by(self)
+    end
  
  def unread_messages?
    unread_message_count > 0 ? true : false

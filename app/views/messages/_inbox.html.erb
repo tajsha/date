@@ -1,7 +1,8 @@
 <h2>Your Inbox</h2>
-<% @user.received_messages.each do |message| %>
+<% if @messages.size == 0 %>
 No messages in your Inbox
 <% end %>
+<% else %>
 		<%= form_tag delete_multiple_user_messages_path, :method=>:post do %>
 			<table  class="table table-bordered">
 			        <tr>
@@ -20,7 +21,7 @@ No messages in your Inbox
 								  <%= link_to "#{h(message.subject)} (unread)", user_message_path(@user, message) %>
 								<% end %>
 							</td>
-							<td><%= "#{message.sender.first_name} #{message.sender.last_name}" %></td>
+						
 					        <td><%=h message.created_at.to_s(:long) %></td>
 						</tr>
 			<% end %>

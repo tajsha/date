@@ -32,5 +32,12 @@ class Message < ActiveRecord::Base
     	self.read_at.nil? ? false : true
     end
 
+    def self.received_by(user)
+       where(:recepient_id => user.id)
+     end
+
+     def self.not_recepient_deleted
+       where("recepient_deleted = ?", false)
+     end
 
 end
