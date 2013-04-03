@@ -1,7 +1,7 @@
 class Photo < ActiveRecord::Base
   attr_accessible :title, :body, :gallery_id, :name, :image, :remote_image_url
-  belongs_to :user, :through => :gallery
-  belongs_to :gallery
+  has_many :user, :through => :gallery
+  has_many :gallery
   mount_uploader :image, ImageUploader
   
     LIMIT = 5

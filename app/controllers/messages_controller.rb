@@ -34,8 +34,9 @@ class MessagesController < ApplicationController
   end
 
   def show
-    @message = Message.find(params[:id])
-  end
+     @message = Message.find(params[:id])
+     @message.readingmessage if @message.recepient == current_user
+   end
   
   def delete_multiple
       if params[:delete]

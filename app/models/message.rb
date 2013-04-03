@@ -18,15 +18,11 @@ class Message < ActiveRecord::Base
     end
 
     # Read message and if it is read by recepient then mark it is read
-    def self.readingmessage(id, reader)
-    	message = find(id, :conditions => ["sender_id = ? OR recepient_id = ?", reader, reader])
-    	if message.read_at.nil? && (message.recepient.user_id==reader)
-    		message.read_at = Time.now
-    		message.save!
-    	end
-    	message
+    def readingmessage
+      read_at ||= Time.now
+      save
     end
-
+    
     # Based on if a message has been read by it's recepient returns true or false.
     def read?
     	self.read_at.nil? ? false : true
