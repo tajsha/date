@@ -12,11 +12,10 @@ class Message < ActiveRecord::Base
     # marks a message as deleted by either the sender or the recepient, which ever the user that was passed is.
     # When both sender and recepient marks it deleted, it is destroyed.
     def mark_message_deleted(id,user_id)
-    	self.sender_deleted = true if self.sender_id == user_id and self.id=id
-    	self.recepient_deleted = true if self.recepient_id == user_id and self.id=id
-    	self.sender_deleted && self.recepient_deleted ? self.destroy : save!
+        self.sender_deleted = true if self.sender_id == user_id
+        self.recepient_deleted = true if self.recepient_id == user_id
+        (self.sender_deleted && self.recepient_deleted) ? self.destroy : self.save!
     end
-
     # Read message and if it is read by recepient then mark it is read
     def readingmessage
       read_at ||= Time.now

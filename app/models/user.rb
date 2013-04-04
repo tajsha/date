@@ -34,10 +34,13 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   validates_format_of :email, with: /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i
   validates_presence_of :password, :on => :create
-  has_one :galleries
+  has_many :galleries
   has_many :photos, :through => :galleries
   before_create { generate_token(:auth_token) }
   ROLES = %w[admin user guest banned]
+  
+  # models/user.rb
+  after_create :setup_gallery
   
   def received_messages
       Message.received_by(self)
@@ -70,5 +73,10 @@ class User < ActiveRecord::Base
     begin
       self[column] = SecureRandom.urlsafe_base64
     end while User.exists?(column => self[column])
+  end
+  
+  private
+  def setup_gallery
+    Gallery.create(user: self)
   end
 end
