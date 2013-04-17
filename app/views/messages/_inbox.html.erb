@@ -6,10 +6,10 @@ No messages in your Inbox
 		<%= form_tag delete_multiple_user_messages_path, :method=>:post do %>
 			<table  class="table table-bordered">
 			        <tr>
-					<th>Delete?</th>
-					<th>Sent</th>
-					<th>Sender</th>
-					<th>Sent</th>
+					<th>Delete</th>
+					<th>Subject</th>
+					<th>Date</th>
+					<th>From</th>
 				</tr>
 					<% for message in @messages %>
 						<tr>
@@ -21,8 +21,9 @@ No messages in your Inbox
 								  <%= link_to "#{h(message.subject)} (unread)", user_message_path(@user, message) %>
 								<% end %>
 							</td>
-						
+
 					        <td><%=h message.created_at.to_s(:long) %></td>
+					<td><%= "#{message.sender}" %></td>
 						</tr>
 			<% end %>
 			</table>

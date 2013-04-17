@@ -11,7 +11,7 @@
 				<tr>
 					<td><%= check_box_tag "delete[]", message.id %></td>
 					<td><%= link_to h(message.subject), user_message_path(@user, message) %></td>
-					<td><%= "#{message.recepient.first_name} #{message.recepient.last_name}" %></td>
+					<td><%= "#{message.recipient.first_name} #{message.recipient.last_name}" %></td>
 					<td><%=h message.created_at.to_s(:long) %></td>
 				</tr>
 				<% end %>

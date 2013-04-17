@@ -1,6 +1,6 @@
 <p>
 	<strong>From:</strong> 
-	<%= @message.sender == @user_id %>
+	<%= @message.sender %>
 </p>
 
 <p>
@@ -9,7 +9,7 @@
 </p>
 <p>
 	<strong>To:</strong> 
-	<%= @message.recepient == @user_id %>
+	<%= @message.recipient %>
 </p>
 
 <p>
@@ -17,8 +17,14 @@
 	<%=h @message.body %>
 </p>
 <p>
-	<% if @message.recepient == @user %>
-	<%= link_to "Reply", new_user_message_path(@user, :reply_to => @user_id) %> |
+	<% if @message.recipient == @user %>
+
+	<%= link_to "Reply", new_user_message_path(@user, :reply_to => @message.sender) %>
+	
+	 |
 	<% end %>
 	<%= link_to "Inbox", user_messages_path(current_user, :mailbox=>:inbox)%>
+	|
+	<%= link_to "Delete", [current_user, @message], :confirm => 'Are you sure you want to delete this message?', :method => :delete %>
+	
 </p>

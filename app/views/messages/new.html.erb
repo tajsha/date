@@ -1,13 +1,13 @@
 <%= form_for @message, :url => user_messages_path(@user) do |f| %>
-  <% if @message.recepient_id.nil? %>
+  <% if @message.recipient_id.nil? %>
     <p>
       To:<br />
-      <%= f.text_field :recepient_id %>
+      <%= f.text_field :recipient_id %>
     </p>
   <% else %>
     <p>
       To:<br />
-      <%= f.text_field :recepient_id, :value=>@message.recepient_id,:readonly => true %>
+      <%= f.text_field :recipient_id, :value=>@message.recipient_id,:readonly => true %>
     </p>
   <% end %>
       <p>

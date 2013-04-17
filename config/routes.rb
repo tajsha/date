@@ -12,6 +12,7 @@ Dating::Application.routes.draw do
   resources :password_resets
   resources :galleries
   resources :photos
+  resources :searches
   
   resources :users do  
       get 'settings', on: :member  

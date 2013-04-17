@@ -17,14 +17,14 @@ class MessagesController < ApplicationController
     if params[:reply_to]
       @reply_to = User.find_by_user_id(params[:reply_to])
       unless @reply_to.nil?
-        @message.recepient_id = @reply_to.user_id
+        @message.recipient_id = @reply_to.user_id
       end
     end
   end
   
   def create
     @message = Message.new(params[:message])
-    @message.sender_id = @user_id
+    @message.sender_id = @user.id
     if @message.save
       flash[:notice] = "Message has been sent"
       redirect_to user_messages_path(current_user, :mailbox=>:inbox)
@@ -35,14 +35,21 @@ class MessagesController < ApplicationController
 
   def show
      @message = Message.find(params[:id])
-     @message.readingmessage if @message.recepient == current_user
+     @message.readingmessage if @message.recipient == current_user
+   end
+   
+   def destroy
+     @message = Message.find(params[:id])
+     @message.destroy
+     flash[:notice] = "Successfully deleted message."
+     redirect_to user_messages_path(@user, @messages)
    end
   
   def delete_multiple
       if params[:delete]
         params[:delete].each { |id|
           @message = Message.find(id)
-          @message.mark_message_deleted(@message.id,@user_id) unless @message.nil?
+          @message.mark_message_deleted(@message.id,@user.id) unless @message.nil?
         }
         flash[:notice] = "Messages deleted"
       end

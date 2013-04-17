@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
  
  # Returns the number of unread messages for this user
  def unread_message_count
-   eval 'messages.count(:conditions => ["recepient_id = ? AND read_at IS NULL", self.user_id])'
+   eval 'messages.count(:conditions => ["recipient_id = ? AND read_at IS NULL", self.user_id])'
  end
  
   def to_s; username
@@ -77,6 +77,6 @@ class User < ActiveRecord::Base
   
   private
   def setup_gallery
-    Gallery.create(user: self)
-  end
+     self.galleries << Gallery.create
+   end
 end
