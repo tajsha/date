@@ -34,5 +34,9 @@ class Message < ActiveRecord::Base
      def self.not_recipient_deleted
        where("recipient_deleted = ?", false)
      end
-
-end
+     
+     def self.sent_by(user)
+        Message.where(:sender_id => user.id)
+      end
+      
+    end

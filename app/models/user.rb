@@ -50,6 +50,10 @@ class User < ActiveRecord::Base
    unread_message_count > 0 ? true : false
  end
  
+ def sent_messages
+   Message.sent_by(self)
+ end
+ 
  # Returns the number of unread messages for this user
  def unread_message_count
    eval 'messages.count(:conditions => ["recipient_id = ? AND read_at IS NULL", self.user_id])'
