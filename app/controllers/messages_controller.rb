@@ -10,6 +10,9 @@ class MessagesController < ApplicationController
     #elsif params[:mailbox] == "archieved"
      # @messages = @user.archived_messages
     end
+    if params[:mailbox] == "unread"
+    @messages = @user.unread_messages
+  end
   end
   
   def new

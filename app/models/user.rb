@@ -50,6 +50,10 @@ class User < ActiveRecord::Base
    unread_message_count > 0 ? true : false
  end
  
+ def unread_messages
+   received_messages.where('read_at IS NULL')
+ end
+ 
  def sent_messages
    Message.sent_by(self)
  end
