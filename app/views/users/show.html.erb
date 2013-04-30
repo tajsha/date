@@ -1,6 +1,7 @@
 <h1><%= @user.username %></h1>
 
 <h2>Basics</h2>
+  <p>Gender: <%= @user.gender %></p>
   <p>Height: <%= best_in_place @user, :feet %>'<%= best_in_place @user, :inches %></p>
   <p>Children: <%= best_in_place @user, :children, nil: 'Do you have or wants kids?', :type => :select, :collection => [[1, "Yes, they live with me"], [2, "I want kids now"], [3, "I want one someday"], [4, "Not for me"]] %></p>
   <p>Religion: <%= best_in_place @user, :religion, nil: 'What is your faith?', :type => :select, :collection => [[1, "Agnostic"], [2, "Atheist"], [3, "Christian"], [4, "Catholic"], [5, "Buddhist"], [6, "Hindu"], [7, "Jewish"], [8, "Muslim"], [9, "Spiritual without affiliation"], [10, "Other"], [11, "None"], [12, "Prefer not to say"]] %><br> 

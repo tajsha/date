@@ -1,12 +1,11 @@
 <div id="photos">
 	<% for photo in @gallery.photos %>
 	<div class="photo">
-		<%= image_tag photo.image
-		_url(:thumb).to_s %>
+		<%= image_tag photo.image_url(:thumb).to_s %>
 		<div class="name"><%= photo.name %></div>
 		<div class="actions">
 			<%= link_to "edit", edit_photo_path(photo) %> |
-	
+
 			<%= link_to "remove", photo, :confirm => 'Are you sure?', :method => :delete %>
 		</div>
 	  </div>
@@ -20,4 +19,3 @@
   <%= link_to "Remove Gallery", @gallery, :confirm => 'Are you sure?', :method => :delete %> |
   <%= link_to "View Galleries", galleries_path %>
 </p>
-		

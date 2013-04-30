@@ -1,18 +1,19 @@
 class PhotosController < ApplicationController
  
   def new
-    @photo = Photo.new(:gallery_id => params[:gallery_id])
+    @photo = Photo.new
   end
   
   def create
     @photo = Photo.new(params[:photo])
+    @photo.user = current_user
     if @photo.save
       flash[:notice] = "Successfully created photos."
-      redirect_to @photo.gallery
+      redirect_to user_photos_path(current_user)
     else
       render :action => 'new'
     end
-end
+  end
 
   def edit
     @photo = Photo.find(params[:id])

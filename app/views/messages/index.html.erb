@@ -4,4 +4,6 @@
 		<%= render :partial => "inbox" %>
 <% elsif params[:mailbox] == "archieved" %>
         <%= render :partial => "inbox" %>
+<% elsif params[:mailbox] == "unread" %>
+		<%= render :partial => "inbox" %>
 <% end %>

@@ -1,3 +1,12 @@
+<%= form_tag users_path, method: :get do %>
+<p>
+	<%= text_field_tag :search, params[:search] %>
+	<%= button_tag "Search", name: nil %>
+	</p>
+<% end %>
+
+<P><%= link_to "Advanced Search", new_search_path %><p>
+
 <h1>Sign Up</h1>
 
 <%= form_for @user do |f| %>
@@ -35,9 +44,7 @@
 			<%= f.select :gender, ['women', 'men', 'both']%>
 			</div>
 			<div class="field">
-				<%= f.label :age %>
-				<%= f.text_field :age %> to 
-				<%= f.text_field :age %>
+			Age <%= select(@object, :age, (18..75).to_a) %> to 	<%= select(@object, :age, (18..75).to_a) %>
 			</div>
 			<div class="field">
 					<%= f.label :birthday %>
