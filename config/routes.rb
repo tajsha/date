@@ -7,7 +7,6 @@ Dating::Application.routes.draw do
   get "profile/:id/settings" => 'users#edit'
   match 'settings/:id' => 'users#settings'
   
-  resources :users
   resources :sessions
   resources :password_resets
   resources :galleries

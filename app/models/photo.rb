@@ -1,17 +1,20 @@
 class Photo < ActiveRecord::Base
   attr_accessible :title, :body, :gallery_id, :name, :image, :remote_image_url
-  has_many :user, :through => :gallery
+  belongs_to :gallery
+  has_many :gallery_users, :through => :gallery, :source => :user
   belongs_to :user
   mount_uploader :image, ImageUploader
   
-  validate :quota
+  LIMIT = 3
 
-  private
+  validate do |record|
+    record.validate_photo_quota
+  end
 
-  def quota
-    return unless user
-    if gallery.photos.count > 4
-      errors[:base] << "Maximum photos uploaded, delete to upload more"
-    end 
+  def validate_photo_quota
+    return unless self.user
+    if self.user.photos(:reload).count >= LIMIT
+      errors.add(:base, :exceeded_quota)
+    end
   end
 end
