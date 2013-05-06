@@ -82,7 +82,6 @@ class User < ActiveRecord::Base
     end while User.exists?(column => self[column])
   end
   
-  
   private
   def setup_gallery
      self.galleries << Gallery.create
