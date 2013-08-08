@@ -1,0 +1,12 @@
+<h1>New Question</h1>
+<%= form_for @question do |f| %>
+<%= @question.errors.full_messages.each do |msg| %>
+<li><%= msg %></li>
+<% end %>
+	<ul>
+		<li><%= f.text_field :question, {:placeholder => 'Please add your question...'} %></li>
+		<li><%= f.text_field :asked_by, {:placeholder => 'Please add your name...'} %></li>
+		<li><%= f.submit %></li>
+		</ul>
+		<% end %>
+		<%= link_to "Back", questions_path, :class => "button" %>

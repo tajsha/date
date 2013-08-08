@@ -5,7 +5,7 @@ class Photo < ActiveRecord::Base
   belongs_to :user
   mount_uploader :image, ImageUploader
   
-  LIMIT = 3
+  LIMIT = 5
 
   validate do |record|
     record.validate_photo_quota

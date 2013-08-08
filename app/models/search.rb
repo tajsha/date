@@ -9,11 +9,11 @@ class Search < ActiveRecord::Base
     
   def find_users
     users = User.order(:id)
-    users = users.where(gender: gender) if gender
-    users = users.where(zip_code: zip_code) if zip_code
-    users = users.where(children: children) if children
-    users = users.where(religion: religion) if religion
-    users = users.where(ethnicity: ethnicity) if ethnicity
-    users
+    users = users.where(gender: gender) if gender.present?
+       users = users.where(zip_code: zip_code) if zip_code.present?
+       users = users.where(children: children) if children.present?
+       users = users.where(religion: religion) if religion.present?
+       users = users.where(ethnicity: ethnicity) if ethnicity.present?
+       users
   end
 end

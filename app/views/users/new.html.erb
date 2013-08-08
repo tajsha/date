@@ -1,4 +1,4 @@
-<%= form_tag users_path, method: :get do %>
+<%= form_tag searches_path, method: :get do %>
 <p>
 	<%= text_field_tag :search, params[:search] %>
 	<%= button_tag "Search", name: nil %>
@@ -6,7 +6,7 @@
 <% end %>
 
 <P><%= link_to "Advanced Search", new_search_path %><p>
-
+	
 <h1>Sign Up</h1>
 
 <%= form_for @user do |f| %>
@@ -41,7 +41,7 @@
 	<div class="field">I'm a
 			<%= f.select :gender, ['man', 'woman']%>
 			interested in 
-			<%= f.select :gender, ['women', 'men', 'both']%>
+			<%= f.select :gender, ['woman', 'men', 'both']%>
 			</div>
 			<div class="field">
 			Age <%= select(@object, :age, (18..75).to_a) %> to 	<%= select(@object, :age, (18..75).to_a) %>

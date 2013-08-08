@@ -1,4 +1,9 @@
 <h1><%= @user.username %></h1>
+<% @user.photos.each do |photo| %>
+    <%= link_to image_tag(photo.image_url(:thumb)), photo.image_url%>
+<% end %></p>
+
+  <%= link_to "Add a Photo", new_photo_path(:gallery_id => @gallery) %>
 
 <h2>Basics</h2>
   <p>Gender: <%= @user.gender %></p>

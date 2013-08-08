@@ -33,14 +33,15 @@ class User < ActiveRecord::Base
   attr_accessible :role, :age, :age_end, :password_confirmation, :about_me, :feet, :inches, :password, :birthday, :career, :children, :education, :email, :ethnicity, :gender, :height, :name, :password_digest, :politics, :religion, :sexuality, :user_drink, :user_smoke, :username, :zip_code
   has_many :photos
   validates_uniqueness_of :email
-  validates_format_of :email, with: /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create
   validates_presence_of :password, :on => :create
   before_create { generate_token(:auth_token) }
   ROLES = %w[admin user guest banned]
   
   # models/user.rb
   after_create :setup_gallery
-  
+
+    
   def received_messages
       Message.received_by(self)
     end

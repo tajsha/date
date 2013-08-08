@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 ruby '2.0.0'
-gem 'rails', '3.2.12'
+gem 'rails', '4.0.0.rc1'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -9,18 +9,24 @@ gem 'rails', '3.2.12'
 gem 'mysql2'
 gem 'carrierwave'
 gem 'rmagick'
+gem 'protected_attributes'
+gem 'rails-observers'
+gem 'actionpack-page_caching'
+gem 'actionpack-action_caching'
+gem 'activerecord-deprecated_finders'
+gem 'thinking-sphinx', '3.0.0'
 
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-
+  gem 'sass-rails',   '~> 4.0.0.rc1'
+  gem 'coffee-rails', '~> 4.0.0.rc1'
+  gem 'uglifier', '>= 1.3.0'
+  
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
 
-  gem 'uglifier', '>= 1.0.3'
 end
 
 gem 'jquery-rails'
@@ -43,6 +49,8 @@ gem 'best_in_place', github: 'bernat/best_in_place'
 
 group :development do
   gem 'annotate'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 gem 'rspec-rails', :group => [:test, :development]

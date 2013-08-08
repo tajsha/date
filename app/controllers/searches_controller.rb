@@ -15,5 +15,11 @@ class SearchesController < ApplicationController
   def show
     @search = Search.find(params[:id])
     @users = @search.users
-  end
+    end
+    
+    def index
+       @users = User.search(params[:search])
+     end
+     
+     
 end

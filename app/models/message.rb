@@ -39,4 +39,15 @@ class Message < ActiveRecord::Base
         Message.where(:sender_id => user.id)
       end
       
+      def previous(same_recipient = true)
+        collection = Message.where('id <> ? AND created_at > ?', self.id, self.created_at).order('created_at ASC')
+        collection.where(recipient_id: self.recipient_id) if same_recipient
+        collection.first
+      end
+
+      def next(same_recipient = true)
+        collection = Message.where('id <> ? AND created_at < ?', self.id, self.created_at).order('created_at DESC')
+        collection.where(recipient_id: self.recipient_id) if same_recipient
+        collection.first
+      end
     end

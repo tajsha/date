@@ -4,7 +4,6 @@ class UsersController < ApplicationController
   def settings
     @user = User.find(params[:id])
   end
-    
   
   def new
     @user = User.new

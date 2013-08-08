@@ -5,7 +5,7 @@ Dating::Application.routes.draw do
   get 'edit' => 'users#edit'
   get "/profile/:id" => "users#show"
   get "profile/:id/settings" => 'users#edit'
-  match 'settings/:id' => 'users#settings'
+  get 'settings/:id' => 'users#settings'
   
   resources :sessions
   resources :password_resets
@@ -18,7 +18,6 @@ Dating::Application.routes.draw do
   end
   
   root to: 'users#new'
-  root to: 'galleries#index'
   
   resources :users do |user|
     resources :messages do
