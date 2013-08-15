@@ -32,6 +32,9 @@ class User < ActiveRecord::Base
   has_secure_password
   attr_accessible :role, :age, :age_end, :password_confirmation, :about_me, :feet, :inches, :password, :birthday, :career, :children, :education, :email, :ethnicity, :gender, :height, :name, :password_digest, :politics, :religion, :sexuality, :user_drink, :user_smoke, :username, :zip_code
   has_many :photos
+  validates_format_of :zip_code,
+                  with: /\A\d{5}-\d{4}|\A\d{5}\z/,
+                  message: "should be 12345 or 12345-1234"
   validates_uniqueness_of :email
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create
   validates_presence_of :password, :on => :create
@@ -40,8 +43,20 @@ class User < ActiveRecord::Base
   
   # models/user.rb
   after_create :setup_gallery
+  
+  validate :over_18
 
-    
+  def over_18
+    if birthday + 18.years > Date.today
+      errors.add(:birthday, "can't be under 18")
+    end
+  end
+  
+  def age
+    now = Time.now.utc.to_date
+    now.year - birthday.year - ((now.month > birthday.month || (now.month == birthday.month && now.day >= birthday.day)) ? 0 : 1)
+  end
+  
   def received_messages
       Message.received_by(self)
     end
@@ -85,6 +100,7 @@ class User < ActiveRecord::Base
   
   private
   def setup_gallery
-     self.galleries << Gallery.create
+     Gallery.create(user: self)
    end
+   
 end

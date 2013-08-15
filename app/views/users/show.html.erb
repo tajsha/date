@@ -6,6 +6,8 @@
   <%= link_to "Add a Photo", new_photo_path(:gallery_id => @gallery) %>
 
 <h2>Basics</h2>
+<p>Age: <%= @user.age %></p>
+
   <p>Gender: <%= @user.gender %></p>
   <p>Height: <%= best_in_place @user, :feet %>'<%= best_in_place @user, :inches %></p>
   <p>Children: <%= best_in_place @user, :children, nil: 'Do you have or wants kids?', :type => :select, :collection => [[1, "Yes, they live with me"], [2, "I want kids now"], [3, "I want one someday"], [4, "Not for me"]] %></p>

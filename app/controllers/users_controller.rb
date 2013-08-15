@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   end
   
   def create
-    @user = User.new(params[:user])
+    @user = User.new(user_params)
     if @user.save
       UserMailer.registration_confirmation(@user).deliver
       session[:user_id] = @user.id
@@ -37,18 +37,26 @@ end
   end
   
   def destroy
-     User.find(params[:id]).destroy
+     User.find(id_params).destroy
      flash[:success] = "User deleted."
      redirect_to users_url
    end
   
 def update
     @user = if current_user.has_role?(:admin)
-       User.find(params[:id])
+       User.find(id_params)
      else
        current_user
      end
-    @user.update_attributes(params[:user])
+    @user.update_attributes(user_params)
     respond_with @user
     end
+
+     
+    private
+    
+    
+     def user_params
+       params.require(:user).permit(:name, :email, :username, :password, :gender, :zip_code, :birthday, :role)
+     end
 end

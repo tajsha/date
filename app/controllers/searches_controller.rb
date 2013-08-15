@@ -18,8 +18,8 @@ class SearchesController < ApplicationController
     end
     
     def index
-       @users = User.search(params[:search])
+      @users = params[:query].blank? ? User.all : User.search(params[:query])
+      
      end
-     
      
 end
