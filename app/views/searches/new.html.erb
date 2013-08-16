@@ -22,5 +22,6 @@
     <%= f.label :ethnicity %><br />
     <%= f.select :ethnicity, [["Asian", "1"], ["Biracial", "2"], ["Indian", "3"], ["Hispanic/Latin", "4"], ["Middle Eastern", "5"], ["Native American", "6"], ["Pacific Islander", "7"], ["White", "8"], ["Other", "9"]], :include_blank => true %>
   </div>
+<%= select(@object, :age, (18..75).to_a) %> to <%= select(@object, :age, (18..75).to_a) %>
   <div class="actions"><%= f.submit "Search" %></div>
 <% end %>

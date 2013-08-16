@@ -1,6 +1,6 @@
 <div class="quesiton-container">
 	<h1><%= @question %></h1>
-		<small><%= question.user_name %> - <%= time_ago_in_words(question.created_at) %></small>
+		<small><%= @question.sender_id %> - </small>
 		</div>
 		
 		<h3>Add your response...</h3>
@@ -9,6 +9,7 @@
 		
 		<div class="answers-container">
 			<h2>Answers</h2>
+			# remove @question.answers
 			<%= render :partial => 'answers/answer', :collection => @question.answers %>
 			</div>
 			

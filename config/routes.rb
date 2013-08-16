@@ -12,9 +12,13 @@ Dating::Application.routes.draw do
   resources :galleries
   resources :photos
   resources :searches
-  
   resources :users do  
       get 'settings', on: :member  
+  end
+  
+  
+  resources :questions do
+    resources :answers, only: [:new, :create]
   end
   
   root to: 'users#new'

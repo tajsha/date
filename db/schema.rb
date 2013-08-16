@@ -9,64 +9,65 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130514215230) do
+ActiveRecord::Schema.define(version: 20130816184148) do
 
-  create_table "galleries", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "galleries", force: true do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string   "name"
     t.integer  "gallery_id"
   end
 
-  create_table "messages", :force => true do |t|
-    t.integer  "sender_id",                              :null => false
+  create_table "messages", force: true do |t|
+    t.integer  "sender_id",                           null: false
     t.integer  "recipient_id"
-    t.boolean  "sender_deleted",    :default => false
-    t.boolean  "recipient_deleted", :default => false
-    t.string   "subject",                                :null => false
+    t.boolean  "sender_deleted",    default: false
+    t.boolean  "recipient_deleted", default: false
+    t.string   "subject",                             null: false
     t.text     "body"
     t.datetime "read_at"
-    t.string   "container",         :default => "draft"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.string   "container",         default: "draft"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
-  create_table "photos", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "photos", force: true do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string   "image"
     t.string   "name"
     t.string   "gallery_id"
     t.integer  "user_id"
   end
 
-  create_table "questions", :force => true do |t|
+  create_table "questions", force: true do |t|
     t.string   "question"
     t.string   "answer"
-    t.integer  "asked_to"
     t.integer  "asked_by"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
   end
 
-  create_table "searches", :force => true do |t|
+  create_table "searches", force: true do |t|
     t.string   "gender"
     t.string   "age"
     t.string   "zip_code"
     t.string   "children"
     t.string   "religion"
     t.string   "ethnicity"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "users", :force => true do |t|
+  create_table "users", force: true do |t|
     t.string   "email"
     t.string   "password_digest"
     t.string   "zip_code"
-    t.string   "birthday"
+    t.date     "birthday"
     t.string   "name"
     t.string   "username"
     t.string   "gender"
@@ -83,8 +84,8 @@ ActiveRecord::Schema.define(:version => 20130514215230) do
     t.string   "about_me"
     t.string   "inches"
     t.string   "feet"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.string   "auth_token"
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
@@ -95,6 +96,6 @@ ActiveRecord::Schema.define(:version => 20130514215230) do
     t.string   "age_end"
   end
 
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
 end
