@@ -5,6 +5,11 @@
 
   <%= link_to "Add a Photo", new_photo_path(:gallery_id => @gallery) %>
 
+<% if current_user %>
+<% link_to "favorite", favorite_path(@user, type: "favorite"), method: :put%>
+<% link_to "unfavorite", favorite_path(@user, type: "unfavorite"), method: :put %>
+<% end %>
+
 <h2>Basics</h2>
 <p>Age: <%= @user.age %></p>
 

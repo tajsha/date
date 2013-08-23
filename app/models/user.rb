@@ -32,6 +32,7 @@ class User < ActiveRecord::Base
   has_secure_password
   attr_accessible :role, :age, :age_end, :password_confirmation, :about_me, :feet, :inches, :password, :birthday, :career, :children, :education, :email, :ethnicity, :gender, :height, :name, :password_digest, :politics, :religion, :sexuality, :user_drink, :user_smoke, :username, :zip_code
   has_many :photos
+  has_many :favorites
   validates_format_of :zip_code,
                   with: /\A\d{5}-\d{4}|\A\d{5}\z/,
                   message: "should be 12345 or 12345-1234"
