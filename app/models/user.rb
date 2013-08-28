@@ -34,6 +34,9 @@ class User < ActiveRecord::Base
   has_many :photos
   has_many :favorites
   has_many :users, through: :favorites
+  has_many :messages
+  has_many :messages_received, class_name: 'Message', foreign_key: :to_id
+  has_many :notifications
   validates_format_of :zip_code,
                   with: /\A\d{5}-\d{4}|\A\d{5}\z/,
                   message: "should be 12345 or 12345-1234"
