@@ -52,16 +52,7 @@ def update
     respond_with @user
     end
     
-    def favorite
-      type = params[:type]
-      if type == "favorite"
-        current_user.favorites << @user
-        redirect_to :back, notice: 'You added #{@recipient_id} to your favorites'
-      elsif type == "unfavorite"
-        current_user.favorites.delete(@user)
-        redirect_to :back, notice: 'You removed #{@recipient_id} from your favorites'
-      end
-    end
+
      
     private
     

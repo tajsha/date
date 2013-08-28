@@ -6,8 +6,11 @@
   <%= link_to "Add a Photo", new_photo_path(:gallery_id => @gallery) %>
 
 <% if current_user %>
-<% link_to "favorite", favorite_path(@user, type: "favorite"), method: :put%>
-<% link_to "unfavorite", favorite_path(@user, type: "unfavorite"), method: :put %>
+  <% if current_user.favorites.include? @user %>
+    <%= link_to "Remove Friend", current_user.favorites.find_by_user_id(@user.id), method: :delete %>
+  <% else %>
+    <%= link_to "Add Friend", users_path(friend_id: @user), method: :post %>
+  <% end %>
 <% end %>
 
 <h2>Basics</h2>
