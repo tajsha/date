@@ -5,13 +5,17 @@
 
   <%= link_to "Add a Photo", new_photo_path(:gallery_id => @gallery) %>
 
-<% if current_user %>
-  <% if current_user.favorites.include? @user %>
-    <%= link_to "Remove Friend", current_user.favorites.find_by_user_id(@user.id), method: :delete %>
+
+<% unless current_user?(@user) %>
+  <div id="follow_form">
+  <% if current_user.following?(@user) %>
+    <%= render 'unfollow' %>
   <% else %>
-    <%= link_to "Add Friend", users_path(friend_id: @user), method: :post %>
+    <%= render 'follow' %>
   <% end %>
+  </div>
 <% end %>
+
 
 <h2>Basics</h2>
 <p>Age: <%= @user.age %></p>
@@ -30,5 +34,3 @@
 
 <h3>About Me</h3>
   <p>About Me: <%= best_in_place @user, :about_me, :type => :textarea %></p>
-
-<%= link_to "Message User", new_user_message_path(@user)%>

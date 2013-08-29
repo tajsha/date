@@ -12,8 +12,13 @@ Dating::Application.routes.draw do
   resources :galleries
   resources :photos
   resources :searches
+  resources :sessions,      only: [:new, :create, :destroy]
+  resources :relationships, only: [:create, :destroy]
   resources :users do  
-      get 'settings', on: :member  
+    get 'settings', on: :member  
+    post 'follow', on: :member 
+    post 'unfollow', on: :member
+    get "follow", on: :member 
   end
   
   
@@ -29,6 +34,9 @@ Dating::Application.routes.draw do
     resources :messages do
       collection do
         post 'delete_multiple'
+      member do
+        get :following, :followers
+      end
       end
     end
   end

@@ -32,11 +32,14 @@ class User < ActiveRecord::Base
   has_secure_password
   attr_accessible :role, :age, :age_end, :password_confirmation, :about_me, :feet, :inches, :password, :birthday, :career, :children, :education, :email, :ethnicity, :gender, :height, :name, :password_digest, :politics, :religion, :sexuality, :user_drink, :user_smoke, :username, :zip_code
   has_many :photos
-  has_many :favorites
-  has_many :users, through: :favorites
   has_many :messages
   has_many :messages_received, class_name: 'Message', foreign_key: :to_id
   has_many :notifications
+  has_many :users, dependent: :destroy
+  has_many :relationships, foreign_key: "follower_id", dependent: :destroy
+  has_many :followed_users, through: :relationships, source: :followed
+  has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
+  has_many :followers, through: :reverse_relationships, source: :follower
   validates_format_of :zip_code,
                   with: /\A\d{5}-\d{4}|\A\d{5}\z/,
                   message: "should be 12345 or 12345-1234"
@@ -60,6 +63,18 @@ class User < ActiveRecord::Base
   def age
     now = Time.now.utc.to_date
     now.year - birthday.year - ((now.month > birthday.month || (now.month == birthday.month && now.day >= birthday.day)) ? 0 : 1)
+  end
+  
+  def following?(other_user)
+    relationships.find_by(followed_id: other_user.id)
+  end
+  
+  def follow!(other_user)
+    relationships.create!(followed_id: other_user.id)
+  end
+  
+  def unfollow!(other_user)
+    relationships.find_by(followed_id: other_user.id).destroy!
   end
   
   def received_messages

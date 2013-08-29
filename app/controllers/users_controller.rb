@@ -52,6 +52,23 @@ def update
     respond_with @user
     end
     
+    def follow
+        @title = "Following"
+        @user = User.find(params[:id])
+      friend = User.find params[:id]
+      current_user.follow! friend unless current_user.following? friend
+       @users = @user.followed_users(page: params[:page])
+   
+      render 'show_follow'
+      
+    end
+
+    def unfollow
+      friend = User.find params[:id]
+      current_user.unfollow! friend
+      redirect_to friend
+    end
+    
 
      
     private

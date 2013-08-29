@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130820161422) do
+ActiveRecord::Schema.define(version: 20130828191308) do
 
   create_table "favorites", force: true do |t|
     t.integer  "sender_id"
@@ -48,6 +48,15 @@ ActiveRecord::Schema.define(version: 20130820161422) do
     t.datetime "updated_at",                          null: false
   end
 
+  create_table "notifications", force: true do |t|
+    t.integer  "user_id"
+    t.string   "event_type"
+    t.string   "event_id"
+    t.boolean  "read",       default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "photos", force: true do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -65,6 +74,17 @@ ActiveRecord::Schema.define(version: 20130820161422) do
     t.integer  "sender_id"
     t.integer  "recipient_id"
   end
+
+  create_table "relationships", force: true do |t|
+    t.integer  "follower_id"
+    t.integer  "followed_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id", using: :btree
+  add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
+  add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
 
   create_table "searches", force: true do |t|
     t.string   "gender"
