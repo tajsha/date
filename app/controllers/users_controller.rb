@@ -43,13 +43,13 @@ end
    end
   
 def update
-    @user = if current_user.has_role?(:admin)
-       User.find(id_params)
-     else
-       current_user
-     end
-    @user.update_attributes(user_params)
-    respond_with @user
+  @user = if current_user.has_role?(:admin)
+        User.find(params[:id])
+      else
+        current_user
+      end
+     @user.update_attributes(params[:user])
+     respond_with @user
     end
     
     def follow
@@ -75,6 +75,6 @@ def update
     
     
      def user_params
-       params.require(:user).permit(:name, :email, :username, :password, :gender, :zip_code, :birthday, :role)
+       params.require(:user).permit(:name, :email, :username, :password, :ethnicity, :gender, :zip_code, :birthday, :role)
      end
 end

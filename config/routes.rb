@@ -29,14 +29,11 @@ Dating::Application.routes.draw do
   root to: 'users#new'
   
   resources :users do |user|
-    
-    put :favorite, on: :member
+
     resources :messages do
       collection do
         post 'delete_multiple'
-      member do
-        get :following, :followers
-      end
+  
       end
     end
   end

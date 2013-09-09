@@ -12,15 +12,15 @@
   </div>
   <div class="field">
     <%= f.label :children %><br />
-    <%= f.select :children, [['Yes, they live with me', "1"], ['I want kids now', "2"], ["I want one someday", "3"], ["Not for me", "4"]], :include_blank => true %>
+    <%= f.select :children, [['Yes, they live with me'], ['I want kids now'], ["I want one someday"], ["Not for me"]], :include_blank => true %>
   </div>
   <div class="field">
     <%= f.label :religion %><br />
-    <%= f.select :religion, [["Agnostic", "1"], ["Atheist", "2"], ["Christian", "3"], ["Catholic", "4"], ["Buddhist", "5"], ["Hindu", "6"], ["Jewish", "7"], ["Muslim", "8"], ["Spiritual without affiliation", "9"], ["Other", "10"], ["None", "11"], ["Prefer not to say", "12"]], :include_blank => true %>
+    <%= f.select :religion, [["Agnostic"], ["Atheist"], ["Christian"], ["Catholic"], ["Buddhist"], ["Hindu"], ["Jewish"], ["Muslim"], ["Spiritual without affiliation"], ["Other"], ["None"], ["Prefer not to say"]], :include_blank => true %>
   </div>
   <div class="field">
     <%= f.label :ethnicity %><br />
-    <%= f.select :ethnicity, [["Asian", "1"], ["Biracial", "2"], ["Indian", "3"], ["Hispanic/Latin", "4"], ["Middle Eastern", "5"], ["Native American", "6"], ["Pacific Islander", "7"], ["White", "8"], ["Other", "9"]], :include_blank => true %>
+    <%= f.select :ethnicity, [["Asian"], ["Biracial"], ["Indian"], ["Hispanic/Latin"], ["Middle Eastern"], ["Native American"], ["Pacific Islander"], ["White"], ["Other"]], :include_blank => true %>
   </div>
 <%= select(@object, :age, (18..75).to_a) %> to <%= select(@object, :age, (18..75).to_a) %>
   <div class="actions"><%= f.submit "Search" %></div>

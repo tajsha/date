@@ -22,15 +22,18 @@
 
   <p>Gender: <%= @user.gender %></p>
   <p>Height: <%= best_in_place @user, :feet %>'<%= best_in_place @user, :inches %></p>
-  <p>Children: <%= best_in_place @user, :children, nil: 'Do you have or wants kids?', :type => :select, :collection => [[1, "Yes, they live with me"], [2, "I want kids now"], [3, "I want one someday"], [4, "Not for me"]] %></p>
-  <p>Religion: <%= best_in_place @user, :religion, nil: 'What is your faith?', :type => :select, :collection => [[1, "Agnostic"], [2, "Atheist"], [3, "Christian"], [4, "Catholic"], [5, "Buddhist"], [6, "Hindu"], [7, "Jewish"], [8, "Muslim"], [9, "Spiritual without affiliation"], [10, "Other"], [11, "None"], [12, "Prefer not to say"]] %><br> 
-(<%= best_in_place @user, :religion, nil: 'How important is this to you?', :type => :select, :collection => [[1, "Very Important"], [2, "Somewhat Important"], [3, "Not Important"]] %>)</p>
+  <p>Children: <%= best_in_place @user, :children, nil: 'Do you have or wants kids?', :type => :select, :collection => [["Yes, they live with me", "Yes, they live with me"], ["I want kids now", "I want kids now"], ["I want kids now", "I want one someday"], ["Not for me", "Not for me"]] %></p>
+  <p>Religion: <%= best_in_place @user, :religion, nil: 'What is your faith?', :type => :select, :collection => [["Agnostic", "Agnostic"], ["Atheist", "Atheist"], ["Christian", "Christian"], ["Catholic", "Catholic"], ["Buddhist", "Buddhist"], ["Hindu", "Hindu"], ["Jewish", "Jewish"], ["Muslim", "Muslim"], ["Spiritual without affiliation", "Spiritual without affiliation"], ["Other", "Other"], ["None", "None"], ["Prefer not to say", "Prefer not to say"]] %><br> 
+(<%= best_in_place @user, :religion, nil: 'How important is this to you?', :type => :select, :collection => [["Very Important", "Very Important"], ["Somewhat Important", "Somewhat Important"], ["Not Important", "Not Important"]] %>)</p>
   <p>Career: <%= best_in_place @user, :career %></p>
-  <p>Education: <%= best_in_place @user, :education, nil: 'What is your education level?', :type => :select, :collection => [[1, "High school"], [2, "Some college"], [3, "Undergraduate"], [4, "Bachelor's"], [5, "Master's"], [6, "PhD"], [7, "Business school"], [8, "Law school"], [9, "Medical school"]] %></p>
-  <p>Ethnicity: <%= best_in_place @user, :ethnicity, nil: 'What is your ethnicity?', :type => :select, :collection => [[1, "Asian"], [2, "Biracial"], [3, "Indian"], [4, "Hispanic/Latin"], [5, "Middle Eastern"], [6, "Native American"], [7, "Pacific Islander"], [8, "White"], [9, "Other"]] %></p>
-  <p>How much do you drink?: <%= best_in_place @user, :user_drink, nil: 'Select how much you drink', :type => :select, :collection => [[1, "Often drinks"], [2, "Sometimes drinks"], [3, "Never drinks"]] %></p>
-  <p>How much do you smoke?: <%= best_in_place @user, :user_smoke, nil: 'Select how often you smoke', :type => :select, :collection => [[1, "Often smokes"], [2, "Sometimes smokes"], [3, "Never smoke"]] %></p>
+  <p>Education: <%= best_in_place @user, :education, nil: 'What is your education level?', :type => :select, :collection => [["High school", "High school"], ["Some college", "Some college"], ["Undergraduate", "Undergraduate"], ["Bachelor's", "Bachelor's"], ["Master's", "Master's"], ["PhD", "PhD"], ["Business school", "Business school"], ["Law school", "Law school"], ["Medical school", "Medical school"]] %></p>
+  <p>Ethnicity: <%= best_in_place @user, :ethnicity, nil: 'What is your ethnicity?', :type => :select, :collection => [["Asian", "Asian"], ["Biracial", "Biracial"], ["Indian", "Indian"], ["Hispanic/Latin", "Hispanic/Latin"], ["Middle Eastern", "Middle Eastern"], ["Native American", "Native American"], ["Pacific Islander", "Pacific Islander"], ["White", "White"], ["Other", "Other"]] %></p>
+  <p>How much do you drink?: <%= best_in_place @user, :user_drink, nil: 'Select how much you drink', :type => :select, :collection => [["Often drinks", "Often drinks"], ["Sometimes drinks", "Sometimes drinks"], ["Never drinks", "Never drinks"]] %></p>
+  <p>How much do you smoke?: <%= best_in_place @user, :user_smoke, nil: 'Select how often you smoke', :type => :select, :collection => [["Often smokes", "Often smokes"], ["Sometimes smokes", "Sometimes smokes"], ["Never smoke", "Never smoke"]] %></p>
 
 
 <h3>About Me</h3>
   <p>About Me: <%= best_in_place @user, :about_me, :type => :textarea %></p>
+
+<h4>Questions and Answers</h4>
+<p>			<%= render :partial => "answers/form", :locals => { :question => @question} %>

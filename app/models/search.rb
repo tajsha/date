@@ -1,5 +1,5 @@
 class Search < ActiveRecord::Base
-  attr_accessible :age, :children, :ethnicity, :gender, :religion, :zip_code, :birthday, :max_age, :min_age
+  attr_accessible :age, :children, :ethnicity, :gender, :religion, :zip_code, :birthday, :max_age, :min_age, :youngest_age, :oldest_age
   
   def users
     @users ||= find_users
@@ -14,7 +14,9 @@ class Search < ActiveRecord::Base
        users = users.where(children: children) if children.present?
        users = users.where(religion: religion) if religion.present?
        users = users.where(ethnicity: ethnicity) if ethnicity.present?
-       User.where("birthday >= ? AND birthday <= ?", Date.today - min_age, Date.today - max_age)
+       users = User.where("birthday >= ? AND birthday <= ?", 80.years.ago + 1.day, 18.years.ago)
+       
+       
        users
   end
 end

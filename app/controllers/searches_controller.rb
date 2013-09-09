@@ -18,7 +18,7 @@ class SearchesController < ApplicationController
     end
     
     def index
-      @users = params[:query].blank? ? User.all : User.search(params[:query])
+      @users = User.search(params[:search])
      end
      
   def min_age
@@ -28,5 +28,12 @@ class SearchesController < ApplicationController
   def max_age
     @max_age = params[:max_age].to_i.years
   end
-     
+  
+  def youngest_age
+  @youngest_age = params[:youngest_age].years
+  end
+
+  def oldest_age
+  @oldest_age = params[:oldest_age].years
+   end
 end
