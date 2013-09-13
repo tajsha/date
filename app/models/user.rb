@@ -32,14 +32,13 @@ class User < ActiveRecord::Base
   has_secure_password
   attr_accessible :role, :age, :age_end, :password_confirmation, :about_me, :feet, :inches, :password, :birthday, :career, :children, :education, :email, :ethnicity, :gender, :height, :name, :password_digest, :politics, :religion, :sexuality, :user_drink, :user_smoke, :username, :zip_code
   has_many :photos
-  has_many :messages
-  has_many :messages_received, class_name: 'Message', foreign_key: :to_id
   has_many :notifications
   has_many :users, dependent: :destroy
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed
   has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
   has_many :followers, through: :reverse_relationships, source: :follower
+  validates :code, uniqueness: true
   validates_format_of :zip_code,
                   with: /\A\d{5}-\d{4}|\A\d{5}\z/,
                   message: "should be 12345 or 12345-1234"
@@ -53,6 +52,28 @@ class User < ActiveRecord::Base
   after_create :setup_gallery
   
   validate :over_18
+  
+  scope :within_miles_of_zip, lambda{|radius, zip|
+     # Get the parameters for the search
+     area = zip.area_for(radius)
+
+     # now find all zip codes that are within 
+     # these min/max lat/lon bounds and return them
+     # weed out any zip codes that fall outside of the search radius
+     { :select => "#{User.columns.map{|c| "users.#{c.name}"}.join(', ')}, sqrt( 
+         pow(#{area[:lat_miles]} * (zips.lat - #{zip.lat}),2) + 
+         pow(#{area[:lon_miles]} * (zips.lon - #{zip.lon}),2)) as distance",
+       :joins => :zip,
+       :conditions => "(zips.lat BETWEEN #{area[:min_lat]} AND #{area[:max_lat]}) 
+         AND (zips.lon BETWEEN #{area[:min_lon]} AND #{area[:max_lon]}) 
+         AND sqrt(pow(#{area[:lat_miles]} * (zips.lat - #{zip.lat}),2) + 
+         pow(#{area[:lon_miles]} * (zips.lon - #{zip.lon}),2)) <= #{area[:radius]}",
+       :order => "distance"}
+   }
+
+   def within_miles(radius)
+     self.class.within_miles_of_zip(radius, zip)
+   end
 
   def over_18
     if birthday + 18.years > Date.today

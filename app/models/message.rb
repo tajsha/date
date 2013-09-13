@@ -1,6 +1,7 @@
 class Message < ActiveRecord::Base
 	attr_accessible :subject, :body, :sender_id, :recipient_id, :read_at,:sender_deleted,:recipient_deleted
 	validates_presence_of :subject, :message => "Please enter message title"
+	has_many :notifications, as: :event
 
 	belongs_to :sender,
 	:class_name => 'User',
@@ -8,10 +9,6 @@ class Message < ActiveRecord::Base
 	belongs_to :recipient,
 	:class_name => 'User',
 	:foreign_key => 'recipient_id'
-	belongs_to :user
-	has_many :notifications, as: :event
-	
-	after_create :send_notification
 
     # marks a message as deleted by either the sender or the recipient, which ever the user that was passed is.
     # When both sender and recipient marks it deleted, it is destroyed.
@@ -54,10 +51,10 @@ class Message < ActiveRecord::Base
         collection.where(recipient_id: self.recipient_id) if same_recipient
         collection.first
       end
-      
-      private
-      
-      def send_notification(message)
-        message.notifications.create(user: recipient_id)
-      end
     end
+    
+    private
+    def send_notification(message)
+      message.notifications.create(user: message.recipient)
+    end
+  

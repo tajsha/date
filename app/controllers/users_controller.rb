@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   respond_to :html, :json
-  
+
   def settings
     @user = User.find(params[:id])
   end

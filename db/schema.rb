@@ -11,28 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130828191308) do
-
-  create_table "favorites", force: true do |t|
-    t.integer  "sender_id"
-    t.string   "recipient_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20130910170355) do
 
   create_table "galleries", force: true do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "name"
     t.integer  "gallery_id"
-  end
-
-  create_table "locations", force: true do |t|
-    t.string   "zip_code"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "messages", force: true do |t|
@@ -131,5 +116,15 @@ ActiveRecord::Schema.define(version: 20130828191308) do
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+
+  create_table "zips", force: true do |t|
+    t.string   "code"
+    t.string   "city"
+    t.string   "state"
+    t.decimal  "lat",        precision: 10, scale: 0
+    t.decimal  "lon",        precision: 10, scale: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
