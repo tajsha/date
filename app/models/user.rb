@@ -33,6 +33,8 @@ class User < ActiveRecord::Base
   attr_accessible :role, :age, :age_end, :password_confirmation, :about_me, :feet, :inches, :password, :birthday, :career, :children, :education, :email, :ethnicity, :gender, :height, :name, :password_digest, :politics, :religion, :sexuality, :user_drink, :user_smoke, :username, :zip_code
   has_many :photos
   has_many :notifications
+  has_many :received_messages, class_name: 'Message', foreign_key: 'recipient_id'
+  has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id'
   has_many :users, dependent: :destroy
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed

@@ -2,6 +2,7 @@ class Message < ActiveRecord::Base
 	attr_accessible :subject, :body, :sender_id, :recipient_id, :read_at,:sender_deleted,:recipient_deleted
 	validates_presence_of :subject, :message => "Please enter message title"
 	has_many :notifications, as: :event
+  scope :unread, -> {where('read_at IS NULL')}
 
 	belongs_to :sender,
 	:class_name => 'User',

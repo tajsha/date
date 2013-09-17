@@ -11,14 +11,13 @@
 <% if current_user %>
 	Logged in as <%= current_user.email %>
 	<%= link_to "Log Out", logout_path %>
+		Unread Messages <%= current_user.received_messages.unread.count %>
 <% else %>
 	<%= link_to "Sign Up", signup_path %> or 
 	<%= link_to "Log In", login_path %>
 <% end %>
-
+	
     <%= flash_messages %>
-
-
 
     <div id="container">
       <% flash.each do |name, msg| %>
