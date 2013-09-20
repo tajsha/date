@@ -1,5 +1,5 @@
 class Search < ActiveRecord::Base
-  attr_accessible :age, :children, :ethnicity, :gender, :religion, :zip_code, :birthday, :max_age, :min_age, :youngest_age, :oldest_age
+  attr_accessible :age, :children, :ethnicity, :career, :gender, :religion, :zip_code, :birthday, :max_age, :min_age, :youngest_age, :oldest_age
   
   def users
     @users ||= find_users

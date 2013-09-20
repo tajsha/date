@@ -32,6 +32,7 @@ class User < ActiveRecord::Base
   has_secure_password
   attr_accessible :role, :age, :age_end, :password_confirmation, :about_me, :feet, :inches, :password, :birthday, :career, :children, :education, :email, :ethnicity, :gender, :height, :name, :password_digest, :politics, :religion, :sexuality, :user_drink, :user_smoke, :username, :zip_code
   has_many :photos
+  belongs_to :zip
   has_many :notifications
   has_many :received_messages, class_name: 'Message', foreign_key: 'recipient_id'
   has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id'
@@ -55,7 +56,7 @@ class User < ActiveRecord::Base
   
   validate :over_18
   
-  scope :within_miles_of_zip, lambda{|radius, zip|
+  scope :within_miles_of_zip, lambda {|radius, zip|
      # Get the parameters for the search
      area = zip.area_for(radius)
 
@@ -74,6 +75,7 @@ class User < ActiveRecord::Base
    }
 
    def within_miles(radius)
+     zip = Zip.find_by_zip('30052')
      self.class.within_miles_of_zip(radius, zip)
    end
 

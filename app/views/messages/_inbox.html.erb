@@ -13,7 +13,8 @@ No messages in your Inbox
 				</tr>
 					<% for message in @messages %>
 						<tr>
-							<td><%= check_box_tag "delete[]", message.id %></td>
+							<td><%= check_box_tag "delete[]", message.id %></td><p>
+								
 							<td>
 								<% if message.read? %>
 								  <%= link_to h(message.subject), user_message_path(@user, message) %>
@@ -27,9 +28,15 @@ No messages in your Inbox
 						</tr>
 			<% end %>
 			</table>
-		<%= submit_tag "Delete selected" %> |
+		<%= submit_tag "Delete selected" %> | 	<button type="button" id="check_all">
+			    Check / Uncheck All
+			</button>
 		<% end %>
 <%= link_to "Compose New Message", new_user_message_path(@user)%> | 
 <%= link_to "View Sent Messages", user_messages_path(current_user, :mailbox => :sent)%>
 | 
 <%= link_to "View Unread Messages", user_messages_path(current_user, :mailbox => :unread)%>
+
+<script type='text/javascript'>
+    $('#check_all').on("click", function(){ $('input[type="checkbox"]').click(); });
+</script>

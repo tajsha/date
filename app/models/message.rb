@@ -3,6 +3,8 @@ class Message < ActiveRecord::Base
 	validates_presence_of :subject, :message => "Please enter message title"
 	has_many :notifications, as: :event
   scope :unread, -> {where('read_at IS NULL')}
+  scope :not_deleted_by_recipient, where('messages.recipient_deleted IS NULL OR messages.recipient_deleted = ?', false)
+  scope :not_deleted_by_sender, where('messages.sender_deleted IS NULL OR messages.sender_deleted = ?', false)
 
 	belongs_to :sender,
 	:class_name => 'User',
@@ -43,17 +45,19 @@ class Message < ActiveRecord::Base
       
       def previous(same_recipient = true)
         collection = Message.where('id <> ? AND created_at > ?', self.id, self.created_at).order('created_at ASC')
-        collection.where(recipient_id: self.recipient_id) if same_recipient
+        collection = collection.where(recipient_id: self.recipient_id) if same_recipient
+        collection = collection.not_deleted_by_recipient
         collection.first
       end
 
       def next(same_recipient = true)
         collection = Message.where('id <> ? AND created_at < ?', self.id, self.created_at).order('created_at DESC')
-        collection.where(recipient_id: self.recipient_id) if same_recipient
+        collection = collection.where(recipient_id: self.recipient_id) if same_recipient
+        collection = collection.not_deleted_by_recipient
         collection.first
       end
     end
-    
+      
     private
     def send_notification(message)
       message.notifications.create(user: message.recipient)

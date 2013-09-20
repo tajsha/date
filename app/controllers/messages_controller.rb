@@ -7,7 +7,7 @@ class MessagesController < ApplicationController
       @messages = @user.sent_messages
     elsif params[:mailbox] == "inbox"
       @messages = @user.received_messages
-    #elsif params[:mailbox] == "archieved"
+    #elsif params[:mailbox] == "archived"
      # @messages = @user.archived_messages
     end
     if params[:mailbox] == "unread"
