@@ -38,5 +38,13 @@
 <h4>Questions and Answers</h4>
 <p>			<%= render :partial => "answers/form", :locals => { :question => @question} %>
 	
-	here
-<% @questions %>
+	
+	Show Dates Proposed:
+	
+	<% if @user.letsgos.any? %>
+		Dates (<%= @user.letsgos.count %>)
+		<%= render @letsgos %>
+		<%= will_paginate @letsgos %>
+		<% end %>
+		
+		<%= render 'letsgos/form' %>

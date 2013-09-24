@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130910170355) do
+ActiveRecord::Schema.define(version: 20130923155018) do
 
   create_table "galleries", force: true do |t|
     t.datetime "created_at", null: false
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(version: 20130910170355) do
     t.string   "name"
     t.integer  "gallery_id"
   end
+
+  create_table "letsgos", force: true do |t|
+    t.string   "content"
+    t.integer  "user_id"
+    t.integer  "tag"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "letsgos", ["user_id", "created_at"], name: "index_letsgos_on_user_id_and_created_at", using: :btree
 
   create_table "messages", force: true do |t|
     t.integer  "sender_id",                           null: false
@@ -116,8 +126,9 @@ ActiveRecord::Schema.define(version: 20130910170355) do
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["zip_code"], name: "index_users_on_zip_code", using: :btree
 
-  create_table "zips", force: true do |t|
+  create_table "zips", id: false, force: true do |t|
     t.string   "code"
     t.string   "city"
     t.string   "state"
@@ -126,5 +137,7 @@ ActiveRecord::Schema.define(version: 20130910170355) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "zips", ["code"], name: "index_zips_on_code", unique: true, using: :btree
 
 end

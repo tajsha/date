@@ -14,6 +14,7 @@ Dating::Application.routes.draw do
   resources :searches
   resources :sessions,      only: [:new, :create, :destroy]
   resources :relationships, only: [:create, :destroy]
+  resources :letsgos, only: [:create, :destroy]
   resources :users do  
     get 'settings', on: :member  
     post 'follow', on: :member 

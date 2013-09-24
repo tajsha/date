@@ -8,6 +8,7 @@ end
 
 def show
   @question = Question.find(params[:id])
+  @questions = Question.order("created_at DESC")
   respond_with(@questions)
 end
 
