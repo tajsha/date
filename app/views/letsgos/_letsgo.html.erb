@@ -1,6 +1,9 @@
 <li>
-	<span class="content"><%= letsgo.content %></span>
+<b>Let's go...<span class="content"><%= letsgo.content %></span></b>
 	<span class="timestamp">
 		Posted <%= time_ago_in_words(letsgo.created_at) %> ago.
 		</span>
+		<% if current_user?(letsgo.user) %>
+		<%= link_to "delete", letsgo, method: :delete, data: { confirm: "You sure?" }%>
+		<% end %>
 		</li>

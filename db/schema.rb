@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20130923155018) do
   create_table "letsgos", force: true do |t|
     t.string   "content"
     t.integer  "user_id"
-    t.integer  "tag"
+    t.string   "tag",        limit: 11
     t.datetime "created_at"
     t.datetime "updated_at"
   end

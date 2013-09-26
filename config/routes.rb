@@ -6,10 +6,12 @@ Dating::Application.routes.draw do
   get "/profile/:id" => "users#show"
   get "profile/:id/settings" => 'users#edit'
   get 'settings/:id' => 'users#settings'
+  get 'letsgos' => 'letsgos#_all'
   
   resources :sessions
   resources :password_resets
   resources :galleries
+  resources :letsgos
   resources :photos
   resources :searches
   resources :sessions,      only: [:new, :create, :destroy]

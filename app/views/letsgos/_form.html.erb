@@ -2,5 +2,7 @@
 	<div class="field">
 		<%= f.text_area :content, placeholder: "Propose new date..." %>
 		</div>
-		<%= f.submit "Post", class: "btn btn-large btn-primary" %>
+		<%= f.select :tag, options_for_select( [["Select One", ""], "Eat", "Drink", "Listen/Watch", "Play", "Explore", "Volunteer", "Other"]) %>
+		
+		<%= f.submit "Post" %>
 		<% end %>

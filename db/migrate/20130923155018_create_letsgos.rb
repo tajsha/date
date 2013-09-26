@@ -3,7 +3,7 @@ class CreateLetsgos < ActiveRecord::Migration
     create_table :letsgos do |t|
       t.string :content
       t.integer :user_id
-      t.integer :tag
+      t.string :tag
 
       t.timestamps
     end
