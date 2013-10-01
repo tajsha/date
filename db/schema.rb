@@ -23,9 +23,10 @@ ActiveRecord::Schema.define(version: 20130923155018) do
   create_table "letsgos", force: true do |t|
     t.string   "content"
     t.integer  "user_id"
-    t.string   "tag",        limit: 11
+    t.string   "tag",                 limit: 100
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "repost_from_user_id"
   end
 
   add_index "letsgos", ["user_id", "created_at"], name: "index_letsgos_on_user_id_and_created_at", using: :btree

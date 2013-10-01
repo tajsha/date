@@ -4,6 +4,7 @@ class CreateLetsgos < ActiveRecord::Migration
       t.string :content
       t.integer :user_id
       t.string :tag
+      t.integer :repost_from_user_id
 
       t.timestamps
     end

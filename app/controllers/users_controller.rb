@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @letsgos = @user.letsgos.paginate(page: params[:page])
-    @letsgo = current_user.letsgo.build
+    @letsgo = current_user.letsgos.build
   end
   
   

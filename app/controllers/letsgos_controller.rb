@@ -19,6 +19,9 @@ end
     @letsgos = Letsgo.all 
 end
 
+  def repost
+  end
+
 private
 
 def letsgo_params
