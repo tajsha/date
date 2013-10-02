@@ -29,7 +29,7 @@
 <p>
 	<% if @message.recipient == @user %>
 
-	<%= link_to "Reply", new_user_message_path(@user, :reply_to => @message.sender) %>
+	<%= link_to "Reply", new_user_message_path(@user, :reply_to => @message.sender_id) %>
 	
 	 |
 	<% end %>

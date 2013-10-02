@@ -18,9 +18,9 @@ class MessagesController < ApplicationController
   def new
     @message = Message.new
     if params[:reply_to]
-      @reply_to = User.find_by_user_id(params[:reply_to])
+      @reply_to = User.find_by_sender_id(params[:reply_to])
       unless @reply_to.nil?
-        @message.recipient_id = @reply_to.user_id
+        @message.recipient_id = @reply_to.sender_id
       end
     end
   end
@@ -39,8 +39,10 @@ class MessagesController < ApplicationController
   def show
      @message = Message.find(params[:id])
      @message.readingmessage if @message.recipient == current_user
-   end
-   
+    
+ end
+
+ 
    def destroy
      @message = Message.find(params[:id])
      @message.destroy
@@ -62,5 +64,5 @@ class MessagesController < ApplicationController
   private
     def set_user
       @user = current_user
-    end
+  end
 end

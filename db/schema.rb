@@ -124,6 +124,9 @@ ActiveRecord::Schema.define(version: 20130923155018) do
     t.integer  "roles_mask"
     t.string   "age"
     t.string   "age_end"
+    t.integer  "average_response_time"
+    t.integer  "response_rate"
+    t.integer  "response_total"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

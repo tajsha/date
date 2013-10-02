@@ -18,3 +18,4 @@ end
 def original_user
   User.find(repost_from_user_id) if is_repost?
 end
+end

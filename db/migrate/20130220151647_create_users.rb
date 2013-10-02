@@ -21,6 +21,9 @@ class CreateUsers < ActiveRecord::Migration
       t.string :about_me
       t.string :inches
       t.string :feet
+      t.string :average_response_time
+      t.string :response_rate
+      t.string :response_total
       t.timestamps
     end
   end
