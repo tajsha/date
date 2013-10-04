@@ -17,7 +17,6 @@ gem 'activerecord-deprecated_finders'
 gem 'thinking-sphinx', '3.0.0'
 gem "jquery-ui-rails"
 gem "will_paginate"
-gem 'sidekiq'
 
 
 # Gems used only for assets and not required

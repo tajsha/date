@@ -6,7 +6,7 @@
 <% end %>
 
 <P><%= link_to "Advanced Search", new_search_path %><p>
-	
+
 <h1>Sign Up</h1>
 
 <%= form_for @user do |f| %>
@@ -20,7 +20,7 @@
       </ul>
     </div>
   <% end %>
-					
+
 	<div class="field">
 		<%= f.label :email %><br/>
 		<%= f.text_field :email %>
@@ -38,9 +38,9 @@
 	</div>
 	</div>
 	<div class="field">I'm a
-			<%= f.select :gender, ['man', 'woman']%>
-			interested in 
-			<%= f.select :gender, ['woman', 'men', 'both']%>
+			<%= f.select :gender, ['Male', 'Female']%>
+	 		that's
+			<%= f.select :sexuality, ['Straight', 'Gay', 'Bisexual']%>
 			</div>
 			<div class="field">
 			Age <%= select(@object, :age, (18..75).to_a) %> to 	<%= select(@object, :age, (18..75).to_a) %>

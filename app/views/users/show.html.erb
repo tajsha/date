@@ -19,7 +19,7 @@
 
 <h2>Basics</h2>
 <p>Age: <%= @user.age %></p>
-
+<p>Sexuality: <%= @user.sexuality %></p>
   <p>Gender: <%= @user.gender %></p>
   <p>Height: <%= best_in_place @user, :feet %>'<%= best_in_place @user, :inches %></p>
   <p>Children: <%= best_in_place @user, :children, nil: 'Do you have or wants kids?', :type => :select, :collection => [["Yes, they live with me", "Yes, they live with me"], ["I want kids now", "I want kids now"], ["I want kids now", "I want one someday"], ["Not for me", "Not for me"]] %></p>

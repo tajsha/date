@@ -42,7 +42,6 @@ class User < ActiveRecord::Base
   has_many :followed_users, through: :relationships, source: :followed
   has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
   has_many :followers, through: :reverse_relationships, source: :follower
-  validates :code, uniqueness: true
   validates_format_of :zip_code,
                   with: /\A\d{5}-\d{4}|\A\d{5}\z/,
                   message: "should be 12345 or 12345-1234"
