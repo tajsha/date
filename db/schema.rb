@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130923155018) do
+ActiveRecord::Schema.define(version: 20131009160613) do
 
   create_table "galleries", force: true do |t|
     t.datetime "created_at", null: false
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20130923155018) do
     t.datetime "updated_at",   null: false
     t.integer  "sender_id"
     t.integer  "recipient_id"
+    t.integer  "message_id"
   end
 
   create_table "relationships", force: true do |t|
@@ -89,8 +90,15 @@ ActiveRecord::Schema.define(version: 20130923155018) do
     t.string   "children"
     t.string   "religion"
     t.string   "ethnicity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "min_age"
+    t.string   "max_age"
+    t.string   "birthday"
+    t.string   "youngest_age"
+    t.string   "oldest_age"
+    t.string   "min_date"
+    t.string   "max_date"
   end
 
   create_table "users", force: true do |t|
@@ -122,8 +130,9 @@ ActiveRecord::Schema.define(version: 20130923155018) do
     t.boolean  "admin"
     t.string   "role"
     t.integer  "roles_mask"
-    t.string   "age"
-    t.string   "age_end"
+    t.integer  "age"
+    t.integer  "min_age"
+    t.integer  "max_age"
     t.integer  "average_response_time"
     t.integer  "response_rate"
     t.integer  "response_total"

@@ -12,6 +12,8 @@ class Message < ActiveRecord::Base
 	belongs_to :recipient,
 	:class_name => 'User',
 	:foreign_key => 'recipient_id'
+	
+	has_one :question
 
     # marks a message as deleted by either the sender or the recipient, which ever the user that was passed is.
     # When both sender and recipient marks it deleted, it is destroyed.
@@ -43,17 +45,15 @@ class Message < ActiveRecord::Base
         Message.where(:sender_id => user.id)
       end
       
-      def previous(same_recipient = true)
+      def next(same_recipient = true)
         collection = Message.where('id <> ? AND created_at > ?', self.id, self.created_at).order('created_at ASC')
-        collection = collection.where(recipient_id: self.recipient_id) if same_recipient
-        collection = collection.not_deleted_by_recipient
+        collection.where(recipient_id: self.recipient_id) if same_recipient
         collection.first
       end
 
-      def next(same_recipient = true)
+      def previous(same_recipient = true)
         collection = Message.where('id <> ? AND created_at < ?', self.id, self.created_at).order('created_at DESC')
-        collection = collection.where(recipient_id: self.recipient_id) if same_recipient
-        collection = collection.not_deleted_by_recipient
+        collection.where(recipient_id: self.recipient_id) if same_recipient
         collection.first
       end
     end

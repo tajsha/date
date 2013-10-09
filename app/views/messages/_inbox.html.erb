@@ -11,7 +11,8 @@ No messages in your Inbox
 					<th>Date</th>
 					<th>From</th>
 				</tr>
-					<% for message in @messages %>
+					<% for message in @messages.not_recipient_deleted %>
+					
 						<tr>
 							<td><%= check_box_tag "delete[]", message.id %></td><p>
 								

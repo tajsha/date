@@ -5,11 +5,15 @@
 
 <p>
 	<strong>Received:</strong> 
-	<%= @message.created_at.to_s(:long) %>
+	<%= @message.created_at.strftime('%B %-d, %Y %l:%M%P') %>
 </p>
 <p>
 	<strong>To:</strong> 
 	<%= @message.recipient %>
+</p>
+
+	<strong>Subject:</strong> 
+	<%= @message.subject %>
 </p>
 
 <p>
@@ -17,11 +21,18 @@
 	<%=h @message.body %>
 </p>
 
+	<%= form_for @message.question, :url => question_path(@message.question), 				
+									 method: :put do |f| %>
+					<%= f.label :answer, "Reply here:" %>
+					<%= f.text_area :answer %>
+					<%= f.submit "Send" %>
+				<% end %>
+
 <p>
-	<% if @message.next.present? %>
+	<% if @message.next %>
 	  <%= link_to 'Next', user_message_path(current_user, @message.next) %>
 	<% end %>
-	<% if @message.previous.present? %>
+	<% if @message.previous %>
 	  <%= link_to 'Previous', user_message_path(current_user, @message.previous) %>
 	<% end %>
 	</p>

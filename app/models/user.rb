@@ -54,7 +54,6 @@ class User < ActiveRecord::Base
   # models/user.rb
   after_create :setup_gallery
   
-  validate :over_18
   
   scope :within_miles_of_zip, lambda {|radius, zip|
      # Get the parameters for the search
@@ -79,17 +78,6 @@ class User < ActiveRecord::Base
      self.class.within_miles_of_zip(radius, zip)
    end
 
-  def over_18
-    if birthday + 18.years > Date.today
-      errors.add(:birthday, "can't be under 18")
-    end
-  end
-  
-  def age
-    now = Time.now.utc.to_date
-    now.year - birthday.year - ((now.month > birthday.month || (now.month == birthday.month && now.day >= birthday.day)) ? 0 : 1)
-  end
-  
   def following?(other_user)
     relationships.find_by(followed_id: other_user.id)
   end
@@ -116,6 +104,10 @@ class User < ActiveRecord::Base
  
  def sent_messages
    Message.sent_by(self)
+ end
+ 
+ def deleted_messages
+   recipient_messages_deleted
  end
  
  # Returns the number of unread messages for this user

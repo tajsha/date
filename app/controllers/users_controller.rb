@@ -79,6 +79,6 @@ def update
     
     
      def user_params
-       params.require(:user).permit(:name, :email, :username, :password, :ethnicity, :gender, :zip_code, :birthday, :role, :sexuality)
+       params.require(:user).permit(:name, :email, :username, :password, :ethnicity, :gender, :zip_code, :birthday, :role, :age, :sexuality)
      end
 end

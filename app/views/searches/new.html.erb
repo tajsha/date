@@ -3,7 +3,7 @@
 <%= form_for @search do |f| %>
 <div class="field">
   <%= f.label :gender %><br />
-  <%= f.select :gender, ['man', 'woman'], :include_blank => true %>
+  <%= f.select :gender, ['male', 'female'], :include_blank => true %>
 </div>
 
   <div class="field">
@@ -22,6 +22,8 @@
     <%= f.label :ethnicity %><br />
     <%= f.select :ethnicity, [["Asian"], ["Biracial"], ["Indian"], ["Hispanic/Latin"], ["Middle Eastern"], ["Native American"], ["Pacific Islander"], ["White"], ["Other"]], :include_blank => true %>
   </div>
-<%= select(@object, :age, (18..75).to_a) %> to <%= select(@object, :age, (18..75).to_a) %>
+<%= select(@object, :youngest_age, (18..75).to_a) %> to <%= select(@object, :oldest_age, (18..75).to_a) %>
+
+
   <div class="actions"><%= f.submit "Search" %></div>
 <% end %>
