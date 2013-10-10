@@ -37,17 +37,18 @@
 		<%= f.text_field :zip_code %>
 	</div>
 	</div>
-	<div class="field">I'm a
-			<%= f.select :gender, ['Male', 'Female']%>
-	 		that's
-			<%= f.select :sexuality, ['Straight', 'Gay', 'Bisexual']%>
-			</div>
-			<div class="field">
-			                    I am
-			                     <%= f.select :age, (18..75).map { |x| [x,x] } %>
-								<%= f.label :birthday %>
-											                    <%= f.date_select :birthday, :start_year => 1995, :end_year => 1932 %>
-			                    </div> 
-	<%= f.collection_select :role, User::ROLES, :to_s, :humanize %>
-	<div class="actions"><%= f.submit %></div>
-<% end %>
+		<div class="field">I'm a
+				<%= f.select :gender, ['Male', 'Female']%>
+		 		that's
+				<%= f.select :sexuality, ['Straight', 'Gay', 'Bisexual']%>
+				</div>
+				<div class="field">
+				Age <%= select(@object, :age, (18..75).to_a) %> to 	<%= select(@object, :age, (18..75).to_a) %>
+				</div>
+				<div class="field">
+				                    <%= f.label :birthday %>
+				                    <%= f.date_select :birthday, :start_year => 1995, :end_year => 1932 %>
+				                    </div>
+		<%= f.collection_select :role, User::ROLES, :to_s, :humanize %>
+		<div class="actions"><%= f.submit %></div>
+	<% end %>

@@ -77,6 +77,17 @@ class User < ActiveRecord::Base
      zip = Zip.find_by_zip('30052')
      self.class.within_miles_of_zip(radius, zip)
    end
+   
+   def over_18
+      if birthday + 18.years > Date.today
+        errors.add(:birthday, "can't be under 18")
+      end
+    end
+
+    def age
+      now = Time.now.utc.to_date
+      now.year - birthday.year - ((now.month > birthday.month || (now.month == birthday.month && now.day >= birthday.day)) ? 0 : 1)
+    end
 
   def following?(other_user)
     relationships.find_by(followed_id: other_user.id)
@@ -133,6 +144,11 @@ class User < ActiveRecord::Base
     begin
       self[column] = SecureRandom.urlsafe_base64
     end while User.exists?(column => self[column])
+  end
+  
+  def self.with_age_range(year_range)
+    today = Date.today
+    where birthday: (today - year_range.max.years)..(today - year_range.min.years)
   end
   
   private

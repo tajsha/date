@@ -21,8 +21,9 @@
   <div class="field">
     <%= f.label :ethnicity %><br />
     <%= f.select :ethnicity, [["Asian"], ["Biracial"], ["Indian"], ["Hispanic/Latin"], ["Middle Eastern"], ["Native American"], ["Pacific Islander"], ["White"], ["Other"]], :include_blank => true %>
-  </div>
-<%= select(@object, :youngest_age, (18..75).to_a) %> to <%= select(@object, :oldest_age, (18..75).to_a) %>
+  </div>	<%= f.select :min_age, (18..75) %>
+	to
+	<%= f.select :max_age, (18..75) %>
 
 
   <div class="actions"><%= f.submit "Search" %></div>

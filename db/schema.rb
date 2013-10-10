@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131009160613) do
+ActiveRecord::Schema.define(version: 20131010143254) do
 
   create_table "galleries", force: true do |t|
     t.datetime "created_at", null: false
@@ -85,20 +85,14 @@ ActiveRecord::Schema.define(version: 20131009160613) do
 
   create_table "searches", force: true do |t|
     t.string   "gender"
-    t.string   "age"
     t.string   "zip_code"
     t.string   "children"
     t.string   "religion"
     t.string   "ethnicity"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.string   "min_age"
-    t.string   "max_age"
-    t.string   "birthday"
-    t.string   "youngest_age"
-    t.string   "oldest_age"
-    t.string   "min_date"
-    t.string   "max_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "min_age"
+    t.integer  "max_age"
   end
 
   create_table "users", force: true do |t|
@@ -130,9 +124,6 @@ ActiveRecord::Schema.define(version: 20131009160613) do
     t.boolean  "admin"
     t.string   "role"
     t.integer  "roles_mask"
-    t.integer  "age"
-    t.integer  "min_age"
-    t.integer  "max_age"
     t.integer  "average_response_time"
     t.integer  "response_rate"
     t.integer  "response_total"
