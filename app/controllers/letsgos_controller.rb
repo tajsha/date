@@ -54,6 +54,17 @@ def interested
     render :new, alert: 'Your message was sent.'
 end
 
+def ask_out
+  @message = Message.new(params[:message])
+  @message.sender_id = @user.id
+  if @message.save
+    flash[:notice] = "You have asked user out"
+    redirect_to user_messages_path(current_user, :mailbox=>:inbox)
+  else
+    render :action => :new
+  end
+end
+
 private
 
 def letsgo_params
