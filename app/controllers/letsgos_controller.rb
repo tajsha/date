@@ -43,6 +43,16 @@ def repost
   @letsgo = Letsgo.find(params[:id]).repost(current_user)
     redirect_to root_url
   end
+  
+def interested
+  @letsgo = User.find(params[:id])
+  @message = Message.create(:subject => "#{user_id} is Interested in you",
+                         :sender_id => @user_id,
+                         :recipient_id => @letsgo.user_id,
+                         :body => "I saw your date and I'm interested")
+  @letsgo.message = @message
+    render :new, alert: 'Your message was sent.'
+end
 
 private
 

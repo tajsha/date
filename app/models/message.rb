@@ -14,6 +14,7 @@ class Message < ActiveRecord::Base
 	:foreign_key => 'recipient_id'
 	
 	has_one :question
+	has_one :letsgo
 
     # marks a message as deleted by either the sender or the recipient, which ever the user that was passed is.
     # When both sender and recipient marks it deleted, it is destroyed.
