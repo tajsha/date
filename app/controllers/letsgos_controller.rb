@@ -16,10 +16,32 @@ end
   end
   
   def index
-    @letsgos = Letsgo.all 
+    @letsgos = Letsgo.where("repost_from_user_id IS NULL").all 
+  end
+
+def eatdrink
+  @eatdrink = Letsgo.where(:tag => 'Eat/Drink').where("repost_from_user_id IS NULL")
 end
 
-  def repost
+def listenwatch
+  @listenwatch = Letsgo.where(:tag => 'Listen/Watch').where("repost_from_user_id IS NULL")
+end
+
+def play
+  @play = Letsgo.where(:tag => 'Play').where("repost_from_user_id IS NULL")
+end
+
+def explore
+  @explore = Letsgo.where(:tag => 'Explore').where("repost_from_user_id IS NULL")
+end
+
+def other
+  @other = Letsgo.where(:tag => 'Other').where("repost_from_user_id IS NULL")
+end
+
+def repost
+  @letsgo = Letsgo.find(params[:id]).repost(current_user)
+    redirect_to root_url
   end
 
 private

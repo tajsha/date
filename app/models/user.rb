@@ -34,6 +34,7 @@ class User < ActiveRecord::Base
   has_many :photos
   has_many :letsgos, dependent: :destroy
   belongs_to :zip
+  belongs_to :default_photo, :class_name => "Photo"
   has_many :notifications
   has_many :received_messages, class_name: 'Message', foreign_key: 'recipient_id'
   has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id'
@@ -118,7 +119,7 @@ class User < ActiveRecord::Base
  end
  
  def deleted_messages
-   recipient_messages_deleted
+ Message.where(recipient_deleted: 1)
  end
  
  # Returns the number of unread messages for this user

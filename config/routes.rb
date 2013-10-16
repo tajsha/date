@@ -6,12 +6,15 @@ Dating::Application.routes.draw do
   get "/profile/:id" => "users#show"
   get "profile/:id/settings" => 'users#edit'
   get 'settings/:id' => 'users#settings'
-  get 'letsgos' => 'letsgos#_all'
+  get 'letsgos/eatdrink' => 'letsgos#eatdrink'
+  get 'letsgos/listenwatch' => 'letsgos#listenwatch'
+  get 'letsgos/play' => 'letsgos#play'
+  get 'letsgos/other' => 'letsgos#other'
+  get 'letsgos/explore' => 'letsgos#explore'
   
   resources :sessions
   resources :password_resets
   resources :galleries
-  resources :letsgos
   resources :photos
   resources :searches
   resources :sessions,      only: [:new, :create, :destroy]
@@ -24,6 +27,11 @@ Dating::Application.routes.draw do
     get "follow", on: :member 
   end
   
+  resources :letsgos do
+    member do
+      post :repost
+    end
+  end
   
   resources :questions do
     resources :answers, only: [:new, :create]

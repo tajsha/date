@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131010143254) do
+ActiveRecord::Schema.define(version: 20131015135753) do
 
   create_table "galleries", force: true do |t|
     t.datetime "created_at", null: false
@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(version: 20131010143254) do
     t.integer  "average_response_time"
     t.integer  "response_rate"
     t.integer  "response_total"
+    t.integer  "default_photo_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

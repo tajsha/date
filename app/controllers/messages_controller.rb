@@ -12,17 +12,18 @@ class MessagesController < ApplicationController
     end
     if params[:mailbox] == "unread"
     @messages = @user.unread_messages
-  elsif params[:mailbox] == "trash"
-    @messages = @user.recipient_deleted
+  end
+  if params[:mailbox] == "trash"
+    @messages = @user.deleted_messages
   end
   end
   
   def new
     @message = Message.new
     if params[:reply_to]
-      @reply_to = User.find_by_user_id(params[:reply_to])
+      @reply_to = User.find_by_id(params[:reply_to])
       unless @reply_to.nil?
-        @message.recipient_id = @reply_to.user.id
+        @message.recipient_id = @reply_to.id
       end
     end
   end
@@ -39,8 +40,11 @@ class MessagesController < ApplicationController
   end
 
   def show
-     @message = Message.find(params[:id])
-     @message.readingmessage if @message.recipient == current_user
+    @message = Message.find(params[:id])
+    if @message.recipient == current_user
+      UserMessageWorker.perform_async(@message.id, current_user.id)
+    end
+  
   end
 
  

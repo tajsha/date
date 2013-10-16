@@ -35,4 +35,10 @@ class PhotosController < ApplicationController
     flash[:notice] = "Successfully destroyed photo."
     redirect_to @photo.gallery
   end
+  
+  def choose_default_photo
+    @photo = Photo.find params[:photo_id]
+    current_user.default_photo = @photo
+    redirect_to '/profile' # or wherever you wan to send them
+  end
 end

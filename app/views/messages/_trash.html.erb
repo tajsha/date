@@ -6,12 +6,12 @@
 				<th>Date</th>
 				<th>From</th>
 			</tr>
-				<% for message in @messages %>
+				<% for message in @messages.recipient_deleted %>
 					<tr>
 						<td><%= check_box_tag "delete[]", message.id %></td>
 						<td>
-							<% if message.deleted? %>
-							  <%= link_to "#{h(message.subject)} (delete)", user_message_path(@user, message) %>
+							<% if message.read? %>
+							  <%= link_to "#{h(message.subject)} (deleted)", user_message_path(@user, message) %>
 							<% end %>
 						</td>
 
