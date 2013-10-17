@@ -1,12 +1,18 @@
 <%= form_for @message, :url => user_messages_path(@user) do |f| %>
+  <% if @message.recipient_id.nil? %>
     <p>
       To:<br />
-      <%= f.text_field :user_id, :value=>@letsgo.user_id,:readonly => true %>
+      <%= f.text_field :recipient_id %>
+    </p>
+  <% else %>
+    <p>
+      To:<br />
+      <%= f.text_field :recipient_id, :value=>@message.recipient_id,:readonly => true %>
     </p>
   <% end %>
       <p>
         Subject:<br />
-        <%= f.text_field :subject, => "#{@messages.sender_id} asked you out on a date." %>
+        <%= f.text_field :subject %>
       </p>
       <p>
         Message<br />

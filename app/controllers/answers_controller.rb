@@ -4,6 +4,10 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:question_id])
   end
   
+  def show
+    @question = Question.find(params[:question_id])
+    @answer = Answer.find(params[:id])
+  
   def create
     @question = Question.find(params[:question_id])
     if @question.update_attributes(params[:question])

@@ -11,7 +11,6 @@ Dating::Application.routes.draw do
   get 'letsgos/play' => 'letsgos#play'
   get 'letsgos/other' => 'letsgos#other'
   get 'letsgos/explore' => 'letsgos#explore'
-  get 'letsgos/askout' => 'letsgos#askout'
   
   resources :sessions
   resources :password_resets
