@@ -36,9 +36,13 @@
 <h3>About Me</h3>
   <p>About Me: <%= best_in_place @user, :about_me, :type => :textarea %></p>
 
-<h4>Questions and Answers</h4>
-<p>			<%= render :partial => "answers/form", :locals => { :question => @question} %>
+<h4>Ask User A Question</h4>
+<p>			<%= link_to "Ask Me", new_question_path, :class => "button" %>
 	<p>
+		<h4>Send Message To User</h4>
+		<p>			<%= link_to "Message Me", new_user_message_path(@user), :class => "button" %>
+			<p>
+	
 		<p>
 			<h5>SHOW QUESTIONS</H5>
 	<%= render :partial => "answers/show", :locals => { :question => @question} %>

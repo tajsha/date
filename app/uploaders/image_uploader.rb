@@ -3,8 +3,8 @@
 class ImageUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
-   include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+   # include CarrierWave::RMagick
+   include CarrierWave::MiniMagick
 
   # Include the Sprockets helpers for Rails 3.1+ asset pipeline compatibility:
   # include Sprockets::Helpers::RailsHelper
@@ -34,6 +34,17 @@ class ImageUploader < CarrierWave::Uploader::Base
   # def scale(width, height)
   #   # do something
   # end
+  
+  
+  process :resize => [584, 329]
+  
+  def resize_to_limit(width, height)
+        manipulate! do |img|
+          img.resize "#{width}x#{height}>"
+          img = yield(img) if block_given?
+          img
+        end
+      end
 
   # Create different versions of your uploaded files:
    version :thumb do

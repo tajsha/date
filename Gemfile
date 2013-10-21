@@ -19,6 +19,7 @@ gem "jquery-ui-rails"
 gem "will_paginate"
 gem 'sidekiq'
 gem 'magnific-popup-rails'
+gem 'mini_magick'
 
 
 # Gems used only for assets and not required

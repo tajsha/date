@@ -15,6 +15,22 @@ class PhotosController < ApplicationController
     end
   end
 
+
+
+  def resize(width, height, gravity = 'Center')
+    manipulate! do |img|
+      img.combine_options do |cmd|
+        cmd.resize "#{width}"
+        if img[:width] < img[:height]
+          cmd.gravity gravity
+          cmd.background "rgba(255,255,255,0.0)"
+          cmd.extent "#{width}x#{height}"
+        end
+      end
+      img = yield(img) if block_given?
+      img
+    end
+  end
   def edit
     @photo = Photo.find(params[:id])
   end
@@ -39,6 +55,6 @@ class PhotosController < ApplicationController
   def choose_default_photo
     @photo = Photo.find params[:photo_id]
     current_user.default_photo = @photo
-    redirect_to '/profile' # or wherever you wan to send them
+    redirect_to '/profile' # or wherever I want to send them
   end
 end

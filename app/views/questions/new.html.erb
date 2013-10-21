@@ -5,7 +5,8 @@
 <% end %>
 	<ul>
 		<li><%= f.text_field :question, {:placeholder => 'Please add your question...'} %></li>
-		<li><%= f.text_field :sender_id, {:placeholder => 'Please add your name...'} %></li>
+	<% #this is not the safest way to do it for security reasons with hidden field  %>
+	<%= f.hidden_field :sender_id, :value => current_user.id %>
 		<li><%= f.text_field :recipient_id, {:placeholder => 'Enter id send to'} %></li>
 		<li><%= f.submit %></li>
 		</ul>

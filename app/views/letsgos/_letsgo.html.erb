@@ -5,7 +5,7 @@
 		</span>
 		<% if current_user?(letsgo.user) %>
 		<%= link_to "delete", letsgo, method: :delete, data: { confirm: "You sure?" }%> <% end %> <% unless current_user?(letsgo.user) %> | <%= link_to "repost", repost_letsgo_path(letsgo), method: :post %> | 
-		<%= link_to "I'm Interested" %>
+		<%= link_to "I'm Interested", interested_letsgo_path(letsgo), method: :message%>
 			
 			<% end %>
 		
