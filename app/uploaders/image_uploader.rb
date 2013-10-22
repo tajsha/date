@@ -36,7 +36,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
   
   
-  process :resize => [584, 329]
+  process :resize_to_fit => [584, 329]
   
   def resize_to_limit(width, height)
         manipulate! do |img|

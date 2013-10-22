@@ -44,6 +44,10 @@ def repost
     redirect_to root_url
   end
   
+  def random
+    @random = Letsgos.find(Letsgo.pluck(:id).sample)
+  end
+  
 def interested
   @letsgo = User.find(params[:id])
   @message = Message.create(:subject => "#{user_id} is Interested in you",

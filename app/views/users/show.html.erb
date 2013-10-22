@@ -1,9 +1,27 @@
 <h1><%= @user.username %></h1>
-<% @user.photos.each do |photo| %>
-    <%= link_to image_tag(photo.image_url(:thumb)), photo.image_url%>
-<% end %></p>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.parent-container').magnificPopup({
+            delegate: 'a',
+            type: 'image',
+gallery:{enabled:true}
+        });   
+    });
+
+</script>
+
+<div class="parent-container">
+    <% @user.photos.each do |photo| %>
+        <%= link_to image_tag(photo.image_url(:thumb)), photo.image_url%>
+<% end %></div></p>
 
   <%= link_to "Add a Photo", new_photo_path(:gallery_id => @gallery) %>
+
+
+<p>RANDOM DATES
+
+<%= @random %>
+<P>
 
 
 <% unless current_user?(@user) %>

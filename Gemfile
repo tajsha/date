@@ -20,6 +20,7 @@ gem "will_paginate"
 gem 'sidekiq'
 gem 'magnific-popup-rails'
 gem 'mini_magick'
+gem 'magnific-popup-rails'
 
 
 # Gems used only for assets and not required
