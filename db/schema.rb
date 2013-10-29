@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131028144304) do
+ActiveRecord::Schema.define(version: 20131029153342) do
 
   create_table "galleries", force: true do |t|
     t.datetime "created_at", null: false
@@ -34,8 +34,8 @@ ActiveRecord::Schema.define(version: 20131028144304) do
   create_table "messages", force: true do |t|
     t.integer  "sender_id",                           null: false
     t.integer  "recipient_id"
-    t.boolean  "sender_deleted",    default: false
-    t.boolean  "recipient_deleted", default: false
+    t.integer  "sender_deleted",    default: 0
+    t.integer  "recipient_deleted", default: 0
     t.string   "subject",                             null: false
     t.text     "body"
     t.datetime "read_at"

@@ -63,7 +63,12 @@ gallery:{enabled:true}
 	
 		<p>
 			<h5>SHOW QUESTIONS</H5>
-	<%= render :partial => "answers/show", :locals => { :question => @question} %>
+	<%= @question.questions.each do |question| %>
+	<% if defined?(question.answer) %>
+	<%= question.question %>
+	<%= question.answer %>
+	<% end %>
+	<% end %>
 	
 	
 	Show Dates Proposed:

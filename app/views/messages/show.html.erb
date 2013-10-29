@@ -21,14 +21,14 @@
 	<%=h @message.body %>
 </p>
 
-
- <%= form_for @message.question, :url => question_path(@message.question),         
-                    method: :put do |f| %>
-           <%= f.label :answer, "Reply here:" %>
-           <%= f.text_area :answer %>
-           <%= f.submit "Send" %>
-         <% end %>
-
+<% if @message.question.present? %>
+<%= form_for @message.question, :url => question_path(@message.question),                                 
+                                                                         method: :put do |f| %>
+                                        <%= f.label :answer, "Reply here:" %>
+                                        <%= f.text_area :answer %>
+                                        <%= f.submit "Send" %>
+                                <% end %>
+<% end %>
 <p>
 	<% if @message.next %>
 	  <%= link_to 'Next', user_message_path(current_user, @message.next) %>

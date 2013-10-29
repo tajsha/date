@@ -1,5 +1,6 @@
 class Question < ActiveRecord::Base
   attr_accessible :answer, :question, :sender_id, :recipient_id
+  belongs_to :user
   
   belongs_to :sender,
 	:class_name => 'User',
