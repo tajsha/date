@@ -34,7 +34,7 @@ gallery:{enabled:true}
   </div>
 <% end %>
 
-<%= link_to "Ask user out" %>
+	<%= link_to "Message Me", new_user_message_path(@user), :class => "button" %>
 
 <h2>Basics</h2>
 <p>Age: <%= @user.age %></p>
@@ -55,7 +55,7 @@ gallery:{enabled:true}
   <p>About Me: <%= best_in_place @user, :about_me, :type => :textarea %></p>
 
 <h4>Ask User A Question</h4>
-<p>			<%= link_to "Ask Me", new_question_path, :class => "button" %>
+<p>			<%= link_to "Ask Me", new_question_path(:user_id => @user.id), :class => "button" %>
 	<p>
 		<h4>Send Message To User</h4>
 		<p>			<%= link_to "Message Me", new_user_message_path(@user), :class => "button" %>

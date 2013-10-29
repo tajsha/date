@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131015135753) do
+ActiveRecord::Schema.define(version: 20131028144304) do
 
   create_table "galleries", force: true do |t|
     t.datetime "created_at", null: false
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20131015135753) do
     t.string   "container",         default: "draft"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.integer  "user_id"
   end
 
   create_table "notifications", force: true do |t|

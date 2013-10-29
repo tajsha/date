@@ -40,12 +40,9 @@ class MessagesController < ApplicationController
   end
 
   def show
-    @message = Message.find(params[:id])
-    if @message.recipient == current_user
-      UserMessageWorker.perform_async(@message.id, current_user.id)
+      @message = Message.find(params[:id])
+      @message.readingmessage if @message.recipient == current_user
     end
-  
-  end
 
  
    def destroy

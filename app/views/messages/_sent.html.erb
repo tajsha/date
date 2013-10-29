@@ -18,4 +18,5 @@
 			</table>
 		<%= submit_tag "Delete selected" %>
 		<% end %>
-	<%= link_to "View Inbox", user_messages_path(current_user, :mailbox=>:inbox)%>
+	<%= link_to "View Inbox", user_messages_path(current_user, :mailbox=>:inbox)%> |
+	<%= link_to "View Trash", user_messages_path(current_user, :mailbox => :trash)%>

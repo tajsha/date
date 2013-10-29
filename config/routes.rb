@@ -30,6 +30,7 @@ Dating::Application.routes.draw do
   resources :letsgos do
     member do
       post :repost
+      post :interested
     end
   end
   
@@ -44,6 +45,7 @@ Dating::Application.routes.draw do
     resources :messages do
       collection do
         post 'delete_multiple'
+        post 'askout'
   
       end
     end

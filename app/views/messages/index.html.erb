@@ -6,4 +6,6 @@
         <%= render :partial => "inbox" %>
 <% elsif params[:mailbox] == "unread" %>
 		<%= render :partial => "inbox" %>
+<% elsif params[:mailbox] == "trash" %>
+		<%= render :partial => "trash" %>
 <% end %>

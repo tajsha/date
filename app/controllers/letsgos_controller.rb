@@ -45,17 +45,22 @@ def repost
   end
   
   def random
-    @random = Letsgos.find(Letsgo.pluck(:id).sample)
+    @random = Letsgos.offset(rand(Letsgos.count)).first
   end
   
 def interested
   @letsgo = User.find(params[:id])
-  @message = Message.create(:subject => "#{user_id} is Interested in you",
-                         :sender_id => @user_id,
-                         :recipient_id => @letsgo.user_id,
-                         :body => "I saw your date and I'm interested")
-  @letsgo.message = @message
-    render :new, alert: 'Your message was sent.'
+  @letsgo = current_user
+  @recipient = Letsgo.find(params[:id])
+  @body = Letsgo.find(params[:id]).content
+  
+  @message = Message.create(:subject => "Someone is Interested in your date!",
+                         :sender_id => @letsgo.id,
+                         :recipient_id => @recipient.user.id,
+                         :body => "I saw your date and I'm interested in Let's go...#{@body}"
+                         )
+
+    redirect_to letsgos_path, notice: "Your message was sent"
 end
 
 private

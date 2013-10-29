@@ -2,13 +2,9 @@
   <% if @message.recipient_id.nil? %>
     <p>
       To:<br />
-      <%= f.text_field :recipient_id %>
+       <%= f.hidden_field :recipient_id, :value => params[:user_id] %> 
     </p>
-  <% else %>
-    <p>
-      To:<br />
-      <%= f.text_field :recipient_id, :value=>@message.recipient_id,:readonly => true %>
-    </p>
+
   <% end %>
       <p>
         Subject:<br />
@@ -21,3 +17,6 @@
 
       <%= submit_tag "Send"%>
 <% end %>
+<%= link_to "View Inbox", user_messages_path(current_user, :mailbox=>:inbox)%> |
+<%= link_to "View Sent Messages", user_messages_path(current_user, :mailbox => :sent)%> |
+<%= link_to "View Trash", user_messages_path(current_user, :mailbox => :trash)%>
