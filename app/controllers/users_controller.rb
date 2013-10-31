@@ -11,6 +11,8 @@ class UsersController < ApplicationController
   
   def profile
     @profile = User.profile
+    @user = User.find(params[:id]) 
+     @question = Question.where(recipient_id: params[:id]).first
   end
   
   def create
@@ -27,7 +29,7 @@ class UsersController < ApplicationController
  
   def show
     @user = User.find(params[:id])
-    @question = User.find(params[:recipient_id])
+    @question = Question.where(recipient_id: params[:id])
     @letsgos = @user.letsgos.paginate(page: params[:page])
     @letsgo = current_user.letsgos.build
   end

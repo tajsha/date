@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
   belongs_to :zip
   belongs_to :default_photo, :class_name => "Photo"
   has_many :notifications
-  has_many :questions, :class_name => 'User'
+  has_many :questions
   has_many :received_messages, class_name: 'Message', foreign_key: 'recipient_id'
   has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id'
   has_many :users, dependent: :destroy

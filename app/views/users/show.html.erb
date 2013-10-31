@@ -63,13 +63,11 @@ gallery:{enabled:true}
 	
 		<p>
 			<h5>SHOW QUESTIONS</H5>
-	<%= @question.questions.each do |question| %>
-	<% if defined?(question.answer) %>
-	<%= question.question %>
-	<%= question.answer %>
-	<% end %>
-	<% end %>
-	
+				<%= @question.each do |question| %>
+				         Question: <%= question.question %><br><br>
+				         Answer: <%= question.answer %>
+				    <% end %>
+	
 	
 	Show Dates Proposed:
 	
