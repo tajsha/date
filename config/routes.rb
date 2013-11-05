@@ -45,8 +45,7 @@ Dating::Application.routes.draw do
     resources :messages do
       collection do
         post 'delete_multiple'
-        post 'askout'
-  
+        get 'askout', action: 'askout'
       end
     end
   end

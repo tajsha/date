@@ -3,7 +3,7 @@
 		<%= f.text_area :content, placeholder: "Propose new date..." %>
 		</div>
 		<%= f.select :tag, options_for_select( [["Select One", ""], "Eat/Drink", "Listen/Watch", "Play", "Explore", "Other"]) %>
-		
+		<a href="/letsgos/random" class="ajax">Click here for a Random letsgo</a>
 		<%= f.submit "Post" %>
 		
 		<% end %>

@@ -5,6 +5,7 @@ class Letsgo < ActiveRecord::Base
   default_scope -> { order('created_at DESC') }
   validates :content, presence: true, length: { maximum: 360 }
   validates :user_id, presence: true
+  scope :random, -> { order("RANDOM()") }
   
   def repost(user_object)
     new_letsgo = self.dup #duplicates the entire object, except for the ID

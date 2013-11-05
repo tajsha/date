@@ -17,6 +17,3 @@
 
       <%= submit_tag "Send"%>
 <% end %>
-<%= link_to "View Inbox", user_messages_path(current_user, :mailbox=>:inbox)%> |
-<%= link_to "View Sent Messages", user_messages_path(current_user, :mailbox => :sent)%> |
-<%= link_to "View Trash", user_messages_path(current_user, :mailbox => :trash)%>

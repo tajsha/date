@@ -119,9 +119,6 @@ class User < ActiveRecord::Base
    Message.sent_by(self)
  end
  
- def deleted_messages
-   Message.where(recipient_deleted: 1)
- end
  
  
  # Returns the number of unread messages for this user
