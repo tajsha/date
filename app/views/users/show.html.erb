@@ -35,7 +35,7 @@ gallery:{enabled:true}
 <% end %>
 
 	<%= link_to "Message Me", new_user_message_path(@user), :class => "button" %>
-		<%= link_to "Ask User Out", new_user_message_path(@user), :class => "button" %>
+		<%= link_to "Ask User Out", askout_user_messages_path(@user), :class => "button" %>
 
 <h2>Basics</h2>
 <p>Age: <%= @user.age %></p>

@@ -21,7 +21,8 @@ class Message < ActiveRecord::Base
     def mark_message_deleted(id,user_id)
             self.sender_deleted = true if self.sender_id == user_id
             self.recipient_deleted = user_id if self.recipient_id == user_id
-            (self.sender_deleted && self.recipient_deleted) ? self.destroy : self.save!
+            (self.sender_deleted > 0 && self.recipient_deleted > 0) ? self.destroy : self.save!
+            (self.sender_deleted != 0 && self.recipient_deleted != 0)
         end
     # Read message and if it is read by recipient then mark it is read
     def readingmessage

@@ -28,6 +28,10 @@ class MessagesController < ApplicationController
     end
   end
   
+  def askout
+    @message = Message.new
+  end
+  
   def create
     @message = Message.new(params[:message])
     @message.sender_id = @user.id
