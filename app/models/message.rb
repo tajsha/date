@@ -2,6 +2,9 @@ class Message < ActiveRecord::Base
 	attr_accessible :subject, :body, :sender_id, :recipient_id, :read_at,:sender_deleted,:recipient_deleted
 	validates_presence_of :subject, :message => "Please enter message title"
 	has_many :notifications, as: :event
+	belongs_to :conversation, inverse_of: :messages
+	belongs_to :user
+	validates_presence_of :user, :conversation, :body
   scope :unread, -> {where('read_at IS NULL')}
   scope :not_deleted_by_recipient, where('messages.recipient_deleted IS NULL OR messages.recipient_deleted = ?', false)
   scope :not_deleted_by_sender, where('messages.sender_deleted IS NULL OR messages.sender_deleted = ?', false)
@@ -16,6 +19,17 @@ class Message < ActiveRecord::Base
 	has_one :question
 	has_one :letsgo
 
+  def reply
+      @original = current_user.received_messages.find(params[:id])
+      subject = @original.subject.sub(/^(Re: )?/, "Re: ")
+      body = @original.body.gsub(/^/, "> ")
+      @message = current_user.sent_messages.build(:to => [@original.user.id], :subject => subject, :body => body)
+    end
+
+  def self.by_date
+      order("created_at DESC")
+    end
+    
     # marks a message as deleted by either the sender or the recipient, which ever the user that was passed is.
     # When both sender and recipient marks it deleted, it is destroyed.
     def mark_message_deleted(id,user_id)

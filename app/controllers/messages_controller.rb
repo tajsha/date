@@ -4,17 +4,17 @@ class MessagesController < ApplicationController
   
   def index
     if params[:mailbox] == "sent"
-      @messages = @user.sent_messages
+      @messages = @user.sent_messages.paginate :per_page => 10, :page => params[:page], :order => "created_at DESC"
     elsif params[:mailbox] == "inbox"
-      @messages = @user.received_messages
+      @messages = @user.received_messages.paginate :per_page => 10, :page => params[:page], :order => "created_at DESC"
     #elsif params[:mailbox] == "archived"
      # @messages = @user.archived_messages
     end
     if params[:mailbox] == "unread"
-    @messages = @user.unread_messages
+    @messages = @user.unread_messages.paginate :per_page => 10, :page => params[:page], :order => "created_at DESC"
   end
   if params[:mailbox] == "trash"
-    @messages = @user.deleted_messages
+    @messages = @user.deleted_messages.paginate :per_page => 10, :page => params[:page], :order => "created_at DESC"
   end
   end
   

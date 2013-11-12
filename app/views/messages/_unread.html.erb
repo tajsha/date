@@ -6,6 +6,7 @@
 				<th>Date</th>
 				<th>From</th>
 			</tr>
+				<%= will_paginate %>
 				<% for message in @messages %>
 					<tr>
 						<td><%= check_box_tag "delete[]", message.id %></td>
@@ -19,7 +20,9 @@
 				<td><%= "#{message.sender}" %></td>
 					</tr>
 		<% end %>
-		</table>
+		</table><p>
+				<%= will_paginate %>
+				<P>
 	<%= submit_tag "Delete selected" %> |
 	<% end %>
 	<%= link_to "View Inbox", user_messages_path(current_user, :mailbox=>:inbox)%> |

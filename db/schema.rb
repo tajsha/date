@@ -11,7 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131029153342) do
+ActiveRecord::Schema.define(version: 20131107202839) do
+
+  create_table "conversation_summaries_with_scalar_subqueries", id: false, force: true do |t|
+    t.integer  "id",                                    default: 0, null: false
+    t.string   "sender_name"
+    t.string   "recipient_name"
+    t.text     "most_recent_message_body"
+    t.datetime "most_recent_message_sent_at"
+    t.integer  "reply_count",                 limit: 8
+  end
+
+  create_table "conversations", force: true do |t|
+    t.string   "sender_id"
+    t.string   "recipient_id"
+    t.string   "subject"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "galleries", force: true do |t|
     t.datetime "created_at", null: false
@@ -32,17 +49,18 @@ ActiveRecord::Schema.define(version: 20131029153342) do
   add_index "letsgos", ["user_id", "created_at"], name: "index_letsgos_on_user_id_and_created_at", using: :btree
 
   create_table "messages", force: true do |t|
-    t.integer  "sender_id",                           null: false
+    t.integer  "sender_id",                                       null: false
     t.integer  "recipient_id"
-    t.integer  "sender_deleted",    default: 0
-    t.integer  "recipient_deleted", default: 0
-    t.string   "subject",                             null: false
+    t.integer  "sender_deleted",                default: 0
+    t.integer  "recipient_deleted",             default: 0
+    t.string   "subject",           limit: 400, default: "",      null: false
     t.text     "body"
     t.datetime "read_at"
-    t.string   "container",         default: "draft"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.string   "container",                     default: "draft"
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
     t.integer  "user_id"
+    t.string   "conversation_id"
   end
 
   create_table "notifications", force: true do |t|

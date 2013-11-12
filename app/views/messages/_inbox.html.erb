@@ -11,6 +11,7 @@ No messages in your Inbox
 					<th>Date</th>
 					<th>From</th>
 				</tr>
+				<%= will_paginate %>
 				<% for message in @messages.not_recipient_deleted %>
 					
 						<tr>
@@ -28,7 +29,8 @@ No messages in your Inbox
 					<td><%= "#{message.sender}" %></td>
 						</tr>
 			<% end %>
-			</table>
+			</table><p>
+					<%= will_paginate %><p>
 		<%= submit_tag "Delete selected" %> | 	<button type="button" id="check_all">
 			    Check / Uncheck All
 			</button>

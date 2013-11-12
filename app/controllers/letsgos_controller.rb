@@ -10,6 +10,11 @@ else
       redirect_to root_url
 end
 end
+
+def show
+  @letsgo = Letsgo.find(params[:id])
+end
+  
   def destroy
     @letsgo.destroy
     redirect_to root_url
