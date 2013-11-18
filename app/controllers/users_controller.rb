@@ -81,6 +81,23 @@ def update
       current_user.default_photo = @photo
       redirect_to '/profile'
     end
+    
+    def check_zipcode
+  		if params[:zipcode].nil?
+  			return
+  		end
+  		if !Zipcode.where('zip = ?', params[:zipcode]).empty?
+  			zip = Zipcode.where('zip = ?', params[:zipcode]).first
+  			return [zip.lat, zip.lng]
+  		else
+  			search = Geocoder.search(params[:zipcode]).first.geometry["location"]
+  			lat = search["lat"]
+  			lng = search["lng"]
+  			zip = Zipcode.new(zip: params[:zipcode], lat: lat, lng: lng)
+  			zip.save
+  			return [lat, lng]
+  		end
+  	end
 
      
     private

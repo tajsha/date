@@ -4,7 +4,6 @@ class Message < ActiveRecord::Base
 	has_many :notifications, as: :event
 	belongs_to :conversation, inverse_of: :messages
 	belongs_to :user
-	validates_presence_of :user, :conversation, :body
   scope :unread, -> {where('read_at IS NULL')}
   scope :not_deleted_by_recipient, where('messages.recipient_deleted IS NULL OR messages.recipient_deleted = ?', false)
   scope :not_deleted_by_sender, where('messages.sender_deleted IS NULL OR messages.sender_deleted = ?', false)
@@ -18,13 +17,6 @@ class Message < ActiveRecord::Base
 	
 	has_one :question
 	has_one :letsgo
-
-  def reply
-      @original = current_user.received_messages.find(params[:id])
-      subject = @original.subject.sub(/^(Re: )?/, "Re: ")
-      body = @original.body.gsub(/^/, "> ")
-      @message = current_user.sent_messages.build(:to => [@original.user.id], :subject => subject, :body => body)
-    end
 
   def self.by_date
       order("created_at DESC")

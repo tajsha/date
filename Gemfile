@@ -18,10 +18,9 @@ gem 'thinking-sphinx', '3.0.0'
 gem "jquery-ui-rails"
 gem "will_paginate"
 gem 'sidekiq'
-gem 'magnific-popup-rails'
 gem 'mini_magick'
-gem 'magnific-popup-rails'
-
+gem 'geocoder'
+gem 'whenever', require: false
 
 # Gems used only for assets and not required
 # in production environments by default.

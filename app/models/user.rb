@@ -34,9 +34,11 @@ class User < ActiveRecord::Base
   has_many :photos
   has_many :letsgos, dependent: :destroy
   belongs_to :zip
+  geocoded_by :zip_code
   belongs_to :default_photo, :class_name => "Photo"
   has_many :notifications
   has_many :questions
+  belongs_to :location
   has_many :received_messages, class_name: 'Message', foreign_key: 'recipient_id'
   has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id'
   has_many :users, dependent: :destroy

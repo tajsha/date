@@ -12,8 +12,8 @@
 //
 //= require jquery
 //= require jquery.ui.all
-//= require magnific-popup
 //= require jquery_ujs
+//= require jquery.magnific-popup.js
 //= require jquery.purr
 //= require best_in_place
 //= require_tree .

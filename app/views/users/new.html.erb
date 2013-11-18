@@ -7,6 +7,11 @@
 
 <P><%= link_to "Advanced Search", new_search_path %><p>
 
+<%= form_tag users_path, method: :get do %>
+<%= label :zip_code, "Enter zip code: " %>
+<%= text_field_tag :zip_code, params[:zip_code] %>
+<% end %>
+
 <h1>Sign Up</h1>
 
 <%= form_for @user do |f| %>
