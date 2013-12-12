@@ -25,8 +25,7 @@ No messages in your Inbox
 								<% end %>
 							</td>
 
-					        <td><%=h message.created_at.to_s(:long) %></td>
-					<td><%= "#{message.sender}" %></td>
+<td><%=h message.created_at.strftime('%B %-d, %Y %l:%M%P')  %></td>					<td><%= "#{message.sender}" %></td>
 						</tr>
 			<% end %>
 			</table><p>

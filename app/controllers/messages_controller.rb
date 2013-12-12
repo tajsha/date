@@ -67,6 +67,21 @@ class MessagesController < ApplicationController
       redirect_to user_messages_path(@user, @messages)
   end
   
+  def reply
+    @message = Message.find(params[:id]).reply(id)
+  end
+  
+  
+  def update
+      @message = Message.new
+      if params[:reply_to]
+        @reply_to = User.find_by_id(params[:reply_to])
+        unless @reply_to.nil?
+          @message.recipient_id = @reply_to.id
+        end
+      end
+    end
+  
   private
     def set_user
       @user = current_user

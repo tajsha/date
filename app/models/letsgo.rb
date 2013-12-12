@@ -1,5 +1,5 @@
 class Letsgo < ActiveRecord::Base
-  attr_accessible :message
+  attr_accessible :message, :content, :tag
   belongs_to :user
   belongs_to :message
   default_scope -> { order('created_at DESC') }

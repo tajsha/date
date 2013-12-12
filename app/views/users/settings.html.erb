@@ -5,5 +5,4 @@
 		<p>Password Confirmation: <%= best_in_place @user, :password_confirmation %></p>
 		<p>Zip Code: <%= best_in_place @user, :zip_code %></p>
 		<p>Birthdate: <%= best_in_place @user, :birthday %></p>
-		<p>Age: <%= best_in_place @user, :age %></p>
-		
+  		<p>Time Zone: <%= best_in_place @user, :time_zone, :type => :select, :collection => [["Eastern Time", "Eastern Time (US & Canada)"], ["Central Time (US & Canada)", "Central Time (US & Canada)"], ["Mountain Time (US & Canada)", "Mountain Time (US & Canada)"], ["Pacific Time (US & Canada)", "Pacific Time (US & Canada)"]] %></p>

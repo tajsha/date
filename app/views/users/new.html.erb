@@ -1,16 +1,16 @@
 <%= form_tag searches_path, method: :get do %>
 <p>
-	<%= text_field_tag :search, params[:search] %>
-	<%= button_tag "Search", name: nil %>
-	</p>
+        <%= text_field_tag :search, params[:search] %>
+        <%= button_tag "Search", name: nil %>
+        </p>
 <% end %>
 
 <P><%= link_to "Advanced Search", new_search_path %><p>
 
-<%= form_tag users_path, method: :get do %>
-<%= label :zip_code, "Enter zip code: " %>
-<%= text_field_tag :zip_code, params[:zip_code] %>
-<% end %>
+<b>PAY WITH PAYPAL</B><BR>
+	<%= link_to @paypal_url do %>
+	  <img src="https://www.paypalobjects.com/it_IT/IT/Marketing/i/bnr/bnr_horizontal_solutiongraphic_335x80.gif" style="margin-right:7px;" />
+	<% end %><P>
 
 <h1>Sign Up</h1>
 
@@ -26,34 +26,32 @@
     </div>
   <% end %>
 
-	<div class="field">
-		<%= f.label :email %><br/>
-		<%= f.text_field :email %>
-	</div>
-	<div class="field">
-		<%= f.label :password %><br/>
-		<%= f.password_field :password %>
-	</div>
-	<div class="field">
-		<%= f.label :username %><br/>
-		<%= f.text_field :username %>
-	<div class="field">
-		<%= f.label :zip_code %><br/>
-		<%= f.text_field :zip_code %>
-	</div>
-	</div>
-		<div class="field">I'm a
-				<%= f.select :gender, ['Male', 'Female']%>
-		 		that's
-				<%= f.select :sexuality, ['Straight', 'Gay', 'Bisexual']%>
-				</div>
-				<div class="field">
-				Age <%= select(@object, :age, (18..75).to_a) %> to 	<%= select(@object, :age, (18..75).to_a) %>
-				</div>
-				<div class="field">
-				                    <%= f.label :birthday %>
-				                    <%= f.date_select :birthday, :start_year => 1995, :end_year => 1932 %>
-				                    </div>
-		<%= f.collection_select :role, User::ROLES, :to_s, :humanize %>
-		<div class="actions"><%= f.submit %></div>
-	<% end %>
+        <div class="field">
+                <%= f.label :email %><br/>
+                <%= f.text_field :email %>
+        </div>
+        <div class="field">
+                <%= f.label :password %><br/>
+                <%= f.password_field :password %>
+        </div>
+        <div class="field">
+                <%= f.label :username %><br/>
+                <%= f.text_field :username %>
+        <div class="field">
+                <%= f.label :zip_code %><br/>
+                <%= f.text_field :zip_code %>
+        </div>
+        </div>
+                <div class="field">I'm a
+                                <%= f.select :gender, ['Male', 'Female']%>
+                                 that's
+                                <%= f.select :sexuality, ['Straight', 'Gay', 'Bisexual']%>
+                                </div>
+          
+                                <div class="field">
+                                                    <%= f.label :birthday %>
+                                                    <%= f.date_select :birthday, :start_year => 1995, :end_year => 1932 %>
+                                                    </div>
+                <%= f.collection_select :role, User::ROLES, :to_s, :humanize %>
+                <div class="actions"><%= f.submit %></div>
+        <% end %>

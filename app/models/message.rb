@@ -17,6 +17,10 @@ class Message < ActiveRecord::Base
 	
 	has_one :question
 	has_one :letsgo
+	
+	def reply
+	  new_message.reply_from_user_id = self.id #save the user id of original repost, to keep track of where it originally came from
+  end
 
   def self.by_date
       order("created_at DESC")

@@ -1,3 +1,4 @@
-class Location < ActiveRecord::Base
-has_many :users
+class Location < ActiveRecord::Base  
+  attr_accessible :city, :latitude, :longitude, :zipcode
+
 end

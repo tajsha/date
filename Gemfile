@@ -14,13 +14,11 @@ gem 'rails-observers'
 gem 'actionpack-page_caching'
 gem 'actionpack-action_caching'
 gem 'activerecord-deprecated_finders'
-gem 'thinking-sphinx', '3.0.0'
+gem 'thinking-sphinx', '3.0.6'
 gem "jquery-ui-rails"
 gem "will_paginate"
 gem 'sidekiq'
 gem 'mini_magick'
-gem 'geocoder'
-gem 'whenever', require: false
 
 # Gems used only for assets and not required
 # in production environments by default.

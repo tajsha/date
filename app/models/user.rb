@@ -30,11 +30,10 @@
 
 class User < ActiveRecord::Base
   has_secure_password
-  attr_accessible :role, :age, :age_end, :password_confirmation, :about_me, :feet, :inches, :password, :birthday, :career, :children, :education, :email, :ethnicity, :gender, :height, :name, :password_digest, :politics, :religion, :sexuality, :user_drink, :user_smoke, :username, :zip_code
+  attr_accessible :role, :name, :time_zone, :code, :lat, :lon, :city, :age, :age_end, :password_confirmation, :about_me, :feet, :inches, :password, :birthday, :career, :children, :education, :email, :ethnicity, :gender, :height, :name, :password_digest, :politics, :religion, :sexuality, :user_drink, :user_smoke, :username, :zip_code
+  validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name)
   has_many :photos
   has_many :letsgos, dependent: :destroy
-  belongs_to :zip
-  geocoded_by :zip_code
   belongs_to :default_photo, :class_name => "Photo"
   has_many :notifications
   has_many :questions
@@ -51,37 +50,19 @@ class User < ActiveRecord::Base
                   message: "should be 12345 or 12345-1234"
   validates_uniqueness_of :email
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create
-  validates_presence_of :password, :on => :create
+  validates_uniqueness_of :username
+  validates_presence_of :username
+  validates_format_of :username, :with => /\A[a-zA-Z0-9]+\Z/, :message => "should only contain letters or numbers"
+  validates :password, :presence => true,
+                       :confirmation => true,
+                       :length => {:within => 6..40},
+                       :on => :create
   before_create { generate_token(:auth_token) }
   ROLES = %w[admin user guest banned]
   
   # models/user.rb
   after_create :setup_gallery
   
-  
-  scope :within_miles_of_zip, lambda {|radius, zip|
-     # Get the parameters for the search
-     area = zip.area_for(radius)
-
-     # now find all zip codes that are within 
-     # these min/max lat/lon bounds and return them
-     # weed out any zip codes that fall outside of the search radius
-     { :select => "#{User.columns.map{|c| "users.#{c.name}"}.join(', ')}, sqrt( 
-         pow(#{area[:lat_miles]} * (zips.lat - #{zip.lat}),2) + 
-         pow(#{area[:lon_miles]} * (zips.lon - #{zip.lon}),2)) as distance",
-       :joins => :zip,
-       :conditions => "(zips.lat BETWEEN #{area[:min_lat]} AND #{area[:max_lat]}) 
-         AND (zips.lon BETWEEN #{area[:min_lon]} AND #{area[:max_lon]}) 
-         AND sqrt(pow(#{area[:lat_miles]} * (zips.lat - #{zip.lat}),2) + 
-         pow(#{area[:lon_miles]} * (zips.lon - #{zip.lon}),2)) <= #{area[:radius]}",
-       :order => "distance"}
-   }
-
-   def within_miles(radius)
-     zip = Zip.find_by_zip('30052')
-     self.class.within_miles_of_zip(radius, zip)
-   end
-   
    def over_18
       if birthday + 18.years > Date.today
         errors.add(:birthday, "can't be under 18")

@@ -11,16 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131107202839) do
-
-  create_table "conversation_summaries_with_scalar_subqueries", id: false, force: true do |t|
-    t.integer  "id",                                    default: 0, null: false
-    t.string   "sender_name"
-    t.string   "recipient_name"
-    t.text     "most_recent_message_body"
-    t.datetime "most_recent_message_sent_at"
-    t.integer  "reply_count",                 limit: 8
-  end
+ActiveRecord::Schema.define(version: 20131210204806) do
 
   create_table "conversations", force: true do |t|
     t.string   "sender_id"
@@ -30,9 +21,16 @@ ActiveRecord::Schema.define(version: 20131107202839) do
     t.datetime "updated_at"
   end
 
+  create_table "favorites", force: true do |t|
+    t.integer  "sender_id"
+    t.string   "recipient_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "galleries", force: true do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "name"
     t.integer  "gallery_id"
   end
@@ -40,27 +38,37 @@ ActiveRecord::Schema.define(version: 20131107202839) do
   create_table "letsgos", force: true do |t|
     t.string   "content"
     t.integer  "user_id"
-    t.string   "tag",                 limit: 100
+    t.string   "tag"
+    t.integer  "repost_from_user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "repost_from_user_id"
   end
 
   add_index "letsgos", ["user_id", "created_at"], name: "index_letsgos_on_user_id_and_created_at", using: :btree
 
+  create_table "locations", force: true do |t|
+    t.string   "zipcode"
+    t.string   "city"
+    t.string   "state"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "messages", force: true do |t|
-    t.integer  "sender_id",                                       null: false
+    t.integer  "sender_id",                             null: false
     t.integer  "recipient_id"
-    t.integer  "sender_deleted",                default: 0
-    t.integer  "recipient_deleted",             default: 0
-    t.string   "subject",           limit: 400, default: "",      null: false
+    t.integer  "sender_deleted",      default: 0
+    t.integer  "recipient_deleted",   default: 0
+    t.string   "subject",                               null: false
     t.text     "body"
     t.datetime "read_at"
-    t.string   "container",                     default: "draft"
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
-    t.integer  "user_id"
+    t.string   "container",           default: "draft"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "conversation_id"
+    t.string   "original_message_id"
   end
 
   create_table "notifications", force: true do |t|
@@ -73,8 +81,8 @@ ActiveRecord::Schema.define(version: 20131107202839) do
   end
 
   create_table "photos", force: true do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "image"
     t.string   "name"
     t.string   "gallery_id"
@@ -84,32 +92,28 @@ ActiveRecord::Schema.define(version: 20131107202839) do
   create_table "questions", force: true do |t|
     t.string   "question"
     t.string   "answer"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "asked_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "sender_id"
     t.integer  "recipient_id"
     t.integer  "message_id"
   end
 
   create_table "relationships", force: true do |t|
-    t.integer  "follower_id"
-    t.integer  "followed_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "follower_id"
+    t.integer "followed_id"
   end
-
-  add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id", using: :btree
-  add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
-  add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
 
   create_table "searches", force: true do |t|
     t.string   "gender"
+    t.string   "age"
     t.string   "zip_code"
     t.string   "children"
     t.string   "religion"
     t.string   "ethnicity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "min_age"
     t.integer  "max_age"
   end
@@ -135,33 +139,21 @@ ActiveRecord::Schema.define(version: 20131107202839) do
     t.string   "about_me"
     t.string   "inches"
     t.string   "feet"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "auth_token"
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
     t.boolean  "admin"
     t.string   "role"
     t.integer  "roles_mask"
-    t.integer  "average_response_time"
-    t.integer  "response_rate"
-    t.integer  "response_total"
+    t.integer  "age"
     t.integer  "default_photo_id"
+    t.integer  "location_id"
+    t.string   "time_zone"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["zip_code"], name: "index_users_on_zip_code", using: :btree
-
-  create_table "zips", id: false, force: true do |t|
-    t.string   "code"
-    t.string   "city"
-    t.string   "state"
-    t.decimal  "lat",        precision: 10, scale: 0
-    t.decimal  "lon",        precision: 10, scale: 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "zips", ["code"], name: "index_zips_on_code", unique: true, using: :btree
 
 end

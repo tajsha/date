@@ -8,9 +8,6 @@
 	<%= @message.created_at.strftime('%B %-d, %Y %l:%M%P') %>
 </p>
 <p>
-	<strong>To:</strong> 
-	<%= @message.recipient %>
-</p>
 
 	<strong>Subject:</strong> 
 	<%= @message.subject %>
@@ -21,6 +18,20 @@
 	<%=h @message.body %>
 </p>
 
+<%= form_for @message, url: user_messages_path(:id=>@message), method: :post do |f| %>
+<% if @message.recipient_id.nil? %>
+  <p>
+    To:<br />
+     <%= f.hidden_field :recipient_id, :value => params[:user_id] %> 
+  </p>
+
+<% end %>
+                                        <%= f.label :body, "Reply here:" %>
+                                        <%= f.text_area :body %>
+                                        <%= f.submit "Reply" %>
+                                <% end %>
+
+     
 <% if @message.question.present? %>
 <%= form_for @message.question, :url => question_path(@message.question),                                 
                                                                          method: :put do |f| %>
