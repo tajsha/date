@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131210204806) do
+ActiveRecord::Schema.define(version: 20131213162801) do
 
   create_table "conversations", force: true do |t|
     t.string   "sender_id"
@@ -56,6 +56,14 @@ ActiveRecord::Schema.define(version: 20131210204806) do
     t.datetime "updated_at"
   end
 
+  create_table "message_copies", force: true do |t|
+    t.integer  "recipient_id"
+    t.integer  "message_id"
+    t.integer  "folder_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "messages", force: true do |t|
     t.integer  "sender_id",                             null: false
     t.integer  "recipient_id"
@@ -69,7 +77,10 @@ ActiveRecord::Schema.define(version: 20131210204806) do
     t.datetime "updated_at"
     t.string   "conversation_id"
     t.string   "original_message_id"
+    t.string   "ancestry"
   end
+
+  add_index "messages", ["ancestry"], name: "index_messages_on_ancestry", using: :btree
 
   create_table "notifications", force: true do |t|
     t.integer  "user_id"
@@ -122,7 +133,7 @@ ActiveRecord::Schema.define(version: 20131210204806) do
     t.string   "email"
     t.string   "password_digest"
     t.string   "zip_code"
-    t.date     "birthday"
+    t.string   "birthday"
     t.string   "name"
     t.string   "username"
     t.string   "gender"

@@ -38,6 +38,14 @@ Dating::Application.routes.draw do
     resources :answers, only: [:new, :create]
   end
   
+  resources :orders do
+    collection do
+      get :paid
+      get :revoked
+      post :ipn
+    end
+  end
+  
   root to: 'users#new'
   
   resources :users do |user|
@@ -46,6 +54,7 @@ Dating::Application.routes.draw do
       collection do
         post 'delete_multiple'
         get 'askout', action: 'askout'
+        get 'reply', action: 'reply'
       end
     end
   end

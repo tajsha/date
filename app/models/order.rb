@@ -1,4 +1,5 @@
 class Order < ActiveRecord::Base
+
   def self.pay(token, payerID)
     begin
       order = self.find_by_payment_token(token)

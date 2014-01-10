@@ -6,7 +6,7 @@ gem 'rails', '4.0.0.rc1'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
+gem 'mysql2', '0.3.11'
 gem 'carrierwave'
 gem 'rmagick'
 gem 'protected_attributes'
@@ -19,6 +19,8 @@ gem "jquery-ui-rails"
 gem "will_paginate"
 gem 'sidekiq'
 gem 'mini_magick'
+gem 'ancestry'
+gem 'paypal-sdk-merchant'
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -3,6 +3,8 @@ class MessagesController < ApplicationController
   before_filter :set_user
   
   def index
+    @messages = Message.scoped
+    @message = Message.new
     if params[:mailbox] == "sent"
       @messages = @user.sent_messages.paginate :per_page => 10, :page => params[:page], :order => "created_at DESC"
     elsif params[:mailbox] == "inbox"
@@ -19,14 +21,11 @@ class MessagesController < ApplicationController
   end
   
   def new
+    @new_message = Message.new
     @message = Message.new
-    if params[:reply_to]
-      @reply_to = User.find_by_id(params[:reply_to])
-      unless @reply_to.nil?
-        @message.recipient_id = @reply_to.id
-      end
-    end
+    @message.parent_id = params[:parent_id]
   end
+    
   
   def askout
     @message = Message.new
@@ -34,7 +33,6 @@ class MessagesController < ApplicationController
   
   def create
     @message = Message.new(params[:message])
-    @message.sender_id = @user.id
     if @message.save
       flash[:notice] = "Message has been sent"
       redirect_to user_messages_path(current_user, :mailbox=>:inbox)
@@ -44,6 +42,7 @@ class MessagesController < ApplicationController
   end
 
   def show
+    @new_message = Message.new
       @message = Message.find(params[:id])
       @message.readingmessage if @message.recipient == current_user
     end
@@ -68,7 +67,9 @@ class MessagesController < ApplicationController
   end
   
   def reply
-    @message = Message.find(params[:id]).reply(id)
+      @reply_message = Message.new
+      @message = Message.new
+      @message.parent_id = params[:parent_id]
   end
   
   

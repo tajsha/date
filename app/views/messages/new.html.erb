@@ -1,11 +1,13 @@
+<% render @message %>
+
+
 <%= form_for @message, :url => user_messages_path(@user) do |f| %>
-  <% if @message.recipient_id.nil? %>
+<%= f.hidden_field :parent_id %>
     <p>
       To:<br />
-       <%= f.hidden_field :recipient_id, :value => params[:user_id] %> 
+      <%= f.text_field :recipient_id, :value => params[:user_id] %> 
     </p>
 
-  <% end %>
       <p>
         Subject:<br />
         <%= f.text_field :subject %>
