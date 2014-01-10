@@ -37,15 +37,8 @@ Dating::Application.routes.draw do
   resources :questions do
     resources :answers, only: [:new, :create]
   end
-  
-  resources :orders do
-    collection do
-      get :paid
-      get :revoked
-      post :ipn
-    end
-  end
-  
+
+          
   root to: 'users#new'
   
   resources :users do |user|
@@ -59,6 +52,14 @@ Dating::Application.routes.draw do
     end
   end
 
+  resources :payments, only: [:show, :create, :destroy] do
+     collection do
+       get :success
+       get :cancel
+       post :notify
+     end
+   end
+   
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
