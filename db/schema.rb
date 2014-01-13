@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131213162801) do
+ActiveRecord::Schema.define(version: 20140113152114) do
 
   create_table "conversations", force: true do |t|
     t.string   "sender_id"
@@ -87,6 +87,20 @@ ActiveRecord::Schema.define(version: 20131213162801) do
     t.string   "event_type"
     t.string   "event_id"
     t.boolean  "read",       default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "payments", force: true do |t|
+    t.integer  "amount",     default: 1
+    t.string   "token"
+    t.string   "identifier"
+    t.string   "payer_id"
+    t.boolean  "recurring",  default: false
+    t.boolean  "digital",    default: false
+    t.boolean  "popup",      default: false
+    t.boolean  "completed",  default: false
+    t.boolean  "canceled",   default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
