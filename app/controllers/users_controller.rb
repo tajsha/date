@@ -1,6 +1,12 @@
 class UsersController < ApplicationController
   respond_to :html, :json
   
+  def choose_default_photo
+    @photo = Photo.find params[:photo_id]
+    current_user.default_photo_id = params[:photo_id]
+    redirect_to '/users'
+  end
+  
   def search
      @latitude = params[:latitude].to_f * Math::PI / 180
      @longitude = params[:longitude].to_f * Math::PI / 180

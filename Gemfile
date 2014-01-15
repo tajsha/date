@@ -6,15 +6,16 @@ gem 'rails', '4.0.0.rc1'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2', '0.3.11'
+gem 'thinking-sphinx', '3.1.0'
+gem 'mysql2', '0.3.13'
 gem 'carrierwave'
+gem 'jdbc-mysql'
 gem 'rmagick'
 gem 'protected_attributes'
 gem 'rails-observers'
 gem 'actionpack-page_caching'
 gem 'actionpack-action_caching'
 gem 'activerecord-deprecated_finders'
-gem 'thinking-sphinx', '3.0.6'
 gem "jquery-ui-rails"
 gem "will_paginate"
 gem 'sidekiq'

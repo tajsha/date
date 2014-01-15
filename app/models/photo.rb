@@ -7,6 +7,7 @@ class Photo < ActiveRecord::Base
   
   LIMIT = 5
 
+
   validate do |record|
     record.validate_photo_quota
   end

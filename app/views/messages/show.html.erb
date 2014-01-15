@@ -20,6 +20,16 @@
   </div>
 </div>
 
+<% if @message.question.present? %>
+<%= form_for @message.question, :url => question_path(@message.question),                                 
+                                                                         method: :put do |f| %>
+                                        <%= f.label :answer, "Reply here:" %>
+                                        <%= f.text_area :answer %>
+                                        <%= f.submit "Send" %>
+                                <% end %>
+
+<% end %>
+
 <%= render "form" %>
 <p>
     <% if @message.next %>
