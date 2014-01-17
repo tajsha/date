@@ -1,5 +1,5 @@
 class Zip < ActiveRecord::Base
-  attr_accessible :city, :lat, :lon, :code, :zipcode
+  attr_accessible :city, :latitude, :longitude, :code, :zipcode, :zip_code
   has_and_belongs_to_many :users
   
   validates :code, uniqueness: true

@@ -64,6 +64,19 @@ class User < ActiveRecord::Base
   # models/user.rb
   after_create :setup_gallery
   
+  def location
+
+      if Location.by_zip_code(self.zip_code.to_s).any?
+          # you can return all here if you want more than one
+          # for testing just returning the first one
+          return Location.by_zip_code(self.zip_code.to_s).first
+      else
+          return nil
+      end
+  end
+  
+  
+  
    def over_18
       if birthday + 18.years > Date.today
         errors.add(:birthday, "can't be under 18")
