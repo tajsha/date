@@ -2,10 +2,10 @@
 
 
 <%= form_for @message, :url => user_messages_path(@user) do |f| %>
-<%= f.hidden_field :parent_id %>
+<%= f.hidden_field :conversation_id %>
     <p>
       To:<br />
-      <%= f.text_field :recipient_id, :value => @message.sender_id %> 
+      <%= f.text_field :recipient_id, :value => params[:user_id] %> 
     </p>
 
       <p>

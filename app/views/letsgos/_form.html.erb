@@ -3,6 +3,5 @@
 		<%= f.text_area :content, placeholder: "Propose new date..." %>
 		</div>
 		<%= f.select :tag, options_for_select( [["Select One", ""], "Eat/Drink", "Listen/Watch", "Play", "Explore", "Other"]) %>
-		<%= f.submit "Post" %>
-		
+		<%= f.submit "Post" %> | <a href="/letsgos/random" class="ajax">random date</a>
 		<% end %>

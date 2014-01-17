@@ -8,12 +8,12 @@
 </p><div class="message">
   <div class="created_at"><%= @message.created_at.strftime('%B %-d, %Y %l:%M%P')  %></div>
   <div class="content"><P>
-<%= nested_messages @message.subtree.arrange(:order => :created_at) %>
+	<%=h @message.body %>
 
   </div>
   <div class="actions">
       <% if @message.recipient == @user %>
-      <%= link_to "Reply", reply_user_messages_path(@user, :parent_id => @message) %><% end %>
+      <%= link_to "Reply", reply_user_messages_path(@message.sender, :conversation_id => @message) %><% end %>
      |
     <%= link_to "Delete", [current_user, @message], :confirm => 'Are you sure you want to delete this message?', :method => :delete %>
 

@@ -147,7 +147,7 @@ ActiveRecord::Schema.define(version: 20140113152114) do
     t.string   "email"
     t.string   "password_digest"
     t.string   "zip_code"
-    t.date     "birthday"
+    t.string   "birthday"
     t.string   "name"
     t.string   "username"
     t.string   "gender"

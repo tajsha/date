@@ -51,12 +51,8 @@ def repost
   
   def random
     @letsgo = Letsgo.random.first
-    if request.xhr?
-      # render the form partial and then 'return false' so the action stops trying to execute
-      
+    if request.xhr?      
     end
-    # if it wasn't an ajax request we should be here, so don't do 
-    # anything more and the normal html will render
   end
   
 def interested

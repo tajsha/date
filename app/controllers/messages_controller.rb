@@ -23,7 +23,7 @@ class MessagesController < ApplicationController
   def new
     @new_message = Message.new
     @message = Message.new
-    @message.parent_id = params[:parent_id]
+    @message.conversation_id = params[:conversation_id]
   end
     
   
@@ -70,7 +70,7 @@ class MessagesController < ApplicationController
   def reply
       @reply_message = Message.new
       @message = Message.new
-      @message.parent_id = params[:parent_id]
+      @message.conversation_id = params[:conversation_id]
   end
   
   

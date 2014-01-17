@@ -2,7 +2,7 @@
 
 
 <%= form_for @new_message, :url => user_messages_path(@user) do |f| %>
-<%= f.hidden_field :parent_id %>
+<%= f.hidden_field :conversation_id %>
   <% if @message.recipient_id.nil? %>
     <p>
       To:<br />

@@ -1,5 +1,5 @@
 <div class="message">
-  <div class="created_at"><%= message.created_at.present? ? message.created_at.strftime("%B %d, %Y") : message.created_at %></div>
+  <div class="created_at"><%= message.created_at.present? ? message.created_at.strftime("%B %d, %Y") : message.created_at %></div><b>From: <%= @message.sender %></b>
   <div class="content">
     <%=h message.body %>
   </div>

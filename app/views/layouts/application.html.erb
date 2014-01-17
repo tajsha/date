@@ -5,6 +5,20 @@
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+<script>
+  $(document).ready(function() {
+    $('.ajax').click(function() {
+      $.get(this.href, function(response) {
+        # In here you should be getting the response from your controller action
+        # you should be able to run
+        console.log(response); # to see the response in your console (f12, or ctrl+option+i)
+        # you'll want to do something like
+        $('body').html(response); 
+        # it's not the prettiest way of doing it, but will get you up and running. 
+      });
+    });
+  });
+</script>
 
 </head>
 <body>

@@ -1,6 +1,5 @@
 class Message < ActiveRecord::Base
-	has_ancestry
-	attr_accessible :subject, :body, :parent_id, :sender_id, :recipient_id, :read_at,:sender_deleted,:recipient_deleted
+	attr_accessible :subject, :conversation_id, :body, :parent_id, :sender_id, :recipient_id, :read_at,:sender_deleted,:recipient_deleted
 	validates_presence_of :subject, :message => "Please enter message title"
 	has_many :notifications, as: :event
 	belongs_to :conversation, inverse_of: :messages
