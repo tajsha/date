@@ -39,6 +39,7 @@ class User < ActiveRecord::Base
   has_many :notifications
   has_many :questions
   belongs_to :location
+  belongs_to :zip
   has_many :received_messages, class_name: 'Message', foreign_key: 'recipient_id'
   has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id'
   has_many :users, dependent: :destroy
