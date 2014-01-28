@@ -37,7 +37,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @question = Question.where(recipient_id: params[:id])
     @letsgos = @user.letsgos.paginate(page: params[:page])
-    @letsgo = current_user.letsgos.build
+    @letsgo = current_user.letsgos.build    
   end
   
   

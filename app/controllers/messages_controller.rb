@@ -23,7 +23,7 @@ class MessagesController < ApplicationController
   def new
     @new_message = Message.new
     @message = Message.new
-    @message.conversation_id = params[:conversation_id]
+    @message.conversation_id = @message.id
   end
     
   
@@ -34,6 +34,7 @@ class MessagesController < ApplicationController
   def create
     @message = Message.new(params[:message])
     @message.sender_id = @user.id
+    @message.conversation_id = @message.id
     if @message.save
       flash[:notice] = "Message has been sent"
       redirect_to user_messages_path(current_user, :mailbox=>:inbox)
@@ -46,6 +47,7 @@ class MessagesController < ApplicationController
     @new_message = Message.new
       @message = Message.find(params[:id])
       @message.readingmessage if @message.recipient == current_user
+      
     end
 
  

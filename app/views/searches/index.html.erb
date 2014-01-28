@@ -1,10 +1,12 @@
 <h1>Search Users</h1>
 
+
 <% @users.each do |user| %>
     <tr>
       <td><%= user %></td>
       <td><%= user.location.zipcode %></td>
-      <td><%= user.location.city %></td>
+      <td><%= user.location.city %></td><p>
     </tr>
 
 <% end %>
+
