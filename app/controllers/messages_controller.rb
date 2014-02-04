@@ -21,40 +21,36 @@ class MessagesController < ApplicationController
   end
   
   def new
-    @message = Message.new
-    @message.conversation_id = @message.id 
-    
-  end
-    
+      @message = Message.new
+      @message.conversation_id = params[:conversation_id]
+    end
+
+    def create
+      @message = Message.new(params[:message])
+      @message.sender_id = @user.id
+      if @message.save
+        flash[:notice] = "Message has been sent"
+        redirect_to user_messages_path(current_user, :mailbox=>:inbox)
+      else
+        render :action => :new
+      end
+    end
+
+    def show
+      @new_message = Message.new
+        @message = Message.find(params[:id])
+        @message.readingmessage if @message.recipient == current_user
+      end
+
+    def reply
+        @reply_message = Message.new
+        @message = Message.new
+        @message.conversation_id = params[:conversation_id]
+    end
   
   def askout
     @message = Message.new
   end
-  
-  def create
-    @message = Message.new(params[:message])
-    @message.sender_id = @user.id
-    @message.conversation_id = @message.id 
-    if @message.save
-      flash[:notice] = "Message has been sent"
-      redirect_to user_messages_path(current_user, :mailbox=>:inbox)
-    else
-      render :action => :new
-    end
-  end
-  
-  def show
-    @new_message = Message.new
-      @message = Message.find(params[:id])
-      @message.readingmessage if @message.recipient == current_user      
-    end
-
-  def reply
-      @reply_message = Message.new
-      @message = Message.new
-      @message.conversation_id = params[:conversation_id]
-  end
-
  
    def destroy
      @message = Message.find(params[:id])

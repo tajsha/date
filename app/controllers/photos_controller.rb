@@ -58,6 +58,6 @@ class PhotosController < ApplicationController
         else
           flash[:notice] = "Avatar failed"
         end
-        redirect_to(current_user) # However you plan to handle this...
+        redirect_to(current_user)
       end
 end

@@ -13,7 +13,7 @@
   </div>
 
   <div class="actions">
-      	  <%= link_to "Reply", reply_user_messages_path(@message.sender, :conversation_id => @message.conversation_id) %>
+      	 <%= link_to "Reply", reply_user_messages_path(@message.sender, conversation_id: @message.conversation_id ? @message.conversation_id : @message.id) %>
 
 
      |
