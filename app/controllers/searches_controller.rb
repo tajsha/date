@@ -20,21 +20,23 @@ class SearchesController < ApplicationController
   end
     
   def index
-         location  = Location.find_by_zipcode params[:zipcode] 
-          latitude  = location.latitude * Math::PI / 180 
-          longitude = location.longitude * Math::PI / 180 
+    if location = Location.find_by_zipcode(params[:search])
+        latitude  = location.latitude * Math::PI / 180 
+        longitude = location.longitude * Math::PI / 180 
 
-          location_zips = Location.search_for_ids( 
-            :geo   => [latitude, longitude], 
-            :with  => {:geodist => 0.0..400_000.0}, 
-            :order => 'geodist ASC',
-            :per_page => 1_000
-          ) 
-          @users = Users.where(zip_code: location_zips.pluck(:zipcode))
-          
-                 
-        end
- 
+        locations = Location.search( 
+          :geo   => [latitude, longitude], 
+          :with  => {:geodist => 0.0..600_000.0}, 
+          :order => 'geodist ASC',
+          :per_page => 5_000
+        ) 
+        @users = User.where(zip_code: locations.map(&:zipcode))
+         
+      
+          else
+            @users = User.search(params[:search])
+        end      
+      end
      
   def min_age
     @min_age = params[:min_age].to_i.years

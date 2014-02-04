@@ -52,9 +52,12 @@ class PhotosController < ApplicationController
     redirect_to @photo.gallery
   end
   
-  def choose_default_photo
-    @photo = Photo.find params[:photo_id]
-    current_user.default_photo = @photo
-    redirect_to '/profile' # or wherever I want to send them
-  end
+  def avatar
+    if current_user.update_attribute(:avatar_id, params[:id])
+      flash[:notice] = "Successfully made Avatar."
+        else
+          flash[:notice] = "Avatar failed"
+        end
+        redirect_to(current_user) # However you plan to handle this...
+      end
 end

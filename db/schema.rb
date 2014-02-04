@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140113152114) do
+ActiveRecord::Schema.define(version: 20140203204719) do
 
   create_table "conversations", force: true do |t|
     t.string   "sender_id"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20140113152114) do
   add_index "letsgos", ["user_id", "created_at"], name: "index_letsgos_on_user_id_and_created_at", using: :btree
 
   create_table "locations", force: true do |t|
-    t.string   "zipcode"
+    t.integer  "zipcode"
     t.string   "city"
     t.string   "state"
     t.float    "latitude"
@@ -112,6 +112,7 @@ ActiveRecord::Schema.define(version: 20140113152114) do
     t.string   "name"
     t.string   "gallery_id"
     t.integer  "user_id"
+    t.integer  "avatar"
   end
 
   create_table "questions", force: true do |t|
@@ -147,7 +148,7 @@ ActiveRecord::Schema.define(version: 20140113152114) do
     t.string   "email"
     t.string   "password_digest"
     t.string   "zip_code"
-    t.string   "birthday"
+    t.date     "birthday"
     t.string   "name"
     t.string   "username"
     t.string   "gender"
@@ -174,8 +175,8 @@ ActiveRecord::Schema.define(version: 20140113152114) do
     t.integer  "roles_mask"
     t.integer  "age"
     t.integer  "default_photo_id"
-    t.integer  "location_id"
     t.string   "time_zone"
+    t.integer  "avatar_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

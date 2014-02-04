@@ -15,7 +15,11 @@ Dating::Application.routes.draw do
   resources :sessions
   resources :password_resets
   resources :galleries
-  resources :photos
+  resources :photos do
+    member do
+      post :avatar
+    end
+  end
   resources :searches
   resources :sessions,      only: [:new, :create, :destroy]
   resources :relationships, only: [:create, :destroy]
