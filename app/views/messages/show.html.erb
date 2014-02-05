@@ -32,8 +32,21 @@
 
 <% end %>
 
-<%= render "form" %>
-<p>
+<%= form_for @reply_message, url: user_messages_path, method: :post do |f| %>
+<%= f.hidden_field :conversation_id, :value => @message.conversation_id %>
+    <p>
+      To:<br />
+      <%= f.text_field :recipient_id, :value => @message.sender_id %> 
+    </p>
+
+        <%= f.hidden_field :subject, :value => "RE:" %>
+      <p>
+        Message<br />
+        <%= f.text_area :body %>
+      </p>
+
+      <%= submit_tag "Send"%>
+<% end %><p>
     <% if @message.next %>
       <%= link_to 'Next', user_message_path(current_user, @message.next) %>
     <% end %>

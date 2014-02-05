@@ -8,10 +8,7 @@
       <%= f.text_field :recipient_id, :value => params[:user_id] %> 
     </p>
 
-      <p>
-        Subject:<br />
-        <%= f.text_field :subject %>
-      </p>
+        <%= f.hidden_field :subject, :value => "RE:" %>
       <p>
         Message<br />
         <%= f.text_area :body %>

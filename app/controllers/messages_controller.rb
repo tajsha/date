@@ -37,7 +37,7 @@ class MessagesController < ApplicationController
     end
 
     def show
-      @new_message = Message.new
+      @reply_message = Message.new
         @message = Message.find(params[:id])
         @message.readingmessage if @message.recipient == current_user
       end
