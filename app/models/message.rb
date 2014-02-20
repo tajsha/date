@@ -4,6 +4,7 @@ class Message < ActiveRecord::Base
 	has_many :notifications, as: :event
 	belongs_to :conversation, inverse_of: :messages
 	belongs_to :user
+  scope :inbox, -> {where('conversation_id IS NULL')}
   scope :unread, -> {where('read_at IS NULL')}
   scope :not_deleted_by_recipient, where('messages.recipient_deleted IS NULL OR messages.recipient_deleted = ?', false)
   scope :not_deleted_by_sender, where('messages.sender_deleted IS NULL OR messages.sender_deleted = ?', false)
@@ -17,11 +18,8 @@ class Message < ActiveRecord::Base
 	
 	has_one :question
 	has_one :letsgo
-	
 
-	def reply
-	  new_message.reply_from_user_id = self.id #save the user id of original repost, to keep track of where it originally came from
-  end
+	
 
   def self.by_date
       order("created_at DESC")

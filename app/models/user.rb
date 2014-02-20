@@ -30,7 +30,7 @@
 
 class User < ActiveRecord::Base
   has_secure_password
-  attr_accessible :role, :name, :time_zone, :code, :lat, :lon, :city, :age, :age_end, :password_confirmation, :about_me, :feet, :inches, :password, :birthday, :career, :children, :education, :email, :ethnicity, :gender, :height, :name, :password_digest, :politics, :religion, :sexuality, :user_drink, :user_smoke, :username, :zip_code
+  attr_accessible :role, :average_response_time, :response_rate, :response_total, :name, :time_zone, :code, :lat, :lon, :city, :age, :age_end, :password_confirmation, :about_me, :feet, :inches, :password, :birthday, :career, :children, :education, :email, :ethnicity, :gender, :height, :name, :password_digest, :politics, :religion, :sexuality, :user_drink, :user_smoke, :username, :zip_code
   # this prevented user from registering as I don't have timezone select on user reg form
   # validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name)
   has_many :photos

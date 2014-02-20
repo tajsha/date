@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>Gemfile</string>
+	<string>app/controllers/messages_controller.rb</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -21,59 +21,74 @@
 	<integer>352</integer>
 	<key>metaData</key>
 	<dict>
-		<key>Gemfile</key>
+		<key>app/controllers/messages_controller.rb</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>19</integer>
+				<integer>7</integer>
 				<key>line</key>
-				<integer>23</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>5</integer>
-		</dict>
-		<key>config/routes.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>1</integer>
-				<key>line</key>
-				<integer>23</integer>
+				<integer>13</integer>
 			</dict>
 			<key>columnSelection</key>
 			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>18</integer>
+			<integer>0</integer>
 			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>2</integer>
-				<key>line</key>
-				<integer>23</integer>
-			</dict>
-			<key>selectTo</key>
 			<dict>
 				<key>column</key>
 				<integer>1</integer>
 				<key>line</key>
-				<integer>23</integer>
+				<integer>4</integer>
 			</dict>
+			<key>selectTo</key>
+			<dict>
+				<key>column</key>
+				<integer>7</integer>
+				<key>line</key>
+				<integer>13</integer>
+			</dict>
+		</dict>
+		<key>app/models/message.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>26</integer>
+				<key>line</key>
+				<integer>2</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>app/views/messages/_inbox.html.erb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>1</integer>
+				<key>line</key>
+				<integer>29</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>17</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
-		<string>config/routes.rb</string>
-		<string>Gemfile</string>
+		<string>app/models/message.rb</string>
+		<string>app/views/messages/_inbox.html.erb</string>
+		<string>app/controllers/messages_controller.rb</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{491, 378}, {757, 400}}</string>
+	<string>{{371, 170}, {766, 381}}</string>
 </dict>
 </plist>

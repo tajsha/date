@@ -25,7 +25,11 @@ No messages in your Inbox
 								<% end %>
 							</td>
 
-<td><%=h message.created_at.strftime('%B %-d, %Y %l:%M%P')  %></td>					<td><%= "#{message.sender}" %></td>
+<td><%=h message.created_at.strftime('%B %-d, %Y %l:%M%P')  %></td>					<td><%= "#{message.sender}" %><br><%= message.sender.age %>, <%= message.sender.gender %>, <%= message.sender.sexuality %><br>
+	<%= message.sender.location.city%>, <%= message.sender.location.state%>
+	
+	<br>							<%= image_tag message.sender.avatar.image_url(:avatar) %>
+</td>
 						</tr>
 			<% end %>
 			</table><p>

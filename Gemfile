@@ -19,6 +19,8 @@ gem 'activerecord-deprecated_finders'
 gem "jquery-ui-rails"
 gem "will_paginate"
 gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'slim'
 gem 'mini_magick'
 gem 'ancestry'
 gem 'paypal-sdk-merchant'

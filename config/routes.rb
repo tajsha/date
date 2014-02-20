@@ -1,4 +1,8 @@
+require 'sidekiq/web'
+
 Dating::Application.routes.draw do
+  mount Sidekiq::Web, at: '/sidekiq'
+
   get 'signup' => 'users#new'
   get 'login' => 'sessions#new'
   get 'logout' => 'sessions#destroy'
@@ -61,7 +65,7 @@ Dating::Application.routes.draw do
        get :success
        get :cancel
        post :notify
-     end
+     end     
    end
    
   # The priority is based upon order of creation:

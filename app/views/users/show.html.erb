@@ -18,9 +18,9 @@ gallery:{enabled:true}
   <%= link_to "Add a Photo", new_photo_path(:gallery_id => @gallery) %>
 
 
-<p>RANDOM DATES
+<p>RANDOM DATES<p>
 
-<%= @random %>
+	<%= image_tag @user.avatar.image_url(:profile) %>
 <P>
 
 
@@ -39,6 +39,7 @@ gallery:{enabled:true}
 
 <h2>Basics</h2>
 <p>Age: <%= @user.age %></p>
+<p>Location: <%= @user.location.city%>, <%= @user.location.state%></p>
 <p>Sexuality: <%= @user.sexuality %></p>
   <p>Gender: <%= @user.gender %></p>
   <p>Height: <%= best_in_place @user, :feet %>'<%= best_in_place @user, :inches %></p>

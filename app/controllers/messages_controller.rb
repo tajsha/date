@@ -8,8 +8,8 @@ class MessagesController < ApplicationController
     if params[:mailbox] == "sent"
       @messages = @user.sent_messages.paginate :per_page => 10, :page => params[:page], :order => "created_at DESC"
     elsif params[:mailbox] == "inbox"
-      @messages = @user.received_messages.paginate :per_page => 10, :page => params[:page], :order => "created_at DESC"
-    #elsif params[:mailbox] == "archived"
+      @messages = @user.received_messages.inbox.paginate :per_page => 10, :page => params[:page], :order => "created_at DESC"
+        #elsif params[:mailbox] == "archived"
      # @messages = @user.archived_messages
     end
     if params[:mailbox] == "unread"
@@ -37,13 +37,16 @@ class MessagesController < ApplicationController
     end
 
     def show
+      @messages = Message.where(conversation_id: params[:id]).order(created_at: :desc)
       @reply_message = Message.new
         @message = Message.find(params[:id])
+        if @message.recipient == current_user
+           UserMessageWorker.perform_async(@message.id, current_user.id)
+         end
         @message.readingmessage if @message.recipient == current_user
       end
 
     def reply
-        @reply_message = Message.new
         @message = Message.new
         @message.conversation_id = params[:conversation_id]
     end

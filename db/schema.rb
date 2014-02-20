@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140203204719) do
+ActiveRecord::Schema.define(version: 20140205160604) do
 
   create_table "conversations", force: true do |t|
     t.string   "sender_id"
@@ -177,6 +177,9 @@ ActiveRecord::Schema.define(version: 20140203204719) do
     t.integer  "default_photo_id"
     t.string   "time_zone"
     t.integer  "avatar_id"
+    t.integer  "average_response_time"
+    t.integer  "response_rate"
+    t.integer  "response_total"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
