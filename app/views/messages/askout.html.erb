@@ -1,19 +1,8 @@
-<%= form_for @message, :url => user_messages_path(@user) do |f| %>
-  <% if @message.recipient_id.nil? %>
-    <p>
-      To:<br />
-       <%= f.hidden_field :recipient_id, :value => params[:user_id] %> 
-    </p>
-
-  <% end %>
-      <p>
-        Subject:<br />
-        <%= f.hidden_field :subject, :value => "You have a date from #{@user.id}" %>
-      </p>
-      <p>
-        Message<br />
-        <%= f.text_area :body %>
-      </p>
-
-      <%= submit_tag "Send"%>
+<%= @user %>
+<%= form_tag({controller: "messages", action: "create"}, method: :post) do %>
+ <%= hidden_field_tag :subject, "You have a date from #{@current_user} " %>
+ <%= label :body, "Message text" %>
+ <%= text_area_tag :body %>
+ <%= hidden_field_tag(:user, params[:user_id]) %>
+ <%= submit_tag 'Send message', class: "btn btn-primary" %>
 <% end %>

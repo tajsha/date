@@ -29,6 +29,12 @@
 #
 
 class User < ActiveRecord::Base
+  acts_as_messageable
+
+  # Added by Koudoku.
+  has_one :subscription
+
+
   has_secure_password
   attr_accessible :role, :average_response_time, :response_rate, :response_total, :name, :time_zone, :code, :lat, :lon, :city, :age, :age_end, :password_confirmation, :about_me, :feet, :inches, :password, :birthday, :career, :children, :education, :email, :ethnicity, :gender, :height, :name, :password_digest, :politics, :religion, :sexuality, :user_drink, :user_smoke, :username, :zip_code
   # this prevented user from registering as I don't have timezone select on user reg form
@@ -65,6 +71,10 @@ class User < ActiveRecord::Base
   
   # models/user.rb
   after_create :setup_gallery
+  
+  def mailboxer_email(object)
+    email
+  end
   
   def location
 
@@ -152,6 +162,10 @@ class User < ActiveRecord::Base
     today = Date.today
     where birthday: (today - year_range.max.years)..(today - year_range.min.years)
   end
+  
+  def name
+    return "#{first_name} #{last_name}"
+   end
   
   private
   def setup_gallery

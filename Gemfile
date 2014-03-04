@@ -6,6 +6,8 @@ gem 'rails', '4.0.0.rc1'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+gem 'mailboxer'
+gem 'paypal-recurring'
 gem 'thinking-sphinx', '3.1.0'
 gem 'mysql2', '0.3.13'
 gem 'carrierwave'
@@ -23,8 +25,8 @@ gem 'sinatra', require: false
 gem 'slim'
 gem 'mini_magick'
 gem 'ancestry'
-gem 'paypal-sdk-merchant'
-gem 'paypal-express'
+gem 'stripe'
+
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -1,26 +1,6 @@
-<% render @message %>
-
-
-<%= form_for @new_message, :url => user_messages_path(@user) do |f| %>
-  <% if @message.recipient_id.nil? %>
-    <p>
-      To:<br />
-      <%= f.text_field :recipient_id %>
-    </p>
-  <% else %>
-    <p>
-
-      <%= f.hidden_field :recipient_id, :value=>@message.recipient_id,:readonly => true %>
-    </p>
-  <% end %>
-      <p>
-        Subject:<br />
-        <%= f.text_field :subject %>
-      </p>
-      <p>
-        Message<br />
-        <%= f.text_area :body %>
-      </p>
-
-      <%= submit_tag "Send"%>
-<% end %>
+Reply:
+ <%= form_for :message, url: [:reply, conversation] do |f| %>
+ <%= f.text_area :body %>
+ <%= f.submit "Send Message", class: 'btn btn-primary' %>
+ <%= submit_tag 'Clear Reply Box', type: :reset, class: 'btn btn-danger' %>
+ <% end %>

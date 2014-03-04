@@ -1,13 +1,6 @@
-require 'paypal/express'
-
-PAYPAL_CONFIG = if ENV['paypal_username'] # for heroku
-  {
-    username:  ENV['paypal_username'],
-    password:  ENV['paypal_password'],
-    signature: ENV['paypal_signature'],
-    sandbox:   ENV['paypal_sandbox']
-  }
-else
-  YAML.load_file("#{Rails.root}/config/paypal.yml")[Rails.env].symbolize_keys
+PayPal::Recurring.configure do |config|
+  config.sandbox = true
+  config.username = "cornelius_api1.me.com"
+  config.password = "1393878821"
+  config.signature = "An5ns1Kso7MWUdW4ErQKJJJ4qi4-A0uND96gHuIJF784XPK09krQUDj1"
 end
-Paypal.sandbox! if PAYPAL_CONFIG[:sandbox]

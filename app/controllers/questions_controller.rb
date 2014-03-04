@@ -20,11 +20,14 @@ end
 def create
   @question = Question.new(params[:question])
   if @question.save
-    @message = Message.create(:subject => "You have a question from #{@question.sender_id}",
-                           :sender_id => @question.sender_id,
-                           :recipient_id => @question.recipient_id,
+    #Original code @message = Message.create
+    @message = current_user.messages.new(:subject => "You have a question from #{@question.sender_id}",
+                           #Original code :sender_id
+                           :notification_id => @question.sender_id,
+                           #Original code :recipient_id
+                           :reciver_id => @question.recipient_id,
                            :body => @question.question)
-    
+
     @question.message = @message
     @question.save
     redirect_to questions_path, notice: 'Your question was saved successfully. Thanks!'

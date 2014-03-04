@@ -1,21 +1,11 @@
-<% render @message %>
-
-
-<%= form_for @message, :url => user_messages_path(@user) do |f| %>
-
-    <p>
-      To:<br />
-      <%= f.text_field :recipient_id, :value => params[:user_id] %> 
-    </p>
-
-      <p>
-        Subject:<br />
-        <%= f.text_field :subject %>
-      </p>
-      <p>
-        Message<br />
-        <%= f.text_area :body %>
-      </p>
-
-      <%= submit_tag "Send"%>
-<% end %>
+Send a message to
+ 
+ <%= @user %>
+ <%= form_tag({controller: "messages", action: "create"}, method: :post) do %>
+  <%= label_tag :subject %>
+  <%= text_field_tag :subject %>
+  <%= label :body, "Message text" %>
+  <%= text_area_tag :body %>
+  <%= hidden_field_tag(:user, params[:user_id]) %>
+  <%= submit_tag 'Send message', class: "btn btn-primary" %>
+ <% end %>

@@ -1,6 +1,13 @@
 require 'sidekiq/web'
 
 Dating::Application.routes.draw do
+
+  # Added by Koudoku.
+  scope module: 'koudoku' do
+    get 'pricing' => 'subscriptions#index', as: 'pricing'
+  end
+
+
   mount Sidekiq::Web, at: '/sidekiq'
 
   get 'signup' => 'users#new'
@@ -16,6 +23,12 @@ Dating::Application.routes.draw do
   get 'letsgos/other' => 'letsgos#other'
   get 'letsgos/explore' => 'letsgos#explore'
   
+  
+  resources :charges
+  resources :subscriptions
+  resources :plans
+  get 'paypal/checkout', to: 'subscriptions#paypal_checkout'
+ 
   resources :sessions
   resources :password_resets
   resources :galleries
@@ -49,16 +62,26 @@ Dating::Application.routes.draw do
           
   root to: 'users#new'
   
-  resources :users do |user|
-
+  resources :users do
     resources :messages do
+      post :new
       collection do
-        post 'delete_multiple'
-        get 'askout', action: 'askout'
-        get 'reply', action: 'reply'
+        get :askout
       end
     end
+    collection do
+        get :trashbin
+        post :empty_trash
+     end
   end
+ 
+ resources :conversations do
+   member do
+     post :reply
+     post :trash
+     post :untrash
+   end
+ end
 
   resources :payments, only: [:show, :create, :destroy] do
      collection do
