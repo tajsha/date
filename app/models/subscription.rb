@@ -1,5 +1,8 @@
 class Subscription < ActiveRecord::Base
   belongs_to :plan
+  belongs_to :subscription
+  belongs_to :user
+  
   validates_presence_of :plan_id
   validates_presence_of :email
   
@@ -37,5 +40,17 @@ class Subscription < ActiveRecord::Base
   
   def payment_provided?
     stripe_card_token.present? || paypal_payment_token.present?
+  end
+  
+  def suspend_paypal
+    paypal.suspend
+    save
+    updateQuery = ActiveRecord::Base.connection.execute("UPDATE Subscription SET cancelled = 'Cancelled' WHERE user_id = #{@user.id}")
+  end
+  
+  
+  def reactivate_paypal
+    paypal.reactivate
+    save
   end
 end

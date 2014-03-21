@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140303194947) do
+ActiveRecord::Schema.define(version: 20140320174607) do
 
   create_table "conversations", force: true do |t|
     t.string   "subject",    default: ""
@@ -157,6 +157,8 @@ ActiveRecord::Schema.define(version: 20140303194947) do
     t.datetime "updated_at"
     t.string   "paypal_customer_token"
     t.string   "paypal_recurring_profile_token"
+    t.integer  "user_id"
+    t.integer  "cancelled"
   end
 
   create_table "users", force: true do |t|
@@ -195,6 +197,7 @@ ActiveRecord::Schema.define(version: 20140303194947) do
     t.integer  "average_response_time"
     t.integer  "response_rate"
     t.integer  "response_total"
+    t.integer  "plan_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

@@ -22,6 +22,15 @@ Dating::Application.routes.draw do
   get 'letsgos/play' => 'letsgos#play'
   get 'letsgos/other' => 'letsgos#other'
   get 'letsgos/explore' => 'letsgos#explore'
+  get "subscriptions/cancelsubscription"
+  get "subscriptions/updatesubscription"
+  get "subscriptions/changecard"
+  get "subscriptions/suspend"
+  get "subscriptions/updatebilling"
+  get "subscriptions/reactivate"
+  patch "updatebilling" => "users#update_stripe_billing"
+  
+  
   
   
   resources :charges
@@ -30,6 +39,7 @@ Dating::Application.routes.draw do
   get 'paypal/checkout', to: 'subscriptions#paypal_checkout'
  
   resources :sessions
+  resources :contacts, only: [:new, :create]
   resources :password_resets
   resources :galleries
   resources :photos do

@@ -88,6 +88,36 @@ def update
       redirect_to '/profile'
     end
     
+    def update_stripe_billing
+       @user = current_user
+       customer = Stripe::Customer.retrieve(current_user.stripe_customer_token)
+       customer.cards.retrieve("#{current_user.stripe_card_id}").delete()
+
+       customer.cards.create({
+         card: {
+         number: params[:user][:scardnumber],
+         exp_month: params[:user][:sexp_month],
+         exp_year: params[:user][:sexp_year],
+         cvc: params[:user][:scvc],
+         name: params[:user][:sname],
+         address_line1: params[:user][:sbilling_address1],
+         address_line2: params[:user][:sbilling_address2],
+         address_city: params[:user][:saddress_city],
+         address_zip: params[:user][:saddress_zip],
+         address_state: params[:user][:saddress_state],
+         address_country: params[:user][:saddress_country]
+         }
+       })
+       if customer.save!
+         @user.stripe_card_id = customer.active_card.id
+         @user.save!
+         flash.alert = 'Billing information updated successfully!'
+         redirect_to edit_user_registration_path
+       else
+         flash.alert = 'Stripe error'
+         redirect_to edit_user_registration_path
+       end
+     end
 
      
     private

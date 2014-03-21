@@ -25,7 +25,7 @@ def create
                            #Original code :sender_id
                            :notification_id => @question.sender_id,
                            #Original code :recipient_id
-                           :reciver_id => @question.recipient_id,
+                           :receiver_id => @question.recipient_id,
                            :body => @question.question)
 
     @question.message = @message
