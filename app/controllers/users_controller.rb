@@ -1,12 +1,6 @@
 class UsersController < ApplicationController
   respond_to :html, :json
   
-  def choose_default_photo
-    @photo = Photo.find params[:photo_id]
-    current_user.default_photo_id = params[:photo_id]
-    redirect_to '/users'
-  end
-  
   def settings
     @user = User.find(params[:id])
   end
@@ -31,16 +25,14 @@ class UsersController < ApplicationController
       render "new"
     end
   end
-  
- 
+
   def show
     @user = User.find(params[:id])
-    @question = Question.where(recipient_id: params[:id])
+    @question = @user.recipient_questions.paginate(page: params[:page])
     @letsgos = @user.letsgos.paginate(page: params[:page])
     @letsgo = current_user.letsgos.build    
   end
-  
-  
+    
     def edit
       @user = User.find(params[:id])
 end
@@ -82,11 +74,6 @@ def update
       redirect_to friend
     end
     
-    def choose_default_photo
-      @photo = Photo.find params[:photo_id]
-      current_user.default_photo = @photo
-      redirect_to '/profile'
-    end
     
     def update_stripe_billing
        @user = current_user

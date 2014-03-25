@@ -37,9 +37,14 @@ class User < ActiveRecord::Base
   has_one :subscription
   has_many :photos
   has_many :letsgos, dependent: :destroy
-  belongs_to :default_photo, :class_name => "Photo"
+  belongs_to :default_photo, :class_name => "Photo"  
   has_many :notifications
-  has_many :questions
+  has_many :sender_questions, 
+  :class_name => 'Question', 
+  :foreign_key => 'sender_id' 
+  has_many :recipient_questions, 
+  :class_name => 'Question', 
+  :foreign_key => 'recipient_id'
   belongs_to :location
   belongs_to :zip
   belongs_to :avatar, class_name: 'Photo'

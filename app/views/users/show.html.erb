@@ -11,17 +11,17 @@ gallery:{enabled:true}
 </script>
 
 <div class="parent-container">
-    <% @user.photos.each do |photo| %>
-        <%= link_to image_tag(photo.image_url(:thumb)), photo.image_url%>  
-		<%= button_to('Set as Avatar', [:photo, @avatar])%>
-
-<% end %></div></p>
+<% @user.photos.each do |photo| %> 
+   <%= link_to image_tag(photo.image_url(:thumb)), photo.image_url%>
+   <%= button_to('Set as Avatar', [:avatar, photo])%> 
+ <% end %>
+ </div></p>
 
   <%= link_to "Add a Photo", new_photo_path(:gallery_id => @gallery) %>
 
 
-<p>RANDOM DATES<p>
-
+<p>AVATAR<p>
+	<%= image_tag @user.avatar.image_url(:profile) %>
 <P>
 
 
@@ -65,9 +65,13 @@ gallery:{enabled:true}
 		<p>
 			<h5>SHOW QUESTIONS</H5>
 				<% @question.select(&:answer?).each do |question| %>
-				         Question: <%= question.question %><br>Answer: <%= question.answer %><br><br>
-				         
-				    <% end %>
+				Question: <%= question.question %>
+				<br>
+				Answer: <%= question.answer %><br><br>
+
+				<%= will_paginate @question %>
+				
+				<% end %>
 	
 	
 	Show Dates Proposed:

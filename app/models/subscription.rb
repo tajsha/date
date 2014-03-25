@@ -45,7 +45,6 @@ class Subscription < ActiveRecord::Base
   def suspend_paypal
     paypal.suspend
     save
-    updateQuery = ActiveRecord::Base.connection.execute("UPDATE Subscription SET cancelled = 'Cancelled' WHERE user_id = #{@user.id}")
   end
   
   

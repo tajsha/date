@@ -31,6 +31,7 @@ class PhotosController < ApplicationController
       img
     end
   end
+  
   def edit
     @photo = Photo.find(params[:id])
   end
@@ -58,6 +59,6 @@ class PhotosController < ApplicationController
         else
           flash[:notice] = "Avatar failed"
         end
-        redirect_to(current_user)
+        redirect_to root_url, notice: "Set as avatar!"
       end
 end
