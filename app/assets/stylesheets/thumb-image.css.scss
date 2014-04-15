@@ -14,15 +14,15 @@ img.profImg {
   /* z-index: 2; */
 }
 /* hover effects */
-.thumbImg:hover .overImg  { display:block; }
-.thumbImg .overImg { display:none; }
-/* specific to thumb image, will need to be adjusted */
-.thumb-over-2 {
+.carImg:hover .overImg  { display:block; }
+.carImg .overImg { display:none; }
+/* specific to car image, will need to be adjusted */
+.car-over-2 {
   position: absolute;
   top: 310px;
   left: 25px;
 }
-.thumb-over {
+.car-over {
   position: absolute;
   top: 36px;
   left: 25px;

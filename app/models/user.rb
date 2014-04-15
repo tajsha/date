@@ -28,6 +28,7 @@
 #  password_reset_sent_at :datetime
 #
 
+
 class User < ActiveRecord::Base
   acts_as_messageable
   has_secure_password
@@ -39,12 +40,8 @@ class User < ActiveRecord::Base
   has_many :letsgos, dependent: :destroy
   belongs_to :default_photo, :class_name => "Photo"  
   has_many :notifications
-  has_many :sender_questions, 
-  :class_name => 'Question', 
-  :foreign_key => 'sender_id' 
-  has_many :recipient_questions, 
-  :class_name => 'Question', 
-  :foreign_key => 'recipient_id'
+  has_many :questions
+
   belongs_to :location
   belongs_to :zip
   belongs_to :avatar, class_name: 'Photo'

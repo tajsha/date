@@ -1,21 +1,38 @@
 <h1><%= @user.username %></h1>
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('.parent-container').magnificPopup({
-            delegate: 'a',
-            type: 'image',
-gallery:{enabled:true}
-        });   
+$(document).ready(function () {
+    $('.parent-container').magnificPopup({
+        delegate: 'a',
+        type: 'inline',
+        gallery: { enabled: true }
     });
-
+});
 </script>
 
 <div class="parent-container">
-<% @user.photos.each do |photo| %> 
-   <%= link_to image_tag(photo.image_url(:thumb)), photo.image_url%>
-   <%= button_to('Set as Avatar', [:avatar, photo])%> 
- <% end %>
- </div></p>
+    <% @user.photos.each do |photo| %>
+        <%= link_to image_tag(photo.image_url(:thumb)), "#" + dom_id(photo) %>
+        <div id="<%= dom_id(photo) %>" class="mfp-hide">
+	<center>
+<%= image_tag(photo.image_url(:popup)) %>
+</center>
+            <%= button_to('Set as Profile Image', [:avatar, photo]) %><p>
+			<%= button_to "remove", photo, :confirm => 'Are you sure?', :method => :delete %><p>
+				Send a message to
+
+				 <%= @user %>
+				 <%= form_tag({controller: "messages", action: "create"}, method: :post) do %>
+				  <%= label_tag :subject %>
+				  <%= text_field_tag :subject %>
+				  <%= label :body, "Message text" %>
+				  <%= text_area_tag :body %>
+				  <%= hidden_field_tag(:user, params[:id]) %>
+				  <%= submit_tag 'Send message', class: "btn btn-primary" %>
+				 <% end %>
+        </div>
+    <% end %>
+</div>
+</p>
 
   <%= link_to "Add a Photo", new_photo_path(:gallery_id => @gallery) %>
 
@@ -63,16 +80,14 @@ gallery:{enabled:true}
 	<p>
 	
 		<p>
-			<h5>SHOW QUESTIONS</H5>
-				<% @question.select(&:answer?).each do |question| %>
-				Question: <%= question.question %>
-				<br>
-				Answer: <%= question.answer %><br><br>
-
-				<%= will_paginate @question %>
-				
-				<% end %>
-	
+<h5>SHOW QUESTIONS</H5>
+	<div id="questions">
+	<% @question.select(&:answer?).each do |question| %>
+	Question: <%= question.question %><br>
+	Answer: <%= question.answer %><br><br>
+	<% end %>
+	<%= will_paginate @question %>
+	</div>
 	
 	Show Dates Proposed:
 	
@@ -81,5 +96,6 @@ gallery:{enabled:true}
 		<%= render @letsgos %>
 		<%= will_paginate @letsgos %>
 		<% end %>
-		
+		<% if current_user?(@user) %>
 		<%= render 'letsgos/form' %>
+		<% end %>

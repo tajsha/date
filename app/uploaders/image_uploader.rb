@@ -10,6 +10,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # include Sprockets::Helpers::RailsHelper
   # include Sprockets::Helpers::IsolatedHelper
 
+
   # Choose what kind of storage to use for this uploader:
   storage :file
   # storage :fog
@@ -56,6 +57,10 @@ class ImageUploader < CarrierWave::Uploader::Base
    
    version :profile do
      process :resize_to_fill => [194, 207]
+   end
+   
+   version :popup do
+     process :resize_to_fill => [500, 500]
    end
    
   # Add a white list of extensions which are allowed to be uploaded.

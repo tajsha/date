@@ -50,7 +50,7 @@ class PhotosController < ApplicationController
     @photo = Photo.find(params[:id])
     @photo.destroy
     flash[:notice] = "Successfully destroyed photo."
-    redirect_to @photo.gallery
+    redirect_to :back
   end
   
   def avatar
@@ -59,6 +59,6 @@ class PhotosController < ApplicationController
         else
           flash[:notice] = "Avatar failed"
         end
-        redirect_to root_url, notice: "Set as avatar!"
+        redirect_to :back, notice: "Set as avatar!"
       end
 end

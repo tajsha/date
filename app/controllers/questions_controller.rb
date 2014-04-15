@@ -2,7 +2,7 @@ class QuestionsController < ApplicationController
   respond_to :js, :html
   
   def index
-    @questions = Question.order("question").paginate(:page => params[:page], :per_page => 2)    
+    @questions = Question.all
     respond_with(@questions)
 end
 

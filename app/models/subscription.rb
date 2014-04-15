@@ -8,6 +8,10 @@ class Subscription < ActiveRecord::Base
   
   attr_accessor :stripe_card_token, :paypal_payment_token
   
+  def expires_at
+    self.updated_at + plan.duration.days
+  end
+  
   def save_with_payment
     if valid?
       if paypal_payment_token.present?
@@ -51,5 +55,25 @@ class Subscription < ActiveRecord::Base
   def reactivate_paypal
     paypal.reactivate
     save
+  end
+  
+  def update_card(subscriber, card_info)
+  token = Stripe::Token.create(
+    card: {
+      number: card_info[:number],
+      exp_month: card_info[:exp_month],
+      exp_year: card_info[:exp_year],
+      cvc: card_info[:cvc]
+    }
+  )
+  customer = Stripe::Customer.retrieve(user.subscription.stripe_customer_token)
+  card = customer.cards.create(card: token.id)
+  card.save
+  customer.default_card = card.id
+  customer.save
+  rescue Stripe::InvalidRequestError => e
+    logger.error "Stripe error while updating card info: #{e.message}"
+    errors.add :base, "#{e.message}"
+    false
   end
 end

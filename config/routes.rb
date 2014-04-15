@@ -2,11 +2,6 @@ require 'sidekiq/web'
 
 Dating::Application.routes.draw do
 
-  # Added by Koudoku.
-  scope module: 'koudoku' do
-    get 'pricing' => 'subscriptions#index', as: 'pricing'
-  end
-
 
   mount Sidekiq::Web, at: '/sidekiq'
 
@@ -28,10 +23,12 @@ Dating::Application.routes.draw do
   get "subscriptions/suspend"
   get "subscriptions/updatebilling"
   get "subscriptions/reactivate"
-  patch "updatebilling" => "users#update_stripe_billing"
+  get ":id/updatebilling" => "users#update_stripe_billing"
+  match '/edit_card',   to: 'subscriptions#edit_card',   via: 'get'
+  match '/update_card', to: 'subscriptions#update_card', via: 'post'
   
-  
-  
+  resources :messages
+    
   
   resources :charges
   resources :subscriptions
@@ -70,7 +67,7 @@ Dating::Application.routes.draw do
   end
 
           
-  root to: 'users#new'
+  root to: 'users#index'
   
   resources :users do
     resources :messages do

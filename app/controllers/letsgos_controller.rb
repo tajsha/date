@@ -1,5 +1,6 @@
 class LetsgosController < ApplicationController
   before_action :correct_user, only: :destroy
+  load_and_authorize_resource
   def create
     @letsgo = current_user.letsgos.build(letsgo_params)
     if @letsgo.save
@@ -13,6 +14,8 @@ end
 
 def show
   @letsgo = Letsgo.find(params[:id])
+  authorize! :read, @letsgo
+  
 end
   
   def destroy

@@ -8,5 +8,5 @@ if $('.pagination').length
   $('#append_more_results').click ->
     url = $('.pagination .next_page').attr('href')
     if url
-      $('.pagination').text('Fetching more products...')
+      $('.pagination').text('Fetching more questions...')
       $.getScript(url)

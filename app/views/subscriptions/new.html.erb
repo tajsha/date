@@ -42,12 +42,12 @@
   <div id="billing_fields">
     <div class="field">
 	  <%= f.hidden_field :user_id, :value => current_user.id %> 
-      <%= f.label :email %>
-      <%= f.text_field :email %>
+      <%= f.hidden_field :email, :value => current_user.email  %>
     </div>
     <% if @subscription.payment_provided? %>
       Payment has been provided. Click "Subscribe" to complete the subscription.
     <% else %>
+
       <div class="field">
         <%= label_tag :card_number, "Credit Card Number" %>
         <%= text_field_tag :card_number, nil, name: nil %>

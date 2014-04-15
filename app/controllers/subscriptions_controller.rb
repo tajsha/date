@@ -35,16 +35,25 @@ class SubscriptionsController < ApplicationController
     def updatesubscription
       @user = current_user
       @customer = Stripe::Customer.retrieve(@user.subscription.stripe_customer_token)
+      if @user.subscription.plan_id == 12
       @customer.update_subscription(:plan => "1", :prorate => true)
-     current_user.save!
-      flash.alert = 'Your subscription has been updated!'
+      current_user.subscription.update_attributes(:plan_id => 1)
+      flash.alert = 'Your subscription has been changed to monthly!'
       redirect_to root_url
+    elsif @user.subscription.plan_id == 1
+      @customer.update_subscription(:plan => "12", :prorate => true)
+      current_user.subscription.update_attributes(:plan_id => 12)
+     current_user.save!
+      flash.alert = 'Your subscription has been changed to annually!'
+      redirect_to root_url
+    end
      end
 
      def cancelsubscription
        @user = current_user
          @customer = Stripe::Customer.retrieve(@user.subscription.stripe_customer_token)
          @customer.cancel_subscription()
+         current_user.subscription.update_attributes(:cancelled => 1)
          current_user.save!
          flash.alert = 'Your subscription has been cancelled successfully!'
          redirect_to root_url
@@ -54,22 +63,11 @@ class SubscriptionsController < ApplicationController
          @user = current_user
          Stripe::Customer.retrieve(@user.subscription.stripe_customer_token).cards.all()
        end
-       
-       def changecard
-           @user = current_user       
-           @customer = Stripe::Customer.retrieve(@user.subscription.stripe_customer_token)
-
-             card = @customer.cards.create({
-               :card => @user.subscription.stripe_customer_token
-             })
-
-             @customer.default_card = card
-             @customer.save
-           end
            
            def suspend
              @user = current_user
              @user.subscription.suspend_paypal
+             current_user.subscription.update_attributes(:cancelled => 1)
                flash.alert = 'Billing has been suspended!'
                 redirect_to root_url
            end
@@ -77,36 +75,30 @@ class SubscriptionsController < ApplicationController
            def reactivate
              @user = current_user
              @user.subscription.reactivate_paypal
+             current_user.subscription.update_attributes(:cancelled => nil)
                flash.alert = 'Billing has been activated!'
                 redirect_to root_url
            end
          
-         def updatebilling
-             @user = current_user
-             customer = Stripe::Customer.retrieve(@user.subscription.stripe_customer_token)
-             customer.cards.retrieve("#{@user.subscription.stripe_card_id}").delete()
-             customer.cards.create({
-                   card: {
-                   number: params[:user][:scardnumber],
-                   exp_month: params[:user][:sexp_month],
-                   exp_year: params[:user][:sexp_year],
-                   cvc: params[:user][:scvc],
-                   name: params[:user][:sname],
-                   address_line1: params[:user][:sbilling_address1],
-                   address_line2: params[:user][:sbilling_address2],
-                   address_city: params[:user][:saddress_city],
-                   address_zip: params[:user][:saddress_zip],
-                   address_state: params[:user][:saddress_state],
-                   address_country: params[:user][:saddress_country]
-                   }
-                 })
-                 if customer.save!
-                   @user.stripe_card_id = customer.active_card.id
-                   @user.save!
-                   flash.alert = 'Billing information updated successfully!'
+     
+               def edit_card
+                 @user = current_user
+               end
+
+               def update_card
+                 @user = current_user
+                 card_info = {
+                   name:    params[:name],
+                   number:    params[:number],
+                   exp_month: params[:date][:month],
+                   exp_year:  params[:date][:year],
+                   cvc:       params[:cvc]
+                 }
+                 if @user.subscription.update_card(@subscriber, card_info)
+                   flash.alert = 'Saved. Your card information has been updated.'
                    redirect_to root_url
                  else
-                   flash.alert = 'Stripe error'
+                   flash.alert = 'Stripe reported an error while updating your card. Please try again.'
                    redirect_to root_url
                  end
                end
