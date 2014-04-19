@@ -16,5 +16,12 @@
 //= require jquery.magnific-popup.js
 //= require jquery.purr
 //= require best_in_place
+//= require cufon-yui
+//= require Helvetica_Neue_LT_Std_400.font
+//= require Helvetica_Neue_LT_Std_italic_300.font
+//= require Helvetica_Neue_LT_Std_500.font
+//= require Helvetica_Neue_LT_Std_750.font
+//= require Dosis_400.font
+//= require cufon
+//= require jquery.jqtransform
 //= require_tree .
-

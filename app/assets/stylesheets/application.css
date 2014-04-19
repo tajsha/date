@@ -11,17 +11,19 @@
  *= require jquery.ui.all
  *= require_self
  *= require magnific-popup.css
+ *= require style
+ *= require jqtransform
  *= require_tree .
  */
 
 /* resize so easier to view */
 
-html, body {
+/*html, body {
   background-color: #4B7399;
   font-family: Verdana, Helvetica, Arial;
   font-size: 14px;
 }
-
+*/
 a img {
   border: none;
 }
