@@ -16,8 +16,11 @@ $(document).ready(function () {
 	<center>
 <%= image_tag(photo.image_url(:popup)) %>
 </center>
+<% if current_user?(@user) %>
             <%= button_to('Set as Profile Image', [:avatar, photo]) %><p>
-			<%= button_to "remove", photo, :confirm => 'Are you sure?', :method => :delete %><p>
+			<%= button_to "remove", photo, :confirm => 'Are you sure?', :method => :delete %>
+			<% end %><p>
+				<% unless current_user?(@user) %>
 				Send a message to
 
 				 <%= @user %>
@@ -29,6 +32,7 @@ $(document).ready(function () {
 				  <%= hidden_field_tag(:user, params[:id]) %>
 				  <%= submit_tag 'Send message', class: "btn btn-primary" %>
 				 <% end %>
+				<% end %>
         </div>
     <% end %>
 </div>

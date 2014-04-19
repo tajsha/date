@@ -27,6 +27,7 @@ gem 'mini_magick'
 gem 'ancestry'
 gem 'stripe'
 gem 'cancancan', '~> 1.7'
+gem 'slim-rails'
 
 
 # Gems used only for assets and not required

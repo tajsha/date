@@ -18,23 +18,26 @@ def new
 end
 
 def create
-  @question = Question.new(params[:question])
-  if @question.save
-    #Original code @message = Message.create
-    @message = current_user.messages.new(:subject => "You have a question from #{@question.sender_id}",
-                           #Original code :sender_id
-                           :notification_id => @question.sender_id,
-                           #Original code :recipient_id
-                           :receiver_id => @question.recipient_id,
-                           :body => @question.question)
+  @conversation = Conversation.new
+  
+    @question = @conversation.questions.build(params[:question])
+    if @question.save
+      #scoping to the current user is the right thing to do here
+      @message = current_user.messages.new(:subject => "You have a question from #{@question.sender_id}",
+                             #Original code :sender_id
+                             :notification_id => @question.sender_id,
+                             #Original code :recipient_id
+                             :receiver_id => @question.recipient_id,
+                             :body => @question.question)
 
-    @question.message = @message
-    @question.save
-    redirect_to questions_path, notice: 'Your question was saved successfully. Thanks!'
-  else
-    render :new, alert: 'Sorry. There was a problem saving your question.'
+      @question.message = @message
+      @question.save
+      redirect_to questions_path, notice: 'Your question was saved successfully. Thanks!'
+    else
+      render :new, alert: 'Sorry. There was a problem saving your question.'
+    end
   end
-end
+
 
   def update
     @question = Question.find(params[:id])

@@ -20,7 +20,7 @@
 
 		<% end %>
 	<p>
-		<% if @user.subscription.paypal_customer_token == NULL %>
+		<% if @user.subscription.paypal_recurring_profile_token.nil? %>
 		
 		Add new Credit Card
 		<%= form_for @user do |f| %>
@@ -73,3 +73,5 @@
 		    </div>
 		  </div>
 		<% end %>
+		  <% end %>
+		
