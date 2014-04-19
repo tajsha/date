@@ -28,7 +28,10 @@ gem 'ancestry'
 gem 'stripe'
 gem 'cancancan', '~> 1.7'
 gem 'slim-rails'
+<<<<<<< HEAD
 
+=======
+>>>>>>> FETCH_HEAD
 
 # Gems used only for assets and not required
 # in production environments by default.
