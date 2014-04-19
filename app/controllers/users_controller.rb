@@ -41,7 +41,7 @@ end
   def index
     @users = User.all
     @search = Search.new
-    
+    render layout: 'new_application'    
   end
   
   def destroy
