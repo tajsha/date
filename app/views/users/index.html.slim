@@ -1,0 +1,132 @@
+.wrapper
+  #top_sec
+    form action="#" 
+      fieldset
+        .search_box
+          h1 Search and find a mate.
+          span.secrch_box_bg
+            input.text_input onblur="if(this.value=='')this.value='e.g (female, likes dogs, has a job)'" onfocus="if(this.value=='e.g (female, likes dogs, has a job)')this.value=''" type="text" value="e.g (female), likes dogs, has a job)"
+            input.find_btn type="button" value="Find" /
+        h4
+          | or use our
+          a.adv_search href="#" 
+            img alt="" src="assets/adv_link.png" /
+            span Advanced Search
+        .form_container
+          .row
+            .col
+              label I am a
+              select.large
+                option woman
+            .select2
+              .col.col2
+                label Seeking
+                select.large
+                  option men
+            .select1
+              .col.col3
+                label Ages
+                select.small
+                  option 25
+            .select5
+              .col.col4
+                label to
+                select.small
+                  option 45
+          .row
+            .col.col5
+              label Near
+              input.text_input onblur=("if(this.value=='')this.value='enter zip here'") onfocus=("if(this.value=='enter zip here')this.value=''") type="text" value=("enter zip here") /
+            .select3
+              .col.col6
+                select.large
+                  option child preference
+            .select4
+              .col.col6
+                select.large
+                  option faith
+            .select4
+              .col.col7
+                select.large
+                  option ethnicity
+          .btm_sec
+            ul.form_list
+              li
+                a href="#" 
+                  img alt="" src="assets/form_icon1.png" /
+                  span.color Save this Search
+              li
+                a href="#" 
+                  img alt="" src="assets/form_icon2.png" /
+                  span Load
+              li
+                a href="#" 
+                  img alt="" src="assets/form_icon3.png" /
+                  span Reset
+            input.find_btn type="button" value="Find" /
+        .btm_search_detail
+          a.simple_search href="#" 
+            img alt="" src="assets/simple_search_icon.png" /
+            span Simple Search
+
+#btm_container
+  .wrapper
+    .box_detail
+      -4.times do
+        .common_box.box1
+          .img_box
+            img alt="" src="assets/list_img1.png" /
+            ul.btn_link
+              li
+                a.message_btn href="#"  Message
+              li
+                a.save_btn href="#"  Save
+              li
+                a.report_btn href="#"  Report
+            span.age_box 27
+          .img_detail
+            small years
+            h3 Adam Smith
+            h4 Montreal, Canada
+            .green_corner
+              img alt="" src="assets/side_curv.png" /
+        .common_box.box1
+          .img_box
+            img alt="" src="assets/list_img2.png" /
+            span.age_box.pink 23
+          .img_detail
+            small years
+            h3.pink Jasmine Simson
+            h4 Barcelona, Spain
+            .pink_corner
+              img alt="" src="assets/curv_2.png" /
+        .common_box.box2
+          .img_box
+            img alt="" src="assets/list_img4.png" /
+            span.age_box 29
+          .img_detail
+            small years
+            h3 Schon Drexler
+            h4 Chicago, USA
+            .green_corner
+              img alt="" src="assets/side_curv.png" /
+        .common_box.box3
+          .img_box
+            img alt="" src="assets/list_img3.png" /
+            span.age_box 24
+          .img_detail
+            small years
+            h3 Chris Young
+            h4 New York, USA
+            .green_corner
+              img alt="" src="assets/side_curv.png" /
+        .common_box.box2
+          .img_box
+            img alt="" src="assets/list_img4.png" /
+            span.age_box 29
+          .img_detail
+            small years
+            h3 Schon Drexler
+            h4 Chicago, USA
+            .green_corner
+              img alt="" src="assets/side_curv.png" /
