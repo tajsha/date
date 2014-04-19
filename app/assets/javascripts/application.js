@@ -25,3 +25,12 @@
 //= require cufon
 //= require jquery.jqtransform
 //= require_tree .
+
+$(function(){
+  $('select').jqTransSelect();
+  $('input[type=checkbox]').jqTransCheckBox();
+  $('.box_detail').masonry({
+  	columnWidth: 80,
+  	itemSelector: '.common_box'
+	});
+});
