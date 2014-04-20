@@ -63,6 +63,8 @@ group :development do
   gem 'annotate'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'pry'
+  gem 'byebug'
 end
 
 gem 'rspec-rails', :group => [:test, :development]

@@ -33,4 +33,13 @@ $(function(){
   	columnWidth: 80,
   	itemSelector: '.common_box'
 	});
+	$('#tabs li a').click(function(e){
+		e.preventDefault();
+		var href = $(this).attr('href');
+		console.log('href'+href);
+		$(this).parent().siblings().removeClass('active');
+		$(this).parent().addClass('active');
+		$('.tab_contr').css('display','none');;
+		$(href).css('display','block');
+	})
 });

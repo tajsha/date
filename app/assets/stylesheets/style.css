@@ -239,6 +239,6 @@ body.color{ background:#fff;}
 
 #top_sec .tab_contr .outer form span.jqTransformCheckboxWrapper a.jqTransformCheckbox{background:url(/assets/checkbox.gif) no-repeat 0 0; width:15px; height:19px; margin-left:13px}
 #top_sec .tab_contr .outer form span.jqTransformCheckboxWrapper a.jqTransformChecked{ background-position:center bottom}
-
+.hide {display: none;}
 
 

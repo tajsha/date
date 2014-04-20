@@ -1,25 +1,31 @@
-.wrapper
-  .login_sec
-    .col
-      a href="#" 
-        =image_tag "login_icon1.png"
-        span Welcome, JaneDoe
-        =image_tag "profile_link_img.png", class: 'img'
-    .col.col2
-      a href="#"
-        =image_tag "login_icon2.png"
-        span Messages
-        =image_tag "login_icon4.png", class: 'img4'
-    .col.col3
-      a href="#" 
-        =image_tag "login_icon3.png", class: 'img3'
-        span Logout
+- logged_in_user = current_user
+- if logged_in_user
+  .wrapper
+    .login_sec
+      .col
+        a href="#" 
+          =image_tag "login_icon1.png"
+          span 
+            'Welcome, 
+            = logged_in_user.username
+          =image_tag "profile_link_img.png", class: 'img'
+      .col.col2
+        a href="#"
+          =image_tag "login_icon2.png"
+          span Messages
+          =image_tag "login_icon4.png", class: 'img4'
+      .col.col3
+        a href="/logout" 
+          =image_tag "login_icon3.png", class: 'img3'
+          span Logout
 #menu_sec
   .wrapper
     .logo
       a href="#" 
         =image_tag "logo.png"
-    ul#nav.nav1
+    - if logged_in_user.blank?
+      a href="/signup" class="registered_btn" Not Yet Registered 
+    ul#nav
       li.active
         a href="#" 
           =image_tag "home_icon.png"
@@ -28,5 +34,8 @@
         a href="#"  Search
       li
         a href="#"  About Us
-      li.last
+      li class="#{logged_in_user.present? ? 'last':''}"
         a href="#"  Contact Us
+      -if logged_in_user.blank?
+        li class="last"
+          a href="/login" Sign In
