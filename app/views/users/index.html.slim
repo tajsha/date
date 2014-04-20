@@ -72,7 +72,7 @@
 #btm_container
   .wrapper
     .box_detail
-      -4.times do
+      .col
         .common_box.box1
           .img_box
             img alt="" src="assets/list_img1.png" /
@@ -90,16 +90,6 @@
             h4 Montreal, Canada
             .green_corner
               img alt="" src="assets/side_curv.png" /
-        .common_box.box1
-          .img_box
-            img alt="" src="assets/list_img2.png" /
-            span.age_box.pink 23
-          .img_detail
-            small years
-            h3.pink Jasmine Simson
-            h4 Barcelona, Spain
-            .pink_corner
-              img alt="" src="assets/curv_2.png" /
         .common_box.box2
           .img_box
             img alt="" src="assets/list_img4.png" /
@@ -120,6 +110,69 @@
             h4 New York, USA
             .green_corner
               img alt="" src="assets/side_curv.png" /
+      .col
+        .common_box.box1
+          .img_box
+            img alt="" src="assets/list_img2.png" /
+            span.age_box.pink 23
+          .img_detail
+            small years
+            h3.pink Jasmine Simson
+            h4 Barcelona, Spain
+            .pink_corner
+              img alt="" src="assets/curv_2.png" /
+        .common_box.box4
+          .img_box
+            img alt="" src="assets/list_img5.png" /
+            span.age_box 27
+          .img_detail
+            small years
+            h3 Eric N'goty
+            h4 London, England
+            .green_corner
+              img alt="" src="assets/side_curv.png" /
+        .common_box.box1
+          .img_box
+            img alt="" src="assets/list_img2.png" /
+            span.age_box.pink 23
+          .img_detail
+            small years
+            h3.pink Jasmine Simson
+            h4 Barcelona, Spain
+            .pink_corner
+              img alt="" src="assets/curv_2.png" /
+      .col
+        .common_box.box3
+          .img_box
+            img alt="" src="assets/list_img3.png" /
+            span.age_box 24
+          .img_detail
+            small years
+            h3 Chris Young
+            h4 New York, USA
+            .green_corner
+              img alt="" src="assets/side_curv.png" /
+        .common_box.box1
+          .img_box
+            img alt="" src="assets/list_img2.png" /
+            span.age_box.pink 23
+          .img_detail
+            small years
+            h3.pink Jasmine Simson
+            h4 Barcelona, Spain
+            .pink_corner
+              img alt="" src="assets/curv_2.png" /
+        .common_box.box4
+          .img_box
+            img alt="" src="assets/list_img5.png" /
+            span.age_box 27
+          .img_detail
+            small years
+            h3 Eric N'goty
+            h4 London, England
+            .green_corner
+              img alt="" src="assets/side_curv.png" /
+      .col.last
         .common_box.box2
           .img_box
             img alt="" src="assets/list_img4.png" /
@@ -129,8 +182,29 @@
             h3 Schon Drexler
             h4 Chicago, USA
             .green_corner
-<<<<<<< HEAD
               img alt="" src="assets/side_curv.png" /
-=======
+        .common_box.box1
+          .img_box
+            img alt="" src="assets/list_img1.png" /
+            span.age_box 27
+          .img_detail
+            small years
+            h3 Adam Smith
+            h4 Montreal, Canada
+            .green_corner
               img alt="" src="assets/side_curv.png" /
->>>>>>> FETCH_HEAD
+        .common_box.box2
+          .img_box
+            img alt="" src="assets/list_img4.png" /
+            span.age_box 29
+          .img_detail
+            small years
+            h3 Schon Drexler
+            h4 Chicago, USA
+            .green_corner
+              img alt="" src="assets/side_curv.png"
+javascript:
+  $(function(){
+    $('select').jqTransSelect({imgPath:'assets/'});
+    $('input[type=checkbox]').jqTransCheckBox({imgPath:'assets/'});
+  });

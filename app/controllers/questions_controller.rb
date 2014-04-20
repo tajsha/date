@@ -18,8 +18,7 @@ def new
 end
 
 def create
-  @conversation = Conversation.new
-  
+@conversation = Conversation.find(params[:conversation_id])
     @question = @conversation.questions.build(params[:question])
     if @question.save
       #scoping to the current user is the right thing to do here
