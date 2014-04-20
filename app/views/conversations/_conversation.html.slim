@@ -1,0 +1,26 @@
+.outer
+  .unread onclick="#" 
+    .col_1
+      img alt="" src="/assets/un_read.png" /
+      span
+        img alt="" src="/assets/jasmine_img1.jpg" /
+      - receipt = conversation.receipts_for(current_user).first  
+      - user = receipt.receiver
+      h5 = user.username
+      strong 
+        = user.age
+        ', 
+        = user.gender
+        ',
+        = user.sexuality
+      small
+        = user.location
+    .col_2
+      span Hi Schon, This is simply Dummy Text :)
+      p Hi Schon, this is simply dummy text liquet. Aenean sollicitudin,lorem quis bibendum auctor, nisi elit consequat ipsum. Lorem quis bibendum auctor, nisi elit consequat ipsum.
+    .col_3
+      strong August 9, 2012
+      small 5:07pm
+  form action="#" 
+    fieldset
+      input type="checkbox" /

@@ -3,7 +3,8 @@ class ConversationsController < ApplicationController
 
   def index
     @conversations ||= current_user.mailbox.inbox.all
-    end
+    render layout: 'new_application'
+  end
   
   def reply
     current_user.reply_to_conversation(conversation, *message_params(:body, :subject))

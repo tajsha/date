@@ -1,0 +1,27 @@
+.wrapper
+  #top_sec
+    .msg_row
+      h2 Messages
+      strong
+        span 
+          'Hi,
+          = current_user.username 
+          '
+        ' You have 2 unread Messages
+    .mail_box
+      .tab_row#tabs
+        ul
+          li.active
+            a href="#inbox"  inbox
+          li
+            a href="#sentbox"  sent
+        ul.right
+          li
+            a href="#" 
+              img alt="" src="/assets/del_icon.png" /
+          li
+            input type="checkbox" /
+      .tab_contr#inbox
+        = render collection: mailbox.inbox, partial: 'conversations/conversation', as: :conversation
+      .tab_contr#sentbox.hide
+        = render collection: mailbox.sentbox, partial: 'conversations/conversation', as: :conversation
