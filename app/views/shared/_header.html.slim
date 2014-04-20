@@ -23,7 +23,9 @@
     .logo
       a href="#" 
         =image_tag "logo.png"
-    ul#nav.nav1
+    - if logged_in_user.blank?
+      a href="/signup" class="registered_btn" Not Yet Registered 
+    ul#nav
       li.active
         a href="#" 
           =image_tag "home_icon.png"
@@ -32,5 +34,8 @@
         a href="#"  Search
       li
         a href="#"  About Us
-      li.last
+      li class="#{logged_in_user.present? ? 'last':''}"
         a href="#"  Contact Us
+      -if logged_in_user.blank?
+        li class="last"
+          a href="/login" Sign In
