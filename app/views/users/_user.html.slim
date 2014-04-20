@@ -17,11 +17,8 @@
     div class= "#{user.gender == 'Male' ? 'green_corner': 'pink_corner'}"
       img alt="" src="#{user.gender == 'Male' ? 'assets/side_curv.png': 'assets/curv_2.png'}" /
 javascript:
-  $('.common_box').bind('mouseover mouseout',function(){
-  mouseover: function(){
+  $('.common_box').mouseenter(function(){
     $(this).find('.btn_link').show()
-  },
-  mouseout: function(){
-    $(this).find('.btn_link').show()
-  }
+  }).mouseleave(function(){
+    $(this).find('.btn_link').hide()
   })
