@@ -40,7 +40,8 @@ class UsersController < ApplicationController
 end
   
   def index
-    @users = User.all
+    user = current_user
+    @users = user.present? ? User.where('id != ?',user.id) : User.all
     @search = Search.new
     render layout: 'new_application'    
   end

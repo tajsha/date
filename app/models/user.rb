@@ -89,6 +89,9 @@ class User < ActiveRecord::Base
       end
   end
   
+  def address
+    "#{location.city}, #{location.state}"
+  end
   
   
    def over_18
