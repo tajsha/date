@@ -1,0 +1,24 @@
+.common_box.box1
+  .img_box
+    = image_tag user.avatar.image_url(:box)
+    ul.btn_link.hide
+      li
+        a.message_btn href="#"  Message
+      li
+        a.save_btn href="#"  Save
+      li
+        a.report_btn href="#"  Report
+    span.age_box class="#{user.gender == 'Male' ? '': 'pink'}" = user.age
+  .img_detail
+    small years
+    h3 class="#{user.gender == 'Male' ? '' : 'pink'}" = user.username
+    h4 
+      = user.address
+    div class= "#{user.gender == 'Male' ? 'green_corner': 'pink_corner'}"
+      img alt="" src="#{user.gender == 'Male' ? 'assets/side_curv.png': 'assets/curv_2.png'}" /
+javascript:
+  $('.common_box').mouseenter(function(){
+    $(this).find('.btn_link').show()
+  }).mouseleave(function(){
+    $(this).find('.btn_link').hide()
+  })
