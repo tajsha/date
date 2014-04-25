@@ -1,0 +1,29 @@
+- sender = conversation.last_sender
+- message = conversation.last_message
+.outer
+  div class="#{message.is_read?(@user) ? 'read' : 'unread'}" onclick="#" 
+    .col_1
+      img alt="" src="#{message.is_read?(@user) ? '/assets/read.png' : '/assets/un_read.png'}" /
+      span
+        img alt="" src="#{sender.avatar.image_url(:avatar)}" /
+      h5 = sender.username
+      strong 
+        = sender.age
+        ', 
+        = sender.gender
+        ',
+        = sender.sexuality
+      small
+        br
+        = sender.location.city
+        ',
+        = sender.location.state
+    .col_2
+      span = message.subject
+      p = message.body
+    .col_3
+      strong = extract_date(message.created_at)
+      small = extract_time(message.created_at)
+  form action="#" 
+    fieldset
+      input type="checkbox" /

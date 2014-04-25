@@ -90,6 +90,31 @@
                       = button_to('Set as Profile Image', [:avatar, photo], class: 'btn')
                       '
                       = button_to "remove", photo, :confirm => 'Are you sure?', :method => :delete, class: 'btn'
+<<<<<<< HEAD
+=======
+                    - unless @user == current_user
+                      .form_container
+                        .row
+                          .col.col2
+                            .large
+                              ul.form_list
+                                li
+                                  h3 
+                                    |Send a message to
+                                    '
+                                    = @user
+                                  = form_tag({controller: "messages", action: "create"}, class: 'form-horizontal', method: :post) do
+                                    li.form-group
+                                      = label_tag :subject, nil, class: 'control-label'
+                                      = text_field_tag :subject, nil, class: 'form-control'
+                                    li.form-group
+                                      = label :body, "Message text", class: 'control-label'
+                                      = text_area_tag :body, nil, class: 'form-control'
+                                      = hidden_field_tag(:user, params[:id])
+                                    li.form-group
+                                      br
+                                      = submit_tag 'Send message', class: "btn btn-primary"
+>>>>>>> ff6acc7e11bce719693f20fa8d480889a190122b
             a.right_arrow href="#" 
               img alt="" src="/assets/right_arrow.png" /
     .profile_middle_container
