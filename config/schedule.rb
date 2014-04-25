@@ -13,3 +13,7 @@ end
 every :reboot do
   rake "ts:start"
 end
+
+every 1.day do
+  runner "Notification.old.destroy"
+end
