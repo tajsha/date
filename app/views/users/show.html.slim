@@ -90,8 +90,6 @@
                       = button_to('Set as Profile Image', [:avatar, photo], class: 'btn')
                       '
                       = button_to "remove", photo, :confirm => 'Are you sure?', :method => :delete, class: 'btn'
-<<<<<<< HEAD
-=======
                     - unless @user == current_user
                       .form_container
                         .row
@@ -114,7 +112,6 @@
                                     li.form-group
                                       br
                                       = submit_tag 'Send message', class: "btn btn-primary"
->>>>>>> ff6acc7e11bce719693f20fa8d480889a190122b
             a.right_arrow href="#" 
               img alt="" src="/assets/right_arrow.png" /
     .profile_middle_container

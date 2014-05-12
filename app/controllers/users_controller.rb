@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   
   def settings
     @user = User.find(params[:id])
-    authorize! :settings, @user
   end
   
   def new
