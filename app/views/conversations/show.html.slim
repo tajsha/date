@@ -1,0 +1,9 @@
+.wrapper
+  #top_sec
+    .msg_row
+      strong
+        span = conversation.subject
+		.mail_box
+			.tab_contr#inbox
+				= render 'messages/message',conversation: conversation
+				= render 'messages/form', conversation: conversation

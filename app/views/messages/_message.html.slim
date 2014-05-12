@@ -1,0 +1,23 @@
+- user = current_user
+- receipts = conversation.receipts_for(user)
+- receipts.each do |receipt|
+  - message = receipt.message
+  - is_unread = message.is_unread?(user)
+  - sender = message.sender
+  .outer
+    div class="#{is_unread == true ? 'unread' : 'read'}" onclick="#"
+      .col_1
+        img alt="" src="#{is_unread == true ? '/assets/un_read.png' : '/assets/read.png'}" /
+        span.sender_avatar
+          - if sender != current_user
+            =link_to "profile/#{sender.id}" do
+              img alt="" src="#{sender.avatar.image_url(:avatar)}"
+          - else
+              img alt="" src="#{sender.avatar.image_url(:avatar)}"
+        h5 From: 
+        strong = sender.username 
+      .col_2
+        p = simple_format h message.body
+      .col_3
+        strong = extract_date(message.created_at)
+        small = extract_time(message.created_at)

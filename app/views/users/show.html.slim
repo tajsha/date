@@ -6,9 +6,10 @@
           .img_box1
             img alt="" src="#{@user.avatar.image_url(:profile)}"
           .img_detail1
-            a.profile_btn href="#" 
-              img alt="" src="/assets/login_icon2.png" /
-              span Message This User
+            -unless current_user == @user
+              a.profile_btn href="#" data-mfp-src='#message_me' 
+                img alt="" src="/assets/login_icon2.png" /
+                span Message This User
             a.profile_btn href="#" 
               img alt="" src="/assets/start_icon.png" /
               span Add to Favorites
@@ -17,28 +18,36 @@
               span Report This User
             h4
               | Career:
-              span.color Designer
+              span.color
+               = best_in_place @user, :career,  nil: 'What are you doing?'
             h4
               | Education:
-              span.color College
+              span.color 
+                = best_in_place @user, :education, nil: 'What is your education level?', :type => :select, :collection => [["High school", "High school"], ["Some college", "Some college"], ["Undergraduate", "Undergraduate"], ["Bachelor's", "Bachelor's"], ["Master's", "Master's"], ["PhD", "PhD"], ["Business school", "Business school"], ["Law school", "Law school"], ["Medical school", "Medical school"]]
             h4
               | Religion:
-              span.color Agnostic
+              span.color 
+                =best_in_place @user, :religion, nil: 'What is your faith?', :type => :select, :collection => [["Agnostic", "Agnostic"], ["Atheist", "Atheist"], ["Christian", "Christian"], ["Catholic", "Catholic"], ["Buddhist", "Buddhist"], ["Hindu", "Hindu"], ["Jewish", "Jewish"], ["Muslim", "Muslim"], ["Spiritual without affiliation", "Spiritual without affiliation"], ["Other", "Other"], ["None", "None"], ["Prefer not to say", "Prefer not to say"]]
             h4
               | Politics:
-              span.color Liberal
+              span.color 
+                = best_in_place @user, :religion, nil: 'How important is this to you?', :type => :select, :collection => [["Very Important", "Very Important"], ["Somewhat Important", "Somewhat Important"], ["Not Important", "Not Important"]]
             h4
               | Children:
-              span.color Has
+              span.color 
+                = best_in_place @user, :children, nil: 'Do you have or wants kids?', :type => :select, :collection => [["Yes, they live with me", "Yes, they live with me"], ["I want kids now", "I want kids now"], ["I want kids now", "I want one someday"], ["Not for me", "Not for me"]]
             h4
               | Does User Smoke:
-              span.color No
+              span.color = best_in_place @user, :user_smoke, nil: 'Select how often you smoke', :type => :select, :collection => [["Often smokes", "Often smokes"], ["Sometimes smokes", "Sometimes smokes"], ["Never smoke", "Never smoke"]]
             h4
               | Does User Drink:
-              span.color Yes
+              span.color = best_in_place @user, :user_drink, nil: 'Select how much you drink', :type => :select, :collection => [["Often drinks", "Often drinks"], ["Sometimes drinks", "Sometimes drinks"], ["Never drinks", "Never drinks"]]
             h4
               | Height:
-              span.color 5ft 10in
+              span.color 
+                = best_in_place @user, :feet ,nil: 'Feet'
+                ''
+                = best_in_place @user, :inches, nil: 'Inch'
             .corner_bg
               img alt="" src="/assets/side_curv.png" /
       .right_sec
@@ -60,22 +69,24 @@
               | Facebook Connected
               img alt="" src="/assets/fb_link.png" /
             span.text_detail
-              | joined 4 months ago /
+              | joined 
+              = distance_of_time_in_words_to_now(@user.created_at) 
+              '&nbsp;ago
               strong Last online 4 hours ago
           .right_box
             span.pic_box3
               img alt="" src="/assets/right_icon1.png" /
             span.pic_detail3
               strong response rate:
-              span 95%
+              span = @user.response_rate
             .res_time_box
               span.pic_box3
                 img alt="" src="/assets/watch_icon.png" /
               span.pic_detail3
                 strong response rate:
-                span 1 day
+                span = @user.average_response_time
           .testimonial_box
-            h4 &quot;Hi,My name is Schon Drexler,i'm Graphic Designer and Photographer from Chicago,USA.&quot;
+            = best_in_place @user, :about_me, :type => :textarea
           .slider_container
             h4 Photos
             a.left_arrow href="#" 
@@ -87,29 +98,30 @@
                   div id="#{dom_id(photo)}" class="mfp-hide"
                     center
                       = image_tag(photo.image_url(:popup))
-                      = button_to('Set as Profile Image', [:avatar, photo], class: 'btn')
-                      '
-                      = button_to "remove", photo, :confirm => 'Are you sure?', :method => :delete, class: 'btn'
+                      - if  @user == current_user
+                        = button_to('Set as Profile Image', [:avatar, photo], class: 'btn')
+                        '
+                        = button_to "remove", photo, :confirm => 'Are you sure?', :method => :delete, class: 'btn'
                     - unless @user == current_user
-                      .form_container
+                      .form
                         .row
                           .col.col2
                             .large
-                              ul.form_list
-                                li
+                              center
+                                .message_div
                                   h3 
                                     |Send a message to
                                     '
                                     = @user
                                   = form_tag({controller: "messages", action: "create"}, class: 'form-horizontal', method: :post) do
-                                    li.form-group
-                                      = label_tag :subject, nil, class: 'control-label'
-                                      = text_field_tag :subject, nil, class: 'form-control'
-                                    li.form-group
+                                    / .form-group
+                                    /   = label_tag :subject, nil, class: 'control-label'
+                                    /   = text_field_tag :subject, nil, class: 'form-control'
+                                    .form-group
                                       = label :body, "Message text", class: 'control-label'
                                       = text_area_tag :body, nil, class: 'form-control'
                                       = hidden_field_tag(:user, params[:id])
-                                    li.form-group
+                                    .form-group
                                       br
                                       = submit_tag 'Send message', class: "btn btn-primary"
             a.right_arrow href="#" 
@@ -118,19 +130,15 @@
       h3
         img alt="" src="/assets/content_icon.png" /
         span Questions Answered
-      a.ask_btn href="#"  Ask Me
-      h2 Question 1
-      p
-        span Question:
-        | If your home was on fire and you could only grab three of your possessions before running out the door, what
-        | would you grab?
-      span.btm_text User Answer:  I would grab my kids, car keys and laptop.
-      h2 Question 2
-      p
-        span Question:
-        | If your could live anywhere in the world where would you live?
-      span.btm_text User Answer:  Chicago, I live here!
-      a.read_more_btn href="#" 
+      -unless @user == current_user
+        = link_to "Ask Me", '#', :class => "ask_btn", 'data-mfp-src'=>'#question_me'
+      #questions_div
+        = render 'questions/questions', questions: @question 
+      - if @question.present?
+        .hide
+          = will_paginate @question, params: {controller: 'users', action: 'show'} 
+          = hidden_field_tag :total_pages, @question.total_pages,class: 'total_pages'
+      a.read_more_btn#append_and_paginate href="#" 
         img alt="" src="/assets/down_circle_btn.png" /
         span Read More Questions
     .profile_btm_container
@@ -226,6 +234,30 @@
               h4 New York, USA
               .green_corner
                 img alt="" src="/assets/side_curv.png" /
+#message_me.mfp-hide 
+  center
+    .message_div
+      = form_tag messages_path, method: :post, remote: true, class:'form-horizontal',id: 'message_form', role: 'form'
+        = hidden_field_tag :user, @user.id
+        .form-group
+          = label_tag :subject, 'Subject', class: 'control-label'
+          = text_field_tag :subject, nil, class: 'form-control' 
+        .form-group
+          = label_tag :body, 'Message Text', class: 'control-label'
+          = text_area_tag :body, nil, class: 'form-control' 
+        br
+        = submit_tag 'Send Message', class: 'btn btn-primary'
+#question_me.mfp-hide 
+  center
+    .message_div
+      = form_for Question.new, class: 'question_form form-horizontal', role: 'form' do |f|
+        .form-group
+          = f.text_field :question, {:placeholder => 'Please add your question...',class:'form-control'}
+        = f.hidden_field :sender_id, :value => current_user.id
+        = f.hidden_field :recipient_id, :value => @user.id
+        = f.submit 'Add Question', class: 'btn btn-primary'
+  
+
 javascript:
   $(document).ready(function () {
     $('.parent-container').magnificPopup({
@@ -234,4 +266,24 @@ javascript:
         gallery: { enabled: true },
         showCloseBtn: true
     });
+    $('.img_box1').click(function(){
+      $('.parent-container').magnificPopup({
+        delegate: 'a',
+        type: 'inline',
+        gallery: { enabled: true },
+        showCloseBtn: true
+      });
+    })
+    $('.profile_btn').magnificPopup({
+      showCloseBtn: true
+    });
+    $('form#message_form').bind('ajax:success', function(evt, data, status, xhr){
+      $.magnificPopup.close()  
+    })
+    $('.ask_btn').magnificPopup({
+      showCloseBtn: true
+    });
+    $('form#question_form').bind('ajax:success', function(evt, data, status, xhr){
+      $.magnificPopup.close()  
+    })
   });
