@@ -2,6 +2,7 @@ class QuestionsController < ApplicationController
   respond_to :js, :html
   
   def index
+    @questions = Question.where(recipient_id: params[:id]).page(params[:page]).per_page(3) if params[recipient_id].present?
     @questions = Question.all
     respond_with(@questions)
 end

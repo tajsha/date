@@ -2,7 +2,12 @@ class ConversationsController < ApplicationController
   helper_method :mailbox, :conversation
 
   def index
+    @user = current_user
     @conversations ||= current_user.mailbox.inbox.all
+    render layout: 'new_application'
+  end
+
+  def show
     render layout: 'new_application'
   end
   
@@ -13,23 +18,23 @@ class ConversationsController < ApplicationController
     
   def trash_folder
     @trash ||= current_user.mailbox.trash.all 
-    end
+  end
     
   def trash
     conversation.move_to_trash(current_user)
     redirect_to :conversations
-    end
+  end
     
   def untrash
     conversation.untrash(current_user)
     redirect_to :conversations
-    end
+  end
     
-    def empty_trash
-      current_user.mailbox.trash.each do |conversation|    conversation.receipts_for(current_user).update_all(:deleted => true)
-      end
-     redirect_to :conversations
+  def empty_trash
+    current_user.mailbox.trash.each do |conversation|    
+      conversation.receipts_for(current_user).update_all(:deleted => true)
     end
+   redirect_to :conversations
   end
           
   private
@@ -59,3 +64,4 @@ class ConversationsController < ApplicationController
      end
    end
   end
+end

@@ -40,7 +40,8 @@ class User < ActiveRecord::Base
   has_many :letsgos, dependent: :destroy
   belongs_to :default_photo, :class_name => "Photo"  
   has_many :notifications
-  has_many :questions
+  has_many :questions, foreign_key: :recipient_id
+  has_many :sent_questions, class_name: 'Question', foreign_key: :sender_id
 
   belongs_to :location
   belongs_to :zip

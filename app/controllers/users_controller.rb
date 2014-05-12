@@ -31,7 +31,10 @@ class UsersController < ApplicationController
     @question = Question.where(recipient_id: params[:id]).page(params[:page]).per_page(3)
     @letsgos = @user.letsgos.paginate(page: params[:page])
     @letsgo = current_user.letsgos.build    
-    render layout: 'new_application'
+    respond_to do |format|
+      format.html { render layout: 'new_application' }
+      format.js { render partial: 'questions/questions', locals: {questions: @question} }
+    end
   end
     
     def edit
