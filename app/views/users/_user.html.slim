@@ -5,7 +5,7 @@
       li
         a.message_btn  href="#" data-user="#{user.id}"  data-mfp-src='#message_me'   Message
       li
-        a.save_btn href="#"  Save
+        = link_to "Save", follow_popup_user_path(user), class: 'save_btn', :'data-mfp-src'=>'#follow_div', remote: true
       li
         a.report_btn href="#" data-mfp-src='#report_me'  Report
     span.age_box class="#{user.gender == 'Male' ? '': 'pink'}" = user.age

@@ -80,7 +80,7 @@ body{ font-family:Arial, Helvetica, sans-serif; background:#f7f7f7;}
 .box_detail .col{float:left; width:217px; margin:0 38px 0 0;}
 .common_box{float:left; width:206px; padding:5px 5px 5px 6px; margin:0 0 53px 0;}
 .common_box.box1{background:url(/assets/img_box_bg.png) no-repeat 0 0; min-height:364px;}
-.common_box .img_box{float:left; width:194px; border-bottom:3px solid #389aeb; position:relative; z-index:99999;}
+.common_box .img_box{float:left; width:194px; border-bottom:3px solid #389aeb; position:relative; z-index:999;}
 .common_box .img_box img{ float:left;}
 .btn_link{float:left; width:185px; position:absolute; list-style:none; top:11px; left:10px;}
 .btn_link li{float:left; padding:0 8px 0 0;}
@@ -107,6 +107,7 @@ body{ font-family:Arial, Helvetica, sans-serif; background:#f7f7f7;}
 .btn {}
 .scroll_link{float:right; width:44px; position:absolute; bottom:20px; right:0px; background:url(/assets/scroll_img.png) no-repeat 0 0; padding:8px 15px 15px 36px; }
 .scroll_link a{font-size:13px; line-height:13px; color:#525252; text-decoration:none;}
+a.scroll_link {font-size:13px; line-height:13px; color:#525252; text-decoration:none;}
 
 /*=================profile_container css start===================*/
 #profile_container{float:left; width:968px; margin:0 0 0 -7px; padding:55px 0 0 0;}

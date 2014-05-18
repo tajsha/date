@@ -1,5 +1,4 @@
 - user = current_user
-- receipts = conversation.receipts_for(user)
 - receipts.each do |receipt|
   - message = receipt.message
   - is_unread = message.is_unread?(user)
@@ -10,7 +9,7 @@
         img alt="" src="#{is_unread == true ? '/assets/un_read.png' : '/assets/read.png'}" /
         span.sender_avatar
           - if sender != current_user
-            =link_to "profile/#{sender.id}" do
+            =link_to "/profile/#{sender.id}" do
               img alt="" src="#{sender.avatar.image_url(:avatar)}"
           - else
               img alt="" src="#{sender.avatar.image_url(:avatar)}"

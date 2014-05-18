@@ -1,5 +1,6 @@
 class ConversationsController < ApplicationController
   helper_method :mailbox, :conversation
+  before_filter :conversation, only: :show
 
   def index
     @user = current_user
@@ -8,7 +9,13 @@ class ConversationsController < ApplicationController
   end
 
   def show
-    render layout: 'new_application'
+    user = current_user
+    @receipts = conversation.receipts_for(user).paginate(:page => params[:page], :per_page => 5)
+    @conversation.receipts.recipient(user).update_all(is_read: true)
+    respond_to do |format| 
+      format.html {render layout: 'new_application'}
+      format.js {}
+    end
   end
   
   def reply
