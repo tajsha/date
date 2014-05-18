@@ -12,62 +12,63 @@
           a.adv_search href="#" 
             img alt="" src="assets/adv_link.png" /
             span Advanced Search
-        .form_container
-          .row
-            .col
-              label I am a
-              select.large
-                option woman
-            .select2
-              .col.col2
-                label Seeking
+        .advanced_search_div.hide
+          .form_container
+            .row
+              .col
+                label I am a
                 select.large
-                  option men
-            .select1
-              .col.col3
-                label Ages
-                select.small
-                  option 25
-            .select5
-              .col.col4
-                label to
-                select.small
-                  option 45
-          .row
-            .col.col5
-              label Near
-              input.text_input onblur=("if(this.value=='')this.value='enter zip here'") onfocus=("if(this.value=='enter zip here')this.value=''") type="text" value=("enter zip here") /
-            .select3
-              .col.col6
-                select.large
-                  option child preference
-            .select4
-              .col.col6
-                select.large
-                  option faith
-            .select4
-              .col.col7
-                select.large
-                  option ethnicity
-          .btm_sec
-            ul.form_list
-              li
-                a href="#" 
-                  img alt="" src="assets/form_icon1.png" /
-                  span.color Save this Search
-              li
-                a href="#" 
-                  img alt="" src="assets/form_icon2.png" /
-                  span Load
-              li
-                a href="#" 
-                  img alt="" src="assets/form_icon3.png" /
-                  span Reset
-            input.find_btn type="button" value="Find" /
-        .btm_search_detail
-          a.simple_search href="#" 
-            img alt="" src="assets/simple_search_icon.png" /
-            span Simple Search
+                  option woman
+              .select2
+                .col.col2
+                  label Seeking
+                  select.large
+                    option men
+              .select1
+                .col.col3
+                  label Ages
+                  select.small
+                    option 25
+              .select5
+                .col.col4
+                  label to
+                  select.small
+                    option 45
+            .row
+              .col.col5
+                label Near
+                input.text_input onblur=("if(this.value=='')this.value='enter zip here'") onfocus=("if(this.value=='enter zip here')this.value=''") type="text" value=("enter zip here") /
+              .select3
+                .col.col6
+                  select.large
+                    option child preference
+              .select4
+                .col.col6
+                  select.large
+                    option faith
+              .select4
+                .col.col7
+                  select.large
+                    option ethnicity
+            .btm_sec
+              ul.form_list
+                li
+                  a href="#" 
+                    img alt="" src="assets/form_icon1.png" /
+                    span.color Save this Search
+                li
+                  a href="#" 
+                    img alt="" src="assets/form_icon2.png" /
+                    span Load
+                li
+                  a href="#" 
+                    img alt="" src="assets/form_icon3.png" /
+                    span Reset
+              input.find_btn type="button" value="Find" /
+          .btm_search_detail
+            a.simple_search href="#" 
+              img alt="" src="assets/simple_search_icon.png" /
+              span Simple Search
 
 #btm_container
   .wrapper
@@ -90,6 +91,9 @@
   center
     .message_div
       = render 'contacts/form'
+#follow_div.mfp-hide
+  center
+    .message_div#follow_user
 javascript:
   $('.common_box').mouseenter(function(){
     $(this).find('.btn_link').show()
@@ -105,3 +109,4 @@ javascript:
   $('form#message_form').bind('ajax:success', function(evt, data, status, xhr){
       $.magnificPopup.close()  
     })
+  $('.save_btn').magnificPopup()

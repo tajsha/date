@@ -53,6 +53,7 @@ Dating::Application.routes.draw do
     post 'follow', on: :member 
     post 'unfollow', on: :member
     get "follow", on: :member 
+    get 'follow_popup', on: :member
   end
   
   resources :letsgos do

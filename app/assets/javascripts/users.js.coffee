@@ -7,3 +7,9 @@ jQuery ->
 		href = $(this).data('href')
 		if(e.target != $('.conversation_avatar'))
 			window.location = href
+	$('.adv_search').click (e) ->
+		e.preventDefault
+		$('.advanced_search_div').removeClass('hide')
+	$('.simple_search').click (e) ->
+		e.preventDefault
+		$('.advanced_search_div').addClass('hide')

@@ -42,4 +42,14 @@ $(function(){
 		$('.tab_contr').css('display','none');;
 		$(href).css('display','block');
 	})
+  $('#signin_link').click(function () {
+      $('#signin-dropdown').toggle();
+      return false;
+  });
+  $('#signin-dropdown').click(function(e) {
+      e.stopPropagation();
+  });
+  $(document).click(function() {
+      $('#signin-dropdown').hide();
+  });
 });

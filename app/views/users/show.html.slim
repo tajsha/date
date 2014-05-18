@@ -4,18 +4,18 @@
       .left_sec
         .profile_pic_box
           .img_box1
-            img alt="" src="#{@user.avatar.image_url(:profile)}"
+            img alt="" src="#{@user.avatar.image_url(:profile)}" data-mfp-src='.parent-container a'
           .img_detail1
             -unless current_user == @user
               a.profile_btn href="#" data-mfp-src='#message_me' 
                 img alt="" src="/assets/login_icon2.png" /
                 span Message This User
-            a.profile_btn href="#" 
-              img alt="" src="/assets/start_icon.png" /
-              span Add to Favorites
-            a.profile_btn.last href="#" 
-              img alt="" src="/assets/minus_icon.png" /
-              span Report This User
+              = link_to follow_popup_user_path(@user), class: 'profile_btn save_btn', :'data-mfp-src'=>'#follow_div', remote: true do
+                = image_tag 'start_icon.png'
+                span Add to Favourites
+              a.profile_btn.last.report_btn data-mfp-src='#report_me' href="#" 
+                img alt="" src="/assets/minus_icon.png" /
+                span Report This User
             h4
               | Career:
               span.color
@@ -92,8 +92,9 @@
             a.left_arrow href="#" 
               img alt="" src="/assets/left_arrow.png" /
             ul.slider.parent-container
-              -@user.photos.each do |photo|
-                li
+              = hidden_field_tag 'current_index',0
+              -@user.photos.each_with_index do |photo, index|
+                li class="#{index > 2 ? 'hide' : ''}"
                   = link_to image_tag(photo.image_url(:thumb)), "#" + dom_id(photo)
                   div id="#{dom_id(photo)}" class="mfp-hide"
                     center
@@ -256,8 +257,13 @@
         = f.hidden_field :sender_id, :value => current_user.id
         = f.hidden_field :recipient_id, :value => @user.id
         = f.submit 'Add Question', class: 'btn btn-primary'
-  
-
+#report_me.mfp-hide
+  center
+    .message_div
+      = render 'contacts/form'
+#follow_div.mfp-hide
+  center
+    .message_div#follow_user
 javascript:
   $(document).ready(function () {
     $('.parent-container').magnificPopup({
@@ -266,14 +272,7 @@ javascript:
         gallery: { enabled: true },
         showCloseBtn: true
     });
-    $('.img_box1').click(function(){
-      $('.parent-container').magnificPopup({
-        delegate: 'a',
-        type: 'inline',
-        gallery: { enabled: true },
-        showCloseBtn: true
-      });
-    })
+    $('.img_box1').magnificPopup();
     $('.profile_btn').magnificPopup({
       showCloseBtn: true
     });
@@ -286,4 +285,48 @@ javascript:
     $('form#question_form').bind('ajax:success', function(evt, data, status, xhr){
       $.magnificPopup.close()  
     })
+    $('.report_btn').magnificPopup()
+    $('.right_arrow').click(function(e){
+      e.preventDefault()
+      console.log('clicked')
+      var image_count = $('ul.parent-container li').length
+      console.log('image_count',image_count)
+      var current_index = parseInt($('#current_index').val())
+      var next_index = current_index + 3
+      if(image_count > 3 && next_index < image_count) {
+        $('ul.parent-container li').each(function(index, element){
+          console.log('index', index)
+          if (index> current_index+2 && index <= next_index + 2) {
+            $(this).removeClass('hide')
+          }
+          else {
+            $(this).addClass('hide') 
+          }
+        })
+        $('#current_index').val(next_index)
+      }
+    })
+
+    $('.left_arrow').click(function(e){
+      e.preventDefault()
+      var image_count = $('ul.parent-container li').length
+      console.log('image_count',image_count)
+      var current_index = parseInt($('#current_index').val())
+      var prev_index;
+      console.log('current_index',current_index)
+      if(image_count > 3 && current_index > 0) {
+        $('ul.parent-container li').each(function(index, element){
+        prev_index = current_index - 3
+          console.log('index', index)
+          if (index < current_index && index >= prev_index) {
+            $(this).removeClass('hide')
+          }
+          else {
+            $(this).addClass('hide') 
+          }
+        })
+        $('#current_index').val(prev_index)
+      }
+    })
+
   });
