@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140430200827) do
+ActiveRecord::Schema.define(version: 20140515204517) do
 
   create_table "contacts", force: true do |t|
     t.string   "name"
@@ -307,6 +307,7 @@ ActiveRecord::Schema.define(version: 20140430200827) do
     t.integer  "response_rate"
     t.integer  "response_total"
     t.integer  "plan_id"
+    t.boolean  "no_email"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

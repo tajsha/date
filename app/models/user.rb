@@ -76,7 +76,11 @@ class User < ActiveRecord::Base
     end
   
   def mailboxer_email(object)
+    if self.no_email
     email
+  else
+    nil
+  end
   end
   
   def location
