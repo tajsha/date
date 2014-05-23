@@ -75,14 +75,13 @@ class User < ActiveRecord::Base
       subscription.present?
     end
   
-  def mailboxer_email(object)
-    if self.no_email
-    email
-  else
-    nil
-  end
-  end
-  
+    def mailboxer_email(object)
+        if self.no_email
+          email
+        else
+            nil
+        end
+    end
   def location
 
       if Location.by_zip_code(self.zip_code.to_s).any?

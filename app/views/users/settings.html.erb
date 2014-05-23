@@ -13,14 +13,11 @@
 change your subscription
 
 <%= form_for(@user) do |f| %>
-           <div class="forms">
-
-			<%= f.check_box :no_email, :value => @user.no_email %>
-			<%= f.submit @user.no_email ? 'Subscribe' : 'Unsubscribe' %>
-
-               </div>
-       <% end %>
-
+<div class="forms">
+<%= f.check_box :no_email, :value => @user.no_email %>
+<%= f.submit @user.no_email ? 'Unsubscribe' : 'Subscribe' %>
+</div>
+<% end %>
 
 		 <p>
 
