@@ -16,6 +16,5 @@ jQuery ->
   $(document).on 'click', '.common_box.box1', (e) ->
     console.log('target', e.target)
     if(!$('.message_btn').is(e.target) && !$('.save_btn').is(e.target) && !$('.report_btn').is(e.target))
-      console.log('clicked')
-      # href = '/users/'+ $(this).data('user-id')
-      # window.location = href
+      href = '/users/'+ $(this).data('user-id')
+      window.location = href

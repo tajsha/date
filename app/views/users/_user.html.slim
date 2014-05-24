@@ -2,13 +2,14 @@
   .common_box.box1 data-user-id="#{user.id}"
     .img_box
       = image_tag user.avatar.try(:image_url)
-      ul.btn_link.hide
-        li
-          a.message_btn  href="#" data-user="#{user.id}"  data-mfp-src='#message_me'   Message
-        li
-          = link_to "Save", follow_popup_user_path(user), class: 'save_btn', :'data-mfp-src'=>'#follow_div', remote: true
-        li
-          a.report_btn href="#" data-mfp-src='#report_me'  Report
+      -if @user.present?  
+        ul.btn_link.hide
+          li
+            a.message_btn  href="#" data-user="#{user.id}"  data-mfp-src='#message_me'   Message
+          li
+            = link_to "Save", follow_popup_user_path(user), class: 'save_btn', :'data-mfp-src'=>'#follow_div', remote: true
+          li
+            a.report_btn href="#" data-mfp-src='#report_me'  Report
     .img_detail
       small years
       .circle
