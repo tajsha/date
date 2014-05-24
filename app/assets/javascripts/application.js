@@ -29,11 +29,15 @@
 $(function(){
   $('select').jqTransSelect();
   $('input[type=checkbox]').jqTransCheckBox();
-  $('.box_detail').masonry({
-  	columnWidth: 80,
-  	itemSelector: '.common_box'
-	});
-	$('#tabs li a').click(function(e){
+  
+  $('.img_box').imagesLoaded(function(){
+    $('.box_detail').masonry({
+  	  columnWidth: 80,
+  	  itemSelector: '.common_box'
+	  });
+  });
+	
+  $('#tabs li a').click(function(e){
 		e.preventDefault();
 		var href = $(this).attr('href');
 		console.log('href'+href);
