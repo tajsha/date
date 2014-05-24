@@ -1,20 +1,21 @@
-.common_box.box1
-  .img_box
-    = image_tag user.avatar.try(:image_url)
-    ul.btn_link.hide
-      li
-        a.message_btn  href="#" data-user="#{user.id}"  data-mfp-src='#message_me'   Message
-      li
-        = link_to "Save", follow_popup_user_path(user), class: 'save_btn', :'data-mfp-src'=>'#follow_div', remote: true
-      li
-        a.report_btn href="#" data-mfp-src='#report_me'  Report
-  .img_detail
-    small years
-    .circle
-      span.age_box class="#{user.gender == 'Male' ? '': 'pink'}" = user.age
-    h3 class="#{user.gender == 'Male' ? '' : 'pink'}" = user.username
-    h4 
-      = user.address
-    div class= "#{user.gender == 'Male' ? 'green_corner': 'pink_corner'}"
-      img alt="" src="#{user.gender == 'Male' ? 'assets/side_curv.png': 'assets/curv_2.png'}" 
+- if user.avatar.present?
+  .common_box.box1 data-user-id="#{user.id}"
+    .img_box
+      = image_tag user.avatar.try(:image_url)
+      ul.btn_link.hide
+        li
+          a.message_btn  href="#" data-user="#{user.id}"  data-mfp-src='#message_me'   Message
+        li
+          = link_to "Save", follow_popup_user_path(user), class: 'save_btn', :'data-mfp-src'=>'#follow_div', remote: true
+        li
+          a.report_btn href="#" data-mfp-src='#report_me'  Report
+    .img_detail
+      small years
+      .circle
+        span.age_box class="#{user.gender == 'Male' ? '': 'pink'}" = user.age
+      h3 class="#{user.gender == 'Male' ? '' : 'pink'}" = user.username
+      h4 
+        = user.address
+      div class= "#{user.gender == 'Male' ? 'green_corner': 'pink_corner'}"
+        img alt="" src="#{user.gender == 'Male' ? 'assets/side_curv.png': 'assets/curv_2.png'}" 
   
