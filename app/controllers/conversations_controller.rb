@@ -4,7 +4,11 @@ class ConversationsController < ApplicationController
 
   def index
     @user = current_user
-    @conversations ||= current_user.mailbox.inbox.all
+    sentbox_page = params[:page] if params[:sentbox].present?
+    inbox_page = params[:page] if params[:inbox].present?
+    mailbox = @user.mailbox
+    @inbox = mailbox.inbox.paginate(:page => inbox_page, :per_page => 5)
+    @sentbox = mailbox.sentbox.paginate(:page => sentbox_page, :per_page => 5)
     render layout: 'new_application'
   end
 
