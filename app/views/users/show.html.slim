@@ -257,22 +257,23 @@
           = text_area_tag :body, nil, class: 'form-control' 
         br
         = submit_tag 'Send Message', class: 'btn btn-primary'
-#question_me.mfp-hide 
-  center
-    .message_div
-      = form_for Question.new, class: 'question_form form-horizontal', role: 'form' do |f|
-        .form-group
-          = f.text_field :question, {:placeholder => 'Please add your question...',class:'form-control'}
-        = f.hidden_field :sender_id, :value => current_user.id
-        = f.hidden_field :recipient_id, :value => @user.id
-        = f.submit 'Add Question', class: 'btn btn-primary'
-#report_me.mfp-hide
-  center
-    .message_div
-      = render 'contacts/form'
-#follow_div.mfp-hide
-  center
-    .message_div#follow_user
+- if current_user.present?
+  #question_me.mfp-hide 
+    center
+      .message_div
+        = form_for Question.new, class: 'question_form form-horizontal', role: 'form' do |f|
+          .form-group
+            = f.text_field :question, {:placeholder => 'Please add your question...',class:'form-control'}
+          = f.hidden_field :sender_id, :value => current_user.id
+          = f.hidden_field :recipient_id, :value => @user.id
+          = f.submit 'Add Question', class: 'btn btn-primary'
+  #report_me.mfp-hide
+    center
+      .message_div
+        = render 'contacts/form'
+  #follow_div.mfp-hide
+    center
+      .message_div#follow_user
 javascript:
   $(document).ready(function () {
     $('.parent-container').magnificPopup({
@@ -339,3 +340,6 @@ javascript:
     })
 
   });
+  $(window).load(function(){
+    $('body').addClass('color')
+  })

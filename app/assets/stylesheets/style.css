@@ -727,4 +727,9 @@ select[multiple].input-lg {
 .form-horizontal .form-control-static {
   padding-top: 7px;
 }
->>>>>>> 570867eee738f1433b61a6f097bcb181e9ea173c
+
+.slider_container li img{
+	border: 1px solid #c3c3c3;
+	border-radius: 5px;
+	padding: 2px
+}
