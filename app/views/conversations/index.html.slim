@@ -12,15 +12,15 @@
       .tab_row#tabs
         ul
           li.active
-            a href="#inbox"  inbox
+            a id='inbox_link' href="#inbox"  inbox
           li
-            a href="#sentbox"  sent
+            a id='sentbox_link' href="#sentbox"  sent
         ul.right
           li
             a href="#" 
               img alt="" src="/assets/del_icon.png" /
           li
-            input type="checkbox" /
+            input type="checkbox" class='select_conversations'
       .tab_contr#inbox
         = render collection: @inbox, partial: 'conversations/conversation', as: :conversation
         .hide#inbox_pagination
