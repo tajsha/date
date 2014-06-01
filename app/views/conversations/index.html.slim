@@ -63,7 +63,11 @@ javascript:
         dataType: 'html',
         errorCallback: function(data){console.log('data', data);},
         prefill: false
-      });
+      },
+      function(){
+        $('input[type=checkbox]').jqTransCheckBox();
+       }
+       );
     }
     if ($('#sentbox .pagination a').length > 0) {
       $('#sentbox').infinitescroll({
@@ -81,7 +85,11 @@ javascript:
         dataType: 'html',
         errorCallback: function(data){console.log('data', data);},
         prefill: false
-      });
+      },
+       function(){
+        $('input[type=checkbox]').jqTransCheckBox();
+       }
+      );
     }
   })
   
