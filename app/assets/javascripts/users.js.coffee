@@ -15,6 +15,6 @@ jQuery ->
     $('.advanced_search_div').addClass('hide')
   $(document).on 'click', '.common_box.box1', (e) ->
     console.log('target', e.target)
-    if(!$('.message_btn').is(e.target) && !$('.save_btn').is(e.target) && !$('.report_btn').is(e.target))
+    if(!$('.message_btn').is(e.target) && $('.message_btn').has(e.target).length == 0 && !$('.save_btn').is(e.target) && $('.save_btn').has(e.target).length == 0 && !$('.report_btn').is(e.target) && $('.report_btn').has(e.target).length == 0)
       href = '/users/'+ $(this).data('user-id')
       window.location = href

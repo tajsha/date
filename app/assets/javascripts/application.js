@@ -37,7 +37,7 @@ $(function(){
 	  });
   });
 	
-  $('#tabs li a').click(function(e){
+  $('a#inbox_link, a#sentbox_link').click(function(e){
 		e.preventDefault();
 		var href = $(this).attr('href');
 		console.log('href'+href);
@@ -56,4 +56,23 @@ $(function(){
   $(document).click(function() {
       $('#signin-dropdown').hide();
   });
+  $('.select_conversations').on('click',function(){
+    console.log('checking')
+    if($(this).is(':checked')){
+      $('.tab_contr:visible .conversation_checkbox').each(function(){
+        $(this).prop('checked', true)
+        console.log('length', $(this).closest('a.jqTransformCheckbox').length)
+        $(this).parent().find('a.jqTransformCheckbox').addClass('jqTransformChecked')
+      })
+      console.log('unchecked')
+    }
+    else {
+      $('.tab_contr:visible .conversation_checkbox').each(function(){
+        $(this).prop('checked', false)
+        $(this).parent().find('a.jqTransformCheckbox').removeClass('jqTransformChecked')
+      })
+      console.log('checked')
+    }
+  })
+  $(".jqtransform").jqTransform();
 });
