@@ -15,7 +15,7 @@ class QuestionsController < ApplicationController
 
   def create
 @question = Question.new(params[:question])
-      @conversation = Conversation.find(params[:conversaton_id])
+      @conversation = Conversation.new
       if @question.save
         #scoping to the current user is the right thing to do here
         @message = current_user.messages.new(:subject => "You have a question from #{@question.sender_id}",
