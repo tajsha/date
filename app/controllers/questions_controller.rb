@@ -8,24 +8,17 @@ class QuestionsController < ApplicationController
     respond_with(@questions)
   end
 
-  def new
+  def new    
     @question = Question.new
     respond_with(@question)
   end
 
   def create
-@question = Question.new(params[:question])
-      @conversation = Conversation.new
+    @conversation = Conversation.create
+    @question = Question.new(params[:question])
       if @question.save
-        #scoping to the current user is the right thing to do here
         @message = current_user.messages.new(:subject => "You have a question from #{@question.sender_id}",
-                               #Original code :sender_id
-                               :notification_id => @question.sender_id,
-                               #Original code :recipient_id
-                               :receiver_id => @question.recipient_id,
-                               :conversation_id => @conversation.id,
                                :body => @question.question)
-
         @question.message = @message
         @question.save
         redirect_to :back, notice: 'Your question was saved successfully. Thanks!'

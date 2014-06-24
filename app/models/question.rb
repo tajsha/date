@@ -1,6 +1,5 @@
 class Question < ActiveRecord::Base
-  attr_accessible :answer, :question, :sender_id, :recipient_id, :conversation_id
-
+  attr_accessible :answer, :question, :sender_id, :recipient_id
   belongs_to :user
 
   belongs_to :sender,:class_name => 'User',:foreign_key => 'sender_id'
@@ -9,6 +8,5 @@ class Question < ActiveRecord::Base
 
   belongs_to :message
 
-  belongs_to :conversation
-
+  
   end

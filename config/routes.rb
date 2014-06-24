@@ -27,6 +27,7 @@ Dating::Application.routes.draw do
   match '/edit_card',   to: 'subscriptions#edit_card',   via: 'get'
   match '/update_card', to: 'subscriptions#update_card', via: 'post'
   
+  
   resources :messages
     
   
