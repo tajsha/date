@@ -131,7 +131,7 @@ a.scroll_link {font-size:13px; line-height:13px; color:#525252; text-decoration:
 body.color{ background:#fff;}
 .profile_top .right_sec{float:right; width:691px; background:#f7f7f7; padding:29px 32px 40px 31px;}
 .top_box{float:left; width:100%;}
-.top_box .left_box{ float:left; width:453px;}
+.top_box .left_box{ float:left; width:330px;}
 .top_box .left_box h2{ float:left; width:100%; font-size:36px; line-height:38px; color:#39a0f6;}
 .top_box .left_box h3{ float:left; width:100%; font-size:16px; line-height:18px; color:#445566; padding:8px 0 0 0;}
 .top_box .left_box h3 span{ color:#a6abba;}
@@ -733,3 +733,5 @@ select[multiple].input-lg {
 	border-radius: 5px;
 	padding: 2px
 }
+.lets_go{float:left; width:280px; border:1px solid #dcdcdc; background:#eff0f3; padding:21px 35px;}
+a.see_more{cursor: pointer}
