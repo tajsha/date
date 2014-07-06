@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140629160335) do
+ActiveRecord::Schema.define(version: 20140404181602) do
 
   create_table "contacts", force: true do |t|
     t.string   "name"
@@ -33,28 +33,6 @@ ActiveRecord::Schema.define(version: 20140629160335) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "finished_mails", force: true do |t|
-    t.integer  "mail_campaign_id"
-    t.string   "from"
-    t.string   "to"
-    t.string   "subject"
-    t.text     "body_html"
-    t.integer  "retries"
-    t.datetime "last_retry_at"
-    t.string   "last_error"
-    t.datetime "sent_at"
-    t.integer  "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.text     "body_text"
-    t.boolean  "opened",           default: false, null: false
-    t.string   "key"
-  end
-
-  add_index "finished_mails", ["key"], name: "index_finished_mails_on_key", unique: true, using: :btree
-  add_index "finished_mails", ["mail_campaign_id", "status"], name: "index_finished_mails_on_mail_campain_id_and_status", using: :btree
-  add_index "finished_mails", ["to", "mail_campaign_id"], name: "index_finished_mails_on_to_and_mail_campaign_id", using: :btree
 
   create_table "galleries", force: true do |t|
     t.datetime "created_at"
@@ -84,43 +62,10 @@ ActiveRecord::Schema.define(version: 20140629160335) do
     t.datetime "updated_at"
   end
 
-  create_table "mail_campaign_attachments", force: true do |t|
-    t.integer  "mail_campaign_id",              null: false
-    t.string   "filename",                      null: false
-    t.string   "path",             limit: 2048
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "mail_campaign_attachments", ["mail_campaign_id"], name: "index_mail_campaign_attachments_on_mail_campaign_id", using: :btree
-
-  create_table "mail_campaigns", force: true do |t|
-    t.integer  "mailing_list_id"
-    t.string   "from"
-    t.string   "subject"
-    t.text     "body_html"
-    t.integer  "unsubscribe_methods"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.text     "body_text"
-    t.integer  "sent_mails_count",    default: 0, null: false
-    t.integer  "opened_mails_count",  default: 0, null: false
-  end
-
-  add_index "mail_campaigns", ["mailing_list_id"], name: "index_mail_campaigns_on_mailing_list_id", using: :btree
-
-  create_table "mail_keys", force: true do |t|
-    t.string   "email"
-    t.string   "key"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "mail_keys", ["email"], name: "index_mail_keys_on_email", unique: true, using: :btree
-  add_index "mail_keys", ["key"], name: "index_mail_keys_on_key", unique: true, using: :btree
-
-  create_table "mailing_lists", force: true do |t|
+  create_table "messages", force: true do |t|
     t.string   "name"
+    t.string   "email"
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -186,26 +131,8 @@ ActiveRecord::Schema.define(version: 20140629160335) do
     t.datetime "updated_at"
     t.integer  "sender_id"
     t.integer  "recipient_id"
-    t.integer  "conversation_id"
+    t.integer  "message_id"
   end
-
-  create_table "queued_mails", force: true do |t|
-    t.integer  "mail_campaign_id"
-    t.string   "to"
-    t.integer  "retries",          default: 0,     null: false
-    t.datetime "last_retry_at"
-    t.string   "last_error"
-    t.boolean  "locked",           default: false, null: false
-    t.datetime "locked_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "key"
-  end
-
-  add_index "queued_mails", ["locked", "locked_at"], name: "index_queued_mails_on_locked_and_locked_at", using: :btree
-  add_index "queued_mails", ["locked", "retries", "id"], name: "index_queued_mails_on_locked_retries_and_id", using: :btree
-  add_index "queued_mails", ["mail_campaign_id", "to"], name: "index_queued_mails_on_mail_campain_id_and_to", unique: true, using: :btree
-  add_index "queued_mails", ["retries", "locked"], name: "index_queued_mails_on_retries_and_locked", using: :btree
 
   create_table "receipts", force: true do |t|
     t.integer  "receiver_id"
@@ -226,6 +153,15 @@ ActiveRecord::Schema.define(version: 20140629160335) do
     t.integer "followed_id"
   end
 
+  create_table "roles", force: true do |t|
+    t.string   "name",        null: false
+    t.string   "title",       null: false
+    t.text     "description", null: false
+    t.text     "the_role",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "searches", force: true do |t|
     t.string   "gender"
     t.string   "age"
@@ -238,16 +174,6 @@ ActiveRecord::Schema.define(version: 20140629160335) do
     t.integer  "min_age"
     t.integer  "max_age"
   end
-
-  create_table "smailer_properties", force: true do |t|
-    t.string   "name"
-    t.text     "value"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "notes"
-  end
-
-  add_index "smailer_properties", ["name"], name: "index_smailer_properties_on_name", unique: true, using: :btree
 
   create_table "subscriptions", force: true do |t|
     t.integer  "plan_id"
@@ -290,6 +216,7 @@ ActiveRecord::Schema.define(version: 20140629160335) do
     t.boolean  "admin"
     t.string   "role"
     t.integer  "roles_mask"
+    t.integer  "age"
     t.integer  "default_photo_id"
     t.string   "time_zone"
     t.integer  "avatar_id"
@@ -297,8 +224,6 @@ ActiveRecord::Schema.define(version: 20140629160335) do
     t.integer  "response_rate"
     t.integer  "response_total"
     t.integer  "plan_id"
-    t.boolean  "no_email"
-    t.integer  "age"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

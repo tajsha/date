@@ -6,6 +6,6 @@ Send a message to
   <%= text_field_tag :subject %>
   <%= label :body, "Message text" %>
   <%= text_area_tag :body %>
-  <%= text_field_tag(:user, params[:user_id]) %>
+  <%= hidden_field_tag(:user, params[:user_id]) %>
   <%= submit_tag 'Send message', class: "btn btn-primary" %>
  <% end %>

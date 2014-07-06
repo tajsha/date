@@ -27,10 +27,8 @@ Dating::Application.routes.draw do
   match '/edit_card',   to: 'subscriptions#edit_card',   via: 'get'
   match '/update_card', to: 'subscriptions#update_card', via: 'post'
   
-  
   resources :messages
-      
-  match '/paypal/ipn' => 'notifications#create', :via => [:get, :post], :as => 'notifications_create'
+    
   
   resources :charges
   resources :subscriptions
@@ -55,8 +53,6 @@ Dating::Application.routes.draw do
     post 'follow', on: :member 
     post 'unfollow', on: :member
     get "follow", on: :member 
-    get 'follow_popup', on: :member
-    post :search, on: :collection
   end
   
   resources :letsgos do

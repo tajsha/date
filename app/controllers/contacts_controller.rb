@@ -1,12 +1,12 @@
 class ContactsController < ApplicationController
    def new
-      @contact = Contact.new
+      @message = Message.new
     end
 
     def create
-      @contact = Contact.new(params[:contact])
-      if @contact.valid?
-        ContactMailer.new_contact(@contact).deliver
+      @message = Message.new(params[:message])
+      if @message.valid?
+        # TODO send message here
         flash[:notice] = "Message sent! Thank you for contacting us."
         redirect_to root_url
       else

@@ -9,18 +9,6 @@
 		<p>Birthdate: <%= best_in_place @user, :birthday %></p>
   		<p>Time Zone: <%= best_in_place @user, :time_zone, :type => :select, :collection => [["Eastern Time", "Eastern Time (US & Canada)"], ["Central Time (US & Canada)", "Central Time (US & Canada)"], ["Mountain Time (US & Canada)", "Mountain Time (US & Canada)"], ["Pacific Time (US & Canada)", "Pacific Time (US & Canada)"]] %></p>
 
-
-change your subscription
-
-<%= form_for(@user) do |f| %>
-<div class="forms">
-<%= f.check_box :no_email, :value => @user.no_email %>
-<%= f.submit @user.no_email ? 'Unsubscribe' : 'Subscribe' %>
-</div>
-<% end %>
-
-		 <p>
-
 		<div id="subscription">
 		  <h1>Your Subscription</h1>
 		  <p>You are signed up for the <strong><%= @user.subscription.plan.name %></strong> plan which includes <strong><%= @user.subscription.plan.length %>  months</strong> for just <strong><%= number_to_currency @user.subscription.plan.price %></strong> per month! You have <%=distance_of_time_in_words(Time.now, @user.subscription.expires_at) %> until it expires!</p>
@@ -32,7 +20,7 @@ change your subscription
 
 		<% end %>
 	<p>
-		<% if @user.subscription.paypal_recurring_profile_token.nil? %>
+		<% if @user.subscription.paypal_customer_token == NULL %>
 		
 		Add new Credit Card
 		<%= form_for @user do |f| %>
@@ -46,7 +34,6 @@ change your subscription
 		      </ul>
 		    </div>
 		  <% end %>
-	
 
 		  <div class="field">
 		    <%= radio_button_tag :pay_with, :card, true %>
@@ -86,5 +73,3 @@ change your subscription
 		    </div>
 		  </div>
 		<% end %>
-		  <% end %>
-		

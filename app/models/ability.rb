@@ -7,9 +7,6 @@ class Ability
       can :manage, :all
     else
       can :read, :all
-      can :settings, User do |u|
-        user.id == u.id
-      end
     end
   end
 end
