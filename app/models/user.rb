@@ -32,7 +32,8 @@
 class User < ActiveRecord::Base
   acts_as_messageable
   has_secure_password
-  attr_accessible :role, :notification_id, :sender_id, :receiver_id, :conversation_id, :no_email, :average_response_time, :response_rate, :response_total, :name, :time_zone, :code, :lat, :lon, :city, :age, :age_end, :password_confirmation, :about_me, :feet, :inches, :password, :birthday, :career, :children, :education, :email, :ethnicity, :gender, :height, :name, :password_digest, :politics, :religion, :sexuality, :user_drink, :user_smoke, :username, :zip_code
+  attr_accessible :role, :notification_id, :sender_id, :receiver_id, :conversation_id, :no_email, :average_response_time, :response_rate, :response_total, :name, :time_zone, :code, :lat, :lon, :city, :age, :age_end, :password_confirmation, :about_me, :feet, :inches, :password, :birthday, :career, :children, :education, :email, :ethnicity, :gender, :height, :name, :password_digest, :politics, :religion, :sexuality, :user_drink, :user_smoke, :username, :zip_code, :user_sex
+  attr_accessor :user_sex
   # this prevented user from registering as I don't have timezone select on user reg form
   # validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name)
   has_one :subscription
@@ -67,10 +68,10 @@ class User < ActiveRecord::Base
                        :on => :create
   before_create { generate_token(:auth_token) }
   ROLES = %w[admin user guest banned]
-  
+  scope :except_user, ->(user) { where('users.id != ?', user.id)}
   # models/user.rb
   after_create :setup_gallery
-  
+  after_save :update_age
    def subscribed?
       subscription.present?
     end
@@ -94,7 +95,7 @@ class User < ActiveRecord::Base
   end
   
   def address
-    "#{location.city}, #{location.state}"
+    "#{location.city}, #{location.state}" rescue nil
   end
   
   
@@ -104,7 +105,7 @@ class User < ActiveRecord::Base
       end
     end
 
-    def age
+    def get_age
       now = Time.now.utc.to_date
       now.year - birthday.year - ((now.month > birthday.month || (now.month == birthday.month && now.day >= birthday.day)) ? 0 : 1)
     end
@@ -181,4 +182,7 @@ class User < ActiveRecord::Base
      Gallery.create(user: self)
    end
    
+   def update_age
+    update_column('age', get_age)
+   end
 end

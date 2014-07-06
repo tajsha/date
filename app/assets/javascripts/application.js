@@ -74,5 +74,5 @@ $(function(){
       console.log('checked')
     }
   })
-  $(".jqtransform").jqTransform();
+  // $(".jqtransform").jqTransform();
 });
