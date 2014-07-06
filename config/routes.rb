@@ -29,7 +29,8 @@ Dating::Application.routes.draw do
   
   
   resources :messages
-    
+      
+  match '/paypal/ipn' => 'notifications#create', :via => [:get, :post], :as => 'notifications_create'
   
   resources :charges
   resources :subscriptions

@@ -2,7 +2,7 @@ class PaymentNotificationsController < ApplicationController
 
 def index
   
-      redirect_to conversations_path(:box => @box)
+  redirect_to root_url
 end
 
    def create
