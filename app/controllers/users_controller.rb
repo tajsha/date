@@ -43,8 +43,12 @@ end
   
   def index
     @user = current_user
-    @users = @user.present? ? User.where('id != ?',@user.id) : User.all
-    @search = Search.new
+    @search = @user.present? ? User.except_user(@user).ransack(params[:q]) :User.ransack(params[:q])
+    if params[:q].present?
+      @users = @search.result
+    else
+      @users = @user.present? ? User.where('id != ?',@user.id) : User.all
+    end      
     render layout: 'new_application'    
   end
   
@@ -118,11 +122,16 @@ end
           end
         end
 
+    def search
+      @users = ThinkingSphinx.search(params[:query])
+      @search = User.ransack(params[:q])
+      render :index, layout: 'new_application'
+    end
      
     private
     
     
      def user_params
-       params.require(:user).permit(:name, :email, :username, :password, :ethnicity, :gender, :zip_code, :birthday, :role, :age, :sexuality)
+       params.require(:user).permit(:name, :email, :username, :password, :ethnicity, :gender, :zip_code, :birthday, :role, :age, :sexuality, :user_sex)
      end
 end

@@ -290,7 +290,6 @@ ActiveRecord::Schema.define(version: 20140629160335) do
     t.boolean  "admin"
     t.string   "role"
     t.integer  "roles_mask"
-    t.integer  "age"
     t.integer  "default_photo_id"
     t.string   "time_zone"
     t.integer  "avatar_id"
@@ -299,6 +298,7 @@ ActiveRecord::Schema.define(version: 20140629160335) do
     t.integer  "response_total"
     t.integer  "plan_id"
     t.boolean  "no_email"
+    t.integer  "age"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
