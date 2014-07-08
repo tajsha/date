@@ -1,6 +1,11 @@
 <% title "Contact Us" %>
 
-<%= form_for @contact do |f| %>
+<%= form_for @message do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
   <p>
     <%= f.label :email %><br />
     <%= f.text_field :email %>

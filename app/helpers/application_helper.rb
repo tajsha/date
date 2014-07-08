@@ -7,12 +7,4 @@ module ApplicationHelper
     content_tag(:div, flash_messages.html_safe, :class => 'notices')
   end
 
-  def extract_date(timestamp)
-  	timestamp.strftime("%B %d, %Y")
-  end
-
-  def extract_time(timestamp)
-  	timestamp.strftime("%I:%M%p")
-  end
-
 end
