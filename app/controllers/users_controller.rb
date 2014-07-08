@@ -29,8 +29,12 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])    
     @question = Question.where(recipient_id: params[:id]).page(params[:page]).per_page(3)
-    @letsgos = @user.letsgos.paginate(page: params[:page])
-    @letsgo = current_user.letsgos.build    
+    # @letsgos = @user.letsgos.paginate(page: params[:page])
+    # @letsgo = current_user.letsgos.build    
+    respond_to do |format|
+      format.html { render layout: 'new_application' }
+      format.js { render partial: 'questions/questions', locals: {questions: @question} }
+    end
   end
     
     def edit
@@ -38,9 +42,14 @@ class UsersController < ApplicationController
 end
   
   def index
-    @users = User.all
-    @search = Search.new
-    
+    @user = current_user
+    @search = @user.present? ? User.except_user(@user).ransack(params[:q]) :User.ransack(params[:q])
+    if params[:q].present?
+      @users = @search.result
+    else
+      @users = @user.present? ? User.where('id != ?',@user.id) : User.all
+    end      
+    render layout: 'new_application'    
   end
   
   def destroy
@@ -59,23 +68,29 @@ def update
      respond_with @user
     end
     
-    def follow
-        @title = "Following"
-        @user = User.find(params[:id])
-      friend = User.find params[:id]
-      current_user.follow! friend unless current_user.following? friend
-       @users = @user.followed_users(page: params[:page])
-   
-      render 'show_follow'
-      
-    end
+def follow
+    @title = "Following"
+    @user = User.find(params[:id])
+  friend = User.find params[:id]
+  current_user.follow! friend unless current_user.following? friend
+   @users = @user.followed_users(page: params[:page])
 
-    def unfollow
-      friend = User.find params[:id]
-      current_user.unfollow! friend
-      redirect_to friend
-    end
+  render 'show_follow'
+  
+end
+
+def unfollow
+  friend = User.find params[:id]
+  current_user.unfollow! friend
+  redirect_to friend
+end
     
+def follow_popup
+  @user = User.find params[:id]
+  respond_to do |format|
+    format.js {}
+  end
+end
     
     def update_stripe_billing
       @user = current_user
@@ -107,11 +122,16 @@ def update
           end
         end
 
+    def search
+      @users = ThinkingSphinx.search(params[:query])
+      @search = User.ransack(params[:q])
+      render :index, layout: 'new_application'
+    end
      
     private
     
     
      def user_params
-       params.require(:user).permit(:name, :email, :username, :password, :ethnicity, :gender, :zip_code, :birthday, :role, :age, :sexuality)
+       params.require(:user).permit(:name, :email, :username, :password, :ethnicity, :gender, :zip_code, :birthday, :role, :age, :sexuality, :user_sex)
      end
 end

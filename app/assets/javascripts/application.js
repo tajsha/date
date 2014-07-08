@@ -16,5 +16,63 @@
 //= require jquery.magnific-popup.js
 //= require jquery.purr
 //= require best_in_place
+//= require cufon-yui
+//= require Helvetica_Neue_LT_Std_400.font
+//= require Helvetica_Neue_LT_Std_italic_300.font
+//= require Helvetica_Neue_LT_Std_500.font
+//= require Helvetica_Neue_LT_Std_750.font
+//= require Dosis_400.font
+//= require cufon
+//= require jquery.jqtransform
 //= require_tree .
 
+$(function(){
+  $('select').jqTransSelect();
+  $('input[type=checkbox]').jqTransCheckBox();
+  
+  $('.img_box').imagesLoaded(function(){
+    $('.box_detail').masonry({
+  	  columnWidth: 80,
+  	  itemSelector: '.common_box'
+	  });
+  });
+	
+  $('a#inbox_link, a#sentbox_link').click(function(e){
+		e.preventDefault();
+		var href = $(this).attr('href');
+		console.log('href'+href);
+		$(this).parent().siblings().removeClass('active');
+		$(this).parent().addClass('active');
+		$('.tab_contr').css('display','none');;
+		$(href).css('display','block');
+	})
+  $('#signin_link').click(function () {
+      $('#signin-dropdown').toggle();
+      return false;
+  });
+  $('#signin-dropdown').click(function(e) {
+      e.stopPropagation();
+  });
+  $(document).click(function() {
+      $('#signin-dropdown').hide();
+  });
+  $('.select_conversations').on('click',function(){
+    console.log('checking')
+    if($(this).is(':checked')){
+      $('.tab_contr:visible .conversation_checkbox').each(function(){
+        $(this).prop('checked', true)
+        console.log('length', $(this).closest('a.jqTransformCheckbox').length)
+        $(this).parent().find('a.jqTransformCheckbox').addClass('jqTransformChecked')
+      })
+      console.log('unchecked')
+    }
+    else {
+      $('.tab_contr:visible .conversation_checkbox').each(function(){
+        $(this).prop('checked', false)
+        $(this).parent().find('a.jqTransformCheckbox').removeClass('jqTransformChecked')
+      })
+      console.log('checked')
+    }
+  })
+  // $(".jqtransform").jqTransform();
+});

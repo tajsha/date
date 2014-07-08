@@ -3,15 +3,13 @@ class Contact
     include ActiveModel::Conversion
     extend ActiveModel::Naming
 
-    attr_accessor :name, :email, :content
+    attr_accessor :email, :content
 
-    validates_presence_of :name
-    validates_format_of :email, :with => /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i
     validates_length_of :content, :maximum => 500
 
-    def initialize(attributes = {})
-      attributes.each do |name, value|
-        send("#{name}=", value)
+    def initialize(attributes={})
+      attributes && attributes.each do |name, value|
+        send("#{name}=", value) if respond_to? name.to_sym 
       end
     end
 

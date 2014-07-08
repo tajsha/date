@@ -27,7 +27,10 @@ gem 'mini_magick'
 gem 'ancestry'
 gem 'stripe'
 gem 'cancancan', '~> 1.7'
-
+gem 'slim-rails'
+gem 'whenever', require: false
+gem 'roadie'
+gem 'ransack'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -35,7 +38,7 @@ group :assets do
   gem 'sass-rails',   '~> 4.0.0.rc1'
   gem 'coffee-rails', '~> 4.0.0.rc1'
   gem 'uglifier', '>= 1.3.0'
-  
+  gem 'less-rails'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
 
@@ -63,6 +66,9 @@ group :development do
   gem 'annotate'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'pry'
+  gem 'pry-byebug'
+  gem 'awesome_print'
 end
 
 gem 'rspec-rails', :group => [:test, :development]
