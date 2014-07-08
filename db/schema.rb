@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140629160335) do
+ActiveRecord::Schema.define(version: 20140630143531) do
 
   create_table "contacts", force: true do |t|
     t.string   "name"
@@ -145,6 +145,15 @@ ActiveRecord::Schema.define(version: 20140629160335) do
 
   add_index "notifications", ["conversation_id"], name: "index_notifications_on_conversation_id", using: :btree
 
+  create_table "payment_notifications", force: true do |t|
+    t.text     "params"
+    t.string   "status"
+    t.string   "transaction_id"
+    t.integer  "plan_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "payments", force: true do |t|
     t.integer  "amount",     default: 1
     t.string   "token"
@@ -186,7 +195,7 @@ ActiveRecord::Schema.define(version: 20140629160335) do
     t.datetime "updated_at"
     t.integer  "sender_id"
     t.integer  "recipient_id"
-    t.integer  "conversation_id"
+    t.integer  "message_id"
   end
 
   create_table "queued_mails", force: true do |t|
@@ -224,6 +233,15 @@ ActiveRecord::Schema.define(version: 20140629160335) do
   create_table "relationships", force: true do |t|
     t.integer "follower_id"
     t.integer "followed_id"
+  end
+
+  create_table "roles", force: true do |t|
+    t.string   "name",        null: false
+    t.string   "title",       null: false
+    t.text     "description", null: false
+    t.text     "the_role",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "searches", force: true do |t|
@@ -290,6 +308,7 @@ ActiveRecord::Schema.define(version: 20140629160335) do
     t.boolean  "admin"
     t.string   "role"
     t.integer  "roles_mask"
+    t.integer  "age"
     t.integer  "default_photo_id"
     t.string   "time_zone"
     t.integer  "avatar_id"
@@ -298,7 +317,6 @@ ActiveRecord::Schema.define(version: 20140629160335) do
     t.integer  "response_total"
     t.integer  "plan_id"
     t.boolean  "no_email"
-    t.integer  "age"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
