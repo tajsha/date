@@ -12,8 +12,8 @@
           a.adv_search href="#" 
             = image_tag "adv_link.png"
             span Advanced Search
-        .advanced_search_div class="#{params[:q].blank? ? 'hide' :'' }"
-          = search_form_for @search do |f|
+        .advanced_search_div class="#{params[:id].blank? ? 'hide' :'' }"
+          = form_for @search do |f|
             .form_container
               .row
                 .col
@@ -24,30 +24,28 @@
                 .select2
                   .col.col2
                     label Seeking
-                    = f.select :gender_eq, %w(Female Male)
+                    = f.select :gender, %w(Female Male)
                 .select1
                   .col.col3
                     label Ages
-                    = f.select :age_gteq, options_for_select((18..50),25), {}, {class: 'small'}
+                    = f.select :min_age, options_for_select((18..50),25), {}, {class: 'small'}
                 .select5
                   .col.col4
                     label to
-                    = f.select :age_lteq, options_for_select((20..50),45), {}, {class: 'small'}
+                    = f.select :max_age, options_for_select((20..50),45), {}, {class: 'small'}
               .row
                 .col.col5
                   label Near
-                  / f.search_field :zip_code,"enter zip here",class: 'text_input',onblur: "if(this.value=='')this.value='enter zip here'", onfocus:"if(this.value=='enter zip here')this.value=''"
-                  = f.search_field :zip_code_eq,placeholder: "enter zip here", class: 'text_input'
-                  /input.text_input onblur=("if(this.value=='')this.value='enter zip here'") onfocus=("if(this.value=='enter zip here')this.value=''") type="text" value=("enter zip here") /
+                  = f.text_field :zip_code,placeholder: "enter zip here", class: 'text_input'
                 .col.col6
-                  = f.search_field :children_eq, placeholder: 'child preference', class: 'text_input'
+                  = f.select :children, ['I want kids now','I want one someday'], prompt: 'child preference'
                   
                 .select4
                   .col.col6
-                    = f.search_field :religion_eq, placeholder: 'religion', class: 'text_input'
+                    = f.select :religion, ['Agnostic', 'Atheist', 'Christian', 'Catholic', 'Buddhist', 'Hindu', 'Jewish', 'Muslim', 'Spiritual without affiliation', 'Other', 'None', 'Prefer not to say'], prompt: 'Religion'
                 .select4
                   .col.col7
-                    = f.search_field :ethnicity_eq, placeholder: 'ethnicity', class: 'text_input'
+                    = f.select :ethnicity, ['Asian', 'Biracial', 'Indian', 'Hispanic/Latin', 'Middle Eastern', 'Native American', 'Pacific Islander', 'White', 'Other'], prompt: 'Ethnicity'
               .btm_sec
                 ul.form_list
                   li

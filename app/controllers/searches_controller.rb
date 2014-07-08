@@ -8,15 +8,26 @@ class SearchesController < ApplicationController
   def create
     @search = Search.new(params[:search])
     if @search.save
-      redirect_to @search
+        redirect_to @search
     else
       render 'new'
     end
   end
 
   def show
+    @user = current_user
     @search = Search.find(params[:id])
     @users = @search.users
+    render 'users/index', layout: 'new_application'    
+  end
+
+  def update
+    @search = Search.find(params[:id])
+    if @search.update_attributes(params[:search])
+        redirect_to @search
+    else
+      render 'new'
+    end
   end
     
   def index

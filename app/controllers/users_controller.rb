@@ -43,12 +43,8 @@ end
   
   def index
     @user = current_user
-    @search = @user.present? ? User.except_user(@user).ransack(params[:q]) :User.ransack(params[:q])
-    if params[:q].present?
-      @users = @search.result
-    else
-      @users = @user.present? ? User.where('id != ?',@user.id) : User.all
-    end      
+    @search = Search.new
+    @users = @user.present? ? User.where('id != ?',@user.id) : User.all
     render layout: 'new_application'    
   end
   
