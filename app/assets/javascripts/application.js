@@ -28,6 +28,10 @@
 
 $(function(){
   $('select').jqTransSelect();
+  $(document).on('change','select',function(){
+    var id = $(this).attr('id')
+    fix_select('#'+id);
+  })
   $('input[type=checkbox]').jqTransCheckBox();
   
   $('.img_box').imagesLoaded(function(){
@@ -76,3 +80,9 @@ $(function(){
   })
   // $(".jqtransform").jqTransform();
 });
+
+function fix_select(selector) {
+    var i=$(selector).parent().find('div,ul').remove().css('zIndex');
+    $(selector).unwrap().removeClass('jqTransformHidden').jqTransSelect();
+    $(selector).parent().css('zIndex', i);
+}

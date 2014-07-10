@@ -28,7 +28,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])    
-    @question = Question.where(recipient_id: params[:id]).page(params[:page]).per_page(3)
+    @question = Question.where('recipient_id = ? and answer is not null', params[:id]).page(params[:page]).per_page(3)
     # @letsgos = @user.letsgos.paginate(page: params[:page])
     # @letsgo = current_user.letsgos.build    
     respond_to do |format|
@@ -120,7 +120,7 @@ end
 
     def search
       @users = ThinkingSphinx.search(params[:query])
-      @search = User.ransack(params[:q])
+      @search = Search.new
       render :index, layout: 'new_application'
     end
      
