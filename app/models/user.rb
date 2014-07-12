@@ -71,7 +71,6 @@ class User < ActiveRecord::Base
   scope :except_user, ->(user) { where('users.id != ?', user.id)}
   # models/user.rb
   after_create :setup_gallery
-  after_save :update_age
    def subscribed?
       subscription.present?
     end
@@ -105,7 +104,7 @@ class User < ActiveRecord::Base
       end
     end
 
-    def get_age
+    def age
       now = Time.now.utc.to_date
       now.year - birthday.year - ((now.month > birthday.month || (now.month == birthday.month && now.day >= birthday.day)) ? 0 : 1)
     end
@@ -180,9 +179,5 @@ class User < ActiveRecord::Base
   private
   def setup_gallery
      Gallery.create(user: self)
-   end
-   
-   def update_age
-    update_column('age', get_age)
    end
 end

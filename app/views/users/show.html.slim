@@ -73,7 +73,7 @@
               = distance_of_time_in_words_to_now(@user.created_at) 
               '&nbsp;ago
               strong Last online 4 hours ago
-          - if @user.letsgos.any?
+          - if @user.letsgos.any? || current_user?(@user)
             .lets_go
               |Proposed Dates (
               = @user.letsgos.count
@@ -81,8 +81,12 @@
               - @user.letsgos.first(3).each_with_index do |letsgo, i|
                 .div.letsgo_li class="#{i != 0 ? 'hide' : ''}"
                   = render 'letsgos/letsgo', letsgo: letsgo
-              span 
-                a.see_more See More..    
+              - if @user.letsgos.present?
+                span 
+                  a.see_more See More..    
+              - if current_user?(@user)
+                .pull-right
+                  = link_to "Add Date", '#', :class => "btn btn-primary add_date", 'data-mfp-src'=>'#letsgo_form_div'
             / span.pic_box3
             /   img alt="" src="/assets/right_icon1.png" /
             / span.pic_detail3
@@ -283,6 +287,10 @@
   #follow_div.mfp-hide
     center
       .message_div#follow_user
+  #letsgo_form_div.mfp-hide
+    center
+      .message_div
+        = render 'letsgos/form'
 javascript:
   $(document).ready(function () {
     $('.parent-container').magnificPopup({
@@ -299,6 +307,9 @@ javascript:
       $.magnificPopup.close()  
     })
     $('.ask_btn').magnificPopup({
+      showCloseBtn: true
+    });
+    $('.add_date').magnificPopup({
       showCloseBtn: true
     });
     $('form#question_form').bind('ajax:success', function(evt, data, status, xhr){
