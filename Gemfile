@@ -26,7 +26,6 @@ gem 'slim'
 gem 'mini_magick'
 gem 'ancestry'
 gem 'stripe'
-gem 'cancancan', '~> 1.7'
 gem 'slim-rails'
 gem 'whenever', require: false
 gem 'roadie'
