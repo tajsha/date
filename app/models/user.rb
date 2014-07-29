@@ -74,7 +74,15 @@ class User < ActiveRecord::Base
    def subscribed?
       subscription.present?
     end
-  
+    
+    def paid?
+      subscriptions.where(cancelled: nil).exists?
+    end
+    
+    def reg?
+      !subscription.cancelled? if subscription
+    end
+    
     def mailboxer_email(object)
         if self.no_email
           email

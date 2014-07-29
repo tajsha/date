@@ -1,6 +1,8 @@
 class ConversationsController < ApplicationController
   helper_method :mailbox, :conversation
   before_filter :conversation, only: :show
+  before_filter :check_has_access
+  
 
   def index
     @user = current_user
@@ -74,5 +76,10 @@ class ConversationsController < ApplicationController
      else subkeys.map{|k| self[k] }
      end
    end
+  end
+  
+  protected
+  def check_has_access
+    redirect_to(root_url) unless Subscription.exists?(user_id: current_user.try(:id) || -1, cancelled: nil)
   end
 end

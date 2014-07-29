@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   
   def settings
     @user = User.find(params[:id])
+    render layout: 'new_application'
   end
   
   def new

@@ -8,6 +8,15 @@ class Subscription < ActiveRecord::Base
   
   attr_accessor :stripe_card_token, :paypal_payment_token
   
+  def has_cancelled?
+    if cancellation_date.present? && cancellation_date > (paid_on + 30)
+      subscription.update_attributes(cancelled: "1")
+      return true
+    else
+      return false
+    end
+  end
+  
   def expires_at
     self.updated_at + plan.duration.days
   end

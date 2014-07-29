@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140630143531) do
+ActiveRecord::Schema.define(version: 20140724152912) do
 
   create_table "contacts", force: true do |t|
     t.string   "name"
@@ -195,7 +195,7 @@ ActiveRecord::Schema.define(version: 20140630143531) do
     t.datetime "updated_at"
     t.integer  "sender_id"
     t.integer  "recipient_id"
-    t.integer  "conversation_id"
+    t.integer  "message_id"
   end
 
   create_table "queued_mails", force: true do |t|
@@ -235,6 +235,15 @@ ActiveRecord::Schema.define(version: 20140630143531) do
     t.integer "followed_id"
   end
 
+  create_table "roles", force: true do |t|
+    t.string   "name",        null: false
+    t.string   "title",       null: false
+    t.text     "description", null: false
+    t.text     "the_role",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "searches", force: true do |t|
     t.string   "gender"
     t.string   "age"
@@ -268,6 +277,7 @@ ActiveRecord::Schema.define(version: 20140630143531) do
     t.string   "paypal_recurring_profile_token"
     t.integer  "user_id"
     t.integer  "cancelled"
+    t.boolean  "cancellation_date"
   end
 
   create_table "users", force: true do |t|
@@ -299,6 +309,7 @@ ActiveRecord::Schema.define(version: 20140630143531) do
     t.boolean  "admin"
     t.string   "role"
     t.integer  "roles_mask"
+    t.integer  "age"
     t.integer  "default_photo_id"
     t.string   "time_zone"
     t.integer  "avatar_id"
@@ -307,7 +318,6 @@ ActiveRecord::Schema.define(version: 20140630143531) do
     t.integer  "response_total"
     t.integer  "plan_id"
     t.boolean  "no_email"
-    t.integer  "age"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

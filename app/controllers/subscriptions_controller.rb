@@ -3,6 +3,7 @@ class SubscriptionsController < ApplicationController
   def new
     plan = Plan.find(params[:plan_id])
     @subscription = plan.subscriptions.build
+    render layout: 'new_application'
     if params[:PayerID]
       @subscription.paypal_customer_token = params[:PayerID]
       @subscription.paypal_payment_token = params[:token]
@@ -21,6 +22,7 @@ class SubscriptionsController < ApplicationController
 
   def show
     @subscription = Subscription.find(params[:id])
+    render layout: 'new_application'
   end
   
   def paypal_checkout
@@ -52,7 +54,7 @@ class SubscriptionsController < ApplicationController
      def cancelsubscription
        @user = current_user
          @customer = Stripe::Customer.retrieve(@user.subscription.stripe_customer_token)
-         @customer.cancel_subscription()
+         @customer.cancel_subscription(:at_period_end => true) 
          current_user.subscription.update_attributes(:cancelled => 1)
          current_user.save!
          flash.alert = 'Your subscription has been cancelled successfully!'

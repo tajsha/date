@@ -3,6 +3,7 @@ class SearchesController < ApplicationController
 
   def new
     @search = Search.new
+    render layout: 'new_application'
   end
 
   def create
