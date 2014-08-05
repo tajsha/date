@@ -8,12 +8,13 @@ class UsersController < ApplicationController
   
   def new
     @user = User.new
+    render layout: 'new_application'
   end
   
   def profile
     @profile = User.profile
     @user = User.find(params[:id]) 
-     @question = Question.where(recipient_id: params[:id]).first
+    @question = Question.where(recipient_id: params[:id]).first
   end
   
   def create
@@ -31,7 +32,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])    
     @question = Question.where('recipient_id = ? and answer is not null', params[:id]).page(params[:page]).per_page(3)
     # @letsgos = @user.letsgos.paginate(page: params[:page])
-    @letsgo = current_user.letsgos.build    
+    @letsgo = current_user.letsgos.build unless current_user.blank? 
     respond_to do |format|
       format.html { render layout: 'new_application' }
       format.js { render partial: 'questions/questions', locals: {questions: @question} }
