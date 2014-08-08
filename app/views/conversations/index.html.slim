@@ -7,7 +7,9 @@
           'Hi,
           = current_user.username 
           '
-        ' You have 2 unread Messages
+          'you have
+          = current_user.mailbox.inbox(:unread => true).count 
+          Unread  unread Messages
     .mail_box
       .tab_row#tabs
         ul

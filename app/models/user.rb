@@ -71,6 +71,11 @@ class User < ActiveRecord::Base
   scope :except_user, ->(user) { where('users.id != ?', user.id)}
   # models/user.rb
   after_create :setup_gallery
+  
+  def to_param
+     username
+   end
+   
    def subscribed?
       subscription.present?
     end

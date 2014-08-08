@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140724152912) do
+ActiveRecord::Schema.define(version: 20140807135052) do
 
   create_table "contacts", force: true do |t|
     t.string   "name"
@@ -196,6 +196,7 @@ ActiveRecord::Schema.define(version: 20140724152912) do
     t.integer  "sender_id"
     t.integer  "recipient_id"
     t.integer  "message_id"
+    t.boolean  "no_email"
   end
 
   create_table "queued_mails", force: true do |t|
@@ -318,6 +319,7 @@ ActiveRecord::Schema.define(version: 20140724152912) do
     t.integer  "response_total"
     t.integer  "plan_id"
     t.boolean  "no_email"
+    t.string   "slug"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

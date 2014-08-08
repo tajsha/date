@@ -37,15 +37,15 @@
                 .col.col5
                   label Near
                   = f.text_field :zip_code,placeholder: "enter zip here", class: 'text_input'
-                .col.col6
+                .col.col
                   = f.select :children, ['I want kids now','I want one someday'], prompt: 'child preference'
                   
-                .select4
-                  .col.col6
-                    = f.select :religion, ['Agnostic', 'Atheist', 'Christian', 'Catholic', 'Buddhist', 'Hindu', 'Jewish', 'Muslim', 'Other', 'None', 'Prefer not to say'], prompt: 'religion'
+                .select5
+                  .col.col3
+                    = f.select :religion, ['Agnostic', 'Atheist', 'Christian', 'Catholic', 'Buddhist', 'Hindu', 'Jewish', 'Muslim', 'Other'], prompt: 'religion'
                 .select4
                   .col.col7
-                    = f.select :ethnicity, ['Asian', 'African American', 'Biracial', 'Indian', 'Hispanic/Latin', 'Middle Eastern', 'Native American', 'Pacific Islander', 'White', 'Other'], prompt: 'ethnicity'
+                    = f.select :ethnicity, ['Asian', 'Black', 'Biracial', 'Indian', 'Hispanic/Latin', 'Middle Eastern', 'Native American', 'Pacific Islander', 'White', 'Other'], prompt: 'ethnicity/race'
               .btm_sec
                 ul.form_list
                   li
@@ -76,10 +76,9 @@
       = form_tag messages_path, method: :post, remote: true, class:'form-horizontal',id: 'message_form', role: 'form'
         = hidden_field_tag :user, nil
         .form-group
-          = label_tag :subject, 'Subject', class: 'control-label'
-          = text_field_tag :subject, nil, class: 'form-control' 
+          = hidden_field_tag :subject, "#{@current_user} messaged you", class: 'form-control' 
         .form-group
-          = label_tag :body, 'Message Text', class: 'control-label'
+          = label_tag :body, 'Your Message', class: 'control-label'
           = text_area_tag :body, nil, class: 'form-control' 
         br
         = submit_tag 'Send Message', class: 'btn btn-primary'

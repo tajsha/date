@@ -125,20 +125,15 @@
                                 center
                                   .message_div
                                     h3 
-                                      |Send a message to
-                                      '
-                                      = @user
-                                    = form_tag({controller: "messages", action: "create"}, class: 'form-horizontal', method: :post) do
-                                      / .form-group
-                                      /   = label_tag :subject, nil, class: 'control-label'
-                                      /   = text_field_tag :subject, nil, class: 'form-control'
-                                      .form-group
-                                        = label :body, "Message text", class: 'control-label'
-                                        = text_area_tag :body, nil, class: 'form-control'
-                                        = hidden_field_tag(:user, params[:id])
-                                      .form-group
-                                        br
-                                        = submit_tag 'Send message', class: "btn btn-primary"
+                                     = form_tag messages_path, method: :post, remote: true, class:'form-horizontal',id: 'message_form', role: 'form'
+                                       = hidden_field_tag :user, @user.id
+                                       .form-group
+                                         = hidden_field_tag :subject, "#{@current_user} messaged you", class: 'form-control' 
+                                       .form-group
+                                         = label_tag :body, 'Your Message', class: 'control-label'
+                                         = text_area_tag :body, nil, placeholder: "Hi, I like your pictures and figured I should write you a message and say...", class: 'form-control' 
+                                       br
+                                       = submit_tag 'Send Message', class: 'btn btn-primary'
               a.right_arrow href="#" 
                 img alt="" src="/assets/right_arrow.png" /
     .profile_middle_container
@@ -263,10 +258,9 @@
       = form_tag messages_path, method: :post, remote: true, class:'form-horizontal',id: 'message_form', role: 'form'
         = hidden_field_tag :user, @user.id
         .form-group
-          = label_tag :subject, 'Subject', class: 'control-label'
-          = text_field_tag :subject, nil, class: 'form-control' 
+          = hidden_field_tag :subject, "#{@current_user} messaged you", class: 'form-control' 
         .form-group
-          = label_tag :body, 'Message Text', class: 'control-label'
+          = label_tag :body, 'Your Message', class: 'control-label'
           = text_area_tag :body, nil, class: 'form-control' 
         br
         = submit_tag 'Send Message', class: 'btn btn-primary'
@@ -279,7 +273,7 @@
             = f.text_field :question, {:placeholder => 'Please add your question...',class:'form-control'}
           = f.hidden_field :sender_id, :value => current_user.id
           = f.hidden_field :recipient_id, :value => @user.id
-          = f.submit 'Add Question', class: 'btn btn-primary'
+          = f.submit 'Ask Question', class: 'btn btn-primary'
   #report_me.mfp-hide
     center
       .message_div

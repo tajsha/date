@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   
   def profile
     @profile = User.profile
-    @user = User.find(params[:id]) 
+    @user = User.find_by(username: params[:id])
     @question = Question.where(recipient_id: params[:id]).first
   end
   
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])    
+    @user = User.find_by(username: params[:id])
     @question = Question.where('recipient_id = ? and answer is not null', params[:id]).page(params[:page]).per_page(3)
     # @letsgos = @user.letsgos.paginate(page: params[:page])
     @letsgo = current_user.letsgos.build unless current_user.blank? 
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
   end
     
     def edit
-      @user = User.find(params[:id])
+      @user = User.find_by(username: params[:id])
 end
   
   def index
@@ -58,7 +58,7 @@ end
   
 def update
   @user = if current_user.has_role?(:admin)
-        User.find(params[:id])
+       User.find_by(username: params[:id])
       else
         current_user
       end
@@ -68,7 +68,7 @@ def update
     
 def follow
     @title = "Following"
-    @user = User.find(params[:id])
+    @user = User.find_by(username: params[:id])
   friend = User.find params[:id]
   current_user.follow! friend unless current_user.following? friend
    @users = @user.followed_users(page: params[:page])
@@ -84,7 +84,7 @@ def unfollow
 end
     
 def follow_popup
-  @user = User.find params[:id]
+  @user = User.find_by(username: params[:id])
   respond_to do |format|
     format.js {}
   end

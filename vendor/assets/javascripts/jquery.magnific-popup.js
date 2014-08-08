@@ -875,7 +875,7 @@ $.magnificPopup = {
 
 		closeOnBgClick: true,
 
-		closeBtnInside: true, 
+		closeBtnInside: false, 
 
 		showCloseBtn: true,
 
