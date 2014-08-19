@@ -19,11 +19,15 @@
             h4
               | Career:
               span.color
-               = best_in_place @user, :career,  nil: 'What are you doing?'
+               = best_in_place @user, :career,  nil: 'What earns you money?'
             h4
               | Education:
               span.color 
                 = best_in_place @user, :education, nil: 'What is your education level?', :type => :select, :collection => [["High school", "High school"], ["Some college", "Some college"], ["Undergraduate", "Undergraduate"], ["Bachelor's", "Bachelor's"], ["Master's", "Master's"], ["PhD", "PhD"], ["Business school", "Business school"], ["Law school", "Law school"], ["Medical school", "Medical school"]]
+            h4
+              | Ethnicity:
+              span.color 
+               = best_in_place @user, :ethnicity, nil: 'What is your ethnicity?', :type => :select, :collection => [["Asian", "Asian"], ["Black", "Black"], ["Biracial", "Biracial" ], ["Indian", "Indian"], ["Hispanic/Latin", "Hispanic/Latin"], ["Middle Eastern", "Middle Eastern"], ["Native American", "Native American"], ["Pacific Islander", "Pacific Islander"], ["White", "White"], ["Other", "Other"]]
             h4
               | Religion:
               span.color 
@@ -117,6 +121,15 @@
                           = button_to('Set as Profile Image', [:avatar, photo], class: 'btn')
                           '
                           = button_to "remove", photo, :confirm => 'Are you sure?', :method => :delete, class: 'btn'
+                          = form_for Photo.new do |f|
+                            = f.label :image, "Upload photos:"
+                            = f.file_field :image, multiple: true, name: "photo[image]"
+                          script#template-upload type="text/x-tmpl" 
+                            .upload
+                              | {%=o.name%}
+                              .progress
+                                .bar style=("width: 0%") 
+                          
                       - unless @user == current_user
                         .form
                           .row
@@ -130,8 +143,8 @@
                                        .form-group
                                          = hidden_field_tag :subject, "#{@current_user} messaged you", class: 'form-control' 
                                        .form-group
-                                         = label_tag :body, 'Your Message', class: 'control-label'
-                                         = text_area_tag :body, nil, placeholder: "Hi, I like your pictures and figured I should write you a message and say...", class: 'form-control' 
+                                         = label_tag :body, 'Send a Message', class: 'control-label'
+                                         = text_field :body, nil, placeholder: "Hi, I like your picture and figured I should write you a message and say...", class: 'form-control' 
                                        br
                                        = submit_tag 'Send Message', class: 'btn btn-primary'
               a.right_arrow href="#" 

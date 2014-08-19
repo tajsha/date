@@ -32,6 +32,8 @@ class SearchesController < ApplicationController
   end
     
   def index
+    @search = Search.new
+    
     if location = Location.find_by_zipcode(params[:search])
         latitude  = location.latitude * Math::PI / 180 
         longitude = location.longitude * Math::PI / 180 
@@ -46,8 +48,10 @@ class SearchesController < ApplicationController
          
       
           else
-            @users = User.search(params[:search])
+            @users = User.search(params[:search], :without => {:user_id => current_user.id})            
         end      
+        render 'users/index', layout: 'new_application'    
+        
       end
      
   def min_age

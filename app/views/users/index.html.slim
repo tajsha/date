@@ -3,9 +3,9 @@
       fieldset
         .search_box
           h1 Search and find a mate.
-          = form_tag search_users_path do
+          = form_tag searches_path, method: :get do
             span.secrch_box_bg
-              input.text_input name='query' type="text" placeholder="e.g (female), likes dogs, has a job)"
+              input.text_input name='search' type="text" placeholder="e.g (female), likes dogs, has a job)"
               input.find_btn type="submit" value="Find" /
         h4
           | or use our

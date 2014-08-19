@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   respond_to :html, :json
   
   def settings
-    @user = User.find(params[:id])
+    @user = User.find_by(username: params[:id])
     render layout: 'new_application'
   end
   

@@ -7,6 +7,7 @@ end
 
 ThinkingSphinx::Index.define :user, :with => :active_record do 
   indexes name, :as => :user, :sortable => true 
-  indexes religion, zip_code, about_me, career, sexuality, children, user_smoke, user_drink, age, gender, ethnicity, education, username
+  indexes religion, zip_code, birthday, about_me, career, sexuality, children, user_smoke, user_drink, gender, ethnicity, education, username
   has created_at, updated_at 
+  has(:id, :as => :user_id)
 end 

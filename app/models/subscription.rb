@@ -44,6 +44,7 @@ class Subscription < ActiveRecord::Base
   def save_with_stripe_payment
     customer = Stripe::Customer.create(description: email, plan: plan_id, card: stripe_card_token)
     self.stripe_customer_token = customer.id
+    self.cancellation_date = customer.subscriptions.first.current_period_end
     save!
   rescue Stripe::InvalidRequestError => e
     logger.error "Stripe error while creating customer: #{e.message}"
