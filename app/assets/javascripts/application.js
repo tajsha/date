@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery.ui.all
 //= require jquery_ujs
+//= require jquery-fileupload/basic
+//= require jquery-fileupload/vendor/tmpl
 //= require jquery.magnific-popup.js
 //= require jquery.purr
 //= require best_in_place

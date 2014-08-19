@@ -5,10 +5,10 @@ class LetsgosController < ApplicationController
     @letsgo = current_user.letsgos.build(letsgo_params)
     if @letsgo.save
       flash[:success] = "Date posted!"
-      redirect_to root_url
+      redirect_to :back
 else
       flash[:error] = "Date was not posted!"
-      redirect_to root_url
+      redirect_to :back
 end
 end
 
@@ -58,20 +58,13 @@ def repost
     end
   end
   
-def interested
-  @letsgo = User.find(params[:id])
-  @letsgo = current_user
-  @recipient = Letsgo.find(params[:id])
-  @body = Letsgo.find(params[:id]).content
-  
-  @message = Message.create(:subject => "Someone is Interested in your date!",
-                         :sender_id => @letsgo.id,
-                         :recipient_id => @recipient.user.id,
-                         :body => "I saw your date and I'm interested in Let's go...#{@body}"
-                         )
-
-    redirect_to letsgos_path, notice: "Your message was sent"
-end
+  def interested
+    @letsgo = Letsgo.find(params[:id])
+    @content = @letsgo.content
+    @recipient = @letsgo.user
+    @receipt = current_user.send_message(@recipient, @content, "Someone is Interested in your date!")
+    redirect_to :back, notice: "Your message was sent"
+  end
 
 private
 

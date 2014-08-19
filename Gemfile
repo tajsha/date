@@ -29,6 +29,8 @@ gem 'stripe'
 gem 'slim-rails'
 gem 'whenever', require: false
 gem 'roadie'
+gem 'jquery-fileupload-rails'
+
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -37,6 +39,7 @@ group :assets do
   gem 'coffee-rails', '~> 4.0.0.rc1'
   gem 'uglifier', '>= 1.3.0'
   gem 'less-rails'
+  
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
 
