@@ -28,6 +28,12 @@ class ConversationsController < ApplicationController
     current_user.reply_to_conversation(conversation, *message_params(:body, :subject))
     redirect_to conversation
   end
+  
+  def trash_conversations
+    # params[:conversations] is an array of conversation IDs
+    Mailboxer::Conversation.find(params[:conversations]).each |conversation|
+      conversation.move_to_trash(current_user)
+    end
     
   def trash_folder
     @trash ||= current_user.mailbox.trash.all 

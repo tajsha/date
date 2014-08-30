@@ -1,6 +1,7 @@
 development:
   mysql41: 9312
   morphology: stem_en
+  wordforms: "lib/word.txt'"
 test:
   mysql41: 9313
 production:

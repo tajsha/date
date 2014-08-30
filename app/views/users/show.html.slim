@@ -10,9 +10,14 @@
               a.profile_btn href="#" data-mfp-src='#message_me' 
                 img alt="" src="/assets/login_icon2.png" /
                 span Message This User
-              = link_to follow_popup_user_path(@user), class: 'profile_btn save_btn', :'data-mfp-src'=>'#follow_div', remote: true do
-                = image_tag 'start_icon.png'
-                span Add to Favourites
+                - if current_user.following?(@user)
+                = link_to follow_popup_user_path(@user), class: 'profile_btn save_btn', :'data-mfp-src'=>'#follow_div', remote: true do
+                  = image_tag 'start_icon.png'
+                  span Unfollow
+                - else
+                  = link_to follow_popup_user_path(@user), class: 'profile_btn save_btn', :'data-mfp-src'=>'#follow_div', remote: true do
+                    = image_tag 'start_icon.png'
+                  span Add to Favorites
               a.profile_btn.last.report_btn data-mfp-src='#report_me' href="#" 
                 img alt="" src="/assets/minus_icon.png" /
                 span Report This User
@@ -82,12 +87,7 @@
               |Proposed Dates (
               = @user.letsgos.count
               |)
-              - @user.letsgos.first(3).each_with_index do |letsgo, i|
-                .div.letsgo_li class="#{i != 0 ? 'hide' : ''}"
-                  = render 'letsgos/letsgo', letsgo: letsgo
-              - if @user.letsgos.present?
-                span 
-                  a.see_more See More..    
+              = render '/letsgos/letsgo'
               - if current_user?(@user)
                 .pull-right
                   = link_to "Add Date", '#', :class => "btn btn-primary add_date", 'data-mfp-src'=>'#letsgo_form_div'

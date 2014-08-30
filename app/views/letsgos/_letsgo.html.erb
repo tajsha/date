@@ -1,10 +1,11 @@
+<%= will_paginate @letsgos %>
+<% for letsgo in @letsgos %>
+
 <li>
 <b>Let's Go...<span class="content"><%= letsgo.content %></span></b>
-	<span class="timestamp">
-		Posted by <b><%= letsgo.user %></b> <%= time_ago_in_words(letsgo.created_at) %> ago.
-		</span>
 		<% if current_user?(letsgo.user) %>
-		<%= link_to "delete", letsgo, method: :delete, data: { confirm: "You sure?" }%> <% end %> <% unless current_user?(letsgo.user) %> <%= link_to "repost", repost_letsgo_path(letsgo), method: :post %> | <%= link_to "Interested", interested_letsgo_path(letsgo), method: :message %>
+		<%= link_to "delete", letsgo, method: :delete, data: { confirm: "You sure?" }%> <% end %> <% unless current_user?(letsgo.user) %> <%= link_to "I'm Interested", interested_letsgo_path(letsgo), method: :message %> | <%= link_to "repost", repost_letsgo_path(letsgo), method: :post %>
+		    <% end %>
 			
 			<% end %>
 		

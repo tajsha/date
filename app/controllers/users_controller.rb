@@ -30,9 +30,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(username: params[:id])
-    @question = Question.where('recipient_id = ? and answer is not null', params[:id]).page(params[:page]).per_page(3)
-    # @letsgos = @user.letsgos.paginate(page: params[:page])
-    @letsgo = current_user.letsgos.build unless current_user.blank? 
+    @question = @user.questions.page(params[:page]).per_page(3)
+    @letsgos = @user.letsgos.paginate(page: params[:page], :per_page => 3)
+    @letsgo = current_user.letsgos.build
     respond_to do |format|
       format.html { render layout: 'new_application' }
       format.js { render partial: 'questions/questions', locals: {questions: @question} }
@@ -69,16 +69,14 @@ def update
 def follow
     @title = "Following"
     @user = User.find_by(username: params[:id])
-  friend = User.find params[:id]
+  friend = User.find_by(username: params[:id])
   current_user.follow! friend unless current_user.following? friend
    @users = @user.followed_users(page: params[:page])
-
-  render 'show_follow'
-  
+   render 'show_follow', layout: 'new_application'  
 end
 
 def unfollow
-  friend = User.find params[:id]
+  friend = User.find_by(username: params[:id])
   current_user.unfollow! friend
   redirect_to friend
 end
