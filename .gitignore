@@ -18,3 +18,6 @@ public/uploads/*
 db/sphinx/development/*
 config/development.sphinx.conf
 log/development.sphinx.pid
+.tmp*
+nbproject/
+
