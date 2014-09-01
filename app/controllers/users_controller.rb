@@ -35,12 +35,8 @@ class UsersController < ApplicationController
     @letsgo = current_user.letsgos.build
     respond_to do |format|
       format.html { render layout: 'new_application' }
-      if params[:letsgo]
-        format.js { render partial: '/letsgos/letsgo_paging', locals: {letsgos: @letsgos} }
-      else
-        format.js { render partial: 'questions/questions', locals: {questions: @question} }
-      end
-      
+      format.js { render partial: '/letsgos/letsgo_paging', locals: {letsgos: @letsgos} } if params[:letsgo]
+      format.js { render partial: 'questions/questions', locals: {questions: @question} }
     end
   end
     
