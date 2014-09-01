@@ -10,14 +10,8 @@
               a.profile_btn href="#" data-mfp-src='#message_me' 
                 img alt="" src="/assets/login_icon2.png" /
                 span Message This User
-                - if current_user.following?(@user)
-                = link_to follow_popup_user_path(@user), class: 'profile_btn save_btn', :'data-mfp-src'=>'#follow_div', remote: true do
-                  = image_tag 'start_icon.png'
-                  span Unfollow
-                - else
-                  = link_to follow_popup_user_path(@user), class: 'profile_btn save_btn', :'data-mfp-src'=>'#follow_div', remote: true do
-                    = image_tag 'start_icon.png'
-                  span Add to Favorites
+              .follow_user_btn              
+                = render '/relationships/follow_user'
               a.profile_btn.last.report_btn data-mfp-src='#report_me' href="#" 
                 img alt="" src="/assets/minus_icon.png" /
                 span Report This User

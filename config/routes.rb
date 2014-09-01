@@ -26,6 +26,7 @@ Dating::Application.routes.draw do
   get ":id/updatebilling" => "users#update_stripe_billing"
   match '/edit_card',   to: 'subscriptions#edit_card',   via: 'get'
   match '/update_card', to: 'subscriptions#update_card', via: 'post'
+  get '/relationships/set_follow' => 'relationships#set_follow'
   
   
   resources :messages
