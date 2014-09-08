@@ -88,6 +88,9 @@ Dating::Application.routes.draw do
   end
  
  resources :conversations do
+   collection do
+    post :trash_all     
+   end
    member do
      post :reply
      post :trash

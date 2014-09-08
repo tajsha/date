@@ -41,6 +41,15 @@ class ConversationsController < ApplicationController
     @trash ||= current_user.mailbox.trash.all 
   end
     
+  def trash_all
+    cs = Conversation.where('id in (?)', params[:ids])
+    cs.each do |conversation|
+      conversation.move_to_trash(current_user)
+    end
+
+  end
+
+  
   def trash
     conversation.move_to_trash(current_user)
     redirect_to :conversations

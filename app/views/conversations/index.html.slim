@@ -19,7 +19,7 @@
             a id='sentbox_link' href="#sentbox"  sent
         ul.right
           li
-            a href="#" 
+            a href="#" id='send_trash'
               img alt="" src="/assets/del_icon.png" /
           li
             input type="checkbox" class='select_conversations'
@@ -33,6 +33,16 @@
           = will_paginate @sentbox
 javascript:
   $(window).load(function(){
+    $("#send_trash").click(function(){
+        var ids = [];
+        $('input.conversation_checkbox:checked').each(function(){
+            ids.push($(this).data('id'));
+        });
+        
+        $.ajax({ type: "POST",  url:"/conversations/trash_all",  data:{ids: ids}});
+    });
+        
+    
     $('#inbox .pagination a').each(function(){
       var href = $(this).attr('href')
       if (href != 'undefined' && href != null) {
