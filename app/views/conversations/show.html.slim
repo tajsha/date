@@ -10,6 +10,8 @@
 				.hide#pagination
 					= will_paginate @receipts
 				= render 'messages/form', conversation: conversation
+				- if @question
+				  = render 'answers/form', question: @question
 javascript:
 	$(window).load(function(){
 		$('.pagination a').each(function(){
