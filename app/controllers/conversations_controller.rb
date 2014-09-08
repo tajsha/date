@@ -1,7 +1,7 @@
 class ConversationsController < ApplicationController
   helper_method :mailbox, :conversation
   before_filter :conversation, only: :show
-  #before_filter :check_has_access
+  before_filter :check_has_access
   
 
   def index
