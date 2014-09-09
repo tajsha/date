@@ -18,6 +18,8 @@ class ConversationsController < ApplicationController
     user = current_user
     @receipts = conversation.receipts_for(user).paginate(:page => params[:page], :per_page => 5)
     @conversation.receipts.recipient(user).update_all(is_read: true)
+    @question = Question.where(:conversation_id => @conversation.id).first
+    
     respond_to do |format| 
       format.html {render layout: 'new_application'}
       format.js {}
@@ -39,6 +41,15 @@ class ConversationsController < ApplicationController
     @trash ||= current_user.mailbox.trash.all 
   end
     
+  def trash_all
+    cs = Conversation.where('id in (?)', params[:ids])
+    cs.each do |conversation|
+      conversation.move_to_trash(current_user)
+    end
+
+  end
+
+  
   def trash
     conversation.move_to_trash(current_user)
     redirect_to :conversations
