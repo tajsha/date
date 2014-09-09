@@ -13,7 +13,7 @@ end
 end
 
 def show
-  @letsgo = Letsgo.find(params[:id])
+  @letsgo = Letsgo.find(username: params[:id])
   authorize! :read, @letsgo
   
 end
@@ -24,7 +24,9 @@ end
   end
   
   def index
-    @letsgos = Letsgo.where("repost_from_user_id IS NULL").all 
+    @letsgos = Letsgo.where("repost_from_user_id IS NULL").all     
+    render layout: 'new_application'
+    
   end
 
 def eatdrink
