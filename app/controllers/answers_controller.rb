@@ -12,6 +12,8 @@ class AnswersController < ApplicationController
   def create
     @question = Question.find(params[:question_id])
     if @question.update_attributes(params[:question])
+      conversation = @question.conversation
+      conversation.move_to_trash(current_user)
       redirect_to questions_path
     else
       render :new

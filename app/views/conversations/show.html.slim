@@ -10,7 +10,7 @@
 				.hide#pagination
 					= will_paginate @receipts
 				= render 'messages/form', conversation: conversation
-				- if @question
+				- if @question && @question.answer.nil?
 				  = render 'answers/form', question: @question
 javascript:
 	$(window).load(function(){
