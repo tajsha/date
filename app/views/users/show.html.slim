@@ -153,7 +153,7 @@
         = render 'questions/questions', questions: @question 
       - if @question.present?
         .hide
-          = will_paginate @question, params: {controller: 'users', action: 'show'} 
+          = will_paginate @question, params: {controller: 'users', action: 'show'}, class: 'hiddenpage' 
           = hidden_field_tag :total_pages, @question.total_pages,class: 'total_pages'
       a.read_more_btn#append_and_paginate href="#" 
         img alt="" src="/assets/down_circle_btn.png" /
