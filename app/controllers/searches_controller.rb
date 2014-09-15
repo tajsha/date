@@ -40,14 +40,15 @@ class SearchesController < ApplicationController
 
         locations = Location.search( 
           :geo   => [latitude, longitude], 
-          :with  => {:geodist => 0.0..600_000.0}, 
+          :with  => {:geodist => 0.0..100_000.0}, 
           :order => 'geodist ASC',
           :per_page => 5_000
         ) 
         @users = User.where(zip_code: locations.map(&:zipcode))
        
           else
-            @users = User.search(params[:search].gsub(/\s+/, ' | '), :with => {:zip_code => current_user.zip_code.to_i}, :without => {:user_id => current_user.id})            
+            @users = User.search params[:search].gsub(/\s+/, ' | '),
+            :without => {:user_id => current_user.id}            
         end      
         render 'users/index', layout: 'new_application'    
         

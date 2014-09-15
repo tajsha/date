@@ -1,10 +1,9 @@
 <p class="flash"><%= flash[:notice] %></p>
 
 <%= form_for(:question, :url => question_answers_path(question)) do |f| %>
-
-  <ul>
-    <li><%= f.text_area :answer, {:placeholder => 'Please add your response...'}%></li>
-    <li><%= f.text_field :recipient_id, {:placeholder => 'Please add your name...'} %></li>
-    <li><%= f.submit "Respond" %></li>
-  </ul>
-<% end %>
+	<ul>
+		<li><%= f.text_area :answer, {:placeholder => 'Please add your response...'}%></li>
+		<li><%= f.text_field :recipient_id, {:placeholder => 'Please add your name...'} %></li>
+		<li><%= f.submit "Respond" %></li>
+		</ul>
+		<% end %>
