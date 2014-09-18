@@ -64,7 +64,7 @@ def repost
     @letsgo = Letsgo.find(params[:id])
     @content = @letsgo.content
     @recipient = @letsgo.user
-    @receipt = current_user.send_message(@recipient, @content, "Someone is Interested in your date!")
+    @receipt = current_user.send_message(@recipient, "Let's go...#{@content}", "#{@current_user} is Interested in your date!")
     redirect_to :back, notice: "Your message was sent"
   end
 

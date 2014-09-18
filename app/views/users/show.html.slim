@@ -10,6 +10,9 @@
               a.profile_btn href="#" data-mfp-src='#message_me' 
                 img alt="" src="/assets/login_icon2.png" /
                 span Message This User
+                a.profile_btn href="#" data-mfp-src='#ask_me' 
+                  img alt="" src="/assets/login_icon2.png" /
+                  span Ask This User Out
               .follow_user_btn              
                 = render '/relationships/follow_user'
               a.profile_btn.last.report_btn data-mfp-src='#report_me' href="#" 
@@ -268,9 +271,21 @@
           = hidden_field_tag :subject, "#{@current_user} messaged you", class: 'form-control' 
         .form-group
           = label_tag :body, 'Your Message', class: 'control-label'
-          = text_area_tag :body, nil, class: 'form-control' 
+          = text_area_tag :body, nil, placeholder: "Hi, I like your picture and figured I should write you a message and say...", class: 'form-control' 
         br
         = submit_tag 'Send Message', class: 'btn btn-primary'
+#ask_me.mfp-hide 
+          center
+            .message_div
+              = form_tag url_for(:controller => 'messages', :action => 'askout'), :method => 'post'
+                = hidden_field_tag :user, @user.id
+                .form-group
+                  = hidden_field_tag :subject, "#{@current_user} asked you out on a date", class: 'form-control' 
+                .form-group
+                  = label_tag :body, 'Your Message', class: 'control-label'
+                  = text_area_tag :body, nil, placeholder: "Hi, I like your picture and figured I should write you a message and say...", class: 'form-control' 
+                br
+                = submit_tag 'Send Message', class: 'btn btn-primary'
 - if current_user.present?
   #question_me.mfp-hide 
     center

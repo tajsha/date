@@ -29,7 +29,13 @@ Dating::Application.routes.draw do
   get '/relationships/set_follow' => 'relationships#set_follow'
   
   
-  resources :messages
+    
+    resources :messages do
+      member do
+      post :askout
+      end
+    end
+
       
   match '/paypal/ipn' => 'notifications#create', :via => [:get, :post], :as => 'notifications_create'
   
@@ -75,22 +81,9 @@ Dating::Application.routes.draw do
   root to: 'users#index'
   
   resources :users do
-    resources :messages do
-      post :new
-      collection do
-        get :askout
-      end
-    end
-    collection do
-        get :trashbin
-        post :empty_trash
-     end
   end
  
  resources :conversations do
-   collection do
-    post :trash_all     
-   end
    member do
      post :reply
      post :trash

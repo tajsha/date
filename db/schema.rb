@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140908010108) do
+ActiveRecord::Schema.define(version: 20140918011406) do
 
   create_table "contacts", force: true do |t|
     t.string   "name"
@@ -279,7 +279,7 @@ ActiveRecord::Schema.define(version: 20140908010108) do
     t.string   "paypal_recurring_profile_token"
     t.integer  "user_id"
     t.integer  "cancelled"
-    t.boolean  "cancellation_date"
+    t.string   "cancellation_date"
   end
 
   create_table "users", force: true do |t|

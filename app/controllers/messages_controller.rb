@@ -18,7 +18,10 @@ class MessagesController < ApplicationController
   end
   
   def askout
-    @message = current_user.messages.new
-   end
+      @recipient = User.find(params[:user])
+      current_user.send_message(@recipient, "Let's Go...#{params[:body]}", params[:subject])
+      flash[:notice] = "Message has been sent!"
+      redirect_to :back, notice: "Your date was sent"
+    end
    
 end
