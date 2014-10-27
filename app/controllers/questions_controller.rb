@@ -19,4 +19,11 @@ class QuestionsController < ApplicationController
         render :new, alert: 'Sorry. There was a problem saving your question.'
       end
     end
+    
+    
+    def destroy
+      @question = Question.find(params[:id])
+      @question.destroy
+      redirect_to :back
+    end
   end

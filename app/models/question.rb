@@ -12,7 +12,21 @@ class Question < ActiveRecord::Base
   
   belongs_to :conversation
   
-  
+  def self.total_answer
+      where('answer IS NOT NULL').count
+    end
+    
+    def self.total_answer_cancelled
+        where('answer IS NULL').count
+      end
+      
+      def self.total_male
+        count_of_males = Question.joins(:sender).where(users: {gender: 'male'}).uniq.count
+      end
+      
+      def self.total_female
+        count_of_males = Question.joins(:sender).where(users: {gender: 'female'}).uniq.count
+      end
 
     
       def mailboxer_email(object)

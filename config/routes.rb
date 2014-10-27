@@ -12,6 +12,12 @@ Dating::Application.routes.draw do
   get "/profile/:id" => "users#show"
   get "profile/:id/settings" => 'users#edit'
   get 'settings/:id' => 'users#settings'
+  get 'admin/users' => 'admin#users'
+  get 'admin/subscriptions' => 'admin#subscriptions'
+  get 'admin/letsgo' => 'admin#letsgo'
+  get 'admin/messages' => 'admin#messages'
+  get 'admin/qanda' => 'admin#qanda'
+  get 'admin/pictures' => 'admin#pictures'
   get 'letsgos/eatdrink' => 'letsgos#eatdrink'
   get 'letsgos/listenwatch' => 'letsgos#listenwatch'
   get 'letsgos/play' => 'letsgos#play'
@@ -39,6 +45,7 @@ Dating::Application.routes.draw do
       
   match '/paypal/ipn' => 'notifications#create', :via => [:get, :post], :as => 'notifications_create'
   
+  resources :admin
   resources :charges
   resources :subscriptions
   resources :plans

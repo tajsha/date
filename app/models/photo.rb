@@ -11,6 +11,14 @@ class Photo < ActiveRecord::Base
   validate do |record|
     record.validate_photo_quota
   end
+  
+  def self.total_male
+    count_of_males = Photo.joins(:user).where(users: {gender: 'male'}).uniq.count
+  end
+  
+  def self.total_female
+    count_of_males = Photo.joins(:user).where(users: {gender: 'female'}).uniq.count
+  end
 
   def validate_photo_quota
     return unless self.user

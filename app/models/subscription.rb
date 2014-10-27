@@ -8,6 +8,54 @@ class Subscription < ActiveRecord::Base
   
   attr_accessor :stripe_card_token, :paypal_payment_token
   
+  def self.total_male
+    count_of_males = Subscription.joins(:user).where(users: {gender: 'male'}).uniq.count
+  end
+  
+  def self.total_female
+    count_of_males = Subscription.joins(:user).where(users: {gender: 'female'}).uniq.count
+  end
+  
+  def self.total_annual
+      where('plan_id = 12').count
+    end
+    
+    def self.total_monthly
+        where('plan_id = 1').count
+      end
+  
+  def self.total_paypal_recurring_profile_token
+      where('paypal_recurring_profile_token IS NOT NULL').count
+    end
+    
+    def self.total_stripe_customer_token
+        where('stripe_customer_token IS NOT NULL').count
+      end
+      
+      def self.total_stripe_cancelled
+          where('stripe_customer_token IS NOT NULL and cancelled IS NOT NULL').count
+        end
+        
+        def self.total_paypal_cancelled
+            where('paypal_recurring_profile_token IS NOT NULL and cancelled IS NOT NULL').count
+          end
+  
+      def self.total_cancelled
+          where('cancelled IS NOT NULL').count
+        end
+  
+        def self.total_active
+            where('cancelled IS NULL').count
+          end
+          
+            def self.total_active_stripe
+                where('stripe_customer_token IS NOT NULL and cancelled IS NULL').count
+              end
+              
+              def self.total_active_paypal
+                  where('paypal_recurring_profile_token IS NOT NULL and cancelled IS NULL').count
+                end
+          
   def has_cancelled?
     if cancellation_date.present? && cancellation_date > (paid_on + 30)
       subscription.update_attributes(cancelled: "1")

@@ -3,12 +3,13 @@ class SubscriptionsController < ApplicationController
   def new
     plan = Plan.find(params[:plan_id])
     @subscription = plan.subscriptions.build
-    render layout: 'new_application'
     if params[:PayerID]
       @subscription.paypal_customer_token = params[:PayerID]
       @subscription.paypal_payment_token = params[:token]
       @subscription.email = @subscription.paypal.checkout_details.email
     end
+    render layout: 'new_application'
+    
   end
 
   def create

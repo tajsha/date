@@ -1,8 +1,13 @@
 class UsersController < ApplicationController
   respond_to :html, :json
   
+  def age_group
+  age_group_service = AgeGroupsService.new([[18, 24], [25, 34], [35, 44], [45, 100]])
+  @age_groups = age_group_service.call
+end
+  
   def settings
-    @user = User.find_by(username: params[:id])
+    @user = User.find(params[:id])
     render layout: 'new_application'
   end
   
@@ -52,9 +57,10 @@ class UsersController < ApplicationController
   end
   
   def destroy
-    User.find(id_params).destroy
+    @user = User.find_by(username: params[:id]).destroy
+    @user.destroy
     flash[:success] = "User deleted."
-    redirect_to users_url
+    redirect_to :back
   end
   
   def update

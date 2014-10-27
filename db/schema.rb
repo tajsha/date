@@ -180,7 +180,7 @@ ActiveRecord::Schema.define(version: 20140918011406) do
 
   create_table "plans", force: true do |t|
     t.string   "name"
-    t.decimal  "price",      precision: 10, scale: 0
+    t.decimal  "price",      precision: 15, scale: 10
     t.integer  "length"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -195,7 +195,6 @@ ActiveRecord::Schema.define(version: 20140918011406) do
     t.datetime "updated_at"
     t.integer  "sender_id"
     t.integer  "recipient_id"
-    t.integer  "message_id"
     t.boolean  "no_email"
     t.integer  "conversation_id"
   end
@@ -235,15 +234,6 @@ ActiveRecord::Schema.define(version: 20140918011406) do
   create_table "relationships", force: true do |t|
     t.integer "follower_id"
     t.integer "followed_id"
-  end
-
-  create_table "roles", force: true do |t|
-    t.string   "name",        null: false
-    t.string   "title",       null: false
-    t.text     "description", null: false
-    t.text     "the_role",    null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "searches", force: true do |t|

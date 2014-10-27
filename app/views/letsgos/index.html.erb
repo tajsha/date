@@ -3,7 +3,8 @@ TAG: <%= link_to "Eat/Drink", letsgos_eatdrink_path %> | <%= link_to "Listen/Wat
 <% for letsgo in @letsgos %>
 
   <li>
-    <b>Let's Go...<span class="content"><%= letsgo.content %></span></b> posted by: 
+    <b>Let's Go...<span class="content"><%= letsgo.content %></span></b> posted by: <%= link_to letsgo.user.username, letsgo.user %>
+
       <% if current_user?(letsgo.user) %>
         <%= link_to "delete", letsgo, method: :delete, data: { confirm: "You sure?" }%> 
       <% end %> 

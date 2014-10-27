@@ -14,7 +14,7 @@ class AnswersController < ApplicationController
     if @question.update_attributes(params[:question])
       conversation = @question.conversation
       conversation.move_to_trash(current_user)
-      redirect_to questions_path
+      redirect_to conversations_path
     else
       render :new
     end

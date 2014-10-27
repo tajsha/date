@@ -10,6 +10,14 @@ class Letsgo < ActiveRecord::Base
   validates :user_id, presence: true
   scope :random, -> { order("RANDOM()") }
   
+  def self.total_male
+    count_of_males = Letsgo.joins(:user).where(users: {gender: 'male'}).uniq.count
+  end
+  
+  def self.total_female
+    count_of_males = Letsgo.joins(:user).where(users: {gender: 'female'}).uniq.count
+  end
+  
   def repost(user_object)
     new_letsgo = self.dup #duplicates the entire object, except for the ID
     new_letsgo.user_id = user_object.id

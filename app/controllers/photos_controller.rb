@@ -3,6 +3,10 @@ class PhotosController < ApplicationController
   def new 
     @photo = Photo.new
   end
+  
+  def show
+    @photos = Photo.find(username: params[:id])    
+  end
 
   def create
     @photo = Photo.create(params[:photo])
@@ -14,8 +18,6 @@ class PhotosController < ApplicationController
       render :action => 'new'
     end
   end
-
-
 
   def resize(width, height, gravity = 'Center')
     manipulate! do |img|

@@ -32,7 +32,7 @@
 class User < ActiveRecord::Base
   acts_as_messageable
   has_secure_password
-  attr_accessible :role, :notification_id, :sender_id, :receiver_id, :conversation_id, :no_email, :average_response_time, :response_rate, :response_total, :name, :time_zone, :code, :lat, :lon, :city, :age, :age_end, :password_confirmation, :about_me, :feet, :inches, :password, :birthday, :career, :children, :education, :email, :ethnicity, :gender, :height, :name, :password_digest, :politics, :religion, :sexuality, :user_drink, :user_smoke, :username, :zip_code, :user_sex
+  attr_accessible :role, :user_id, :notification_id, :sender_id, :receiver_id, :conversation_id, :no_email, :average_response_time, :response_rate, :response_total, :name, :time_zone, :code, :lat, :lon, :city, :age, :age_end, :password_confirmation, :about_me, :feet, :inches, :password, :birthday, :career, :children, :education, :email, :ethnicity, :gender, :height, :name, :password_digest, :politics, :religion, :sexuality, :user_drink, :user_smoke, :username, :zip_code, :user_sex
   attr_accessor :user_sex
   # this prevented user from registering as I don't have timezone select on user reg form
   # validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name)
@@ -49,7 +49,6 @@ class User < ActiveRecord::Base
   belongs_to :avatar, class_name: 'Photo'
   has_many :received_messages, class_name: 'Message', foreign_key: 'recipient_id'
   has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id'
-  has_many :users, dependent: :destroy
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed
   has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
@@ -71,6 +70,18 @@ class User < ActiveRecord::Base
   scope :except_user, ->(user) { where('users.id != ?', user.id)}
   # models/user.rb
   after_create :setup_gallery
+  
+  def is_subscriber?
+    subscriptions.size > 0 # or 'subscription'
+  end
+  
+  def self.total_males
+    where(gender: 'male').count
+  end
+  
+  def self.total_females
+    where(gender: 'female').count
+  end
   
   def to_param
      username

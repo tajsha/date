@@ -1,5 +1,4 @@
 class LetsgosController < ApplicationController
-  before_action :correct_user, only: :destroy
   #load_and_authorize_resource
   def create
     @letsgo = current_user.letsgos.build(letsgo_params)
@@ -19,8 +18,9 @@ def show
 end
   
   def destroy
+    @letsgo = Letsgo.find(params[:id])
     @letsgo.destroy
-    redirect_to root_url
+    redirect_to :back
   end
   
   def index

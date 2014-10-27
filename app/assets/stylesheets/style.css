@@ -225,6 +225,30 @@ body.color{ background:#fff;}
 .tab_contr .unread .col_3 small{ float:left; color:#929292; font-size:13px; line-height:22px; font-style:italic}
 
 
+.tab_contr .reading{ float:left; width:895px; background:#FFFFFF; border:1px solid #eeeeee; border-radius:5px; cursor:pointer}
+
+
+.tab_contr .reading .col_1{ float:left; width:302px}
+.tab_contr .reading .col_1 img{ float:left;}
+.tab_contr .reading .col_1 span{ float:left; border:1px solid #bbbbbb; border-radius:4px; padding:4px; background:#fff; margin:11px 12px 0 15px}
+.tab_contr .reading .col_1 span img{ float:left;}
+.tab_contr .reading .col_1 h5{ color:#36A0F6; font-size:18px; line-height:26px; margin-top:7px; font-weight:normal; text-transform:capitalize}
+.tab_contr .reading .col_1 strong{ float:left; color:#455565; font-size:13px; line-height:20px}
+.tab_contr .reading .col_1 small{ color:#c8c8c8; font-size:13px; line-height:22px; font-style:italic}
+
+.tab_contr .reading .col_2{ float:left; width:397px; padding:0 23px; border-left:1px solid #e3e3e3; border-right:1px solid #e3e3e3; margin-top:11px}
+.tab_contr .reading .col_2 span{ float:left; color:#ababab; font-size:17px; line-height:20px; width:100%; padding-bottom:8px}
+.tab_contr .reading .col_2 p{ color:#000000; font-size:13px; line-height:16px; padding-bottom:7px}
+
+.tab_contr .reading .col_3{ float:left; width:107px; padding:0 20px;  margin-top:11px}
+.tab_contr .reading .col_3 strong{ float:left; color:#aaaaaa; font-size:13px; line-height:20px}
+.tab_contr .reading .col_3 small{ float:left; color:#c8c8c8; font-size:13px; line-height:22px; font-style:italic}
+
+
+
+
+
+
 .tab_contr .read{ float:left; width:895px; background:#fcfcfc; border:1px solid #eeeeee; border-radius:5px; cursor:pointer}
 
 

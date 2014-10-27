@@ -30,6 +30,8 @@ gem 'slim-rails'
 gem 'whenever', require: false
 gem 'roadie'
 gem 'jquery-fileupload-rails'
+gem 'chartkick'
+gem 'groupdate'
 
 
 # Gems used only for assets and not required
