@@ -52,3 +52,8 @@ User Statistics
 		</table>
 				<%= will_paginate(@users) %>
 				
+				<ul>
+				  <% @age_groups.each do |age_group| %>
+				    <li><%= age_group.from %> - <%= age_group.to %>: <b><%= age_group.count %></b></li>
+				  <% end %>
+				</ul>

@@ -40,11 +40,10 @@ class User < ActiveRecord::Base
   has_many :photos
   has_many :letsgos, dependent: :destroy
   belongs_to :default_photo, :class_name => "Photo"  
+  belongs_to :location, :foreign_key => :zip_code, :primary_key => :zip_code
   has_many :notifications
   has_many :questions, foreign_key: :recipient_id
   has_many :sent_questions, class_name: 'Question', foreign_key: :sender_id
-
-  belongs_to :location
   belongs_to :zip
   belongs_to :avatar, class_name: 'Photo'
   has_many :received_messages, class_name: 'Message', foreign_key: 'recipient_id'
@@ -71,6 +70,20 @@ class User < ActiveRecord::Base
   # models/user.rb
   after_create :setup_gallery
   
+  def latitude
+      location = Location.find_by_zip_code(zip_code)
+      if location
+        location.latitude
+    end
+  end
+  
+    def longitude
+        location = Location.find_by_zip_code(zip_code)
+        if location
+          location.longitude
+      end
+    end
+  
   def is_subscriber?
     subscriptions.size > 0 # or 'subscription'
   end
@@ -81,6 +94,16 @@ class User < ActiveRecord::Base
   
   def self.total_females
     where(gender: 'female').count
+  end
+  
+  def self.total_male_messages
+    join_clause = "INNER JOIN users ON notifications.sender_id = users.id AND notifications.sender_type = 'User'"
+    Notification.joins(join_clause).where(users: { gender: 'male' }).uniq.count 
+  end
+  
+  def self.total_female_messages
+    join_clause = "INNER JOIN users ON notifications.sender_id = users.id AND notifications.sender_type = 'User'"
+    Notification.joins(join_clause).where(users: { gender: 'female' }).uniq.count 
   end
   
   def to_param

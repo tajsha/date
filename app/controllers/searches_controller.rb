@@ -34,7 +34,7 @@ class SearchesController < ApplicationController
   def index
     @search = Search.new
     
-    if location = Location.find_by_zipcode(params[:search])
+    if location = Location.find_by_zip_code(params[:search])
         latitude  = location.latitude * Math::PI / 180 
         longitude = location.longitude * Math::PI / 180 
 
@@ -44,10 +44,14 @@ class SearchesController < ApplicationController
           :order => 'geodist ASC',
           :per_page => 5_000
         ) 
-        @users = User.where(zip_code: locations.map(&:zipcode))
+        @users = User.where(zip_code: locations.map(&:zip_code))
        
           else
-            @users = User.search(params[:search].gsub(/\s+/, ' | '), :with => {:zip_code => current_user.zip_code.to_i}, :without => {:user_id => current_user.id})            
+            @users = User.search(params[:search].gsub(/\s+/, ' | '),
+            :geo => [current_user.latitude * Math::PI / 180.0, current_user.longitude * Math::PI / 180.0],
+            :with  => {:geodist => 0.0..100_000.0},
+            :order => 'geodist ASC', :without => {:user_id => current_user.id})
+                        
                    
         end      
         render 'users/index', layout: 'new_application'    

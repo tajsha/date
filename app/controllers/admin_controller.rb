@@ -29,6 +29,8 @@ class AdminController < ApplicationController
       @user = current_user
       @users = User.all      
       @users = User.includes(subscription: :plan).paginate(:per_page => 20, :page => params[:page])
+      age_group_service = AgeGroupsService.new([[18, 24], [25, 34], [35, 44], [45, 100]])
+      @age_groups = age_group_service.call
       render layout: 'new_application'    
   end
   

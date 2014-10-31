@@ -1,9 +1,9 @@
-class AgeGroupService
+class AgeGroupsService
   # @params 
   #   ranges - an array of age group ranges. E.g.: [[0, 18], [19, 24], [25, 34], ...]
   #   users - an array of users from which the age groups will be computed. Defaults to all users  
   def initialize(ranges = [], users = User.all.to_a)
-    @ranges = [[0, 18], [19, 24], [25, 34], [35, 44], [45, 100]]
+    @ranges = ranges
     @users = users
     @age_groups = []
   end
