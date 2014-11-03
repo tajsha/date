@@ -14,5 +14,9 @@ module ApplicationHelper
   def extract_time(timestamp)
   	timestamp.strftime("%I:%M%p")
   end
+  def random_background
+    image_list = ["search_background1.png", "search_background2.png"]
+    "background: url('/assets/#{image_list.shuffle[0]}') no-repeat scroll 0% 0% transparent;"
+  end
 
 end
