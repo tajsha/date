@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 20141101224339) do
   add_index "letsgos", ["user_id", "created_at"], name: "index_letsgos_on_user_id_and_created_at", using: :btree
 
   create_table "locations", force: true do |t|
-    t.string   "zip_code"
+    t.string   "zipcode"
     t.string   "city"
     t.string   "state"
     t.float    "latitude"
@@ -180,7 +180,7 @@ ActiveRecord::Schema.define(version: 20141101224339) do
 
   create_table "plans", force: true do |t|
     t.string   "name"
-    t.decimal  "price",      precision: 15, scale: 10
+    t.decimal  "price",      precision: 10, scale: 0
     t.integer  "length"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -304,7 +304,7 @@ ActiveRecord::Schema.define(version: 20141101224339) do
     t.integer  "age"
     t.integer  "default_photo_id"
     t.string   "time_zone"
-    t.integer  "avatar_id",              default: 8
+    t.integer  "avatar_id"
     t.integer  "average_response_time"
     t.integer  "response_rate"
     t.integer  "response_total"
