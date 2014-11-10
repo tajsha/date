@@ -130,7 +130,6 @@ class User < ActiveRecord::Base
         end
     end
   def location
-
       if Location.by_zip_code(self.zip_code.to_s).any?
           # you can return all here if you want more than one
           # for testing just returning the first one
