@@ -759,7 +759,7 @@ a.see_more{cursor: pointer}
 	margin-right: 28px;
 }
 .form_container .row .col label{
-	padding: 4px 0px 0px;
+	padding: 10px 0px 0px;
 }
 .form_container .row .col.col21{
 	width: 100px;
@@ -791,4 +791,13 @@ a.see_more{cursor: pointer}
 }
 .form_container .form_list{
 	width: 430px;
+}
+.form_container .col.col.col30 .jqTransformSelectWrapper{
+    width: 168px !important
+}
+.form_container .col.col.col31 .jqTransformSelectWrapper{
+    width: 106px !important
+}
+.form_container .col.col3.col33 label{
+    margin-right: 7px;
 }

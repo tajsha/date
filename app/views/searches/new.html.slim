@@ -25,27 +25,29 @@
                     .col.col2
                       label Seeking
                       = f.select :gender, %w(Female Male)
+                  .row style='padding-top:20px;'
                   .select1
-                    .col.col3
+                    .col.col3.col33 style='width:175px;'
                       label Ages
                       = f.select :min_age, options_for_select((18..50),25), {}, {class: 'small'}
                   .select5
                     .col.col4
                       label to
                       = f.select :max_age, options_for_select((20..50),45), {}, {class: 'small'}
-                .row
-                  .col.col5
+                  .select4
+                    .col.col7 style='margin-left: 10px;width:233px;'
+                      = f.select :ethnicity, ['Asian', 'Biracial', 'Indian', 'Hispanic/Latin', 'Middle Eastern', 'Native American', 'Pacific Islander', 'White', 'Other'], prompt: 'Ethnicity'
+                .row style='padding-top:20px;'
+                  .col.col5 style='margin-right:18px;'
                     label Near
                     = f.text_field :zip_code,placeholder: "enter zip here", class: 'text_input'
-                  .col.col6
+                  .col.col.col30 style='width:190px;'
                     = f.select :children, ['I want kids now','I want one someday'], prompt: 'child preference'
 
-                  .select4
-                    .col.col6
+                  .select5
+                    .col.col3.col31 style='width:100px;'
                       = f.select :religion, ['Agnostic', 'Atheist', 'Christian', 'Catholic', 'Buddhist', 'Hindu', 'Jewish', 'Muslim', 'Spiritual without affiliation', 'Other', 'None', 'Prefer not to say'], prompt: 'Religion'
-                  .select4
-                    .col.col7
-                      = f.select :ethnicity, ['Asian', 'Biracial', 'Indian', 'Hispanic/Latin', 'Middle Eastern', 'Native American', 'Pacific Islander', 'White', 'Other'], prompt: 'Ethnicity'
+                  
                 .btm_sec
                   ul.form_list
                     li
