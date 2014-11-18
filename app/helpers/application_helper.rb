@@ -18,5 +18,8 @@ module ApplicationHelper
     image_list = ["search_background1.png", "search_background2.png"]
     "background: url('/assets/#{image_list.shuffle[0]}') no-repeat scroll 0% 0% transparent;"
   end
+  def unread_messages(user)
+    user.mailbox.inbox(:unread => true).count
+  end
 
 end

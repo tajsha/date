@@ -801,3 +801,14 @@ a.see_more{cursor: pointer}
 .form_container .col.col3.col33 label{
     margin-right: 7px;
 }
+.messbg_icon{
+    background: #39A0F6;
+    color: #ffffff !important;
+    border-radius: 50%;
+    text-align: center;
+    padding: 0 4px !important;
+    position: absolute;
+    top: 10px;
+    font-size: 10px;
+    font-weight: bold !important;
+}
