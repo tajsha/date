@@ -14,7 +14,9 @@
           a href="/conversations"
             =image_tag "login_icon2.png"
             span Messages
-            =image_tag "login_icon4.png", class: 'img4'
+            / =image_tag "login_icon4.png", class: 'img4'
+            span class="messbg_icon" =unread_messages(current_user)
+            / =unread_messages(current_user)
         .col.col3
           a href="/logout" 
             =image_tag "login_icon3.png", class: 'img3'

@@ -2,7 +2,6 @@ require 'sidekiq/web'
 
 Dating::Application.routes.draw do
 
-
   mount Sidekiq::Web, at: '/sidekiq'
 
   get 'signup' => 'users#new'
@@ -34,7 +33,9 @@ Dating::Application.routes.draw do
   match '/update_card', to: 'subscriptions#update_card', via: 'post'
   get '/relationships/set_follow' => 'relationships#set_follow'
   
+  post 'subscription_event' => "webhooks#subscription_event"
   
+
     
     resources :messages do
       member do

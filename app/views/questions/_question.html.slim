@@ -1,9 +1,5 @@
 h2 
-  'Question 
-  = (page-1)*3+i+1
+  = question.question 
 p
-  span Question:
-  = question.question
-span.btm_text 
-  'User Answer:  
-  = question.answer
+  span = question.answer
+  

@@ -12,8 +12,18 @@
               img alt="" src="#{sender.avatar.image_url(:avatar)}"
           - else
               img alt="" src="#{sender.avatar.image_url(:avatar)}"
-        h5 From: 
-        strong = sender.username 
+        h5 = sender.username 
+        strong 
+          = sender.age
+          ', 
+          = sender.gender
+          ',
+          = sender.sexuality
+        small
+          br
+          = sender.location.city
+          ',
+          = sender.location.state
       .col_2
         p = simple_format h message.body
       .col_3

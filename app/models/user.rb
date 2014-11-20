@@ -69,6 +69,7 @@ class User < ActiveRecord::Base
   scope :except_user, ->(user) { where('users.id != ?', user.id)}
   # models/user.rb
   after_create :setup_gallery
+  before_save :set_age
   
   def latitude
       location = Location.find_by_zip_code(zip_code)
@@ -154,6 +155,10 @@ class User < ActiveRecord::Base
     def age
       now = Time.now.utc.to_date
       now.year - birthday.year - ((now.month > birthday.month || (now.month == birthday.month && now.day >= birthday.day)) ? 0 : 1)
+    end
+    
+    def set_age
+      self.age = Time.now.year - self.birthday.year
     end
 
   def following?(other_user)

@@ -224,7 +224,6 @@ body.color{ background:#fff;}
 .tab_contr .unread .col_3 strong{ float:left; color:#445566; font-size:13px; line-height:20px}
 .tab_contr .unread .col_3 small{ float:left; color:#929292; font-size:13px; line-height:22px; font-style:italic}
 
-
 .tab_contr .reading{ float:left; width:895px; background:#FFFFFF; border:1px solid #eeeeee; border-radius:5px; cursor:pointer}
 
 
@@ -267,6 +266,8 @@ body.color{ background:#fff;}
 .tab_contr .read .col_3{ float:left; width:107px; padding:0 20px;  margin-top:11px}
 .tab_contr .read .col_3 strong{ float:left; color:#aaaaaa; font-size:13px; line-height:20px}
 .tab_contr .read .col_3 small{ float:left; color:#c8c8c8; font-size:13px; line-height:22px; font-style:italic}
+
+
 
 #top_sec .tab_contr .outer form span.jqTransformCheckboxWrapper a.jqTransformCheckbox{background:url(/assets/checkbox.gif) no-repeat 0 0; width:15px; height:19px; margin-left:13px}
 #top_sec .tab_contr .outer form span.jqTransformCheckboxWrapper a.jqTransformChecked{ background-position:center bottom}
@@ -761,3 +762,75 @@ select[multiple].input-lg {
 }
 .lets_go{float:left; width:280px; border:1px solid #dcdcdc; background:#eff0f3; padding:21px 35px;}
 a.see_more{cursor: pointer}
+/*--style----vd------*/
+.btm_search_detail{
+	text-align: left;
+}
+.form_container{
+	width: 586px;
+}
+.form_container .row{
+	width: 600px;
+}
+.form_container .row .col .large {
+	width: 90px;
+	padding: 0;
+}
+.form_container .row .col.col20{
+	width: 150px;
+	margin-right: 28px;
+}
+.form_container .row .col label{
+	padding: 10px 0px 0px;
+}
+.form_container .row .col.col21{
+	width: 100px;
+}
+.form_container .row .col.col22{
+	width: 157px;
+	margin-top: 7px;
+}
+.form_container .row .col.col23{
+	width: 160px;
+	margin-right: 10px;
+}
+.form_container .row .col.col3.col24{
+	width: 85px;
+	margin: 7px 10px 0px 0px;
+}
+.form_container .row .col.col7.col25{
+	width: 135px;
+	margin-top: 7px;
+}
+.form_container .row .col.col21 label{
+	width: 35px;
+	text-align: right;
+	margin-right: 10px;
+}
+.form_container .row .col.col21 .small{
+	padding: 0;
+	width: 55px;
+}
+.form_container .form_list{
+	width: 430px;
+}
+.form_container .col.col.col30 .jqTransformSelectWrapper{
+    width: 168px !important
+}
+.form_container .col.col.col31 .jqTransformSelectWrapper{
+    width: 106px !important
+}
+.form_container .col.col3.col33 label{
+    margin-right: 7px;
+}
+.messbg_icon{
+    background: #39A0F6;
+    color: #ffffff !important;
+    border-radius: 50%;
+    text-align: center;
+    padding: 0 4px !important;
+    position: absolute;
+    top: 10px;
+    font-size: 10px;
+    font-weight: bold !important;
+}

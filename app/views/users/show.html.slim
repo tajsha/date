@@ -9,51 +9,52 @@
             -unless current_user == @user
               a.profile_btn href="#" data-mfp-src='#message_me' 
                 img alt="" src="/assets/login_icon2.png" /
-                span Message This User
+                span Message
                 a.profile_btn href="#" data-mfp-src='#ask_me' 
                   img alt="" src="/assets/login_icon2.png" /
-                  span Ask This User Out
+                  - if @user.gender == "Male"
+                     span Ask him out
+                  - elsif @user.gender == "Female"
+                     span Ask her out
               .follow_user_btn              
                 = render '/relationships/follow_user'
               a.profile_btn.last.report_btn data-mfp-src='#report_me' href="#" 
                 img alt="" src="/assets/minus_icon.png" /
-                span Report This User
+                span Report
             h4
-              | Career:
+              | Career: 
               span.color
                = best_in_place @user, :career,  nil: 'What earns you money?'
             h4
-              | Education:
+              | Education: 
               span.color 
                 = best_in_place @user, :education, nil: 'What is your education level?', :type => :select, :collection => [["High school", "High school"], ["Some college", "Some college"], ["Undergraduate", "Undergraduate"], ["Bachelor's", "Bachelor's"], ["Master's", "Master's"], ["PhD", "PhD"], ["Business school", "Business school"], ["Law school", "Law school"], ["Medical school", "Medical school"]]
             h4
-              | Ethnicity:
+              | Ethnicity: 
               span.color 
                = best_in_place @user, :ethnicity, nil: 'What is your ethnicity?', :type => :select, :collection => [["Asian", "Asian"], ["Black", "Black"], ["Biracial", "Biracial" ], ["Indian", "Indian"], ["Hispanic/Latin", "Hispanic/Latin"], ["Middle Eastern", "Middle Eastern"], ["Native American", "Native American"], ["Pacific Islander", "Pacific Islander"], ["White", "White"], ["Other", "Other"]]
             h4
-              | Religion:
+              | Religion: 
               span.color 
                 =best_in_place @user, :religion, nil: 'What is your faith?', :type => :select, :collection => [["Agnostic", "Agnostic"], ["Atheist", "Atheist"], ["Christian", "Christian"], ["Catholic", "Catholic"], ["Buddhist", "Buddhist"], ["Hindu", "Hindu"], ["Jewish", "Jewish"], ["Muslim", "Muslim"], ["Spiritual without affiliation", "Spiritual without affiliation"], ["Other", "Other"], ["None", "None"], ["Prefer not to say", "Prefer not to say"]]
             h4
-              | Politics:
+              | Politics: 
               span.color 
-                = best_in_place @user, :religion, nil: 'How important is this to you?', :type => :select, :collection => [["Very Important", "Very Important"], ["Somewhat Important", "Somewhat Important"], ["Not Important", "Not Important"]]
+                = best_in_place @user, :politics, nil: 'How important is this to you?', :type => :select, :collection => [["Very Important", "Very Important"], ["Somewhat Important", "Somewhat Important"], ["Not Important", "Not Important"]]
             h4
-              | Children:
+              | Children: 
               span.color 
                 = best_in_place @user, :children, nil: 'Do you have or wants kids?', :type => :select, :collection => [["Yes, they live with me", "Yes, they live with me"], ["I want kids now", "I want kids now"], ["I want kids now", "I want one someday"], ["Not for me", "Not for me"]]
             h4
-              | Does User Smoke:
+              | Does User Smoke: 
               span.color = best_in_place @user, :user_smoke, nil: 'Select how often you smoke', :type => :select, :collection => [["Often smokes", "Often smokes"], ["Sometimes smokes", "Sometimes smokes"], ["Never smoke", "Never smoke"]]
             h4
-              | Does User Drink:
+              | Does User Drink: 
               span.color = best_in_place @user, :user_drink, nil: 'Select how much you drink', :type => :select, :collection => [["Often drinks", "Often drinks"], ["Sometimes drinks", "Sometimes drinks"], ["Never drinks", "Never drinks"]]
             h4
-              | Height:
+              | Height: 
               span.color 
-                = best_in_place @user, :feet ,nil: 'Feet'
-                ''
-                = best_in_place @user, :inches, nil: 'Inch'
+                = best_in_place @user, :height ,nil: '0`0'
             .corner_bg
               img alt="" src="/assets/side_curv.png" /
       .right_sec
@@ -81,13 +82,11 @@
               strong Last online 4 hours ago
           - if @user.letsgos.any? || current_user?(@user)
             .lets_go
-              |Proposed Dates (
-              = @user.letsgos.count
-              |)
+              |Go on one of her dates
               = render '/letsgos/letsgo'
               - if current_user?(@user)
                 .pull-right
-                  = link_to "Add Date", '#', :class => "btn btn-primary add_date", 'data-mfp-src'=>'#letsgo_form_div'
+                  = link_to "Add Your Date", '#', :class => "btn btn-primary add_date", 'data-mfp-src'=>'#letsgo_form_div'
             / span.pic_box3
             /   img alt="" src="/assets/right_icon1.png" /
             / span.pic_detail3

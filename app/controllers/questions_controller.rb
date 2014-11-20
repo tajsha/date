@@ -12,7 +12,7 @@ class QuestionsController < ApplicationController
       @question = Question.new(params[:question])
       if @question.save
         #NOTE: @messagei is actually an object of Receipt
-        @message = current_user.send_message(@question.recipient, @question.question, "You have a question from #{@question.sender_id}") 
+        @message = current_user.send_message(@question.recipient, @question.question, "You have a question from #{@current_user}") 
         @question.update(:conversation_id => @message.notification.conversation.id)
         redirect_to :back, notice: 'Your question was saved successfully. Thanks!'
       else
