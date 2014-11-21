@@ -9,9 +9,11 @@
 					= render 'messages/message',conversation: conversation, receipts: @receipts
 				.hide#pagination
 					= will_paginate @receipts
-				= render 'messages/form', conversation: conversation
+				/ = render 'messages/form', conversation: conversation
 				- if @question && @question.answer.nil?
 				  = render 'answers/form', question: @question
+				- else
+                                  = render 'messages/form', conversation: conversation
 javascript:
 	$(window).load(function(){
 		$('.pagination a').each(function(){
