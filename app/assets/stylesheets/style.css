@@ -832,5 +832,6 @@ a.see_more{cursor: pointer}
     position: absolute;
     top: 10px;
     font-size: 10px;
-    font-weight: bold !important;
+    font-weight: 900 !important;
+	border: 1px solid #D2D2D2;
 }
