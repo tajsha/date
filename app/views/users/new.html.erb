@@ -1,44 +1,61 @@
 <h1>Sign Up</h1>
 
-<%= form_for @user do |f| %>
-  <% if @user.errors.any? %>
-    <div class="error_messages">
-      <h2>Form is invalid</h2>
-      <ul>
-        <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<div class="form_container">
+    <%= form_for @user do |f| %>
+      <% if @user.errors.any? %>
+        <div class="error_messages">
+          <h2>Form is invalid</h2>
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="row">
+        <div class="field">
+          <%= f.label :email %><br/>
+          <%= f.text_field :email %>
+        </div>
+                
+        <div class="field">
+          <%= f.label :username %><br/>
+          <%= f.text_field :username %>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="field">
+          <%= f.label :password %><br/>
+          <%= f.password_field :password %>
+        </div>
+      </div>
 
+      <div class="row">
         <div class="field">
-                <%= f.label :email %><br/>
-                <%= f.text_field :email %>
+          <%= f.label :zip_code %><br/>
+          <%= f.text_field :zip_code %>
         </div>
+      </div>
+      
+      <div class="row">
         <div class="field">
-                <%= f.label :password %><br/>
-                <%= f.password_field :password %>
-        </div>
-        <div class="field">
-                <%= f.label :username %><br/>
-                <%= f.text_field :username %>
-        <div class="field">
-                <%= f.label :zip_code %><br/>
-                <%= f.text_field :zip_code %>
-        </div>
-        </div>
-                <div class="field">I'm a
-                                <%= f.select :gender, ['Male', 'Female']%>
-                                 that's
-                                <%= f.select :sexuality, ['Straight', 'Gay', 'Bisexual']%>
-                                </div>
+          <%= f.label "I'm a" %><br />
+          <div class="radio-gender">
+            <div class="radio radio-male" style="margin: 0">
+              <input id="user_gender_male" name="user[gender]" type="radio" value="male">
+              <label for="user_gender_male">Male</label>
+            </div>
+            <div class="radio radio-female" style="margin: 0">
+              <input id="user_gender_female" name="user[gender]" type="radio" value="female">
+              <label for="user_gender_female">Female</label>
+            </div>
+          </div>
           
-                                <div class="field">
-                                                    <%= f.label :birthday %>
-                                                    <%= f.date_select :birthday, :start_year => 1995, :end_year => 1932 %>
-                                                    </div>
-											
-                <%= f.collection_select :role, User::ROLES, :to_s, :humanize %>
-                <div class="actions"><%= f.submit %></div>
-        <% end %>
+        </div>
+      </div>
+                                    
+                    <div class="actions"><%= f.submit %></div>
+    <% end %>
+</div>
+<%#= f.select :gender, ['Male', 'Female']%>
