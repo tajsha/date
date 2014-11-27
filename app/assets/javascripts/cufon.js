@@ -28,7 +28,7 @@ Cufon.replace('.btn_link li', { fontFamily:'Helvetica Neue LT Std', fontWeight: 
 Cufon.replace('.jqTransformSelectWrapper div span', { fontFamily:'Helvetica Neue LT Std', fontWeight: 300, hover: true});
 Cufon.replace('.jqTransformSelectWrapper ul', { fontFamily:'Helvetica Neue LT Std', fontWeight: 300, hover: true});
 
-Cufon.replace('label', { fontFamily:'Helvetica Neue LT Std', fontWeight: 300, hover: true});
+Cufon.replace('.field label', { fontFamily:'Helvetica Neue LT Std', fontWeight: 300, hover: true});
 
 /*Cufon.replace('#content_page .left_section ul li', { fontFamily:'Helvetica', fontWeight: 700, hover: true});
 Cufon.replace('#content_page .left_section ul li ul li span', { fontFamily:'Helvetica', fontWeight: 700, hover: true});*/
