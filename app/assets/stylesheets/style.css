@@ -811,4 +811,33 @@ a.see_more{cursor: pointer}
     top: 10px;
     font-size: 10px;
     font-weight: bold !important;
+    border: 1px solid #D2D2D2;
+}
+.form_container.msg_form{
+    border: 0 none;
+}
+.msg_row h5{
+    font-size: 13px;
+    color: #A6ABBA;
+}
+.msg_row strong{
+    color: #456;
+    font-weight: bold;
+}
+.msg_row strong span {
+    color: rgba(85, 105, 125, 1);
+    font-size: 13px;
+    text-transform: capitalize;
+}
+.msg_row .outer{
+    border-bottom: 1px solid #f1f1f1;
+}
+.msg_row .sptextmess{
+    font-size: 24px;
+}
+.tab_contr span.h4{
+	text-transform: capitalize;
+}
+.tab_contr .sender_avatar img{
+	margin-right: 5px;
 }

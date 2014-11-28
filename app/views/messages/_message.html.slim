@@ -3,7 +3,7 @@
   - message = receipt.message
   - is_unread = message.is_unread?(user)
   - sender = message.sender
-  .outer
+  .outer style='margin-bottom: 10px; padding-bottom: 10px;'
     div class="#{is_unread == true ? 'unread' : 'reading'}" onclick="#"
       .col_1
         span.sender_avatar
@@ -12,10 +12,23 @@
               img alt="" src="#{sender.avatar.image_url(:avatar)}"
           - else
               img alt="" src="#{sender.avatar.image_url(:avatar)}"
-        h5 From: 
-        strong = sender.username 
+        / h5 From: 
+        / strong = sender.username 
+        span class='h4' = sender.username
+        span style='color: #A6ABBA; margin: 0 5px'-
+        small style='color: #A6ABBA'
+          = sender.age
+          ',
+          = sender.gender
+          ',
+          =sender.sexuality
+      .col_3
+        small style='color: #A6ABBA' = extract_date(message.created_at)
+        small style='color: #A6ABBA' = extract_time(message.created_at)
+        /small
+          /br
+          /= sender.location.city
+          /',
+          /= sender.location.state
       .col_2
         p = simple_format h message.body
-      .col_3
-        strong = extract_date(message.created_at)
-        small = extract_time(message.created_at)
