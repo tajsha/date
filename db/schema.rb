@@ -180,7 +180,7 @@ ActiveRecord::Schema.define(version: 20141101224339) do
 
   create_table "plans", force: true do |t|
     t.string   "name"
-    t.decimal  "price",      precision: 10, scale: 0
+    t.decimal  "price",      precision: 15, scale: 10
     t.integer  "length"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -304,7 +304,7 @@ ActiveRecord::Schema.define(version: 20141101224339) do
     t.integer  "age"
     t.integer  "default_photo_id"
     t.string   "time_zone"
-    t.integer  "avatar_id"
+    t.integer  "avatar_id",              default: 1
     t.integer  "average_response_time"
     t.integer  "response_rate"
     t.integer  "response_total"

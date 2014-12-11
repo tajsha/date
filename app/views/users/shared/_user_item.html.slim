@@ -1,0 +1,15 @@
+li
+  .common_box.box3
+    .img_box
+      - if user.avatar.present?
+          img alt="" src="#{user.avatar.try(:image_url)}" style=("width: 194px;height: 139px;")  /
+      - else
+        img alt="no image" src="" style=("width: 194px;height: 139px;") /
+    .img_detail
+      small years
+      .circle
+        span.age_box 24  
+      h3 #{user.username} #{current_user.location.state}
+      h4 #{user.location.city}, #{user.location.state}
+      .green_corner
+        img alt="" src="/assets/side_curv.png" /

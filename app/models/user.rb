@@ -221,6 +221,9 @@ class User < ActiveRecord::Base
   def name
     return "#{first_name} #{last_name}"
    end
+  def similar
+    User.where(:zip_code => self.zip_code).where(:gender => self.gender).where.not(:id => self.id)
+  end
   
   private
   def setup_gallery
