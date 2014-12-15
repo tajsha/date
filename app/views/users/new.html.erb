@@ -1,4 +1,4 @@
-<div class="register_form">
+<div class="sm_form_container">
   <h1>Create your account</h1>
   <%= form_for @user do |f| %>
     <% if @user.errors.any? %>
@@ -66,9 +66,9 @@
     </div>
     
     <div class="row">
-      <div class="field"> 
+      <div class="field" id=""> 
         <%= f.label :birthday %><br />
-        <%= f.date_select :birthday, :start_year => 1995, :end_year => 1932 %>
+        <%= f.date_select :birthday, :start_year => 1995, :end_year => 1932, use_short_month: true  %>
       </div>
       
       <div class="field">

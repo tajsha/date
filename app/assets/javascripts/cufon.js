@@ -29,6 +29,11 @@ Cufon.replace('.jqTransformSelectWrapper div span', { fontFamily:'Helvetica Neue
 Cufon.replace('.jqTransformSelectWrapper ul', { fontFamily:'Helvetica Neue LT Std', fontWeight: 300, hover: true});
 
 Cufon.replace('.field label', { fontFamily:'Helvetica Neue LT Std', fontWeight: 300, hover: true});
+Cufon.replace('input', { fontFamily:'Helvetica Neue LT Std', fontWeight: 300, hover: true});
+Cufon.replace('option', { fontFamily:'Helvetica Neue LT Std', fontWeight: 300, hover: true});
+Cufon.replace('select', { fontFamily:'Helvetica Neue LT Std', fontWeight: 300, hover: true});
+Cufon.replace('.plan h1, .plan h2, .plan p', { fontFamily:'Helvetica Neue LT Std', fontWeight: 300, hover: true});
+Cufon.replace('.sm_form_container p, .sm_form_container a, .sm_form_container h1, .sm_form_container input ', { fontFamily:'Helvetica Neue LT Std', fontWeight: 300, hover: true});
 
 /*Cufon.replace('#content_page .left_section ul li', { fontFamily:'Helvetica', fontWeight: 700, hover: true});
 Cufon.replace('#content_page .left_section ul li ul li span', { fontFamily:'Helvetica', fontWeight: 700, hover: true});*/

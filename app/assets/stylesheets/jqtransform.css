@@ -421,3 +421,33 @@ a.jqTransformChecked { background-position: center bottom;
  * Hidden - used to hide the original form elements
  * ------------- */
 .jqTransformHidden {display: none!important;}
+
+.sm_form_container .row .field .jqTransformSelectWrapper  a.jqTransformSelectOpen {
+	display: block;
+	position: absolute!important;
+	border-right: 1px solid #cecece;
+	width: 30px!important;
+	height: 41px!important;
+	background: url(/assets/img/select_btn2.png) no-repeat 0 0;;
+
+}
+.sm_form_container .row .field .jqTransformSelectWrapper {
+	width: 24%!important;
+	position:relative;
+	height: 41px;
+	
+	background: url(/assets/img/select_left.jpg) repeat top left;
+	 display:inline-block;
+	padding: 0 0 0 19px;
+}
+#expiration .jqTransformSelectWrapper:first-of-type {
+	width: 55%!important;
+}
+.sm_form_container .row .field .jqTransformSelectWrapper div span {
+	padding-left: 0;
+}
+
+.sm_form_container a.jqTransformCheckbox {margin:0}
+.sm_form_container .row .select .jqTransformSelectWrapper {
+	width: 90%!important;
+}

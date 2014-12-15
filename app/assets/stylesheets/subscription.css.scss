@@ -1,13 +1,17 @@
-// Place all the styles related to the users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-.message_div{
-	width: 400px;
-	background: #fff;
-	border-radius: 5px;
-	padding: 60px; 
-}
-.field{
+
+.col-3 {width: 362px; float:left;}
+.col-9 {width: 970px; margin: 20px auto;}
+.plan {border: 1px solid #d0d0d0; background:#fff; margin: 0 10px 0 0; padding: 23px; max-height: 166px;}
+.plan:first-child {margin-bottom: 15px; max-height: 130px;} 
+.plan h1 {color: #535353; font-size: 1.7em;}
+.plan h2 {color: #36b5ff; font-size: 1.3em; margin-bottom: 5px;}
+.plan p {color: #b8b8b8; font-size: 0.9em; margin-bottom: 3px;}
+.plan .radio {color: #229eff; font-size: 1.1em;}
+.plan img {float: right;}
+.sm_form_container {height: 385px;}
+
+/* normal radio check */
+.plan{
     input[type=checkbox],
     input[type=radio   ]{
       width     : 2em;
