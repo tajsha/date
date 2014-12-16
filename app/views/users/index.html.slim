@@ -18,41 +18,41 @@
               .form_container
                 .row style='padding-top:20px;'
                   .col
-                    label I am a
-                    select.large
-                      option male
-                      option female
-                  .select2
-                    .col.col2 style='width:300px;'
-                      label Seeking
-                      select.large
-                        option female
-                        option male
+                      label I am Seeking
+                  
+                      = select_tag :sexuality, options_for_select(['Straight', 'Gay', 'Bisexual'])
+                   
+             
                   .select1
-                    .col.col3.col33 style='width:175px;'
-                      label Ages
-                      = select_tag :min_age, options_for_select((18..65),18), {class: 'small'}
+                    .col
+                      = select_tag :gender, options_for_select([['Men',' Male'], ['Women', 'Female']])
                       
-                  .select5
-                    .col.col4
-                      label to
-                      = select_tag :max_age, options_for_select((20..65),65), {class: 'small'}
-                      
+                      .select1
+                        .col.col3.col33 style='width:175px;'
+                          label Ages
+                          = select_tag :min_age, options_for_select((18..65),18), {class: 'small'}
+
+                      .select5
+                        .col.col4
+                          label to
+                          = select_tag :max_age, options_for_select((20..65),65), {class: 'small'}
+                
                   .select4
-                    .col.col7 style='margin-left: 10px;width:233px;'
-                    = select_tag :ethnicity, options_for_select(['Asian', 'Black', 'Biracial', 'Indian', 'Hispanic/Latin', 'Middle Eastern', 'Native American', 'Pacific Islander', 'White', 'Other']), prompt: 'ethnicity/race'
-  
+                  .col
+                      = select_tag :ethnicity, options_for_select(['Asian', 'Black', 'Biracial', 'Indian', 'Hispanic/Latin', 'Middle Eastern', 'Native American', 'Pacific Islander', 'White', 'Other']), prompt: 'Ethnicity'
+                      
+                  .col
+                      = select_tag :children, options_for_select(['I want kids now','I want one someday', 'Yes they live with me']), prompt: 'Kids'
+              
                 .row style='padding-top:20px;'
                   .col.col5 style='margin-right:18px;'
                     label Near
                     = text_field_tag :zip_code, nil, placeholder: "enter zip here", class: 'text_input'
                     
-                  .col.col.col30 style='width:190px;'
-                    = select_tag :children, options_for_select(['I want kids now','I want one someday']), prompt: 'child preference'
-
+        
                   .select5
                     .col.col3.col31 style='width:100px;'
-                      = select_tag :religion, options_for_select(['Agnostic', 'Atheist', 'Christian', 'Catholic', 'Buddhist', 'Hindu', 'Jewish', 'Muslim', 'Other']), prompt: 'religion'
+                      = select_tag :religion, options_for_select(['Agnostic', 'Atheist', 'Christian', 'Catholic', 'Buddhist', 'Hindu', 'Jewish', 'Muslim', 'Other']), prompt: 'Faith'
                 .btm_sec style='margin-top:20px;'
                   ul.form_list
                     li

@@ -16,4 +16,9 @@ class UserMailer < ActionMailer::Base
     @user = user
     mail :to => user.email, :subject => "Password Reset"
   end
+  
+  def subscriber(user)
+    @user = user
+    mail(:to => user.email, :subject => "Congrats! Here's Your Subscription Information")
+  end
 end

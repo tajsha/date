@@ -14,8 +14,10 @@ class SubscriptionsController < ApplicationController
   end
 
   def create
+    @user = current_user
     @subscription = Subscription.new(params[:subscription])
     if @subscription.save_with_payment
+      UserMailer.subscriber(@user).deliver
       redirect_to @subscription, :notice => "Thank you for subscribing!"
     else
       render :new
@@ -57,7 +59,6 @@ class SubscriptionsController < ApplicationController
        @user = current_user
          @customer = Stripe::Customer.retrieve(@user.subscription.stripe_customer_token)
          @customer.cancel_subscription(:at_period_end => true) 
-         current_user.subscription.update_attributes(:cancelled => 1)
          current_user.save!
          flash.alert = 'Your subscription has been cancelled successfully!'
          redirect_to root_url

@@ -13,6 +13,7 @@ ThinkingSphinx::Index.define :user, :with => :active_record do
   has "RADIANS(locations.longitude)", :as => :longitude, :type => :float
   has(:id, :as => :user_id)
   has(:zip_code, :as => :zip_code, :type => :integer)
+  has age
   set_property :wordforms => 'lib/word.txt'
   join location
 end 

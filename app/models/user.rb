@@ -71,6 +71,10 @@ class User < ActiveRecord::Base
   after_create :setup_gallery
   before_save :set_age
   
+  def similar
+    User.where(:zip_code => self.zip_code).where(:gender => self.gender).where.not(:id => self.id)
+  end
+  
   def latitude
       location = Location.find_by_zip_code(zip_code)
       if location
@@ -160,7 +164,7 @@ class User < ActiveRecord::Base
     def set_age
       self.age = Time.now.year - self.birthday.year
     end
-
+      
   def following?(other_user)
     relationships.find_by(followed_id: other_user.id)
   end

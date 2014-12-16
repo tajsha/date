@@ -3,7 +3,7 @@
   - message = receipt.message
   - is_unread = message.is_unread?(user)
   - sender = message.sender
-  .outer
+  .outer style='margin-bottom: 10px; padding-bottom: 10px;'
     div class="#{is_unread == true ? 'unread' : 'reading'}" onclick="#"
       .col_1
         span.sender_avatar

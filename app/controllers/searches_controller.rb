@@ -30,7 +30,7 @@ class SearchesController < ApplicationController
       render 'new'
     end
   end
-    
+  
   def index
     @search = Search.new
     
@@ -47,13 +47,14 @@ class SearchesController < ApplicationController
         @users = User.where(zip_code: locations.map(&:zip_code))
        
           else
-            @users = User.search(params[:search].gsub(/\s+/, ' | '),
+            @users = User.search(params[:query],
+            :conditions => {:ethnicity => params[:ethnicity], :religion => params[:religion], :children => params[:children], :gender => params[:gender]},
+            :with => {:age => (params[:min_age].to_i)..(params[:max_age].to_i), :geodist => 0.0..100_000.0},
             :geo => [current_user.latitude * Math::PI / 180.0, current_user.longitude * Math::PI / 180.0],
-            :with  => {:geodist => 0.0..100_000.0},
-            :order => 'geodist ASC', :without => {:user_id => current_user.id})
-                        
-                   
-        end      
+            :order => 'geodist ASC', :without => {:user_id => current_user.id})      
+        
+
+        end
         render 'users/index', layout: 'new_application'    
         
       end
@@ -73,4 +74,5 @@ class SearchesController < ApplicationController
   def oldest_age
   @oldest_age = params[:oldest_age].years
    end
+   
 end
