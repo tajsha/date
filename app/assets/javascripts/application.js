@@ -29,6 +29,9 @@
 //= require_tree .
 
 $(function(){
+  if($("#jqTransformDisable").length > 0) {
+    return;
+  }else{
   $('select').jqTransSelect();
   $(document).on('change','select',function(){
     var id = $(this).attr('id')
@@ -81,6 +84,7 @@ $(function(){
     }
   })
   // $(".jqtransform").jqTransform();
+}
 });
 
 function fix_select(selector) {
