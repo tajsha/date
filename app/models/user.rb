@@ -222,7 +222,8 @@ class User < ActiveRecord::Base
     return "#{first_name} #{last_name}"
    end
   def similar
-    User.where(:zip_code => self.zip_code).where(:gender => self.gender).where.not(:id => self.id)
+    arr = User.where(:gender => self.gender).where.not(:id => self.id)
+    arr.select{|c| c.location.state == self.location.state } 
   end
   
   private
