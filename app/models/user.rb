@@ -228,6 +228,7 @@ class User < ActiveRecord::Base
   end
   
   private
+  
   def setup_gallery
      Gallery.create(user: self)
    end
