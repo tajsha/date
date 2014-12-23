@@ -220,7 +220,8 @@ class User < ActiveRecord::Base
   
   def name
     return "#{first_name} #{last_name}"
-   end
+  end
+   
   def similar
     arr = User.where(:gender => self.gender).where.not(:id => self.id)
     arr.select{|c| c.location.state == self.location.state } 
