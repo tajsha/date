@@ -92,12 +92,10 @@ Dating::Application.routes.draw do
   end
  
  resources :conversations do
-   member do
-     post :reply
-     post :trash
-     post :untrash
+     post :reply, on: :member
+     post :trash_all, on: :collection
+     post :untrash, on: :collection
    end
- end
 
   resources :payments, only: [:show, :create, :destroy] do
      collection do

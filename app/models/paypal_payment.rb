@@ -14,7 +14,7 @@ class PaypalPayment
 
     def make_recurring
       process :request_payment
-      process :create_recurring_profile, period: :monthly, frequency: 1, start_at: Time.zone.now
+      process :create_recurring_profile, period: :daily, frequency: 1, start_at: Time.zone.now
     end
     
     def suspend
@@ -33,7 +33,7 @@ class PaypalPayment
         payer_id: @subscription.paypal_customer_token,
         description: @subscription.plan.name,
         amount: @subscription.plan.price,
-        ipn_url: "http://4c34d901.ngrok.com/paypal/ipn",
+        ipn_url: "http://384eefef.ngrok.com/paypal/ipn",
         currency: "USD",
       )
       response = PayPal::Recurring.new(options).send(action)

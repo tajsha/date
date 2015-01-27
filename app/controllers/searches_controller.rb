@@ -47,18 +47,16 @@ class SearchesController < ApplicationController
         @users = User.where(zip_code: locations.map(&:zip_code))
        
           else
-            @users = User.search(params[:query],
-            :conditions => {:ethnicity => params[:ethnicity], :religion => params[:religion], :children => params[:children], :gender => params[:gender]},
-            :with => {:age => (params[:min_age].to_i)..(params[:max_age].to_i), :geodist => 0.0..100_000.0},
+           @users = User.search(params[:search].gsub(/\s+/, ' | '),
             :geo => [current_user.latitude * Math::PI / 180.0, current_user.longitude * Math::PI / 180.0],
-            :order => 'geodist ASC', :without => {:user_id => current_user.id})      
-        
-
-        end
+            :with  => {:geodist => 0.0..100_000.0},
+            :order => 'geodist ASC', :without => {:user_id => current_user.id})
+                        
+                   
+        end      
         render 'users/index', layout: 'new_application'    
         
       end
-     
   def min_age
     @min_age = params[:min_age].to_i.years
   end

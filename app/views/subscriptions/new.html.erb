@@ -1,21 +1,24 @@
 <div class="col-9">
-  <%= form_for @subscription do |f| %>
+ <%= form_for @subscription do |f| %>
   <div class="col-3">
     <div class="plan">
-      <h1><%= radio_button_tag :plan_id, '1' %><label for="plan_id_1"><span><span></span></span></label>Plan 1</h1>
-      <h2>Plan 1 offers:</h2>
-      <p>Can Reach out to 10 profiles per month</p>
-      <p>View 20 locals in your area</p>
-      <p>Recieve 10 replies per month</p>
+      <%= image_tag "/assets/best1.png" %>
+
+      <h1><%= radio_button_tag :plan_id, '12', true %><label for="plan_id_12"><span><span></span></span></label>$13.50 a year</h1>
+      <h2>12-Month Membership</h2>
+      <p>2 FREE months!</p>
+      <p>Send unlimited messages to any user</p>
+	  <p>Receive and read unlimited messages</p>
+	  <p>Make real connections</p>
     </div>
     <div class="plan">
-      <%= image_tag "/assets/best1.png" %>
-      <h1><%= radio_button_tag :plan_id, '2', true %><label for="plan_id_2"><span><span></span></span></label> Plan 2</h1>
-      <h2>Plan 2 offers:</h2>
-      <p>Can Reach out to unlimited profiles per month</p>
+      <h1><%= radio_button_tag :plan_id, '1' %><label for="plan_id_1"><span><span></span></span></label>$1.35 a month</h1>
+      <h2>1-Month Membership</h2>
+      <p>Send unlimited messages to any user</p>
+	  <p>Receive and read unlimited messages</p>
       <p>View all locals in your area</p>
-      <p>Recieve unlimited replies per month</p>
-      <p>See who has been visiting your profile</p>
+      <p>Book the dates you like</p>
+	  <p>Make real connections</p>
     </div>
   </div>
   <div class="sm_form_container">
@@ -39,7 +42,6 @@
         
       <% end %>
     
-      <%= f.hidden_field :plan_id %>
       <%= f.hidden_field :stripe_card_token %>
       <%= f.hidden_field :paypal_customer_token %>
       <%= f.hidden_field :paypal_payment_token %>
@@ -63,7 +65,8 @@
     </div>
     <div class="row">
       <div id="paypal_checkout" style="display:none">
-        <%= link_to image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), paypal_checkout_path(plan_id: @subscription.plan_id) %>
+	   <%= link_to image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), paypal_checkout_path(plan_id: @subscription.plan_id) %>
+	
       </div>
     </div>
     <div id="billing_fields">

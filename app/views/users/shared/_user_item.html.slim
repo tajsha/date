@@ -1,14 +1,15 @@
 li
   .common_box.box3
     .img_box
-      - if user.avatar.present?
-          img alt="" src="#{user.avatar.try(:image_url)}" style=("width: 194px;height: 139px;")  /
-      - else
-        img alt="no image" src="" style=("width: 194px;height: 139px;") /
+        = link_to user do
+          - if user.avatar.present?
+          img alt="" src="#{user.avatar.try(:image_url, :similar)}" style=("width: 194px;height: 139px;")  /
+          - else
+            img alt="no image" src="" style=("width: 194px;height: 139px;") /
     .img_detail
       small years
       .circle
-        span.age_box 24  
+        span.age_box = user.age 
       h3 #{user.username} #{current_user.location.state}
       h4 #{user.location.city}, #{user.location.state}
       .green_corner
