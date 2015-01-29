@@ -10,9 +10,12 @@ html xmlns="http://www.w3.org/1999/xhtml"
     = javascript_include_tag "//www.google.com/jsapi", "chartkick"
     
   body
-    #outer
-      a href="#" class='scroll_link'  Scroll to Top
-      == render 'shared/header'
-      #body_container
-        == yield
-        
+    == render 'shared/header'
+    .wrapper
+      #profile_container
+        .profile_top
+   
+          == yield
+          doctype html
+    a href="#" class='scroll_link'  Scroll to Top
+      
