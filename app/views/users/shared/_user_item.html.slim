@@ -10,7 +10,7 @@ li
       small years
       .circle
         span.age_box = user.age 
-      h3 #{user.username} 
-  
+      h3 #{user.username} #{current_user.location.state}
+      h4 #{user.location.city}, #{user.location.state}
       .green_corner
         img alt="" src="/assets/side_curv.png" /
