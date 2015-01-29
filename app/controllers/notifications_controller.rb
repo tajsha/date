@@ -8,8 +8,8 @@ class NotificationsController < ApplicationController
       puts "in method*************************************"   
       #query[:cmd] = "_notify-validate"
       if  params[:txn_type] == 'subscr_cancel'
-        user_subscription = Subscription.find_by(paypal_customer_token: params[:payer_id])
-            user_subscription.update_column("cancelled",1) if user_subscription.present?
+       user_subscription = Subscription.find_by(paypal_customer_token: params[:payer_id])
+       user_subscription.update_column("cancelled",1) if user_subscription.present?
       end
       render :text => 'OK'
     end
