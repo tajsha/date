@@ -4,7 +4,8 @@
       .left_sec
         .profile_pic_box
           .img_box1
-            img alt="" src="#{@user.avatar.try(:image_url,:profile)}" data-mfp-src='.parent-container a'
+            
+              img alt="this is wrong" src="#{@user.avatar.try(:image_url,:profile)}" data-mfp-src='.parent-container a' 
           .img_detail1
             -unless current_user == @user
               a.profile_btn href="#" data-mfp-src='#message_me' 
@@ -21,6 +22,7 @@
               a.profile_btn.last.report_btn data-mfp-src='#report_me' href="#" 
                 img alt="" src="/assets/minus_icon.png" /
                 span Report
+
             h4
               | Career: 
               span.color
@@ -87,7 +89,10 @@
 
               - if current_user?(@user)
                 .pull-right
-                  = link_to "Add Your First Date", '#', :class => "btn btn-primary add_date", 'data-mfp-src'=>'#letsgo_form_div'
+                  /= link_to "Add Your First Date", '#', :class => "btn btn-primary add_date", 'data-mfp-src'=>'#letsgo_form_div'
+                .profile_middle_container1
+                  h3
+                    = link_to "Add Your First Date", '#', :class => "date_btn add_date", 'data-mfp-src'=>'#letsgo_form_div'
             / span.pic_box3
             /   img alt="" src="/assets/right_icon1.png" /
             / span.pic_detail3
@@ -112,7 +117,16 @@
                   = "#{@user.username} has not filled out their about me section yet"
           -unless @user.photos.present?  
             .slider_container
+              br
               h4 Photos
+              = form_for Photo.new do |f|
+                br
+                  br
+
+                = f.file_field :image, title: "Please choose file", class: "file-picker" , multiple: true, name: "photo[image]" , :class => "btn"
+              script#template-upload[type="text/x-tmpl"]
+                |  <div class="upload"> {%=o.name%} <div class="progress"><div class="bar" style="width: 0%"></div></div> </div> 
+
           -else   
             .slider_container
               h4 Photos
@@ -226,6 +240,8 @@
       .message_div
         = render 'letsgos/form'
 javascript:
+
+
   $(document).ready(function () {
     $('.parent-container').magnificPopup({
         delegate: 'a',
@@ -233,10 +249,11 @@ javascript:
         gallery: { enabled: true },
         showCloseBtn: true
     });
-    $('.img_box1').magnificPopup();
-    $('.profile_btn').magnificPopup({
+    $('.profile_pic_box').magnificPopup() 
+    $('.img_box1').magnificPopup({
       showCloseBtn: true
-    });
+      });
+    
     $('form#message_form').bind('ajax:success', function(evt, data, status, xhr){
       $.magnificPopup.close()  
     })
