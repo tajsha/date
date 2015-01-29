@@ -120,7 +120,8 @@
                 br
                   br
 
-                = f.file_field :image, title: "Please choose file", class: "file-picker" , multiple: true, name: "photo[image]" , :class => "btn"
+                = f.file_field :image, title: "Please choose file", class: "file-picker" , multiple: true, name: "photo[image]" , :class => "btn", :id =>"input_file"
+                <input type = "button" id="upload" class="date_btn2" value="Upload Image">
               script#template-upload[type="text/x-tmpl"]
                 |  <div class="upload"> {%=o.name%} <div class="progress"><div class="bar" style="width: 0%"></div></div> </div> 
 
@@ -281,6 +282,12 @@ javascript:
         $('#current_index').val(next_index)
       }
     })
+
+    $("#upload").click(function(){
+    
+    $("#input_file").click();
+   
+  });
 
     $('.left_arrow').click(function(e){
       e.preventDefault()
