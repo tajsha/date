@@ -73,7 +73,7 @@ class User < ActiveRecord::Base
   
   def similar
     arr = User.where(:gender => self.gender).where.not(:id => self.id)
-    arr.select{|c| c.location.state == self.location.state }
+    #arr.select{|c| c.location.state == self.location.state }
   end
   
   def latitude
@@ -136,11 +136,14 @@ class User < ActiveRecord::Base
         end
     end
   def location
+     puts "***************************"
+    # puts Location.zipcode
+     puts "***************************"
 
-      if Location.by_zip_code(self.zip_code.to_s).any?
+      if self.zip_code.to_s
           # you can return all here if you want more than one
           # for testing just returning the first one
-          return Location.by_zip_code(self.zip_code.to_s).first
+          return self.zip_code.to_s.first
       else
           return nil
       end
