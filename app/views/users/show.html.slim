@@ -82,14 +82,14 @@
               strong Last online 4 hours ago
           - if @user.letsgos.any? || current_user?(@user)
             .lets_go   
-             
+              - if @user.gender == "Male"
+                 |Go on one of his dates
+              - elsif @user.gender == "Female"
+                 |Go on one of her dates
               = render '/letsgos/letsgo'
               - if current_user?(@user)
                 .pull-right
-                  /= link_to "Add Your First Date", '#', :class => "btn btn-primary add_date", 'data-mfp-src'=>'#letsgo_form_div'
-                .profile_middle_container1
-                  h3
-                    = link_to "Add Your First Date", '#', :class => "date_btn add_date", 'data-mfp-src'=>'#letsgo_form_div'
+                  = link_to "Add Your Date", '#', :class => "btn btn-primary add_date", 'data-mfp-src'=>'#letsgo_form_div'
             / span.pic_box3
             /   img alt="" src="/assets/right_icon1.png" /
             / span.pic_detail3
@@ -112,20 +112,7 @@
                   = @user.about_me
                 - else
                   = "#{@user.username} has not filled out their about me section yet"
-          -unless @user.photos.present? 
-            .slider_container
-              br
-              h4 Photos
-              = form_for Photo.new do |f|
-                br
-                  br
-
-                = f.file_field :image, title: "Please choose file", class: "file-picker" , multiple: true, name: "photo[image]" , :class => "btn", :id =>"input_file"
-                <input type = "button" id="upload" class="date_btn2" value="Upload Image">
-              script#template-upload[type="text/x-tmpl"]
-                |  <div class="upload"> {%=o.name%} <div class="progress"><div class="bar" style="width: 0%"></div></div> </div> 
-
-          -else   
+          -if @user.photos.present?  
             .slider_container
               h4 Photos
               a.left_arrow href="#" 
@@ -149,8 +136,8 @@
                             .upload
                               | {%=o.name%}
                               .progress
-                                .bar style=("width: 0%")
-              
+                                .bar style=("width: 0%") 
+                          
                       - unless @user == current_user
                         .form
                           .row
@@ -282,12 +269,6 @@ javascript:
         $('#current_index').val(next_index)
       }
     })
-
-    $("#upload").click(function(){
-    
-    $("#input_file").click();
-   
-  });
 
     $('.left_arrow').click(function(e){
       e.preventDefault()

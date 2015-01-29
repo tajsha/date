@@ -92,4 +92,3 @@ function fix_select(selector) {
     $(selector).unwrap().removeClass('jqTransformHidden').jqTransSelect();
     $(selector).parent().css('zIndex', i);
 }
-

@@ -73,7 +73,7 @@ class User < ActiveRecord::Base
   
   def similar
     arr = User.where(:gender => self.gender).where.not(:id => self.id)
-    #arr.select{|c| c.location.state == self.location.state }
+    arr.select{|c| c.location.state == self.location.state }
   end
   
   def latitude
@@ -137,11 +137,10 @@ class User < ActiveRecord::Base
     end
   def location
 
-
-      if self.zip_code.to_s
+      if Location.by_zip_code(self.zip_code.to_s).any?
           # you can return all here if you want more than one
           # for testing just returning the first one
-          return self.zip_code.to_s.first
+          return Location.by_zip_code(self.zip_code.to_s).first
       else
           return nil
       end
@@ -165,19 +164,6 @@ class User < ActiveRecord::Base
     
     def set_age
       self.age = Time.now.year - self.birthday.year
-      gender = self.gender.inspect
-      sexuality = self.sexuality.inspect
-      puts "***********************************"
-      puts self.gender.inspect
-      puts "hi hello how are you"
-
-      puts self.sexuality.inspect
-      puts "***********************************"      
-      if gender == sexuality
-        self.sexuality = "Gay"
-      else
-        self.sexuality = "Straight"
-      end
     end
       
   def following?(other_user)
