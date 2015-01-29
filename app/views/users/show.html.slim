@@ -4,8 +4,7 @@
       .left_sec
         .profile_pic_box
           .img_box1
-            
-              img alt="this is wrong" src="#{@user.avatar.try(:image_url,:profile)}" data-mfp-src='.parent-container a' 
+            img alt="" src="#{@user.avatar.try(:image_url,:profile)}" data-mfp-src='.parent-container a'
           .img_detail1
             -unless current_user == @user
               a.profile_btn href="#" data-mfp-src='#message_me' 
@@ -22,7 +21,6 @@
               a.profile_btn.last.report_btn data-mfp-src='#report_me' href="#" 
                 img alt="" src="/assets/minus_icon.png" /
                 span Report
-
             h4
               | Career: 
               span.color
@@ -86,7 +84,6 @@
             .lets_go   
              
               = render '/letsgos/letsgo'
-
               - if current_user?(@user)
                 .pull-right
                   /= link_to "Add Your First Date", '#', :class => "btn btn-primary add_date", 'data-mfp-src'=>'#letsgo_form_div'
@@ -115,7 +112,7 @@
                   = @user.about_me
                 - else
                   = "#{@user.username} has not filled out their about me section yet"
-          -unless @user.photos.present?  
+          -unless @user.photos.present? 
             .slider_container
               br
               h4 Photos
@@ -151,8 +148,8 @@
                             .upload
                               | {%=o.name%}
                               .progress
-                                .bar style=("width: 0%") 
-                          
+                                .bar style=("width: 0%")
+              
                       - unless @user == current_user
                         .form
                           .row
@@ -240,8 +237,6 @@
       .message_div
         = render 'letsgos/form'
 javascript:
-
-
   $(document).ready(function () {
     $('.parent-container').magnificPopup({
         delegate: 'a',
@@ -249,11 +244,10 @@ javascript:
         gallery: { enabled: true },
         showCloseBtn: true
     });
-    $('.profile_pic_box').magnificPopup() 
-    $('.img_box1').magnificPopup({
+    $('.img_box1').magnificPopup();
+    $('.profile_btn').magnificPopup({
       showCloseBtn: true
-      });
-    
+    });
     $('form#message_form').bind('ajax:success', function(evt, data, status, xhr){
       $.magnificPopup.close()  
     })
