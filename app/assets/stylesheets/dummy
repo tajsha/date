@@ -1,0 +1,38 @@
+ -unless @user.photos.present?  
+            .slider_container
+              br
+              h4 Photos
+              = form_for Photo.new do |f|
+                br
+                  br
+
+                = f.file_field :image, title: "Please choose file", class: "file-picker" , multiple: true, name: "photo[image]" , :class => "btn"
+              script#template-upload[type="text/x-tmpl"]
+                |  <div class="upload"> {%=o.name%} <div class="progress"><div class="bar" style="width: 0%"></div></div> </div> 
+
+          -else   
+            .slider_container
+              h4 Photos
+              a.left_arrow href="#" 
+                img alt="" src="/assets/left_arrow.png" /
+              ul.slider.parent-container
+                = hidden_field_tag 'current_index',0
+                -@user.photos.each_with_index do |photo, index|
+                  li class="#{index > 2 ? 'hide' : ''}"
+                    = link_to image_tag(photo.image_url(:thumb)), "#" + dom_id(photo)
+                    div id="#{dom_id(photo)}" class="mfp-hide"
+                      center
+                        = image_tag(photo.image_url(:popup))
+                        - if  @user == current_user
+                          = button_to('Set as Profile Image', [:avatar, photo], class: 'btn')
+                          '
+                          = button_to "remove", photo, :confirm => 'Are you sure?', :method => :delete, class: 'btn'
+                          = form_for Photo.new do |f|
+                            = f.label :image, "Upload photos:"
+                            = f.file_field :image, multiple: true, name: "photo[image]"
+                          script#template-upload type="text/x-tmpl" 
+                            .upload
+                              | {%=o.name%}
+                              .progress
+                                .bar style=("width: 0%") 
+                          

@@ -136,9 +136,7 @@ class User < ActiveRecord::Base
         end
     end
   def location
-     puts "***************************"
-    # puts Location.zipcode
-     puts "***************************"
+
 
       if self.zip_code.to_s
           # you can return all here if you want more than one
@@ -167,6 +165,19 @@ class User < ActiveRecord::Base
     
     def set_age
       self.age = Time.now.year - self.birthday.year
+      gender = self.gender.inspect
+      sexuality = self.sexuality.inspect
+      puts "***********************************"
+      puts self.gender.inspect
+      puts "hi hello how are you"
+
+      puts self.sexuality.inspect
+      puts "***********************************"      
+      if gender == sexuality
+        self.sexuality = "Gay"
+      else
+        self.sexuality = "Straight"
+      end
     end
       
   def following?(other_user)
