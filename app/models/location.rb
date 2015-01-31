@@ -1,6 +1,6 @@
 class Location < ActiveRecord::Base  
-  attr_accessible :city, :latitude, :longitude, :zip_code
+  attr_accessible :city, :latitude, :longitude, :zipcode, :state
   has_and_belongs_to_many :users
-  scope :by_zip_code, ->(zip_code) { where('zip_code = ?', zip_code) }
+  scope :by_zip_code, ->(zipcode) { where('zipcode = ?', zipcode) }
 
 end
