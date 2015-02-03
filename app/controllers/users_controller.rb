@@ -53,8 +53,18 @@ end
   def index
     @user = current_user
     @search = Search.new
-    @users = @user.present? ? User.where('id != ?',@user.id) : User.all
-    render layout: 'new_application'    
+    page = params[:page] || 1
+     if @user.present?
+		@users = User.search(:without => {:user_id => @user.id}, :page => page, :per_page => 4, :order => 'created_at DESC')
+	 else
+		@users = User.search(:page => page, :per_page => 12, :order => 'created_at DESC') 
+	 end
+	 
+    if request.xhr?
+		render :partial => 'user', :layout => false, :collection => @users
+    else
+		render layout: 'new_application'    
+	end
   end
   
   def destroy

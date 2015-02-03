@@ -77,6 +77,8 @@
     .wrapper
       .box_detail
         = render collection: @users, partial: 'users/user', as: :user
+	button onclick="getMoreRecords(); return false;" id='more_button' /
+	input name='more' type='hidden' value='2' id='more_users'
   #message_me.mfp-hide 
     center
       .message_div
@@ -116,3 +118,34 @@
         $.magnificPopup.close()  
       })
     $('.save_btn').magnificPopup()
+    $(window).scroll(function() {
+	   if($(window).scrollTop() + $(window).height() == $(document).height()) {
+	   if ($('#more_button').is(':visible')) {
+         $('#more_button').trigger('click');
+        }
+	   }
+	});
+	
+	function getMoreRecords(){
+		var pageOffset = $('#more_users').val();
+		$('#more_button').hide();
+		var url = "/users?"+"page=" + pageOffset;
+		$.ajax({
+			url: url,
+			method: 'GET',
+			success: function(html_data){
+				// make jQuery object from HTML string
+				var $moreBlocks = jQuery( html_data );
+				// Append new blocks
+				$(".box_detail").append( $moreBlocks );
+
+				// Have Masonry position new blocks
+				$(".box_detail").masonry( 'appended', $moreBlocks );         
+				if($moreBlocks.length == 4){
+					$('#more_users').val((parseInt(pageOffset) + 1));
+					$('#more_button').show();
+				}
+			}
+
+		});
+	 }
