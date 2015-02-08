@@ -23,6 +23,15 @@ end
   end
   
   def create
+    if params["user"]["male_sexuality"].present? and params["user"]["female_sexuality"].present?
+      params["user"][:sexuality] = 'bisexual'
+    elsif params["user"]["male_sexuality"].present?
+      params["user"][:sexuality] = 'gay' if params["user"]["gender"] == 'Male'
+      params["user"][:sexuality] = 'straight' if params["user"]["gender"] == 'Female'
+    elsif params["user"]["female_sexuality"].present?
+      params["user"][:sexuality] = 'gay' if params["user"]["gender"] == 'Female'
+      params["user"][:sexuality] = 'straight' if params["user"]["gender"] == 'Male'
+    end
     @user = User.new(user_params)
     if @user.save
       UserMailer.registration_confirmation(@user).deliver
@@ -57,7 +66,7 @@ end
      if @user.present?
 		@users = User.search(:without => {:user_id => @user.id}, :page => page, :per_page => 4, :order => 'created_at DESC')
 	 else
-		@users = User.search(:page => page, :per_page => 12, :order => 'created_at DESC') 
+		@users = User.search(:page => page, :per_page => 4, :order => 'created_at DESC')
 	 end
 	 
     if request.xhr?

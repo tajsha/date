@@ -37,12 +37,6 @@ class SearchesController < ApplicationController
     if params[:gender].present? and params[:search].nil?
         conditions = {}
         range_cond = {}
-          if params["sexuality"].present?
-            sexuality = {"Gay" => "Male", "Bisexual" => "Female"}
-            straight = {"Male" => "Female", "Female" => "Male"}
-            sexuality["Straight"] = straight[params["gender"].strip] 
-			conditions[:sexuality] = sexuality[params["sexuality"]]
-		  end
           conditions[:gender] = params["gender"].strip if params["gender"].present?
           conditions[:ethnicity] = params["ethnicity"] if params["ethnicity"].present?
           conditions[:zip_code] = params["zip_code"] if params["zip_code"].present?

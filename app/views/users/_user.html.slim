@@ -2,7 +2,7 @@
   .common_box.box1 data-user-id="#{user.username}"
     .img_box
       = link_to user do
-        = image_tag user.avatar.try(:image_url)
+        = image_tag user.avatar.try(:image_url), size: "194x194"
       -if @user.present?  
         ul.btn_link.hide
           li
