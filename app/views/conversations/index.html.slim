@@ -39,7 +39,13 @@ javascript:
             ids.push($(this).data('id'));
         });
         
-        $.ajax({ type: "POST",  url:"/conversations/trash_all",  data:{ids: ids}});
+        $.ajax({ type: "POST",  url:"/conversations/trash_all",  data:{ids: ids},
+		  success:function(data){
+            jQuery.each(ids, function (i, val) {
+              $("div.outer#msg_"+val).remove();
+            });
+          }
+        });
     });
         
     

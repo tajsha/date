@@ -47,6 +47,7 @@ class ConversationsController < ApplicationController
       conversation.move_to_trash(current_user)
     end
 
+    render :json => {:success => true}
   end
 
   
