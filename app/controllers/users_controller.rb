@@ -80,6 +80,7 @@ end
     else
       current_user
     end
+    params[:user].delete("user_id")
     @user.update_attributes(params[:user])
     respond_with @user
   end

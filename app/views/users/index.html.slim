@@ -77,7 +77,8 @@
     .wrapper
       .box_detail
         = render collection: @users, partial: 'users/user', as: :user
-	button onclick="getMoreRecords(); return false;" id='more_button' /
+	  - if params[:controller] == "users"
+		button onclick="getMoreRecords(); return false;" id='more_button' /
 	input name='more' type='hidden' value='2' id='more_users'
   #message_me.mfp-hide 
     center
