@@ -33,6 +33,8 @@ gem 'jquery-fileupload-rails'
 gem 'chartkick'
 gem 'groupdate'
 gem 'stripe_event'
+gem 'client_side_validations'
+
 
 
 # Gems used only for assets and not required
