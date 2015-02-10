@@ -23,6 +23,15 @@ end
   end
   
   def create
+    if params["user"]["male_sexuality"].present? and params["user"]["female_sexuality"].present?
+      params["user"][:sexuality] = 'bisexual'
+    elsif params["user"]["male_sexuality"].present?
+      params["user"][:sexuality] = 'gay' if params["user"]["gender"] == 'Male'
+      params["user"][:sexuality] = 'straight' if params["user"]["gender"] == 'Female'
+    elsif params["user"]["female_sexuality"].present?
+      params["user"][:sexuality] = 'gay' if params["user"]["gender"] == 'Female'
+      params["user"][:sexuality] = 'straight' if params["user"]["gender"] == 'Male'
+    end
     @user = User.new(user_params)
     if @user.save
       UserMailer.registration_confirmation(@user).deliver
@@ -53,8 +62,18 @@ end
   def index
     @user = current_user
     @search = Search.new
-    @users = @user.present? ? User.where('id != ?',@user.id) : User.all
-    render layout: 'new_application'    
+    page = params[:page] || 1
+     if @user.present?
+		@users = User.search(:without => {:user_id => @user.id}, :page => page, :per_page => 4, :order => 'created_at DESC')
+	 else
+		@users = User.search(:page => page, :per_page => 4, :order => 'created_at DESC')
+	 end
+	 
+    if request.xhr?
+		render :partial => 'user', :layout => false, :collection => @users
+    else
+		render layout: 'new_application'    
+	end
   end
   
   def destroy
@@ -70,6 +89,7 @@ end
     else
       current_user
     end
+    params[:user].delete("user_id")
     @user.update_attributes(params[:user])
     respond_with @user
   end

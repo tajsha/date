@@ -32,7 +32,7 @@
 class User < ActiveRecord::Base
   acts_as_messageable
   has_secure_password
-  attr_accessible :role, :user_id, :notification_id, :sender_id, :receiver_id, :conversation_id, :no_email, :average_response_time, :response_rate, :response_total, :name, :time_zone, :code, :lat, :lon, :city, :age, :age_end, :password_confirmation, :about_me, :feet, :inches, :password, :birthday, :career, :children, :education, :email, :ethnicity, :gender, :height, :name, :password_digest, :politics, :religion, :sexuality, :user_drink, :user_smoke, :username, :zip_code, :user_sex
+  attr_accessible :role, :user_id, :notification_id, :sender_id, :receiver_id, :conversation_id, :no_email, :average_response_time, :response_rate, :response_total, :name, :time_zone, :code, :lat, :lon, :city, :age, :age_end, :password_confirmation, :about_me, :feet, :inches, :password, :birthday, :career, :children, :education, :email, :ethnicity, :gender, :height, :name, :password_digest, :politics, :religion, :sexuality, :user_drink, :user_smoke, :username, :zip_code, :user_sex, :male_sexuality, :female_sexuality
   attr_accessor :user_sex
   # this prevented user from registering as I don't have timezone select on user reg form
   # validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name)
@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
   has_many :photos
   has_many :letsgos, dependent: :destroy
   belongs_to :default_photo, :class_name => "Photo"  
-  belongs_to :location, :foreign_key => :zip_code, :primary_key => :zip_code
+  belongs_to :location, :foreign_key => :zip_code, :primary_key => :zipcode
   has_many :notifications
   has_many :questions, foreign_key: :recipient_id
   has_many :sent_questions, class_name: 'Question', foreign_key: :sender_id
@@ -73,18 +73,21 @@ class User < ActiveRecord::Base
   
   def similar
     arr = User.where(:gender => self.gender).where.not(:id => self.id)
+    puts "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+    puts arr.inspect
+    puts self.location.state.inspect
     arr.select{|c| c.location.state == self.location.state }
   end
   
   def latitude
-      location = Location.find_by_zip_code(zip_code)
+      location = Location.find_by_zipcode(zip_code)
       if location
         location.latitude
     end
   end
   
     def longitude
-        location = Location.find_by_zip_code(zip_code)
+        location = Location.find_by_zipcode(zip_code)
         if location
           location.longitude
       end
