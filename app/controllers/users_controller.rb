@@ -99,7 +99,7 @@ end
     @user = User.find_by(username: params[:id])
     friend = User.find_by(username: params[:id])
     current_user.follow! friend unless current_user.following? friend
-    @users = @user.followed_users(page: params[:page])
+    @users = @user.followed_users(page: params[:page])-[current_user]
     render 'show_follow', layout: 'new_application'  
   end
 

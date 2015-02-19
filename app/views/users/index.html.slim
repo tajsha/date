@@ -142,6 +142,7 @@
 
 				// Have Masonry position new blocks
 				$(".box_detail").masonry( 'appended', $moreBlocks );         
+				Cufon.refresh();
 				if($moreBlocks.length == 4){
 					$('#more_users').val((parseInt(pageOffset) + 1));
 					$('#more_button').show();
