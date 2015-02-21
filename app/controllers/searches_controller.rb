@@ -48,8 +48,13 @@ class SearchesController < ApplicationController
 							 elsif params["max_age"].present?
 									18..params["max_age"].to_i
 							 end
+		  range_cond[:geodist] = 0.0..100_000.0
           conditions[:children] = params["children"] if params["children"].present?
-		  @users = User.search(:conditions => conditions, :with => range_cond)
+		  @users = User.search(:conditions => conditions, 
+					:with => range_cond,
+					:geo => [current_user.latitude * Math::PI / 180.0, current_user.longitude * Math::PI / 180.0],
+					:order => 'geodist ASC', :without => {:user_id => current_user.id}
+					)
     else                    
           params[:search] = params[:search] || ''
            @users = User.search(params[:search].gsub(/\s+/, ' | '),
