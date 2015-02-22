@@ -109,5 +109,13 @@ javascript:
        }
       );
     }
+    
+    $(".outer").hover(
+	  function() {
+		$( this ).find("div.message_delete").show();
+	  }, function() {
+		$( this ).find("div.message_delete").hide();
+	  }
+	);
   })
   
