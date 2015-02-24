@@ -52,7 +52,12 @@
         
                   .select5
                     .col.col3.col31 style='width:100px;'
-                      = select_tag :religion, options_for_select(['Agnostic', 'Atheist', 'Christian', 'Catholic', 'Buddhist', 'Hindu', 'Jewish', 'Muslim', 'Other']), prompt: 'Faith'
+                      ul.form_list
+						  -['Agnostic', 'Atheist', 'Christian', 'Catholic', 'Buddhist', 'Hindu', 'Jewish', 'Muslim', 'Other'].each do |r|
+							li
+								= check_box_tag 'religion[]', r
+								h #{r}
+                      
                 .btm_sec style='margin-top:20px;'
                   ul.form_list
                     li

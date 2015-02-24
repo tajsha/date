@@ -40,7 +40,7 @@ class SearchesController < ApplicationController
           conditions[:gender] = params["gender"].strip if params["gender"].present?
           conditions[:ethnicity] = params["ethnicity"] if params["ethnicity"].present?
           conditions[:zip_code] = params["zip_code"] if params["zip_code"].present?
-          conditions[:religion] = params["religion"] if params["religion"].present?
+          conditions[:religion] = params["religion"].join('|') if params["religion"].present?
           range_cond[:age] = if params["min_age"].present? and params["max_age"].present?
 									params["min_age"].to_i..params["max_age"].to_i 
 							 elsif params["min_age"].present?
