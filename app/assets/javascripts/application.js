@@ -92,3 +92,16 @@ function fix_select(selector) {
     $(selector).unwrap().removeClass('jqTransformHidden').jqTransSelect();
     $(selector).parent().css('zIndex', i);
 }
+
+function deleteMsg(id){
+	var ids = [];
+	ids.push(id);        
+	$.ajax({ type: "POST",  url:"/conversations/trash_all",  data:{ids: ids},
+	  success:function(data){
+		jQuery.each(ids, function (i, val) {
+		  $("div.outer#msg_"+val).remove();
+		});
+	  }
+	});
+}
+

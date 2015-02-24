@@ -27,6 +27,10 @@
     .col_3
       strong = extract_date(message.created_at)
       small = extract_time(message.created_at)
+  div.message_delete
+	a  href="javascript:void(0);" onclick="deleteMsg(#{conversation.id});" style="text-decoration: none; color: #929292;"
+	   img alt="" style="display: block; margin-left: auto; margin-right: auto;" src="/assets/del_icon.png" /
+	   span = 'Delete'
   form action="#" 
     fieldset
       input type="checkbox" class="conversation_checkbox" data-id="#{conversation.id}"
