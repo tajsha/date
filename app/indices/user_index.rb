@@ -5,7 +5,7 @@ ThinkingSphinx::Index.define :location, :with => :active_record do
   has "RADIANS(locations.longitude)", :as => :longitude, :type => :float
 end 
 
-ThinkingSphinx::Index.define :user, :with => :active_record do 
+ThinkingSphinx::Index.define :user, :with => :active_record, :delta => true do 
   indexes name, :as => :user, :sortable => true 
   indexes religion, birthday, about_me, height, career, feet, inches, sexuality, children, user_smoke, user_drink, politics, gender, ethnicity, education, username, zip_code
   has created_at, updated_at 

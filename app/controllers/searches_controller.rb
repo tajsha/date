@@ -39,7 +39,14 @@ class SearchesController < ApplicationController
         range_cond = {}
           conditions[:gender] = params["gender"].strip if params["gender"].present?
           conditions[:ethnicity] = params["ethnicity"] if params["ethnicity"].present?
-          conditions[:zip_code] = params["zip_code"] if params["zip_code"].present?
+          if params["zip_code"].present?
+			l = Location.find_by_zip_code(params["zip_code"])
+			lat = l.latitude * Math::PI / 180.0
+			lng = l.longitude * Math::PI / 180.0
+		  else
+		    lat = current_user.latitude * Math::PI / 180.0
+		    lng = current_user.longitude * Math::PI / 180.0
+		  end
           conditions[:religion] = params["religion"].join('|') if params["religion"].present?
           range_cond[:age] = if params["min_age"].present? and params["max_age"].present?
 									params["min_age"].to_i..params["max_age"].to_i 
@@ -52,7 +59,7 @@ class SearchesController < ApplicationController
           conditions[:children] = params["children"] if params["children"].present?
 		  @users = User.search(:conditions => conditions, 
 					:with => range_cond,
-					:geo => [current_user.latitude * Math::PI / 180.0, current_user.longitude * Math::PI / 180.0],
+					:geo => [lat, lng],
 					:order => 'geodist ASC', :without => {:user_id => current_user.id}
 					)
     else                    
