@@ -104,4 +104,6 @@ function deleteMsg(id){
 	  }
 	});
 }
-
+$( document ).ready(function() {
+	$("abbr.timeago").timeago();
+});
