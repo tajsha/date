@@ -106,4 +106,8 @@ function deleteMsg(id){
 }
 $( document ).ready(function() {
 	$("abbr.timeago").timeago();
+	window.asd = $('.SlectBox').SumoSelect({ 
+			placeholder: 'Relegion',
+			csvDispCount: 3 
+		});
 });

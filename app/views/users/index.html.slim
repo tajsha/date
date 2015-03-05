@@ -52,7 +52,7 @@
         
                   .select5
                     .col
-					  = select_tag :religion, options_for_select(['Agnostic', 'Atheist', 'Christian', 'Catholic', 'Buddhist', 'Hindu', 'Jewish', 'Muslim', 'Other']), prompt: 'Relegion', multiple: true
+					  = select_tag :religion, options_for_select(['Agnostic', 'Atheist', 'Christian', 'Catholic', 'Buddhist', 'Hindu', 'Jewish', 'Muslim', 'Other']), multiple: true, class: "SlectBox", id: "relegion"
                       
                 .btm_sec style='margin-top:20px;'
                   ul.form_list
@@ -158,4 +158,6 @@
 		});
 	 }
 	 
-	 $("#relegion").dropdownchecklist(); 
+	 $("#relegion").on('change', function(){
+		return false;		
+	 });
