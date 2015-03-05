@@ -32,6 +32,7 @@ Dating::Application.routes.draw do
   match '/edit_card',   to: 'subscriptions#edit_card',   via: 'get'
   match '/update_card', to: 'subscriptions#update_card', via: 'post'
   get '/relationships/set_follow' => 'relationships#set_follow'
+  get '/speed_dates' => 'users#speed_date'
   
   post 'subscription_event' => "webhooks#subscription_event"
   
