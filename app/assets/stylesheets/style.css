@@ -931,7 +931,7 @@ body{ font-family:Arial, Helvetica, sans-serif; background:#f7f7f7;}
 .secrch_box_bg{ float:left; width:590px; background:url(/assets/search_box_bg.png) no-repeat 0 0; height:51px;}
 #top_sec form{float:left; width:100%; }
 .secrch_box_bg  .text_input{float:left; width:437px; padding:15px 0 16px 43px; background:none; font-size:15px; line-height:17px; color:#c6c6c6; border:none;}
-.secrch_box_bg  .find_btn{ float:left; width:108px; background:none; border:none; padding:13px 0 13px 0; text-align:center; font-size:17px; line-height:21px; color:#000000; cursor:pointer; text-shadow:0px 1px 1px #fff; font-weight:bold;}
+.secrch_box_bg  .find_btn{ float:left; width:148px; background:none; border:none; padding:13px 0 13px 0; text-align:center; font-size:17px; line-height:21px; color:#000000; cursor:pointer; text-shadow:0px 1px 1px #fff; font-weight:bold;}
 #top_sec h4{width:100%; font-size:15px; line-height:18px; color:#5b5b5b; float:left; padding:0 0 18px 0;}
 #top_sec h4 .adv_search{ margin:0 0 0 7px; padding:0 0 2px 0px; text-decoration:none; color:#5b5b5b; color:#39a0f6; border-bottom:1px dotted #39a0f6; font-size:14px; line-height:15px;}
 #top_sec h4 .adv_search span{ padding:0 0 0 4px;}

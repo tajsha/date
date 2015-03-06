@@ -3,34 +3,55 @@ TAG: <%= link_to "Eat/Drink", letsgos_eatdrink_path %> | <%= link_to "Listen/Wat
 
 <% for letsgo in @letsgos %>
 
-      <div class="outer" style="padding-left: 25%; padding-right: 25%;">
-        <fieldset style="border: 1px solid #bbbbbb; border-radius: 4px; padding: 5%; background: #eff0f3;">
-          <div style="float: left;">
-            <span>
-                <a href="/users/shaik"><img alt="" src="/uploads/photo/image/1/avatar_ruby.png" style="border: 1px solid #bbbbbb; border-radius: 4px;"></a>
-            </span>
-            <p>
-             <span><strong><%= letsgo.user.username %></strong><span><br/>
-             <span><%= letsgo.user.age %>, <%= letsgo.user.gender %>, <%= letsgo.user.sexuality %></span><br/>
-             <span><%= letsgo.user.location.city %>, <% letsgo.user.location.state %></span>
-            </p>
-          </div>
-          <div>
-            <span><%= letsgo.content %></span><br/>
-            <span style="text-align: center;">.....................................................................................</span><br>
-            <br/>
-            <div class="letsgos_container">
-              <%= link_to "View", letsgo.user, :class => "button" %>
-              <% unless current_user?(letsgo.user) %>
-                  <%= link_to "I'm Interested", interested_letsgo_path(letsgo), method: :message, :class => "button" %>
-                  <%= link_to "repost", repost_letsgo_path(letsgo), method: :post, :class => "button" %>
+<li class="stream-card-search stream-card imp" data-imp-position="0" data-imp="95341" data-user="vicky09">
+	<div class="media">
+		<div class="media-snapshot">
+			<a href="<%= user_url(letsgo.user)%>"><img alt="" class="media-avatar" height="100" src="<%= letsgo.user.avatar.try(:image_url,:profile) %>" width="100">
+			</a>
+			<dl class="media-meta">
+				<dt class="user-login">
+					<a href="<%= user_url(letsgo.user)%>"><%= letsgo.user.username %></a>
+				</dt>
+				<dd class="user-meta">
+					<%= letsgo.user.age %>, <%= letsgo.user.gender.first %>, <%= letsgo.user.sexuality %>
+				</dd>
+				<dd class="user-location">
+					<%= letsgo.user.location.city %>, <% letsgo.user.location.state %>
+				</dd>
+			</dl>
+		</div>
+
+		<div class="media-content">
+
+		<div class="card-content-proposition card-content">
+		<blockquote> 
+			<span class="card-header haw-leader">
+				How about we…
+			</span>
+			<span class="date-description">
+				<%= letsgo.content %>
+			</span>
+			</blockquote>
+		</div>
+
+		<div class="date-card-info card-info">
+			<span class="timestamp right">Reposted over <abbr class="timeago" title="<%= letsgo.user.updated_at %>"></abbr> </span>
+		</div>
+
+		<div class="date-card-actions card-actions">
+			<div class="contact right">
+			<% unless current_user?(letsgo.user) %>
+                  <%= link_to "I'm Interested", interested_letsgo_path(letsgo), method: :message, :class => "button skinny" %>
+                  <%= link_to "repost", repost_letsgo_path(letsgo), method: :post, :class => "button skinny" %>
               <% end %>
               <% if current_user?(letsgo.user) %>
-                  <%= link_to "delete", letsgo, method: :delete, data: { confirm: "You sure?" }, :class => "button" %>
+                  <%= link_to "delete", letsgo, method: :delete, data: { confirm: "You sure?" }, :class => "button skinny" %>
               <% end %>
-            </div>
-          </div>
-        </fieldset>
-      </div>
-    <br/>
+			</div>
+			<div class="favorite left">
+			</div>
+		</div>
+	</div>
+</div>
+</li>
 <% end %>
