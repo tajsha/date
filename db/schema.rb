@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141101224339) do
+ActiveRecord::Schema.define(version: 20150225164202) do
 
   create_table "contacts", force: true do |t|
     t.string   "name"
@@ -311,6 +311,7 @@ ActiveRecord::Schema.define(version: 20141101224339) do
     t.integer  "plan_id"
     t.boolean  "no_email"
     t.string   "slug"
+    t.boolean  "delta",                  default: true, null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
