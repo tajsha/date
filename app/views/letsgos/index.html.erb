@@ -56,4 +56,19 @@ TAG: <%= link_to "Eat/Drink", letsgos_eatdrink_path %> | <%= link_to "Listen/Wat
 </div>
 </li>
 <% end %>
+<% if @page > 1 %>
+<form action="/letsgos">
+    <input type="hidden" name='page' value= '<%= @page-2 %>'/>
+    <input class="btn btn-success btn-block" type="submit" value="Go to Previous Page">
+</form>
+<% end %>
+
+<% if @letsgos.present? %>
+<form action="/letsgos">
+    <input type="hidden" name='page' value= '<%= @page %>'/>
+    <input class="btn btn-success btn-block" type="submit" value="Go to Next Page">
+</form>
+<% end %>
+
+
 </div>

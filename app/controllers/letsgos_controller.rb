@@ -23,10 +23,11 @@ end
     redirect_to :back
   end
   
-  def index
-    @letsgos = Letsgo.where("repost_from_user_id IS NULL").all     
-    render layout: 'new_application'
-    
+  def index    
+    limit = params['page'].present? ? params['page'].to_i * 10 : 0
+    @letsgos = Letsgo.where("repost_from_user_id IS NULL").offset(limit).limit(10)    
+    @page = params['page'].present? ? (params['page'].to_i+1) : 1    
+    render layout: 'new_application'    
   end
 
 def eatdrink
