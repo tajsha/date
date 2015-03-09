@@ -392,7 +392,6 @@ margin-left: 15px;
 }
 
 blockquote {
-width:450px;
 quotes:"\201C" "\201D";
 }
 blockquote:before, blockquote:after {

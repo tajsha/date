@@ -33,7 +33,7 @@
                                  <dd class="user-meta">
                                     <%= u.age %>, <%= u.gender.first %>, <%= u.sexuality %>
                                  </dd>
-                                 <dd class="user-location"><%= u.location.city %>, <% u.location.state %></dd>
+                                 <dd class="user-location"><%= u.location.city %>, <%= u.location.state %></dd>
                               </dl>
                            </div>
                         </div>
@@ -55,9 +55,6 @@
           <% end %>
          </ol>
          <div class="empty-state">
-            <div class="hidden loading-indicator">
-               <div class="spinner"></div>
-            </div>
             <div class="layout-container">
                <div class="empty-container">
                   <div class="empty-inner">
