@@ -32,7 +32,7 @@ body{ font-family:Arial, Helvetica, sans-serif; background:#f7f7f7;}
 #nav li.active a span{padding:0 0 0 5px;}
 #menu_sec .registered_btn{float:right; width:144px; background: no-repeat 0 0; height:34px; margin:2px 2px 0 37px; font-size:13px; line-height:15px; text-shadow:0 1px 1px #fff; font-weight:bold; text-align:center;text-decoration:none; background:url(/assets/registered_btn_bg.png) no-repeat 0 0; padding:8px 0 4px 0; color:#3f4244;}
 
-#body_container{float:left; width:100%; margin-left: 20px;}
+#body_container{float:left; width:100%;}
 #top_sec{float:left; padding:53px 0 64px 0; width:100%;}
 #top_sec .search_box{float:left; width:593px; padding:0 0 15px 0;}
 #top_sec .search_box h1{width:100%; font-size:38px; color:#5b5b5b; line-height:40px; padding:0 0 17px 0;}
@@ -931,17 +931,17 @@ body{ font-family:Arial, Helvetica, sans-serif; background:#f7f7f7;}
 .secrch_box_bg{ float:left; width:590px; background:url(/assets/search_box_bg.png) no-repeat 0 0; height:51px;}
 #top_sec form{float:left; width:100%; }
 .secrch_box_bg  .text_input{float:left; width:437px; padding:15px 0 16px 43px; background:none; font-size:15px; line-height:17px; color:#c6c6c6; border:none;}
-.secrch_box_bg  .find_btn{ float:left; width:148px; background:none; border:none; padding:13px 0 13px 0; text-align:center; font-size:17px; line-height:21px; color:#000000; cursor:pointer; text-shadow:0px 1px 1px #fff; font-weight:bold;}
+.secrch_box_bg  .find_btn{ float:left; width:108px; background:none; border:none; padding:13px 0 13px 0; text-align:center; font-size:17px; line-height:21px; color:#000000; cursor:pointer; text-shadow:0px 1px 1px #fff; font-weight:bold;}
 #top_sec h4{width:100%; font-size:15px; line-height:18px; color:#5b5b5b; float:left; padding:0 0 18px 0;}
 #top_sec h4 .adv_search{ margin:0 0 0 7px; padding:0 0 2px 0px; text-decoration:none; color:#5b5b5b; color:#39a0f6; border-bottom:1px dotted #39a0f6; font-size:14px; line-height:15px;}
 #top_sec h4 .adv_search span{ padding:0 0 0 4px;}
 
 .form_container{float:left; width:100%; background:#fff; border:1px solid #d0d0d0; border-radius:0 0 3px 3px; padding:0px 0px 8px 0px;}
-.form_container .row{ float:left; width:914px; padding:37px 22px 0 22px;}
+.form_container .row{ float:left; width:914px; padding:3px 22px 0 22px;}
 .form_container .row .col{float:left; width:257px; margin:0 13px 0 0;}
 .form_container .row .col label{ width:58px; text-align:left; font-size:15px; line-height:17px; color:#525252; padding:12px 0 0 0; float:left;}
 .form_container .row .col .large{ float:right; width:199px; padding:10px 0;}
-.form_container .row .col.col2{width:302px; margin:0 30px 0 0;}
+.form_container .row .col.col2{width:262px; margin:0 30px 0 0;}
 .form_container .row .col.col3{width:160px; margin:0 14px 0 0;}
 .form_container .row .col.col3 .small{float:right; width:107px; padding:10px 0;}
 .form_container .row .col.col3 label{width:51px;}

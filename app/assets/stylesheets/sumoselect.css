@@ -6,7 +6,9 @@
 .SumoSelect > .optWrapper > .options > li { -moz-transition: 200ms ease; -webkit-transition: 200ms ease; transition: 200ms ease; }
     .SumoSelect > .optWrapper > .options > li label, .SumoSelect > .CaptionCont { user-select: none; -o-user-select: none; -moz-user-select: none; -khtml-user-select: none; -webkit-user-select: none; }
 
-.SumoSelect { width: 30%!important;
+.SumoSelect { 
+width: 110px;
+margin-left: -30px;
 position: relative;
 height: 41px;
 background: url(/assets/img/select_left.jpg) repeat top left;
