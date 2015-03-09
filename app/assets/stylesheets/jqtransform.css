@@ -259,7 +259,7 @@ a.jqTransformChecked { background-position: center bottom;
 
 
 .select1 .jqTransformSelectWrapper {
-	width: 56%!important;
+	width: 53%!important;
 	position:relative;
 	height: 41px;
 	background: url(/assets/img/select_left.jpg) repeat top left;
@@ -268,7 +268,7 @@ a.jqTransformChecked { background-position: center bottom;
 	
 	
 .select2 .jqTransformSelectWrapper {
-	width: 69%!important;
+	width: 65%!important;
 	position:relative;
 	height: 41px;
 	background: url(/assets/img/select_left.jpg) repeat top left;

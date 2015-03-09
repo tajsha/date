@@ -1,3 +1,4 @@
+<div id='letsgo' style="margin-left: 20px;">
 TAG: <%= link_to "Eat/Drink", letsgos_eatdrink_path %> | <%= link_to "Listen/Watch", letsgos_listenwatch_path %> | <%= link_to "Play", letsgos_play_path %> | <%= link_to "Explore", letsgos_explore_path %> | <%= link_to "Other", letsgos_other_path %>
 <br/>
 
@@ -16,7 +17,7 @@ TAG: <%= link_to "Eat/Drink", letsgos_eatdrink_path %> | <%= link_to "Listen/Wat
 					<%= letsgo.user.age %>, <%= letsgo.user.gender.first %>, <%= letsgo.user.sexuality %>
 				</dd>
 				<dd class="user-location">
-					<%= letsgo.user.location.city %>, <% letsgo.user.location.state %>
+					<%= letsgo.user.location.city %>, <%= letsgo.user.location.state %>
 				</dd>
 			</dl>
 		</div>
@@ -55,3 +56,19 @@ TAG: <%= link_to "Eat/Drink", letsgos_eatdrink_path %> | <%= link_to "Listen/Wat
 </div>
 </li>
 <% end %>
+<% if @page > 1 %>
+<form action="/letsgos">
+    <input type="hidden" name='page' value= '<%= @page-2 %>'/>
+    <input class="btn btn-success btn-block" type="submit" value="Go to Previous Page">
+</form>
+<% end %>
+
+<% if @letsgos.present? %>
+<form action="/letsgos">
+    <input type="hidden" name='page' value= '<%= @page %>'/>
+    <input class="btn btn-success btn-block" type="submit" value="Go to Next Page">
+</form>
+<% end %>
+
+
+</div>
