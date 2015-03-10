@@ -106,8 +106,22 @@ function deleteMsg(id){
 }
 $( document ).ready(function() {
 	$("abbr.timeago").timeago();
-	window.asd = $('.SlectBox').SumoSelect({ 
+	window.asd = $('.SlectBox#relegion').SumoSelect({ 
 			placeholder: 'Relegion',
 			csvDispCount: 3 
 		});
+		
+	window.asd = $('.SlectBox#children').SumoSelect({ 
+			placeholder: 'Kids',
+			csvDispCount: 3 
+		});
+	window.asd = $('.SlectBox#ethnicity').SumoSelect({ 
+			placeholder: 'Ethnicity',
+			csvDispCount: 3 
+		});
+	window.asd = $('.SlectBox#gender').SumoSelect({ 
+		placeholder: 'Gender',
+		csvDispCount: 3 
+	});
+	
 });

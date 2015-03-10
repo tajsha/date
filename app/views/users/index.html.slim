@@ -24,10 +24,10 @@
                    
              
                   .select2
-                    .col.col2
+                    .col style="width:60px;"
 					  label Seeking 
-					  
-                      = select_tag :gender, options_for_select([['Men',' Male'], ['Women', 'Female']])
+					.col5 style="float:left;" 
+                      = select_tag :gender, options_for_select([['Men','Male'], ['Women', 'Female']]), multiple: true, class: "SlectBox", id: "gender"
                 .row      
 				  .select1
 					.col.col3.col33 style='width:175px;'
@@ -40,16 +40,16 @@
 					  = select_tag :max_age, options_for_select((20..65),65), {class: 'small'}
                 
                   .select4
-                  .col style="margin-left:15px; width: 245px;"
-                      = select_tag :ethnicity, options_for_select(['Asian', 'Black', 'Biracial', 'Indian', 'Hispanic/Latin', 'Middle Eastern', 'Native American', 'Pacific Islander', 'White', 'Other']), prompt: 'Ethnicity'
+                  .col5 style="float:left; margin-left:15px; width: 245px;"
+                      = select_tag :ethnicity, options_for_select(['Asian', 'Black', 'Biracial', 'Indian', 'Hispanic/Latin', 'Middle Eastern', 'Native American', 'Pacific Islander', 'White', 'Other']), multiple: true, class: "SlectBox", id: "ethnicity"
                       
                 .row
                   .col.col5 style='margin-right:18px;'
                     label Near
                     = text_field_tag :zip_code, nil, placeholder: "enter zip here", class: 'text_input'
                     
-				  .col style="width: 180px;"
-					= select_tag :children, options_for_select(['I want kids now','I want one someday', 'Yes they live with me']), prompt: 'Kids'
+				  .col5 style="width: 180px; float:left;"
+					= select_tag :children, options_for_select(['I want kids now','I want one someday', 'Yes they live with me']), multiple: true, class: "SlectBox", id: "children"
               
         
                   .select5
@@ -160,6 +160,6 @@
 		});
 	 }
 	 
-	 $("#relegion").on('change', function(){
+	 $("#relegion, #gender, #children, #ethnicity").on('change', function(){
 		return false;		
 	 });

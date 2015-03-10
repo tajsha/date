@@ -37,8 +37,8 @@ class SearchesController < ApplicationController
     if params[:gender].present? and params[:search].nil?
         conditions = {}
         range_cond = {}
-          conditions[:gender] = params["gender"].strip if params["gender"].present?
-          conditions[:ethnicity] = params["ethnicity"] if params["ethnicity"].present?
+          conditions[:gender] = params["gender"].join('|') if params["gender"].present?
+          conditions[:ethnicity] = params["ethnicity"].join('|') if params["ethnicity"].present?
           if params["zip_code"].present?
 			l = Location.find_by_zip_code(params["zip_code"])
 			lat = l.latitude * Math::PI / 180.0
@@ -56,7 +56,7 @@ class SearchesController < ApplicationController
 									18..params["max_age"].to_i
 							 end
 		  range_cond[:geodist] = 0.0..100_000.0
-          conditions[:children] = params["children"] if params["children"].present?
+          conditions[:children] = params["children"].join('|') if params["children"].present?
 		  @users = User.search(:conditions => conditions, 
 					:with => range_cond,
 					:geo => [lat, lng],
