@@ -246,7 +246,10 @@ javascript:
         gallery: { enabled: true },
         showCloseBtn: true
     });
-    $('.img_box1').magnificPopup();
+    $('.img_box1').click(function(){
+		var user_id = "#{@user.avatar.id}" ;
+		$("a[href='#photo_" +user_id+ "']").trigger('click');
+    });
     $('.profile_btn').magnificPopup({
       showCloseBtn: true
     });
