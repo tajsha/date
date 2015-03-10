@@ -25,7 +25,9 @@ end
   
   def index    
     limit = params['page'].present? ? params['page'].to_i * 10 : 0
-    @letsgos = Letsgo.where("repost_from_user_id IS NULL").offset(limit).limit(10)    
+    location_zipcodes = Location.select(:zip_code).where(:state => current_user.location.state).map(&:zip_code)
+    user_ids = User.select(:id).where(:zip_code => location_zipcodes)
+    @letsgos = Letsgo.where("repost_from_user_id IS NULL AND user_id IN (?)", user_ids).offset(limit).limit(10)    
     @page = params['page'].present? ? (params['page'].to_i+1) : 1    
     render layout: 'new_application'    
   end
