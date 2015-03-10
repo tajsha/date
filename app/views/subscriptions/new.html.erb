@@ -110,9 +110,7 @@
   </div>
 </div>
 <script>
-  $("input[name='plan_id']").on('change', function(){
-     console.log($(this).val());
-     console.log("<%= new_subscription_url %>");
+  $("input[name='subscription[plan_id]']").on('change', function(){
       window.location.assign("<%= new_subscription_url %>?plan_id="+$(this).val());
   });
 
