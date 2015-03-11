@@ -26,7 +26,24 @@ end
   def index    
     limit = params['page'].present? ? params['page'].to_i * 10 : 0
     location_zipcodes = Location.select(:zip_code).where(:state => current_user.location.state).map(&:zip_code)
-    user_ids = User.select(:id).where(:zip_code => location_zipcodes)
+        genders = if current_user.gender.downcase == 'male'
+				  if current_user.sexuality.downcase == 'gay'
+				    ["Male"]
+				  elsif current_user.sexuality.downcase == 'straight'
+				    ["Female"]
+				  else
+				    ["Male", "Female"]
+				  end
+				else
+				  if current_user.sexuality.downcase == 'gay'
+				    ["Female"]
+				  elsif current_user.sexuality.downcase == 'straight'
+				    ["Male"]
+				  else
+				    ["Male", "Female"]
+				  end
+				end
+    user_ids = User.select(:id).where(:zip_code => location_zipcodes, :gender => genders)
     @letsgos = Letsgo.where("repost_from_user_id IS NULL AND user_id IN (?)", user_ids).offset(limit).limit(10)    
     @page = params['page'].present? ? (params['page'].to_i+1) : 1    
     render layout: 'new_application'    
