@@ -44,7 +44,7 @@ end
 				  end
 				end
     user_ids = User.select(:id).where(:zip_code => location_zipcodes, :gender => genders)
-    @letsgos = Letsgo.where("repost_from_user_id IS NULL AND user_id IN (?)", user_ids).offset(limit).limit(10)    
+    @letsgos = Letsgo.where("repost_from_user_id IS NULL AND user_id IN (?)", user_ids).order("created_at ASC").offset(limit).limit(10)    
     @page = params['page'].present? ? (params['page'].to_i+1) : 1    
     render layout: 'new_application'    
   end
