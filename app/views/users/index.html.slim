@@ -18,7 +18,7 @@
               .form_container
                 .row style='padding-top: 20px !important;'
                   .col
-                      label I am a
+                      label I am
                   
                       = select_tag :sexuality, options_for_select(['Straight', 'Gay', 'Bisexual'])
                    
@@ -94,7 +94,7 @@
             = label_tag :body, 'Your Message', class: 'control-label'
             = text_area_tag :body, nil, class: 'form-control' 
           br
-          = submit_tag 'Send Message', class: 'btn btn-primary'
+          = submit_tag 'Send', class: 'btn btn-primary'
   #report_me.mfp-hide
     center
       .message_div

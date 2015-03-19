@@ -168,7 +168,7 @@
                                          = label_tag :body, 'Send a Message', class: 'control-label'
                                          = text_field :body, nil, placeholder: "Hi, I like your picture and figured I should write you a message and say...", class: 'form-control' 
                                        br
-                                       = submit_tag 'Send Message', class: 'btn btn-primary'
+                                       = submit_tag 'Send', class: 'btn btn-primary'
               a.right_arrow href="#" 
                 img alt="" src="/assets/right_arrow.png" /
     .profile_middle_container
@@ -204,7 +204,7 @@
           = label_tag :body, 'Your Message', class: 'control-label'
           = text_area_tag :body, nil, placeholder: "Hi, I like your picture and figured I should write you a message and say...", class: 'form-control' 
         br
-        = submit_tag 'Send Message', class: 'btn btn-primary'
+        = submit_tag 'Send', class: 'btn btn-primary'
 #ask_me.mfp-hide 
           center
             .message_div
@@ -216,7 +216,7 @@
                   = label_tag :body, 'Your Message', class: 'control-label'
                   = text_area_tag :body, nil, placeholder: "Hi, I like your picture and figured I should write you a message and say...", class: 'form-control' 
                 br
-                = submit_tag 'Send Message', class: 'btn btn-primary'
+                = submit_tag 'Send', class: 'btn btn-primary'
 - if current_user.present?
   #question_me.mfp-hide 
     center
