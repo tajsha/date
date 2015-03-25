@@ -118,7 +118,7 @@ class SearchesController < ApplicationController
    end
    
    def check_user_login
-     redirect_to :back unless current_user.present?
+     redirect_to "/signup" unless current_user.present?
    end
    
 end
