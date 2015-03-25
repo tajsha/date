@@ -65,6 +65,7 @@ Dating::Application.routes.draw do
   end
   resources :searches do
 	get 'save_searches', on: :collection
+	get 'load_search', on: :collection
   end
   resources :sessions,      only: [:new, :create, :destroy]
   resources :relationships, only: [:create, :destroy]

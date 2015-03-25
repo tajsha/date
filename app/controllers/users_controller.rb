@@ -90,7 +90,8 @@ end
     @search = Search.new
     page = params[:page] || 1
      if @user.present?
-		@users = User.search(:without => {:user_id => @user.id}, :page => page, :per_page => 4, :order => 'created_at DESC')
+		@users = User.search(:geo => [current_user.latitude * Math::PI / 180.0, current_user.longitude * Math::PI / 180.0],
+				:with  => {:geodist => 0.0..100_000.0}, :without => {:user_id => @user.id}, :page => page, :per_page => 4, :order => 'created_at DESC')
 	 else
 		@users = User.search(:page => page, :per_page => 4, :order => 'created_at DESC')
 	 end
