@@ -1,3 +1,6 @@
+- if flash[:notice]
+   .notice
+	 = flash[:notice]    
 .row style='#{random_background};margin:0;float:left;width:100%;'
   .wrapper
     #top_sec
@@ -6,7 +9,7 @@
             h1 Search and find a mate.
             = form_tag searches_path, method: :get, id: "basic_search" do
               span.secrch_box_bg
-                input.text_input name='search' type="text" placeholder="e.g (female), likes dogs, has a job)"
+                input.text_input name='search' type="text" placeholder="e.g (female), likes dogs, has a job)" value="#{@search.input_text}"
                 input.find_btn type="submit" value="Find" /
           h4
             | or use our
@@ -20,42 +23,48 @@
                   .col
                       label I am a
                   
-                      = select_tag :sexuality, options_for_select(['Straight', 'Gay', 'Bisexual'])
+                      = select_tag :sexuality, options_for_select(['Straight', 'Gay', 'Bisexual'], @search.sexuality)
                    
              
                   .select2
                     .col style="width:60px;"
 					  label Seeking 
 					.col5 style="float:left;" 
-                      = select_tag :gender, options_for_select([['Men','Male'], ['Women', 'Female']]), multiple: true, class: "SlectBox", id: "gender"
+					  - gender = @search.gender.present? ? @search.gender.split(',') : nil
+                      = select_tag :gender, options_for_select([['Men','Male'], ['Women', 'Female']], ), multiple: true, class: "SlectBox", id: "gender"
                 .row      
 				  .select1
 					.col.col3.col33 style='width:175px;'
 					  label Ages
-					  = select_tag :min_age, options_for_select((18..65),18), {class: 'small'}
+					  - min_age = @search.min_age || 18
+					  = select_tag :min_age, options_for_select((18..65), min_age), {class: 'small'}
 
 				  .select5
 					.col.col4
 					  label to
+					  - max_age = @search.max_age || 65
 					  = select_tag :max_age, options_for_select((20..65),65), {class: 'small'}
                 
                   .select4
                   .col5 style="float:left; margin-left:15px; width: 245px;"
-                      = select_tag :ethnicity, options_for_select(['Asian', 'Black', 'Biracial', 'Indian', 'Hispanic/Latin', 'Middle Eastern', 'Native American', 'Pacific Islander', 'White', 'Other']), multiple: true, class: "SlectBox", id: "ethnicity"
+					  - ethnicity = @search.ethnicity.present? ? @search.ethnicity.split(',') : nil
+                      = select_tag :ethnicity, options_for_select(['Asian', 'Black', 'Biracial', 'Indian', 'Hispanic/Latin', 'Middle Eastern', 'Native American', 'Pacific Islander', 'White', 'Other'], ethnicity), multiple: true, class: "SlectBox", id: "ethnicity"
                       
                 .row
                   .col.col5 style='margin-right:18px;'
                     label Near
-                    = text_field_tag :zip_code, nil, placeholder: "enter zip here", class: 'text_input'
+                    input.text_input name='zip_code' type="text" placeholder="enter zip here" value="#{@search.zip_code}"
+                    
                     
 				  .col5 style="width: 180px; float:left;"
-					= select_tag :children, options_for_select(['I want kids now','I want one someday', 'Yes they live with me']), multiple: true, class: "SlectBox", id: "children"
+				    - children = @search.children.present? ? @search.children.split(',') : nil
+					= select_tag :children, options_for_select(['I want kids now','I want one someday', 'Yes they live with me'], children), multiple: true, class: "SlectBox", id: "children"
               
         
                   .select5
-                    
-					  = select_tag :religion, options_for_select(['Agnostic', 'Atheist', 'Christian', 'Catholic', 'Buddhist', 'Hindu', 'Jewish', 'Muslim', 'Other']), multiple: true, class: "SlectBox", id: "relegion"
-					  input.adv_text_input name='search' type="hidden"
+                      - religion = @search.religion.present? ? @search.religion.split(',') : nil
+					  = select_tag :religion, options_for_select(['Agnostic', 'Atheist', 'Christian', 'Catholic', 'Buddhist', 'Hindu', 'Jewish', 'Muslim', 'Other'], religion), multiple: true, class: "SlectBox", id: "relegion"
+					  input.adv_text_input name='search' type="hidden" value="#{@search.input_text}"
                       
                 .btm_sec style='margin-top:20px;'
                   ul.form_list
@@ -68,7 +77,7 @@
                         = image_tag "form_icon2.png"
                         span Load
                     li
-                      a href="#" id="reset_form"
+                      a href="/searches" id="reset_form"
                         = image_tag "form_icon3.png"
                         span Reset
                   input.find_btn type="submit" value="Find" /
@@ -164,7 +173,7 @@
 		return false;		
 	 });
 	 
-	 $("input.text_input").on('keyup', function(){
+	 $("#basic_search input.text_input").on('keyup', function(){
 	   $("input.adv_text_input").val(this.value);
 	 });
 	 
@@ -172,6 +181,11 @@
 	   $("form#adv_search").trigger('reset');
 	   $("form#basic_search").trigger('reset');	 
 	   $("input.adv_text_input").val("");
+	 });
+	 
+	 $("#basic_search").submit(function(e){
+		$('form#adv_search').submit();
+		e.preventDefault();
 	 });
 	 
 	 $("#save_search").on("click", function () {
