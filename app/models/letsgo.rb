@@ -10,6 +10,14 @@ class Letsgo < ActiveRecord::Base
   validates :user_id, presence: true
   scope :random, -> { order("RANDOM()") }
   
+  after_save :set_user_delta_flag
+  after_destroy :set_user_delta_flag
+  
+  def set_user_delta_flag
+    user.delta = false
+    user.save!
+  end
+  
   def self.total_male
     count_of_males = Letsgo.joins(:user).where(users: {gender: 'male'}).uniq.count
   end

@@ -103,7 +103,6 @@ class SearchesController < ApplicationController
    end
    
    def save_searches
-   {"utf8"=>"✓", "sexuality"=>"Straight", "min_age"=>"18", "max_age"=>"65", "zip_code"=>"", "search"=>"dogs"}
      s = current_user.search || Search.new
      s.gender = params["gender"].join(',') if params["gender"].present?
      s.min_age = params["min_age"] if params["min_age"].present?
@@ -117,8 +116,23 @@ class SearchesController < ApplicationController
      redirect_to :back
    end
    
+   def load_search
+     s = current_user.search
+     if s.present?
+		 p = {"utf8"=>"✓", "sexuality"=> current_user.sexuality, "min_age"=> s.min_age, 
+				"max_age"=> s.max_age, "zip_code"=> s.zip_code, "search"=> s.input_text, 
+				"religion" => s.religion.present? ? s.religion.split(',') : nil, 
+				"children" => s.children.present? ? s.children.split(',') : nil,
+				"ethnicity" => s.ethnicity.present? ? s.ethnicity.split(',') : nil, 
+				"gender" => s.gender.present? ? s.gender.split(',') : nil}
+		redirect_to searches_path(:params => p)
+	 else
+	   redirect_to :back
+	 end
+   end
+   
    def check_user_login
-     redirect_to :back unless current_user.present?
+     redirect_to "/signup" unless current_user.present?
    end
    
 end
