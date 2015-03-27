@@ -3,7 +3,7 @@ class SearchesController < ApplicationController
 
   def new
     @search = Search.new
-    render layout: 'new_application'
+    render 'users/index', layout: 'new_application'
   end
 
   def create
@@ -111,24 +111,18 @@ class SearchesController < ApplicationController
      s.religion = params["religion"].join(',') if params["religion"].present?
      s.children = params["children"].join(',') if params["children"].present?
      s.ethnicity = params["ethnicity"].join(',') if params["ethnicity"].present?
+     s.sexuality = params["sexuality"] if params["sexuality"].present?
+     s.zip_code = params["zip_code"] if params["zip_code"].present?
      s.user_id = current_user.id
      s.save
+     flash[:notice] = "Search saved successfully."
      redirect_to :back
    end
    
    def load_search
-     s = current_user.search
-     if s.present?
-		 p = {"utf8"=>"✓", "sexuality"=> current_user.sexuality, "min_age"=> s.min_age, 
-				"max_age"=> s.max_age, "zip_code"=> s.zip_code, "search"=> s.input_text, 
-				"religion" => s.religion.present? ? s.religion.split(',') : nil, 
-				"children" => s.children.present? ? s.children.split(',') : nil,
-				"ethnicity" => s.ethnicity.present? ? s.ethnicity.split(',') : nil, 
-				"gender" => s.gender.present? ? s.gender.split(',') : nil}
-		redirect_to searches_path(:params => p)
-	 else
-	   redirect_to :back
-	 end
+     @search = current_user.search
+     flash[:notice] = "Search loaded successfully."
+	 render 'users/index', layout: 'new_application'    
    end
    
    def check_user_login
