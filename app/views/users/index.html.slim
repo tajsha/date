@@ -164,6 +164,16 @@
 					$('#more_users').val((parseInt(pageOffset) + 1));
 					$('#more_button').show();
 				}
+				$('.message_btn').magnificPopup();
+				$('.report_btn').magnificPopup();
+				$('.message_btn').click(function(){
+				  var user_id = $(this).data('user');
+				  $('#user').val(user_id);
+				});
+				$('form#message_form').bind('ajax:success', function(evt, data, status, xhr){
+					$.magnificPopup.close()  
+				  });
+				$('.save_btn').magnificPopup();
 			}
 
 		});
