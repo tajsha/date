@@ -63,10 +63,11 @@ end
     @user = current_user
     @search = Search.new
     page = params[:page] || 1
+    @order = params[:order] || ['age', 'created_at', 'email', 'zip_code', 'birthday', 'username'].shuffle.first
      if @user.present?
-		@users = User.search(:without => {:user_id => @user.id}, :page => page, :per_page => 4, :order => 'created_at DESC')
+		@users = User.search(:without => {:user_id => @user.id}, :page => page, :per_page => 4, :order => "#{@order} DESC")
 	 else
-		@users = User.search(:page => page, :per_page => 4, :order => 'created_at DESC')
+		@users = User.search(:page => page, :per_page => 4, :order => "#{@order} DESC")
 	 end
 	 
     if request.xhr?
