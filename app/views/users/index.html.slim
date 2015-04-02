@@ -141,8 +141,9 @@
 	
 	function getMoreRecords(){
 		var pageOffset = $('#more_users').val();
+		var order = "#{@order}";
 		$('#more_button').hide();
-		var url = "/users?"+"page=" + pageOffset;
+		var url = "/users?"+"page=" + pageOffset + "&order=" + order;
 		$.ajax({
 			url: url,
 			method: 'GET',
