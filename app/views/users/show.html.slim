@@ -139,20 +139,21 @@ p.flash
                   li class="#{index > 2 ? 'hide' : ''}"
                     = link_to image_tag(photo.image_url(:thumb)), "#" + dom_id(photo)
                     div id="#{dom_id(photo)}" class="mfp-hide"
-                      center
-                        = image_tag(photo.image_url(:popup))
-                        - if  @user == current_user
-                          = button_to('Set as Profile Image', [:avatar, photo], class: 'btn')
-                          '
-                          = button_to "remove", photo, :confirm => 'Are you sure?', :method => :delete, class: 'btn'
-                          = form_for Photo.new do |f|
-                            = f.label :image, "Upload photos:"
-                            = f.file_field :image, multiple: true, name: "photo[image]"
-                          script#template-upload type="text/x-tmpl" 
-                            .upload
-                              | {%=o.name%}
-                              .progress
-                                .bar style=("width: 0%") 
+					  - if @user == current_user
+		                  center
+		                    = image_tag(photo.image_url(:popup))
+		                    - if  @user == current_user
+		                      = button_to('Set as Profile Image', [:avatar, photo], class: 'btn')
+		                      '
+		                      = button_to "remove", photo, :confirm => 'Are you sure?', :method => :delete, class: 'btn'
+		                      = form_for Photo.new do |f|
+		                        = f.label :image, "Upload photos:"
+		                        = f.file_field :image, multiple: true, name: "photo[image]"
+		                      script#template-upload type="text/x-tmpl" 
+		                        .upload
+		                          | {%=o.name%}
+		                          .progress
+		                            .bar style=("width: 0%") 
                           
                       - unless @user == current_user
                         .form
@@ -168,6 +169,36 @@ p.flash
                                          = hidden_field_tag :subject, "#{@current_user} messaged you", class: 'form-control' 
                                        .form-group
                                          = label_tag :body, 'Send a Message', class: 'control-label'
+                                         hr 
+                                         .commoon_sec
+											 .left_sec
+											   = image_tag(photo.image_url(:popup))
+											 .right_sec style="position:relative;"
+												.top_box style="position:absolute; border: 1px solid #cccccc; width: 456px; border-radius: 6px; height: 140px; background-color: #F7F7F7;"
+												  .left_box style="float:right; text-align:left; width: 68%;"
+													h2 = @user.username
+													h3
+													  = @user.age
+													  ', 
+													  = @user.gender
+													  ',
+													  = @user.sexuality
+													  '
+													  span 
+														= @user.location.try(:city)
+														',
+														= @user.location.try(:state)
+										 - if  @user == current_user
+										   = button_to('Set as Profile Image', [:avatar, photo], class: 'btn')									  
+										   = button_to "remove", photo, :confirm => 'Are you sure?', :method => :delete, class: 'btn'
+										   = form_for Photo.new do |f|
+											 = f.label :image, "Upload photos:"
+											 = f.file_field :image, multiple: true, name: "photo[image]"
+											 script#template-upload type="text/x-tmpl" 
+											   .upload
+											   | {%=o.name%}
+											   .progress
+											   .bar style=("width: 0%") 
                                          = text_area_tag :body, nil, placeholder: "Hi, I like your picture and figured I should write you a message and say...", class: 'form-control' 
                                        br
                                        = submit_tag 'Send', class: 'btn btn-primary send-a-message'

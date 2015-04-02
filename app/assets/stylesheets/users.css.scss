@@ -12,6 +12,24 @@
 	padding: 3px 134px 5px 27px;
 }
 
+.send-a-message-div hr {
+	left: 49px;
+	position: relative;
+}
+
+.send-a-message-div img {
+	width: 130px;
+	height: 130px;
+	position: relative;
+	float: left;
+	margin-bottom: 15px;
+	margin-top: 5px;
+	margin-left: 5px;
+	border: 1px solid #cccccc;
+	border-radius: 5px;
+	z-index: 100;
+}
+
 .message_div .control-label {
 	margin-bottom: 10px;
 }
