@@ -8,16 +8,38 @@
 	padding: 3px 118px 5px 27px;
 }
 
+.send-a-message-div {
+	padding: 3px 134px 5px 27px;
+}
+
 .message_div .control-label {
 	margin-bottom: 10px;
 }
 
-.message_div input.btn {
-	float: right;
-	margin: -53px -113px 5px 5px;
-}
-
-
 .message_div textarea {
 	height: 106px;
+}
+
+.message_div input.btn {
+	float: right;
+	margin: -73px -113px 5px 5px;
+}
+
+.message_div input.send-a-message {
+	float: right;
+	margin: -78px -124px 5px 5px !important;
+}
+
+.message_div input.contact-us {
+	float: right;
+	margin: -54px -105px 5px 5px !important;
+}
+
+.message_div input.home-page {
+	float: right;
+	margin: -53px -113px 5px 5px !important;
+}
+
+.message_div input.ask-me {
+	margin: -73px -102px 5px -1px !important;
 }

@@ -160,7 +160,7 @@ p.flash
                             .col.col2
                               .large
                                 center
-                                  .message_div
+                                  .message_div.send-a-message-div
                                     h3 
                                      = form_tag messages_path, method: :post, remote: true, class:'form-horizontal',id: 'message_form', role: 'form'
                                        = hidden_field_tag :user, @user.id
@@ -168,9 +168,9 @@ p.flash
                                          = hidden_field_tag :subject, "#{@current_user} messaged you", class: 'form-control' 
                                        .form-group
                                          = label_tag :body, 'Send a Message', class: 'control-label'
-                                         = text_field :body, nil, placeholder: "Hi, I like your picture and figured I should write you a message and say...", class: 'form-control' 
+                                         = text_area_tag :body, nil, placeholder: "Hi, I like your picture and figured I should write you a message and say...", class: 'form-control' 
                                        br
-                                       = submit_tag 'Send Message', class: 'btn btn-primary'
+                                       = submit_tag 'Send', class: 'btn btn-primary send-a-message'
               a.right_arrow href="#" 
                 img alt="" src="/assets/right_arrow.png" /
     .profile_middle_container
@@ -206,7 +206,7 @@ p.flash
           = label_tag :body, 'Your Message', class: 'control-label'
           = text_area_tag :body, nil, placeholder: "Hi, I like your picture and figured I should write you a message and say...", class: 'form-control' 
         br
-        = submit_tag 'Send Message', class: 'btn btn-primary'
+        = submit_tag 'Send', class: 'btn btn-primary'
 #ask_me.mfp-hide 
           center
             .message_div
@@ -218,7 +218,7 @@ p.flash
                   = label_tag :body, 'Your Message', class: 'control-label'
                   = text_area_tag :body, nil, placeholder: "Hi, I like your picture and figured I should write you a message and say...", class: 'form-control' 
                 br
-                = submit_tag 'Send Message', class: 'btn btn-primary'
+                = submit_tag 'Send', class: 'btn btn-primary ask-me'
 - if current_user.present?
   #question_me.mfp-hide 
     center
