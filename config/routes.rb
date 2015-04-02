@@ -32,6 +32,7 @@ Dating::Application.routes.draw do
   match '/edit_card',   to: 'subscriptions#edit_card',   via: 'get'
   match '/update_card', to: 'subscriptions#update_card', via: 'post'
   get '/relationships/set_follow' => 'relationships#set_follow'
+  get '/speed_dates' => 'users#speed_date'
   
   post 'subscription_event' => "webhooks#subscription_event"
   
@@ -51,6 +52,7 @@ Dating::Application.routes.draw do
   resources :subscriptions
   resources :plans
   get 'paypal/checkout', to: 'subscriptions#paypal_checkout'
+  get 'paypal/subscription', to: 'subscriptions#paypal_subscription_record', :as => 'paypal_subscription_create'
  
   resources :sessions
   resources :contacts, only: [:new, :create]
@@ -61,7 +63,10 @@ Dating::Application.routes.draw do
       post :avatar
     end
   end
-  resources :searches
+  resources :searches do
+	get 'save_searches', on: :collection
+	get 'load_search', on: :collection
+  end
   resources :sessions,      only: [:new, :create, :destroy]
   resources :relationships, only: [:create, :destroy]
   resources :letsgos, only: [:create, :destroy]

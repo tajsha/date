@@ -23,10 +23,30 @@ end
     redirect_to :back
   end
   
-  def index
-    @letsgos = Letsgo.where("repost_from_user_id IS NULL").all     
-    render layout: 'new_application'
-    
+  def index    
+    limit = params['page'].present? ? params['page'].to_i * 10 : 0
+    location_zipcodes = Location.select(:zip_code).where(:state => current_user.location.state).map(&:zip_code)
+        genders = if current_user.gender.downcase == 'male'
+				  if current_user.sexuality.downcase == 'gay'
+				    ["Male"]
+				  elsif current_user.sexuality.downcase == 'straight'
+				    ["Female"]
+				  else
+				    ["Male", "Female"]
+				  end
+				else
+				  if current_user.sexuality.downcase == 'gay'
+				    ["Female"]
+				  elsif current_user.sexuality.downcase == 'straight'
+				    ["Male"]
+				  else
+				    ["Male", "Female"]
+				  end
+				end
+    user_ids = User.select(:id).where(:zip_code => location_zipcodes, :gender => genders)
+    @letsgos = Letsgo.where("repost_from_user_id IS NULL AND user_id IN (?)", user_ids).order("created_at ASC").offset(limit).limit(10)    
+    @page = params['page'].present? ? (params['page'].to_i+1) : 1    
+    render layout: 'new_application'    
   end
 
 def eatdrink
@@ -65,7 +85,11 @@ def repost
     @content = @letsgo.content
     @recipient = @letsgo.user
     @receipt = current_user.send_message(@recipient, "Let's go...#{@content}", "#{@current_user} is Interested in your date!")
-    redirect_to :back, notice: "Your message was sent"
+    if request.xhr?
+		render :json => {:success => true}
+    else
+		redirect_to :back, notice: "Your message was sent"
+	end
   end
 
 private

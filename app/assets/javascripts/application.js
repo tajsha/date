@@ -92,3 +92,39 @@ function fix_select(selector) {
     $(selector).unwrap().removeClass('jqTransformHidden').jqTransSelect();
     $(selector).parent().css('zIndex', i);
 }
+
+function deleteMsg(id){
+	var ids = [];
+	ids.push(id);        
+	$.ajax({ type: "POST",  url:"/conversations/trash_all",  data:{ids: ids},
+	  success:function(data){
+		jQuery.each(ids, function (i, val) {
+		  $("div.outer#msg_"+val).remove();
+		});
+	  }
+	});
+}
+$( document ).ready(function() {
+	$("abbr.timeago").timeago();
+	window.asd = $('.SlectBox#relegion').SumoSelect({ 
+			placeholder: 'Relegion',
+			csvDispCount: 3 
+		});
+		
+	window.asd = $('.SlectBox#children').SumoSelect({ 
+			placeholder: 'Kids',
+			csvDispCount: 3 
+		});
+	window.asd = $('.SlectBox#ethnicity').SumoSelect({ 
+			placeholder: 'Ethnicity',
+			csvDispCount: 3 
+		});
+	window.asd = $('.SlectBox#gender').SumoSelect({ 
+		placeholder: 'Gender',
+		csvDispCount: 3 
+	});
+	
+	$('#header .main_dropdown').hover( function() { $('#header .main_dropdown .dropdown-menu').toggle(); } );
+	
+});
+

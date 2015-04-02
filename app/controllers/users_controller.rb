@@ -11,6 +11,32 @@ end
     render layout: 'new_application'
   end
   
+  def speed_date
+    user_ids = Letsgo.all.map(&:user_id).uniq
+    genders = if current_user.gender.downcase == 'male'
+				  if current_user.sexuality.downcase == 'gay'
+				    ["Male"]
+				  elsif current_user.sexuality.downcase == 'straight'
+				    ["Female"]
+				  else
+				    ["Male", "Female"]
+				  end
+				else
+				  if current_user.sexuality.downcase == 'gay'
+				    ["Female"]
+				  elsif current_user.sexuality.downcase == 'straight'
+				    ["Male"]
+				  else
+				    ["Male", "Female"]
+				  end
+				end
+		   user_ids = User.select(:id).where(["id IN (?) AND gender IN (?)", user_ids, genders]).map(&:id)
+           @users = User.search(:geo => [current_user.latitude * Math::PI / 180.0, current_user.longitude * Math::PI / 180.0],
+            :with  => {:geodist => 0.0..100_000.0, :user_id => user_ids},
+            :order => 'geodist ASC', :without => {:user_id => current_user.id}).shuffle
+	render layout: 'new_application'
+  end
+  
   def new
     @user = User.new
     render layout: 'new_application'
@@ -65,7 +91,8 @@ end
     page = params[:page] || 1
     @order = params[:order] || ['age', 'created_at', 'email', 'zip_code', 'birthday', 'username'].shuffle.first
      if @user.present?
-		@users = User.search(:without => {:user_id => @user.id}, :page => page, :per_page => 4, :order => "#{@order} DESC")
+		@users = User.search(:geo => [current_user.latitude * Math::PI / 180.0, current_user.longitude * Math::PI / 180.0],
+				:with  => {:geodist => 0.0..100_000.0}, :without => {:user_id => @user.id}, :page => page, :per_page => 4, :order => "#{@order} DESC")
 	 else
 		@users = User.search(:page => page, :per_page => 4, :order => "#{@order} DESC")
 	 end

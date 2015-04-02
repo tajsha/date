@@ -1,3 +1,5 @@
+p.flash
+  = flash[:notice]
 .wrapper
   #top_sec
     .msg_row
@@ -84,6 +86,13 @@ javascript:
       },
       function(){
         $('input[type=checkbox]').jqTransCheckBox();
+        $(".outer").hover(
+			  function() {
+				$( this ).find("div.message_delete").show();
+			  }, function() {
+				$( this ).find("div.message_delete").hide();
+			  }
+			);
        }
        );
     }
@@ -106,8 +115,23 @@ javascript:
       },
        function(){
         $('input[type=checkbox]').jqTransCheckBox();
+        $(".outer").hover(
+			  function() {
+				$( this ).find("div.message_delete").show();
+			  }, function() {
+				$( this ).find("div.message_delete").hide();
+			  }
+			);
        }
       );
     }
+    
+    $(".outer").hover(
+	  function() {
+		$( this ).find("div.message_delete").show();
+	  }, function() {
+		$( this ).find("div.message_delete").hide();
+	  }
+	);
   })
   
