@@ -120,6 +120,19 @@ end
     @user.update_attributes(params[:user])
     respond_with @user
   end
+  
+   def set_follow
+    @user = User.find_by(username: params[:id])
+    friend = User.find_by(username: params[:id])
+    if current_user.following? friend
+		current_user.unfollow! friend 
+	else
+	    current_user.follow! friend 
+	end
+	respond_to do |format|
+      format.js {render '/users/set_follow.js'}
+    end
+  end
     
   def follow
     @title = "Following"
