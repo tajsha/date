@@ -445,3 +445,22 @@ white-space: nowrap;
 width: 26px;
 height: 26px;
 }
+
+.notice_flash {
+  position: fixed;
+  bottom: 0;
+  display: none;
+  right: 0;
+  width: 20%;
+  background: orange;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  z-index: 10000;
+}
+.notice_flash .close{
+	float: right;
+background-color: orange;
+border: none;
+color: white;
+}
