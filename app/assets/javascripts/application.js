@@ -103,6 +103,9 @@ function deleteMsg(id){
 	  }
 	});
 }
+
+
+
 $( document ).ready(function() {
 	$("abbr.timeago").timeago();
 	window.asd = $('.SlectBox#relegion').SumoSelect({ 
@@ -124,6 +127,31 @@ $( document ).ready(function() {
 	});
 	
 	$('#header .main_dropdown').hover( function() { $('#header .main_dropdown .dropdown-menu').toggle(); } );
+    if($(".notice, .flash").text().length){
+          $(".notice_flash .flash_msg").text($(".notice, .flash").text());
+	      $(".notice_flash").show();
+	      setTimeout(function(){
+		    $(".notice_flash").hide();
+	      }, 5000);
+	}                 
+    $(".notice, .flash").hide();
+	$(".notice_flash .close").on('click', function(){
+	  $(".notice_flash").hide();
+	});
+      
 	
 });
+ $( document ).ajaxComplete(function(event, xhr, settings) {
+         console.log(xhr.responseText.notice);
+var myArr = JSON.parse(xhr.responseText);
+console.log(myArr);
+         if(myArr && myArr.notice.length){
+		 $(".notice_flash .flash_msg").text(myArr.notice);
+		 $(".notice_flash").show();
+		 setTimeout(function(){
+			$(".notice_flash").hide();
+		}, 5000);
+        }
+	});
+
 

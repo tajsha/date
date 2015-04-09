@@ -179,7 +179,8 @@ class User < ActiveRecord::Base
   end
   
   def unfollow!(other_user)
-    relationships.find_by(followed_id: other_user.id).destroy!
+    r = relationships.find_by(followed_id: other_user.id)
+    r.destroy! if r.present?
   end
   
   def received_messages

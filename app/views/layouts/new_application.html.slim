@@ -10,6 +10,11 @@ html xmlns="http://www.w3.org/1999/xhtml"
     = javascript_include_tag "//www.google.com/jsapi", "chartkick"
     
   body
+	div.notice_flash	  
+	  span class="flash_msg"
+		= flash[:notice]
+	  button type="button" class="close" aria-label="Close"
+	    span aria-hidden="true" &times;
     #outer
       a href="#" class='scroll_link'  Scroll to Top
       == render 'shared/header'
