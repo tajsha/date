@@ -71,10 +71,10 @@
               ',
               = @user.sexuality
               '
-              span 
-                = @user.location.try(:city)
-                ',
-                = @user.location.try(:state)
+              br
+              = @user.location.try(:city)
+              ',
+              = @user.location.try(:state)
             span.fb_con
               | Facebook Connected
               img alt="" src="/assets/fb_link.png" /
@@ -185,10 +185,10 @@
 													  ',
 													  = @user.sexuality
 													  '
-													  span 
-														= @user.location.try(:city)
-														',
-														= @user.location.try(:state)
+													  br
+                                                      = @user.location.try(:city)
+                                                      ',
+                                                      = @user.location.try(:state)
 										 - if  @user == current_user
 										   = button_to('Set as Profile Image', [:avatar, photo], class: 'btn')									  
 										   = button_to "remove", photo, :confirm => 'Are you sure?', :method => :delete, class: 'btn'
@@ -251,7 +251,7 @@
                       ',
                       = @user.sexuality
                       '
-                      span
+                      br
                       = @user.location.try(:city)
                       ',
                       = @user.location.try(:state)

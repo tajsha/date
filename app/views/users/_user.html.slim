@@ -2,8 +2,14 @@
   .common_box.box1 data-user-id="#{user.username}" id="#{user.username}"
     .img_box
       = link_to user do
-        = image_tag user.avatar.try(:image_url), size: "194x194"
-      -if @user.present?  
+        = image_tag user.avatar.try(:image_url), size: "194x194", id: "image_#{user.id}"
+      input type="hidden" id="name_#{user.id}" value="#{user.username}"
+      input type="hidden" id="age_#{user.id}" value="#{user.age}"
+      input type="hidden" id="gender_#{user.id}" value="#{user.gender}"
+      input type="hidden" id="sexuality_#{user.id}" value="#{user.sexuality}"
+      input type="hidden" id="city_#{user.id}" value="#{user.location.try(:city)}"
+      input type="hidden" id="state_#{user.id}" value="#{user.location.try(:state)}"
+      -if @user.present?
         ul.btn_link.hide
           li
             a.message_btn  href="#" data-user="#{user.id}"  data-mfp-src='#message_me'   Message
@@ -23,3 +29,26 @@
         = user.address
       div class= "#{user.gender == 'Male' ? 'green_corner': 'pink_corner'}"
         =image_tag "#{user.gender == 'Male' ? 'side_curv.png': 'curv_2.png'}"
+
+  javascript:
+    $('.message_btn').magnificPopup()
+    $('.message_btn').click(function () {
+      var user_id = $(this).data('user');
+      $('#user').val(user_id);
+      var avatar_url = $("#image_" + user_id).attr('src');
+      var username = $("#name_" + user_id).val();
+      var age = $("#age_" + user_id).val();
+      var gender = $("#gender_" + user_id).val();
+      var sexuality = $("#sexuality_" + user_id).val();
+      var city = $("#city_" + user_id).val();
+      var state = $("#state_" + user_id).val();
+      var html_content = "<div class=\"commoon_sec\">" +
+              "<div class=\"left_sec\"><img alt=\"Popup baby\" src=\"" + avatar_url + "\"></div>" +
+              "<div class=\"right_sec\" style=\"position:relative;\">" +
+              "<div class=\"top_box\" style=\"position:absolute; border: 1px solid #cccccc; width: 456px; border-radius: 6px; height: 140px; background-color: #F7F7F7;\">" +
+              "<div class=\"left_box\" style=\"float:right; text-align:left; width: 68%;\">" +
+              "<h2>" + username + "</h2><h3>" + age + ", " + gender + ", " + sexuality + "</br>" +
+              city + ", " + state + "</h3></div></div></div></div>";
+      $("div.common_sec").html(html_content);
+      Cufon.refresh();
+    })

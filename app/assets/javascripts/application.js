@@ -144,15 +144,16 @@ $( document ).ready(function() {
 });
  $( document ).ajaxComplete(function(event, xhr, settings) {
          console.log(xhr.responseText.notice);
-var myArr = JSON.parse(xhr.responseText);
-console.log(myArr);
-         if(myArr && myArr.notice.length){
-		 $(".notice_flash .flash_msg").text(myArr.notice);
-		 $(".notice_flash").show();
-		 setTimeout(function(){
-			$(".notice_flash").hide();
-		}, 5000);
-        }
+         if(typeof xhr.responseText.notice !== 'undefined'){
+             var myArr = JSON.parse(xhr.responseText);
+             if(myArr && myArr.notice.length) {
+                 $(".notice_flash .flash_msg").text(myArr.notice);
+                 $(".notice_flash").show();
+                 setTimeout(function () {
+                     $(".notice_flash").hide();
+                 }, 5000);
+             }
+         }
 	});
 
 
