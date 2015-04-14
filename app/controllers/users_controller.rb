@@ -89,7 +89,11 @@ end
     @user = current_user
     @search = Search.new
     page = params[:page] || 1
+<<<<<<< Updated upstream
     @order = params[:order] || ['age', 'created_at', 'birthday', 'username'].shuffle.first
+=======
+    @order = params[:order] || ['age', 'created_at', 'email', 'username'].shuffle.first
+>>>>>>> Stashed changes
      if @user.present?
 		@users = User.search(:geo => [current_user.latitude * Math::PI / 180.0, current_user.longitude * Math::PI / 180.0],
 				:with  => {:geodist => 0.0..100_000.0}, :without => {:user_id => @user.id}, :page => page, :per_page => 4, :order => "#{@order} DESC")
