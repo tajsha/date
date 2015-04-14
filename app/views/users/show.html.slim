@@ -47,7 +47,7 @@
             h4
               | Children: 
               span.color 
-                = best_in_place @user, :children, nil: 'Do you have or wants kids?', :type => :select, :collection => [["Yes, they live with me", "Yes, they live with me"], ["I want kids now", "I want kids now"], ["I want kids now", "I want one someday"], ["Not for me", "Not for me"]]
+                = best_in_place @user, :children, nil: 'Do you have or wants kids?', :type => :select, :collection => [["Yes, they live with me", "Yes, they live with me"], ["I want kids now", "I want kids now"], ["I want one someday", "I want one someday"], ["Not for me", "Not for me"]]
             h4
               | Does User Smoke: 
               span.color = best_in_place @user, :user_smoke, nil: 'Select how often you smoke', :type => :select, :collection => [["Often smokes", "Often smokes"], ["Sometimes smokes", "Sometimes smokes"], ["Never smoke", "Never smoke"]]
@@ -254,7 +254,7 @@
 - if current_user.present?
   #question_me.mfp-hide 
     center
-      .message_div
+      .message_div.ask_me
         = form_for Question.new, class: 'question_form form-horizontal', role: 'form' do |f|
           .form-group
             = f.text_field :question, {:placeholder => 'Please add your question...',class:'form-control'}
