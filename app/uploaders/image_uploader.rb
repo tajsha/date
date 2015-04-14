@@ -64,7 +64,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
    version :avatar do
      process :auto_orient
-     process :resize_to_fill => [77, 77]
+     process :resize_to_fill => [50, 50]
    end
    
    version :profile do

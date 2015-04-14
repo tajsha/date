@@ -411,8 +411,7 @@ display: none;
 z-index: 1000; 
 float: left; 
 padding: 5px 0; 
-margin: 2px 0 0; 
-font-size: 13px; 
+font-size: 13px;
 text-align: left; 
 list-style: none; 
 background-color: #f7f7f7; 
@@ -462,4 +461,8 @@ height: 26px;
 background-color: orange;
 border: none;
 color: white;
+}
+
+.header_avatar {
+ margin-top: -21px;
 }

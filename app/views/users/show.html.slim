@@ -47,7 +47,7 @@
             h4
               | Children: 
               span.color 
-                = best_in_place @user, :children, nil: 'Do you have or wants kids?', :type => :select, :collection => [["Yes, they live with me", "Yes, they live with me"], ["I want kids now", "I want kids now"], ["I want kids now", "I want one someday"], ["Not for me", "Not for me"]]
+                = best_in_place @user, :children, nil: 'Do you have or wants kids?', :type => :select, :collection => [["Yes, they live with me", "Yes, they live with me"], ["I want kids now", "I want kids now"], ["I want one someday", "I want one someday"], ["Not for me", "Not for me"]]
             h4
               | Does User Smoke: 
               span.color = best_in_place @user, :user_smoke, nil: 'Select how often you smoke', :type => :select, :collection => [["Often smokes", "Often smokes"], ["Sometimes smokes", "Sometimes smokes"], ["Never smoke", "Never smoke"]]
@@ -71,10 +71,10 @@
               ',
               = @user.sexuality
               '
-              span 
-                = @user.location.try(:city)
-                ',
-                = @user.location.try(:state)
+              br
+              = @user.location.try(:city)
+              ',
+              = @user.location.try(:state)
             span.fb_con
               | Facebook Connected
               img alt="" src="/assets/fb_link.png" /
@@ -185,10 +185,10 @@
 													  ',
 													  = @user.sexuality
 													  '
-													  span 
-														= @user.location.try(:city)
-														',
-														= @user.location.try(:state)
+													  br
+                                                      = @user.location.try(:city)
+                                                      ',
+                                                      = @user.location.try(:state)
 										 - if  @user == current_user
 										   = button_to('Set as Profile Image', [:avatar, photo], class: 'btn')									  
 										   = button_to "remove", photo, :confirm => 'Are you sure?', :method => :delete, class: 'btn'
@@ -229,13 +229,32 @@
           = render '/users/shared/user_item', :user => user
 #message_me.mfp-hide 
   center
-    .message_div
+    .message_div.send-a-message-div
       = form_tag messages_path, method: :post, remote: true, class:'form-horizontal',id: 'message_form', role: 'form'
         = hidden_field_tag :user, @user.id
         .form-group
           = hidden_field_tag :subject, "#{@current_user} messaged you", class: 'form-control' 
         .form-group
           = label_tag :body, 'Your Message', class: 'control-label'
+          hr
+            .commoon_sec
+              .left_sec
+                = image_tag(@user.avatar.try(:image_url,:profile))
+              .right_sec style="position:relative;"
+                .top_box style="position:absolute; border: 1px solid #cccccc; width: 456px; border-radius: 6px; height: 140px; background-color: #F7F7F7;"
+                  .left_box style="float:right; text-align:left; width: 68%;"
+                    h2 = @user.username
+                    h3
+                      = @user.age
+                      ',
+                      = @user.gender
+                      ',
+                      = @user.sexuality
+                      '
+                      br
+                      = @user.location.try(:city)
+                      ',
+                      = @user.location.try(:state)
           = text_area_tag :body, nil, placeholder: "Hi, I like your picture and figured I should write you a message and say...", class: 'form-control' 
         br
         = submit_tag 'Send', class: 'btn btn-primary'
@@ -254,7 +273,7 @@
 - if current_user.present?
   #question_me.mfp-hide 
     center
-      .message_div
+      .message_div.ask_me
         = form_for Question.new, class: 'question_form form-horizontal', role: 'form' do |f|
           .form-group
             = f.text_field :question, {:placeholder => 'Please add your question...',class:'form-control'}

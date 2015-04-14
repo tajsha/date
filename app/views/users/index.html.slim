@@ -31,7 +31,7 @@
 					  label Seeking 
 					.col5 style="float:left;" 
 					  - gender = @search.gender.present? ? @search.gender.split(',') : nil
-                      = select_tag :gender, options_for_select([['Men','Male'], ['Women', 'Female']], ), multiple: true, class: "SlectBox", id: "gender"
+                      = select_tag :gender, options_for_select([['Men','Male'], ['Women', 'Female']], gender), multiple: true, class: "SlectBox", id: "gender"
                 .row      
 				  .select1
 					.col.col3.col33 style='width:175px;'
@@ -43,7 +43,7 @@
 					.col.col4
 					  label to
 					  - max_age = @search.max_age || 65
-					  = select_tag :max_age, options_for_select((20..65),65), {class: 'small'}
+					  = select_tag :max_age, options_for_select((20..65), max_age), {class: 'small'}
                 
                   .select4
                   .col5 style="float:left; margin-left:15px; width: 245px;"
@@ -95,13 +95,15 @@
 	input name='more' type='hidden' value='2' id='more_users'
   #message_me.mfp-hide 
     center
-      .message_div
+      .message_div.send-a-message-div
         = form_tag messages_path, method: :post, remote: true, class:'form-horizontal',id: 'message_form', role: 'form'
           = hidden_field_tag :user, nil
           .form-group
             = hidden_field_tag :subject, "#{@current_user} messaged you", class: 'form-control' 
           .form-group
             = label_tag :body, 'Your Message', class: 'control-label'
+            hr
+              .common_sec
             = text_area_tag :body, nil, class: 'form-control' 
           = submit_tag 'Send', class: 'btn btn-primary home-page'
   #report_me.mfp-hide
@@ -123,10 +125,6 @@
     })
     $('.message_btn').magnificPopup()
     $('.report_btn').magnificPopup()
-    $('.message_btn').click(function(){
-      var user_id = $(this).data('user');
-      $('#user').val(user_id);
-    })
     $('form#message_form').bind('ajax:success', function(evt, data, status, xhr){
         $.magnificPopup.close()  
       })
