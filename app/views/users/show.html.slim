@@ -229,13 +229,32 @@
           = render '/users/shared/user_item', :user => user
 #message_me.mfp-hide 
   center
-    .message_div
+    .message_div.send-a-message-div
       = form_tag messages_path, method: :post, remote: true, class:'form-horizontal',id: 'message_form', role: 'form'
         = hidden_field_tag :user, @user.id
         .form-group
           = hidden_field_tag :subject, "#{@current_user} messaged you", class: 'form-control' 
         .form-group
           = label_tag :body, 'Your Message', class: 'control-label'
+          hr
+            .commoon_sec
+              .left_sec
+                = image_tag(@user.avatar.try(:image_url,:profile))
+              .right_sec style="position:relative;"
+                .top_box style="position:absolute; border: 1px solid #cccccc; width: 456px; border-radius: 6px; height: 140px; background-color: #F7F7F7;"
+                  .left_box style="float:right; text-align:left; width: 68%;"
+                    h2 = @user.username
+                    h3
+                      = @user.age
+                      ',
+                      = @user.gender
+                      ',
+                      = @user.sexuality
+                      '
+                      span
+                      = @user.location.try(:city)
+                      ',
+                      = @user.location.try(:state)
           = text_area_tag :body, nil, placeholder: "Hi, I like your picture and figured I should write you a message and say...", class: 'form-control' 
         br
         = submit_tag 'Send', class: 'btn btn-primary'
