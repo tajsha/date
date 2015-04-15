@@ -111,10 +111,7 @@
             /     span = @user.average_response_time
             .testimonial_box
               - if current_user == @user
-                - if @user.about_me
-                  = best_in_place @user, :about_me, :type => :textarea
-                - else
-                  Describe Describe yourself here
+                  = best_in_place @user, :about_me, :type => :textarea, :place_holder => 'Describe yourself here'
               - else
                 - if @user.about_me
                   = @user.about_me
