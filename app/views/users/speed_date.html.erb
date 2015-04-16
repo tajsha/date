@@ -84,6 +84,8 @@
 
 <script>
 	jQuery(document).ready(function () {
+	    if($('.date-slide').length == 0)
+			$(".empty-state").show();
 		$("#speed-date-slides ol li:first").addClass('active');
 		$(".skip-form").submit(function(e){
 			e.preventDefault(); //STOP default action

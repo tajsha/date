@@ -111,10 +111,7 @@
             /     span = @user.average_response_time
             .testimonial_box
               - if current_user == @user
-                - if @user.about_me
-                  = best_in_place @user, :about_me, :type => :textarea
-                - else
-                  Describe Describe yourself here
+                  = best_in_place @user, :about_me, :type => :textarea, :place_holder => 'Describe yourself here'
               - else
                 - if @user.about_me
                   = @user.about_me
@@ -126,7 +123,7 @@
               = form_for Photo.new do |f|
                 br
                 = f.file_field :image, multiple: true, name: "photo[image]", id: "input_file" , style: "display: none"
-                = link_to "Upload", '#', :class => "upload_image", :id => "upload"
+                = link_to "Upload", '#', :class => "upload_image upload", :id => "upload"
               script#template-upload[type="text/x-tmpl"]
                 |  <div class="upload"> {%=o.name%} <div class="progress"><div class="bar" style="width: 0%"></div></div> </div> 
           -else
@@ -300,8 +297,9 @@ javascript:
         showCloseBtn: true
     });
     $('.img_box1').click(function(){
-		var user_id = "#{@user.avatar.id}" ;
-		$("a[href='#photo_" +user_id+ "']").trigger('click');
+		var user_id = "#{@user.avatar.present? ? @user.avatar.id : ''}" ;
+        if(user_id.length)
+		  $("a[href='#photo_" +user_id+ "']").trigger('click');
     });
     $('.profile_btn').magnificPopup({
       showCloseBtn: true
