@@ -31,9 +31,13 @@ end
 				  end
 				end
 		   user_ids = User.select(:id).where(["id IN (?) AND gender IN (?)", user_ids, genders]).map(&:id)
-           @users = User.search(:geo => [current_user.latitude * Math::PI / 180.0, current_user.longitude * Math::PI / 180.0],
-            :with  => {:geodist => 0.0..100_000.0, :user_id => user_ids},
-            :order => 'geodist ASC', :without => {:user_id => current_user.id}).shuffle
+           @users = if user_ids.present? 
+					   User.search(:geo => [current_user.latitude * Math::PI / 180.0, current_user.longitude * Math::PI / 180.0],
+						:with  => {:geodist => 0.0..100_000.0, :user_id => user_ids},
+						:order => 'geodist ASC', :without => {:user_id => current_user.id}).shuffle
+					else
+						[]
+					end
 	render layout: 'new_application'
   end
   
