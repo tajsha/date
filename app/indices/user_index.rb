@@ -15,11 +15,7 @@ ThinkingSphinx::Index.define :user, :with => :active_record, :delta => true do
   has(:id, :as => :user_id)
   has age
   has username
-<<<<<<< Updated upstream
   has birthday
-=======
-  has email
->>>>>>> Stashed changes
   set_property :wordforms => 'lib/word.txt'
   join location
 end

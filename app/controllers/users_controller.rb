@@ -31,13 +31,9 @@ end
 				  end
 				end
 		   user_ids = User.select(:id).where(["id IN (?) AND gender IN (?)", user_ids, genders]).map(&:id)
-           @users = if user_ids.present? 
-					   User.search(:geo => [current_user.latitude * Math::PI / 180.0, current_user.longitude * Math::PI / 180.0],
-						:with  => {:geodist => 0.0..100_000.0, :user_id => user_ids},
-						:order => 'geodist ASC', :without => {:user_id => current_user.id}).shuffle
-					else
-						[]
-					end
+           @users = User.search(:geo => [current_user.latitude * Math::PI / 180.0, current_user.longitude * Math::PI / 180.0],
+            :with  => {:geodist => 0.0..100_000.0, :user_id => user_ids},
+            :order => 'geodist ASC', :without => {:user_id => current_user.id}).shuffle
 	render layout: 'new_application'
   end
   
@@ -74,7 +70,7 @@ end
 
   def show
     @user = User.find_by(username: params[:id])
-    @question = @user.questions.where("answer is not null").page(params[:page]).per_page(3)
+    @question = @user.questions.page(params[:page]).per_page(3)
     @letsgos = @user.letsgos.paginate(page: params[:page], :per_page => 3)
     @letsgo = current_user.letsgos.build
     @similar_users = @user.similar.shuffle.first(8)
@@ -93,11 +89,7 @@ end
     @user = current_user
     @search = Search.new
     page = params[:page] || 1
-<<<<<<< Updated upstream
     @order = params[:order] || ['age', 'created_at', 'birthday', 'username'].shuffle.first
-=======
-    @order = params[:order] || ['age', 'created_at', 'email', 'username'].shuffle.first
->>>>>>> Stashed changes
      if @user.present?
 		@users = User.search(:geo => [current_user.latitude * Math::PI / 180.0, current_user.longitude * Math::PI / 180.0],
 				:with  => {:geodist => 0.0..100_000.0}, :without => {:user_id => @user.id}, :page => page, :per_page => 4, :order => "#{@order} DESC")
