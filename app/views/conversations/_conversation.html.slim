@@ -8,7 +8,7 @@
       img alt="" src="#{is_unread == true ? '/assets/un_read.png' : '/assets/read.png'}" /
       span.conversation_avatar style='margin: 16px 10px 0px 15px'
         =link_to "/users/#{sender.username}" do
-          img alt="" src="#{sender.avatar.image_url(:avatar)}" /
+          img alt="" src="#{sender.avatar.image_url(:inbox)}" /
       h5 = sender.username
       strong style='margin-left: 15px' 
         = sender.age
