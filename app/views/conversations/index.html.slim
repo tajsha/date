@@ -85,6 +85,13 @@ javascript:
         prefill: false
       },
       function(){
+		$('.converation').click(function(e) {
+		  var href;
+		  href = $(this).data('href');
+		  if (!$('.conversation_avatar').is(e.target)) {
+			return window.location = href;
+		  }
+		});
         $('input[type=checkbox]').jqTransCheckBox();
         $(".outer").hover(
 			  function() {
@@ -114,6 +121,13 @@ javascript:
         prefill: false
       },
        function(){
+       $('.converation').click(function(e) {
+		  var href;
+		  href = $(this).data('href');
+		  if (!$('.conversation_avatar').is(e.target)) {
+			return window.location = href;
+		  }
+		});
         $('input[type=checkbox]').jqTransCheckBox();
         $(".outer").hover(
 			  function() {
