@@ -50,23 +50,133 @@ end
   end
 
 def eatdrink
-  @eatdrink = Letsgo.where(:tag => 'Eat/Drink').where("repost_from_user_id IS NULL")
+    limit = params['page'].present? ? params['page'].to_i * 10 : 0
+    location_zipcodes = Location.select(:zip_code).where(:state => current_user.location.state).map(&:zip_code)
+        genders = if current_user.gender.downcase == 'male'
+				  if current_user.sexuality.downcase == 'gay'
+				    ["Male"]
+				  elsif current_user.sexuality.downcase == 'straight'
+				    ["Female"]
+				  else
+				    ["Male", "Female"]
+				  end
+				else
+				  if current_user.sexuality.downcase == 'gay'
+				    ["Female"]
+				  elsif current_user.sexuality.downcase == 'straight'
+				    ["Male"]
+				  else
+				    ["Male", "Female"]
+				  end
+				end
+    user_ids = User.select(:id).where(:zip_code => location_zipcodes, :gender => genders)
+    @letsgos = Letsgo.where(:tag => 'Eat/Drink').where("repost_from_user_id IS NULL AND user_id IN (?)", user_ids).order("created_at ASC").offset(limit).limit(10)    
+    @page = params['page'].present? ? (params['page'].to_i+1) : 1    
+    render layout: 'new_application'
 end
 
 def listenwatch
-  @listenwatch = Letsgo.where(:tag => 'Listen/Watch').where("repost_from_user_id IS NULL")
+   limit = params['page'].present? ? params['page'].to_i * 10 : 0
+    location_zipcodes = Location.select(:zip_code).where(:state => current_user.location.state).map(&:zip_code)
+        genders = if current_user.gender.downcase == 'male'
+				  if current_user.sexuality.downcase == 'gay'
+				    ["Male"]
+				  elsif current_user.sexuality.downcase == 'straight'
+				    ["Female"]
+				  else
+				    ["Male", "Female"]
+				  end
+				else
+				  if current_user.sexuality.downcase == 'gay'
+				    ["Female"]
+				  elsif current_user.sexuality.downcase == 'straight'
+				    ["Male"]
+				  else
+				    ["Male", "Female"]
+				  end
+				end
+    user_ids = User.select(:id).where(:zip_code => location_zipcodes, :gender => genders)
+    @letsgos = Letsgo.where(:tag => 'Listen/Watch').where("repost_from_user_id IS NULL AND user_id IN (?)", user_ids).order("created_at ASC").offset(limit).limit(10)    
+    @page = params['page'].present? ? (params['page'].to_i+1) : 1    
+    render layout: 'new_application'
 end
 
 def play
-  @play = Letsgo.where(:tag => 'Play').where("repost_from_user_id IS NULL")
+    limit = params['page'].present? ? params['page'].to_i * 10 : 0
+    location_zipcodes = Location.select(:zip_code).where(:state => current_user.location.state).map(&:zip_code)
+        genders = if current_user.gender.downcase == 'male'
+				  if current_user.sexuality.downcase == 'gay'
+				    ["Male"]
+				  elsif current_user.sexuality.downcase == 'straight'
+				    ["Female"]
+				  else
+				    ["Male", "Female"]
+				  end
+				else
+				  if current_user.sexuality.downcase == 'gay'
+				    ["Female"]
+				  elsif current_user.sexuality.downcase == 'straight'
+				    ["Male"]
+				  else
+				    ["Male", "Female"]
+				  end
+				end
+    user_ids = User.select(:id).where(:zip_code => location_zipcodes, :gender => genders)
+    @letsgos = Letsgo.where(:tag => 'Play').where("repost_from_user_id IS NULL AND user_id IN (?)", user_ids).order("created_at ASC").offset(limit).limit(10)    
+    @page = params['page'].present? ? (params['page'].to_i+1) : 1    
+    render layout: 'new_application'
 end
 
 def explore
-  @explore = Letsgo.where(:tag => 'Explore').where("repost_from_user_id IS NULL")
+    limit = params['page'].present? ? params['page'].to_i * 10 : 0
+    location_zipcodes = Location.select(:zip_code).where(:state => current_user.location.state).map(&:zip_code)
+        genders = if current_user.gender.downcase == 'male'
+				  if current_user.sexuality.downcase == 'gay'
+				    ["Male"]
+				  elsif current_user.sexuality.downcase == 'straight'
+				    ["Female"]
+				  else
+				    ["Male", "Female"]
+				  end
+				else
+				  if current_user.sexuality.downcase == 'gay'
+				    ["Female"]
+				  elsif current_user.sexuality.downcase == 'straight'
+				    ["Male"]
+				  else
+				    ["Male", "Female"]
+				  end
+				end
+    user_ids = User.select(:id).where(:zip_code => location_zipcodes, :gender => genders)
+    @letsgos = Letsgo.where(:tag => 'Explore').where("repost_from_user_id IS NULL AND user_id IN (?)", user_ids).order("created_at ASC").offset(limit).limit(10)    
+    @page = params['page'].present? ? (params['page'].to_i+1) : 1    
+    render layout: 'new_application'
 end
 
 def other
-  @other = Letsgo.where(:tag => 'Other').where("repost_from_user_id IS NULL")
+    limit = params['page'].present? ? params['page'].to_i * 10 : 0
+    location_zipcodes = Location.select(:zip_code).where(:state => current_user.location.state).map(&:zip_code)
+        genders = if current_user.gender.downcase == 'male'
+				  if current_user.sexuality.downcase == 'gay'
+				    ["Male"]
+				  elsif current_user.sexuality.downcase == 'straight'
+				    ["Female"]
+				  else
+				    ["Male", "Female"]
+				  end
+				else
+				  if current_user.sexuality.downcase == 'gay'
+				    ["Female"]
+				  elsif current_user.sexuality.downcase == 'straight'
+				    ["Male"]
+				  else
+				    ["Male", "Female"]
+				  end
+				end
+    user_ids = User.select(:id).where(:zip_code => location_zipcodes, :gender => genders)
+    @letsgos = Letsgo.where(:tag => 'Other').where("repost_from_user_id IS NULL AND user_id IN (?)", user_ids).order("created_at ASC").offset(limit).limit(10)    
+    @page = params['page'].present? ? (params['page'].to_i+1) : 1    
+    render layout: 'new_application'
 end
 
 def repost
