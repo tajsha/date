@@ -76,6 +76,11 @@ class ImageUploader < CarrierWave::Uploader::Base
      process :auto_orient
      process :resize_to_fit => [500, 500]
    end
+   
+   version :speed do
+     process :auto_orient
+     process :resize_to_fit => [548, 530]
+   end
 
    version :box do
      process :auto_orient
