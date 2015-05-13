@@ -12,34 +12,34 @@ end
   end
   
   def speed_date
-     user_ids = Letsgo.all.map(&:user_id).uniq
-     genders = if current_user.gender.downcase == 'male'
- 				  if current_user.sexuality.downcase == 'gay'
- 				    ["Male"]
- 				  elsif current_user.sexuality.downcase == 'straight'
- 				    ["Female"]
- 				  else
- 				    ["Male", "Female"]
- 				  end
- 				else
- 				  if current_user.sexuality.downcase == 'gay'
- 				    ["Female"]
- 				  elsif current_user.sexuality.downcase == 'straight'
- 				    ["Male"]
- 				  else
- 				    ["Male", "Female"]
- 				  end
- 				end
- 		   user_ids = User.select(:id).where(["id IN (?) AND gender IN (?)", user_ids, genders]).map(&:id)
-            @users = if user_ids.present? 
- 					   User.search(:geo => [current_user.latitude * Math::PI / 180.0, current_user.longitude * Math::PI / 180.0],
- 						:with  => {:geodist => 0.0..100_000.0, :user_id => user_ids},
- 						:order => 'geodist ASC', :without => {:user_id => current_user.id}).shuffle
- 					else
- 						[]
- 					end
- 	render layout: 'new_application'
-   end
+    user_ids = Letsgo.all.map(&:user_id).uniq
+    genders = if current_user.gender.downcase == 'male'
+				  if current_user.sexuality.downcase == 'gay'
+				    ["Male"]
+				  elsif current_user.sexuality.downcase == 'straight'
+				    ["Female"]
+				  else
+				    ["Male", "Female"]
+				  end
+				else
+				  if current_user.sexuality.downcase == 'gay'
+				    ["Female"]
+				  elsif current_user.sexuality.downcase == 'straight'
+				    ["Male"]
+				  else
+				    ["Male", "Female"]
+				  end
+				end
+		   user_ids = User.select(:id).where(["id IN (?) AND gender IN (?)", user_ids, genders]).map(&:id)
+           @users = if user_ids.present? 
+					   User.search(:geo => [current_user.latitude * Math::PI / 180.0, current_user.longitude * Math::PI / 180.0],
+						:with  => {:geodist => 0.0..100_000.0, :user_id => user_ids},
+						:order => 'geodist ASC', :without => {:user_id => current_user.id}).shuffle
+					else
+						[]
+					end
+	render layout: 'new_application'
+  end
   
   def new
     @user = User.new

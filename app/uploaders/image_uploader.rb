@@ -64,7 +64,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
    version :avatar do
      process :auto_orient
-     process :resize_to_fill => [40, 40]
+     process :resize_to_fill => [50, 50]
    end
    
    version :profile do
@@ -76,20 +76,10 @@ class ImageUploader < CarrierWave::Uploader::Base
      process :auto_orient
      process :resize_to_fit => [500, 500]
    end
-   
-   version :speed do
-     process :auto_orient
-     process :resize_to_fit => [548, 530]
-   end
 
    version :box do
      process :auto_orient
      process :resize_to_fill => [194, 285]
-   end
-   
-   version :inbox do
-     process :auto_orient
-     process :resize_to_fill => [77, 77]
    end
    
    version :similar do
@@ -100,6 +90,11 @@ class ImageUploader < CarrierWave::Uploader::Base
    version :speed do
      process :auto_orient
      process :resize_to_fill => [548, 530]
+   end
+   
+   version :inbox do
+     process :auto_orient
+     process :resize_to_fill => [77, 77]
    end
    
   # Add a white list of extensions which are allowed to be uploaded.
