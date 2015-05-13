@@ -35,7 +35,7 @@ class SearchesController < ApplicationController
     if current_user.present?
 		@search = Search.new
 		
-		if params["min_age"].present? and params[:search].present?
+		if params["min_age"].present?
 			conditions = {}
 			range_cond = {}
 			  conditions[:gender] = params["gender"].join('|') if params["gender"].present?

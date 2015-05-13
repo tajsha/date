@@ -21,3 +21,5 @@ log/development.sphinx.pid
 .tmp*
 nbproject/
 
+
+app/views/users/speed_date.html.erb

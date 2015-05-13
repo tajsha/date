@@ -11,7 +11,7 @@ class PhotosController < ApplicationController
   def create
     @photo = Photo.create(params[:photo])
     @photo.user = current_user
-    if @photo.save
+    if @photo.reload.present?
       flash[:notice] = "Successfully created photos."
       redirect_to :back
     else

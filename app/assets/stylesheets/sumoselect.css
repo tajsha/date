@@ -22,7 +22,13 @@ cursor: pointer; padding: 12px 0 0 7px;}
 line-height: 15px!important; }
 
         .SumoSelect > .CaptionCont > label { position: absolute; top: 0px; right: 0px; bottom: 0px; width: 45px!important; background-color: #E0D8D8; }
-            .SumoSelect > .CaptionCont > label > i { background-image: url('/assets/img/select_btn.jpg'); background-position: center center; width: 45px; height: 41px; display: block; position: absolute; top: 5px; left: 0px; right: 0px; bottom: 0px; margin: auto; cursor: pointer;}
+            .SumoSelect > .CaptionCont > label > i { background-image: url('/assets/img/select_btn.jpg'); background-position: center center; width: 45px; height: 41px; display: block; position: absolute; left: 0px; right: 0px; bottom: 0px; margin: auto; cursor: pointer;}
+@-moz-document url-prefix() {
+            .SumoSelect > .CaptionCont > label > i { top: 0px; }
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+            .SumoSelect > .CaptionCont > label > i { top: 5px;}
+           }
 
     .SumoSelect > .optWrapper { top: 30px; width: 100%; position: absolute; left: 0; opacity: 0; visibility: hidden; transition: opacity 300ms ease-out, top 300ms ease-out, visibility 300ms ease-out; -webkit-transition: opacity 300ms ease-out, top 300ms ease-out, visibility 300ms ease-out; -moz-transition: opacity 300ms ease-out, top 300ms ease-out, visibility 300ms ease-out; -ms-transition: opacity 300ms ease-out, top 300ms ease-out, visibility 300ms ease-out; -o-transition: opacity 300ms ease-out, top 300ms ease-out, visibility 300ms ease-out; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; z-index: -100; background: #fff; border: 1px solid #ddd; box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.11); border-radius: 3px; }
         .SumoSelect > .optWrapper.open { top: 40px; visibility: visible; opacity: 1; z-index: 1000; }
