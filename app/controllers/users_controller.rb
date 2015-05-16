@@ -100,6 +100,7 @@ end
 		@users = User.search(:page => page, :per_page => 4, :order => "#{@order} DESC")
 	 end
 	 
+	 @page = page	 
     if request.xhr?
 		render :partial => 'user', :layout => false, :collection => @users
     else

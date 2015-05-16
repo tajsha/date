@@ -1,8 +1,14 @@
 - if user.avatar.present?
-  .common_box.box1 data-user-id="#{user.username}" id="#{user.username}"
+  - style_class = {"1" => "box1", "2" => "box2", "3" => "box3", "4" => "box1"}
+  - style_type = {"1" => "similar", "2" => "profile", "3" => "box", "4" => "similar"}
+  - shuffle_array = ["1", "2", "3", "4"]
+  - my_index = shuffle_array.rotate(@page.to_i)
+  - my_style = style_type[my_index[user_counter]]
+  - my_style_class = style_class[my_index[user_counter]]
+  div class="common_box #{my_style_class}" data-user-id="#{user.username}" id="#{user.username}"
     .img_box
       = link_to user do
-        = image_tag user.avatar.try(:image_url), size: "194x194", id: "image_#{user.id}"
+        = image_tag user.avatar.try(:image_url, my_style), id: "image_#{user.id}"
       input type="hidden" id="name_#{user.id}" value="#{user.username}"
       input type="hidden" id="age_#{user.id}" value="#{user.age}"
       input type="hidden" id="gender_#{user.id}" value="#{user.gender}"
