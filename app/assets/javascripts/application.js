@@ -143,7 +143,7 @@ $( document ).ready(function() {
 	
 });
  $( document ).ajaxComplete(function(event, xhr, settings) {
-         if(typeof xhr.responseText.notice !== 'undefined'){
+         if(typeof xhr.responseText.notice !== 'undefined' || typeof xhr.responseText !== 'undefined'){
              var myArr = JSON.parse(xhr.responseText);
              if(myArr && myArr.notice.length) {
                  $(".notice_flash .flash_msg").text(myArr.notice);
