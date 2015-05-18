@@ -33,6 +33,7 @@ class SearchesController < ApplicationController
   
   def index
     if current_user.present?
+        @user = current_user
 		@search = Search.new
 		
 		if params["min_age"].present?

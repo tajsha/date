@@ -148,13 +148,17 @@
 			success: function(html_data){
 				// make jQuery object from HTML string
 				var $moreBlocks = jQuery( html_data );
-				// Append new blocks
-				$(".box_detail").append( $moreBlocks );
+				$moreBlocks.css('display','none');
+				$(".box_detail").append($moreBlocks).imagesLoaded(
+                        function(){
+                            $moreBlocks.fadeIn(1000);
+                            $(".box_detail").masonry('appended', $moreBlocks);
 
-				// Have Masonry position new blocks
-				$(".box_detail").masonry( 'appended', $moreBlocks );         
+                            isFetchingPics = false;
+                        }
+                    );        
 				Cufon.refresh();
-				$( ".common_box.box1" ).mouseenter(function() {
+				$( ".common_box" ).mouseenter(function() {
 				  $(this).find(".btn_link").show();
 				}).mouseleave(function() {
 				  $(this).find(".btn_link").hide();

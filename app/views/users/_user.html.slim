@@ -2,9 +2,9 @@
   - style_class = {"1" => "box1", "2" => "box2", "3" => "box3", "4" => "box1"}
   - style_type = {"1" => "similar", "2" => "profile", "3" => "box", "4" => "similar"}
   - shuffle_array = ["1", "2", "3", "4"]
-  - my_index = shuffle_array.rotate(@page.to_i)
-  - my_style = style_type[my_index[user_counter]]
-  - my_style_class = style_class[my_index[user_counter]]
+  - my_index = shuffle_array.rotate(@page.to_i || ((user_counter+1).to_f/4.to_f).ceil)
+  - my_style = @page.present? ? style_type[my_index[user_counter]] : style_type[my_index[((user_counter+1).to_f%4.to_f).ceil]]
+  - my_style_class = @page.present? ? style_class[my_index[user_counter]] : style_class[my_index[((user_counter+1).to_f%4.to_f).ceil]]
   div class="common_box #{my_style_class}" data-user-id="#{user.username}" id="#{user.username}"
     .img_box
       = link_to user do
@@ -35,26 +35,3 @@
         = user.address
       div class= "#{user.gender == 'Male' ? 'green_corner': 'pink_corner'}"
         =image_tag "#{user.gender == 'Male' ? 'side_curv.png': 'curv_2.png'}"
-
-  javascript:
-    $('.message_btn').magnificPopup()
-    $('.message_btn').click(function () {
-      var user_id = $(this).data('user');
-      $('#user').val(user_id);
-      var avatar_url = $("#image_" + user_id).attr('src');
-      var username = $("#name_" + user_id).val();
-      var age = $("#age_" + user_id).val();
-      var gender = $("#gender_" + user_id).val();
-      var sexuality = $("#sexuality_" + user_id).val();
-      var city = $("#city_" + user_id).val();
-      var state = $("#state_" + user_id).val();
-      var html_content = "<div class=\"commoon_sec\">" +
-              "<div class=\"left_sec\"><img alt=\"Popup baby\" src=\"" + avatar_url + "\"></div>" +
-              "<div class=\"right_sec\" style=\"position:relative;\">" +
-              "<div class=\"top_box\" style=\"position:absolute; border: 1px solid #cccccc; width: 456px; border-radius: 6px; height: 140px; background-color: #F7F7F7;\">" +
-              "<div class=\"left_box\" style=\"float:right; text-align:left; width: 68%;\">" +
-              "<h2>" + username + "</h2><h3>" + age + ", " + gender + ", " + sexuality + "</br>" +
-              city + ", " + state + "</h3></div></div></div></div>";
-      $("div.common_sec").html(html_content);
-      Cufon.refresh();
-    })
