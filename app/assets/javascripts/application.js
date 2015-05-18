@@ -142,7 +142,9 @@ $( document ).ready(function() {
 	
 });
  $( document ).ajaxComplete(function(event, xhr, settings) {
-         if(typeof xhr.responseText.notice !== 'undefined'){
+	     var ct = xhr.getResponseHeader("content-type") || "";
+	     if (ct.indexOf('json') > -1) {
+			 console.log(xhr.responseText);
              var myArr = JSON.parse(xhr.responseText);
              if(myArr && myArr.notice.length) {
                  $(".notice_flash .flash_msg").text(myArr.notice);
@@ -153,5 +155,26 @@ $( document ).ready(function() {
              }
          }
 	});
+
+$('.message_btn').click(function () {
+  var user_id = $(this).data('user');
+  $('#user').val(user_id);
+  var avatar_url = $("#image_" + user_id).attr('src');
+  var username = $("#name_" + user_id).val();
+  var age = $("#age_" + user_id).val();
+  var gender = $("#gender_" + user_id).val();
+  var sexuality = $("#sexuality_" + user_id).val();
+  var city = $("#city_" + user_id).val();
+  var state = $("#state_" + user_id).val();
+  var html_content = "<div class=\"commoon_sec\">" +
+              "<div class=\"left_sec\"><img alt=\"Popup baby\" src=\"" + avatar_url + "\"></div>" +
+              "<div class=\"right_sec\" style=\"position:relative;\">" +
+              "<div class=\"top_box\" style=\"position:absolute; border: 1px solid #cccccc; width: 456px; border-radius: 6px; height: 140px; background-color: #F7F7F7;\">" +
+              "<div class=\"left_box\" style=\"float:right; text-align:left; width: 68%;\">" +
+              "<h2>" + username + "</h2><h3>" + age + ", " + gender + ", " + sexuality + "</br>" +
+              city + ", " + state + "</h3></div></div></div></div>";
+  $("div.common_sec").html(html_content);
+  Cufon.refresh();
+})
 
 
