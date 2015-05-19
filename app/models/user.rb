@@ -74,9 +74,6 @@ class User < ActiveRecord::Base
   
   def similar
     arr = User.where(:gender => self.gender).where.not(:id => self.id)
-    puts "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
-    puts arr.inspect
-    puts self.location.state.inspect
     arr.select{|c| c.location.state == self.location.state }
   end
   
