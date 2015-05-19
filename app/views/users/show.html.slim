@@ -159,33 +159,15 @@
                             .col.col2
                               .large
                                 center
-                                  .message_div.send-a-message-div
+                                  = image_tag(photo.image_url(:popup))
+                                  .message_div.send-a-message-div style="height:120px;"
                                     h3 
                                      = form_tag messages_path, method: :post, remote: true, class:'form-horizontal',id: 'message_form', role: 'form'
                                        = hidden_field_tag :user, @user.id
                                        .form-group
                                          = hidden_field_tag :subject, "#{@current_user} messaged you", class: 'form-control' 
                                        .form-group
-                                         = label_tag :body, 'Send a Message', class: 'control-label'
-                                         hr 
-                                         .commoon_sec
-											 .left_sec
-											   = image_tag(photo.image_url(:popup))
-											 .right_sec style="position:relative;"
-												.top_box style="position:absolute; border: 1px solid #cccccc; width: 456px; border-radius: 6px; height: 140px; background-color: #F7F7F7;"
-												  .left_box style="float:right; text-align:left; width: 68%;"
-													h2 = @user.username
-													h3
-													  = @user.age
-													  ', 
-													  = @user.gender
-													  ',
-													  = @user.sexuality
-													  '
-													  br
-                                                      = @user.location.try(:city)
-                                                      ',
-                                                      = @user.location.try(:state)
+                                         = label_tag :body, 'Send a Message', class: 'control-label', style: "margin-bottom:1px;"
 										 - if  @user == current_user
 										   = button_to('Set as Profile Image', [:avatar, photo], class: 'btn')									  
 										   = button_to "remove", photo, :confirm => 'Are you sure?', :method => :delete, class: 'btn'
@@ -197,7 +179,7 @@
 											   | {%=o.name%}
 											   .progress
 											   .bar style=("width: 0%") 
-                                         = text_area_tag :body, nil, placeholder: "Hi, I like your picture and figured I should write you a message and say...", class: 'form-control' 
+                                         = text_area_tag :body, nil, placeholder: "Hi, I like your picture and figured I should write you a message and say...", class: 'form-control', style: "height:60px;" 
                                        br
                                        = submit_tag 'Send', class: 'btn btn-primary send-a-message'
               a.right_arrow href="#" 
