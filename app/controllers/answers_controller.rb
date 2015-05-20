@@ -14,6 +14,7 @@ class AnswersController < ApplicationController
     if @question.update_attributes(params[:question])
       conversation = @question.conversation
       conversation.move_to_trash(current_user)
+      flash[:notice] = "Your Answer has been posted to Your Profile."
       redirect_to conversations_path
     else
       render :new
