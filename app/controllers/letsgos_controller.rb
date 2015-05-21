@@ -3,10 +3,10 @@ class LetsgosController < ApplicationController
   def create
     @letsgo = current_user.letsgos.build(letsgo_params)
     if @letsgo.save
-      flash[:success] = "Date posted!"
+      flash[:notice] = "Date posted!"
       redirect_to :back
 else
-      flash[:error] = "Date was not posted!"
+      flash[:notice] = "Date was not posted!"
       redirect_to :back
 end
 end
