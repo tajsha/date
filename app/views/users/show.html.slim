@@ -117,7 +117,7 @@
                   = @user.about_me
                 - else
                   = "#{@user.username} has not filled out their about me section yet"
-          -if @user.photos.present? == false
+          -if current_user?(@user) and @user.photos.present? == false
             .slider_container
               h4 Photos
               = form_for Photo.new do |f|
@@ -320,7 +320,26 @@ javascript:
         })
         $('#current_index').val(next_index)
       }
-    })
+    });
+    $("#new_question").submit(function(e){
+     e.preventDefault();
+     var postData = $(this).serializeArray();
+     var formURL = $(this).attr("action");
+     $.ajax(
+		{
+			url : formURL,
+			type: "POST",
+			data : postData,
+			success:function(data, textStatus, jqXHR) 
+			{
+				$.magnificPopup.close();
+			},
+			error: function(jqXHR, textStatus, errorThrown) 
+			{
+				//if fails      
+			}
+		});
+    });
     
      $("#upload").click(function(){
     
