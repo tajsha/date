@@ -320,7 +320,26 @@ javascript:
         })
         $('#current_index').val(next_index)
       }
-    })
+    });
+    $("#new_question").submit(function(e){
+     e.preventDefault();
+     var postData = $(this).serializeArray();
+     var formURL = $(this).attr("action");
+     $.ajax(
+		{
+			url : formURL,
+			type: "POST",
+			data : postData,
+			success:function(data, textStatus, jqXHR) 
+			{
+				$.magnificPopup.close();
+			},
+			error: function(jqXHR, textStatus, errorThrown) 
+			{
+				//if fails      
+			}
+		});
+    });
     
      $("#upload").click(function(){
     
