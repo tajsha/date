@@ -74,7 +74,7 @@ end
 
   def show
     @user = User.find_by(username: params[:id])
-    @question = @user.questions.where("answer is not null").page(params[:page]).per_page(3)
+    @question = @user.questions.where("answer is not null").order("created_at DESC").page(params[:page]).per_page(3)
     @letsgos = @user.letsgos.paginate(page: params[:page], :per_page => 3)
     @letsgo = current_user.letsgos.build
     @similar_users = @user.similar.shuffle.first(8)
