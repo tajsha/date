@@ -12,6 +12,7 @@ end
   end
   
   def speed_date
+    @letsgo = current_user.letsgos.build
     user_ids = Letsgo.all.map(&:user_id).uniq
     genders = if current_user.gender.downcase == 'male'
 				  if current_user.sexuality.downcase == 'gay'

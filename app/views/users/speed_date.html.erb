@@ -1,3 +1,8 @@
+<% if flash[:notice] %>
+ <p class="flash">
+   <%= flash[:notice] %>
+ </p>
+<% end %>
 <link href="/styles/middle.css" media="screen" rel="stylesheet" type="text/css">
 
 
@@ -69,7 +74,7 @@
                         very top of search results - where you belong.
                      </p>
                      <p class="action">
-                        <a class="button large" href="<%= user_url(current_user) %>">
+                        <a class="button large add_date" data-mfp-src="#letsgo_form_div">
                         Post a Date
                         </a>
                      </p>
@@ -80,7 +85,13 @@
       </section>
    </section>
 </div>
-
+<div id = 'letsgo_form_div' class="mfp-hide">
+  <center>
+      <div class="message_div">
+        <%= render 'letsgos/form' %>
+      </div>
+  </center>
+</div>
 
 <script>
 	jQuery(document).ready(function () {
@@ -120,6 +131,10 @@
 				}
 			});
 		});
+
+        $('.add_date').magnificPopup({
+            showCloseBtn: true
+        });
 	});
 	
 </script>
