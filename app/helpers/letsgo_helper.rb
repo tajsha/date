@@ -2,19 +2,16 @@ module LetsgoHelper
   def letsgo_icon_class(letsgo)
     case letsgo.tag
     when "Eat/Drink"
-      "fork27.png"
+      "fork27"
     when "Play"
-      "play48.png"
+      "play48"
     when "Listen/Watch"
-      "entry.png"
+      "entry"
     when "Explore"
-      "binoculars18.png"
+      "binoculars18"
     when "Other"
-      "calendar146.png"
+      "calendar146"
   end
 end
- 
-  def letsgo_icon(letsgo)
-    content_tag(:span, "", class: letsgo_icon_class(letsgo) )
-  end
+
 end

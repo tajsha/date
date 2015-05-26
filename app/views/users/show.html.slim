@@ -86,8 +86,8 @@
           - if @user.letsgos.any? || current_user?(@user)
             .lets_go   
               = render '/letsgos/letsgo'
-              br
               - if current_user?(@user)
+                br
                 .pull-right
                   .profile_middle_container1 
                     .ask_btn1

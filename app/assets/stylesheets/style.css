@@ -1650,7 +1650,18 @@ select[multiple].input-lg {
 	border-radius: 5px;
 	padding: 2px
 }
-.lets_go{float:left; width:280px; border:1px solid #dcdcdc; background:#eff0f3; padding:21px 35px;}
+.lets_go{float:left; width:347px; border:1px solid #dcdcdc; background:#eff0f3; padding:6px;}
+.lets_go li {padding: 5px; font-size: 12px; border: 1px solid #dcdcdc;margin-bottom: 1px;}
+.lets_go li.entry {list-style-image: url('/assets/entry.png')}
+.lets_go li.fork27 {list-style-image: url('/assets/fork27.png')}
+.lets_go li.play48 {list-style-image: url('/assets/play48.png')}
+.lets_go li.binoculars18 {list-style-image: url('/assets/binoculars18.png')}
+.lets_go li.calendar146 {list-style-image: url('/assets/calendar146.png')}
+.lets_go li .details{width:85%;}
+.lets_go li .without_user.details{width:56%;}
+.lets_go li .form_actions{float: right;margin-top: -20px;}
+.lets_go li .without_user.form_actions{width:135px;}
+.lets_go li .btn.btn-danger{padding: 4px; margin-right: -3px;}
 a.see_more{cursor: pointer}
 /*--style----vd------*/
 .btm_search_detail{
