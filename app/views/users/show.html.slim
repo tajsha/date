@@ -241,12 +241,15 @@
           center
             .message_div
               = form_tag url_for(:controller => 'messages', :action => 'askout'), :method => 'post'
+                .form-group style="margin-bottom: -15px; margin-top: 10px;"
+                  = label_tag :body, (@user.gender == 'Male' ? 'Ask Him Out' : 'Ask Her Out'), class: 'control-label'
+                hr
                 = hidden_field_tag :user, @user.id
                 .form-group
                   = hidden_field_tag :subject, "#{@current_user} asked you out on a date", class: 'form-control' 
                 .form-group
-                  = label_tag :body, 'Your Message', class: 'control-label'
-                  = text_area_tag :body, nil, placeholder: "Hi, I like your picture and figured I should write you a message and say...", class: 'form-control' 
+                  = label_tag :body, 'Let\'s Go..', class: 'control-label', style: "position: absolute; margin-left: -187px; color: #353334; font-size: 15px; margin-top: 4px;"
+                  = text_area_tag :body, nil, placeholder: "Hi, I like your picture and figured I should write you a message and say...", class: 'form-control', style: 'height:57px; padding-top: 25px;'
                 br
                 = submit_tag 'Send', class: 'btn btn-primary ask-me'
 - if current_user.present?
