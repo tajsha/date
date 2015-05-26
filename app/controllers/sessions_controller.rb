@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-
+  before_filter :user_loged_in, :except => [:new, :create]
   def new
   end
   
