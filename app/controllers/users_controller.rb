@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_filter :user_loged_in, :except => [:index, :new, :create]
   respond_to :html, :json
   
   def age_group
