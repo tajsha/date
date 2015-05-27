@@ -5,11 +5,11 @@
     </div>
     <div class="<%= 'without_user' unless current_user?(letsgo.user) %> form_actions">
       <% if current_user?(letsgo.user) %>
-        <%= button_to "delete", letsgo, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-danger" %>
+        <%= link_to "delete", letsgo, method: :delete, data: { confirm: "You sure?" } %>
       <% end %> 
       <% unless current_user?(letsgo.user) %>
-        <%= button_to "I'm Interested", interested_letsgo_path(letsgo), method: :message, class: "btn btn-danger" %>
-        <%= button_to "repost", repost_letsgo_path(letsgo), method: :post, class: "btn btn-danger"%>
+        <%= link_to "I'm Interested", interested_letsgo_path(letsgo), method: :message %> |
+        <%= link_to "repost", repost_letsgo_path(letsgo), method: :post %>
       <% end %>
     </div>
   <% end %>

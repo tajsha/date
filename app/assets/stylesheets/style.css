@@ -1651,7 +1651,7 @@ select[multiple].input-lg {
 	padding: 2px
 }
 .lets_go{float:left; width:347px; border:1px solid #dcdcdc; background:#eff0f3; padding:6px;}
-.lets_go li {padding: 5px; font-size: 12px; border: 1px solid #dcdcdc;margin-bottom: 1px;}
+.lets_go li {padding: 5px; font-size: 12px; margin-bottom: 1px;}
 .lets_go li.entry {list-style-image: url('/assets/entry.png')}
 .lets_go li.fork27 {list-style-image: url('/assets/fork27.png')}
 .lets_go li.play48 {list-style-image: url('/assets/play48.png')}
