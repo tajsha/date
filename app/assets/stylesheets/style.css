@@ -160,7 +160,7 @@ body.color{ background:#fff;}
 .profile_middle_container h3{float:left; width:777px; font-size:22px; line-height:24px; color:#606061;}
 .profile_middle_container h3 span{ padding:0 0 0 13px;}
 .profile_middle_container .ask_btn{float:right; width:124px; text-align:center; text-decoration:none; font-size:14px; line-height:16px; color:#3f4244; background:url(/assets/ask_btn_bg.png) no-repeat 0 0; padding:9px 0 7px 0; font-weight:bold; text-shadow:0 1px 1px #fff; font-weight:bold;}
-.profile_middle_container1 .ask_btn1{ width:124px; text-align:center; text-decoration:none; font-size:14px; line-height:16px; color:#3f4244; background:url(/assets/ask_btn_bg.png) no-repeat 0 0; padding:9px 0 7px 0; font-weight:bold; text-shadow:0 1px 1px #fff; font-weight:bold;}
+.profile_middle_container1 .ask_btn1{ text-align:center; text-decoration:none; font-size:14px; line-height:16px; color:#3f4244; background:url(/assets/ask_btn_bg.png) no-repeat 0 0; padding:9px 0 7px 0; font-weight:bold; text-shadow:0 1px 1px #fff; font-weight:bold;}
 
 
 .upload_image {
