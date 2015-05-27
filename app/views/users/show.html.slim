@@ -83,19 +83,28 @@
               = distance_of_time_in_words_to_now(@user.created_at) 
               '&nbsp;ago
               strong Last online 4 hours ago
-          - if @user.letsgos.any? || current_user?(@user)
-            .lets_go   
+
+          .lets_go
+            - if @user.letsgos.any?
               = render '/letsgos/letsgo'
-              - if current_user?(@user)
-                br
-                .pull-right
-                  .profile_middle_container1 
-                    .ask_btn1 style="background-position: center;"
-                      -if @letsgos.blank?
-                        = link_to "Post First Date", '#', :class => "read_more_btn1 add_date", 'data-mfp-src'=>'#letsgo_form_div',:style => "text-decoration:none;color:#3f4244;"
-                      -else
-                        = link_to "Post Date", '#', :class => "read_more_btn1 add_date", 'data-mfp-src'=>'#letsgo_form_div', :style => "text-decoration:none;color:#3f4244;"
-                  
+            -else
+              b #{@user.username} has not posted any dates yet.
+              br
+              br
+              .pull-right
+                .profile_middle_container1
+                  .ask_btn1 style="background-position: center;"
+                    = link_to (@user.gender == 'Male' ? "Ask him out" : "Ask her out"), '#', :class => "read_more_btn1 add_date", 'data-mfp-src'=> '#ask_me', :style => "text-decoration:none;color:#3f4244;"
+            - if current_user?(@user)
+              br
+              .pull-right
+                .profile_middle_container1
+                  .ask_btn1 style="background-position: center;"
+                    -if @letsgos.blank?
+                      = link_to "Post First Date", '#', :class => "read_more_btn1 add_date", 'data-mfp-src'=>'#letsgo_form_div',:style => "text-decoration:none;color:#3f4244;"
+                    -else
+                      = link_to "Post Date", '#', :class => "read_more_btn1 add_date", 'data-mfp-src'=>'#letsgo_form_div', :style => "text-decoration:none;color:#3f4244;"
+
                  
         
             / span.pic_box3
@@ -109,6 +118,7 @@
             /   span.pic_detail3
             /     strong response rate:
             /     span = @user.average_response_time
+          - if @user.letsgos.any? || current_user?(@user)
             .testimonial_box
               - if current_user == @user
                   = best_in_place @user, :about_me, :type => :textarea, :place_holder => 'Describe yourself here'
