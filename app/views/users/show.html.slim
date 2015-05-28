@@ -87,7 +87,7 @@
           .lets_go
             - if @user.letsgos.any?
               = render '/letsgos/letsgo'
-            -else
+            -elsif @user != current_user
               b #{@user.username} has not posted any dates yet.
               br
               br
