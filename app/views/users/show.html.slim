@@ -82,7 +82,7 @@
               | joined 
               = distance_of_time_in_words_to_now(@user.created_at) 
               '&nbsp;ago
-              strong Last online 4 hours ago
+              strong Last online #{distance_of_time_in_words_to_now(@user.updated_at)} ago
 
           .lets_go
             - if @user.letsgos.any?
@@ -250,7 +250,7 @@
 #ask_me.mfp-hide 
           center
             .message_div
-              = form_tag url_for(:controller => 'messages', :action => 'askout'), :method => 'post'
+              = form_tag url_for(:controller => 'messages', :action => 'askout'), :method => 'post', :id => 'ask_me_form'
                 .form-group style="margin-bottom: -15px; margin-top: 10px;"
                   = label_tag :body, (@user.gender == 'Male' ? 'Ask Him Out' : 'Ask Her Out'), class: 'control-label'
                 hr
@@ -334,7 +334,7 @@ javascript:
         $('#current_index').val(next_index)
       }
     });
-    $("#new_question").submit(function(e){
+    $("#new_question, #ask_me_form").submit(function(e){
      e.preventDefault();
      var postData = $(this).serializeArray();
      var formURL = $(this).attr("action");
@@ -352,6 +352,22 @@ javascript:
 				//if fails      
 			}
 		});
+    });
+
+    $("li a#repost").on('click', function (e) {
+      e.preventDefault();
+      var URL = $(this).attr("href");
+      $.ajax(
+              {
+                url: URL,
+                type: "POST",
+                success: function (data, textStatus, jqXHR) {
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                  //if fails
+                }
+              });
+      return false;
     });
     
      $("#upload").click(function(){
