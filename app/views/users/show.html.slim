@@ -82,20 +82,29 @@
               | joined 
               = distance_of_time_in_words_to_now(@user.created_at) 
               '&nbsp;ago
-              strong Last online 4 hours ago
-          - if @user.letsgos.any? || current_user?(@user)
-            .lets_go   
+              strong Last online #{distance_of_time_in_words_to_now(@user.updated_at)} ago
+
+          .lets_go
+            - if @user.letsgos.any?
               = render '/letsgos/letsgo'
+            -elsif @user != current_user
+              b #{@user.username} has not posted any dates yet.
               br
-              - if current_user?(@user)
-                .pull-right
-                  .profile_middle_container1 
-                    .ask_btn1
-                      -if @letsgos.blank?
-                        = link_to "Post First Date", '#', :class => "read_more_btn1 add_date", 'data-mfp-src'=>'#letsgo_form_div',:style => "text-decoration:none;color:#3f4244;"
-                      -else
-                        = link_to "Post Date", '#', :class => "read_more_btn1 add_date", 'data-mfp-src'=>'#letsgo_form_div', :style => "text-decoration:none;color:#3f4244;"
-                  
+              br
+              .pull-right
+                .profile_middle_container1
+                  .ask_btn1 style="background-position: center;"
+                    = link_to (@user.gender == 'Male' ? "Ask him out" : "Ask her out"), '#', :class => "read_more_btn1 add_date", 'data-mfp-src'=> '#ask_me', :style => "text-decoration:none;color:#3f4244;"
+            - if current_user?(@user)
+              br
+              .pull-right
+                .profile_middle_container1
+                  .ask_btn1 style="background-position: center;"
+                    -if @letsgos.blank?
+                      = link_to "Post First Date", '#', :class => "read_more_btn1 add_date", 'data-mfp-src'=>'#letsgo_form_div',:style => "text-decoration:none;color:#3f4244;"
+                    -else
+                      = link_to "Post Date", '#', :class => "read_more_btn1 add_date", 'data-mfp-src'=>'#letsgo_form_div', :style => "text-decoration:none;color:#3f4244;"
+
                  
         
             / span.pic_box3
@@ -109,6 +118,7 @@
             /   span.pic_detail3
             /     strong response rate:
             /     span = @user.average_response_time
+          - if @user.letsgos.any? || current_user?(@user)
             .testimonial_box
               - if current_user == @user
                   = best_in_place @user, :about_me, :type => :textarea, :place_holder => 'Describe yourself here'
@@ -240,13 +250,16 @@
 #ask_me.mfp-hide 
           center
             .message_div
-              = form_tag url_for(:controller => 'messages', :action => 'askout'), :method => 'post'
+              = form_tag url_for(:controller => 'messages', :action => 'askout'), :method => 'post', :id => 'ask_me_form'
+                .form-group style="margin-bottom: -15px; margin-top: 10px;"
+                  = label_tag :body, (@user.gender == 'Male' ? 'Ask Him Out' : 'Ask Her Out'), class: 'control-label'
+                hr
                 = hidden_field_tag :user, @user.id
                 .form-group
                   = hidden_field_tag :subject, "#{@current_user} asked you out on a date", class: 'form-control' 
                 .form-group
-                  = label_tag :body, 'Your Message', class: 'control-label'
-                  = text_area_tag :body, nil, placeholder: "Hi, I like your picture and figured I should write you a message and say...", class: 'form-control' 
+                  = label_tag :body, 'Let\'s Go..', class: 'control-label', style: "position: absolute; margin-left: -187px; color: #353334; font-size: 15px; margin-top: 4px;"
+                  = text_area_tag :body, nil, placeholder: "Hi, I like your picture and figured I should write you a message and say...", class: 'form-control', style: 'height:57px; padding-top: 25px;'
                 br
                 = submit_tag 'Send', class: 'btn btn-primary ask-me'
 - if current_user.present?
@@ -268,7 +281,7 @@
       .message_div#follow_user
   #letsgo_form_div.mfp-hide
     center
-      .message_div
+      .message_div style="padding-right: 52px;"
         = render 'letsgos/form'
 javascript:
   $(document).ready(function () {
@@ -321,7 +334,7 @@ javascript:
         $('#current_index').val(next_index)
       }
     });
-    $("#new_question").submit(function(e){
+    $("#new_question, #ask_me_form").submit(function(e){
      e.preventDefault();
      var postData = $(this).serializeArray();
      var formURL = $(this).attr("action");
@@ -339,6 +352,22 @@ javascript:
 				//if fails      
 			}
 		});
+    });
+
+    $("li a#repost").on('click', function (e) {
+      e.preventDefault();
+      var URL = $(this).attr("href");
+      $.ajax(
+              {
+                url: URL,
+                type: "POST",
+                success: function (data, textStatus, jqXHR) {
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                  //if fails
+                }
+              });
+      return false;
     });
     
      $("#upload").click(function(){

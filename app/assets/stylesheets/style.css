@@ -160,7 +160,7 @@ body.color{ background:#fff;}
 .profile_middle_container h3{float:left; width:777px; font-size:22px; line-height:24px; color:#606061;}
 .profile_middle_container h3 span{ padding:0 0 0 13px;}
 .profile_middle_container .ask_btn{float:right; width:124px; text-align:center; text-decoration:none; font-size:14px; line-height:16px; color:#3f4244; background:url(/assets/ask_btn_bg.png) no-repeat 0 0; padding:9px 0 7px 0; font-weight:bold; text-shadow:0 1px 1px #fff; font-weight:bold;}
-.profile_middle_container1 .ask_btn1{ width:124px; text-align:center; text-decoration:none; font-size:14px; line-height:16px; color:#3f4244; background:url(/assets/ask_btn_bg.png) no-repeat 0 0; padding:9px 0 7px 0; font-weight:bold; text-shadow:0 1px 1px #fff; font-weight:bold;}
+.profile_middle_container1 .ask_btn1{ text-align:center; text-decoration:none; font-size:14px; line-height:16px; color:#3f4244; background:url(/assets/ask_btn_bg.png) no-repeat 0 0; padding:9px 0 7px 0; font-weight:bold; text-shadow:0 1px 1px #fff; font-weight:bold;}
 
 
 .upload_image {
@@ -1650,7 +1650,18 @@ select[multiple].input-lg {
 	border-radius: 5px;
 	padding: 2px
 }
-.lets_go{float:left; width:280px; border:1px solid #dcdcdc; background:#eff0f3; padding:21px 35px;}
+.lets_go{float:left; width:347px; border:1px solid #dcdcdc; background:#eff0f3; padding:6px;}
+.lets_go li {padding: 5px; font-size: 12px; margin-bottom: 1px;}
+.lets_go li.entry {list-style: url('/assets/entry.png') inside;}
+.lets_go li.fork27 {list-style: url('/assets/fork27.png') inside;}
+.lets_go li.play48 {list-style: url('/assets/play48.png') inside;}
+.lets_go li.binoculars18 {list-style: url('/assets/binoculars18.png') inside;}
+.lets_go li.calendar146 {list-style: url('/assets/calendar146.png') inside;}
+.lets_go li .details{width:85%;}
+.lets_go li .without_user.details{width:56%;}
+.lets_go li .form_actions{float: right;}
+.lets_go li .without_user.form_actions{width:135px;}
+.lets_go li .btn.btn-danger{padding: 4px; margin-right: -3px;}
 a.see_more{cursor: pointer}
 /*--style----vd------*/
 .btm_search_detail{
