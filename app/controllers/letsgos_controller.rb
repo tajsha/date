@@ -181,7 +181,11 @@ end
 
 def repost
   @letsgo = Letsgo.find(params[:id]).repost(current_user)
-    redirect_to root_url
+	if request.xhr?
+		render :json => {:notice => 'Repost submitted to the user.' }
+	else
+		redirect_to root_url
+	end
   end
   
   def random
