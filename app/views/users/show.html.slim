@@ -82,7 +82,7 @@
               | joined 
               = distance_of_time_in_words_to_now(@user.created_at) 
               '&nbsp;ago
-              strong Last online #{distance_of_time_in_words_to_now(@user.updated_at)} ago
+              strong Last online #{distance_of_time_in_words_to_now(@user.updated_at).gsub(/\d+/, 'few')} ago
 
           .lets_go
             - if @user.letsgos.any?
