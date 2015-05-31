@@ -45,7 +45,11 @@ Dating::Application.routes.draw do
       end
     end
 
-      
+  resource :twitter do
+    get :authorize
+    get :return
+  end
+
   match '/paypal/ipn' => 'notifications#create', :via => [:get, :post], :as => 'notifications_create'
   
   resources :admin

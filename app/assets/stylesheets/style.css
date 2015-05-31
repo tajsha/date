@@ -963,6 +963,7 @@ body{ font-family:Arial, Helvetica, sans-serif; background:#f7f7f7;}
 .form_container .form_list li a span{ padding:0 0 0 3px;}
 .form_container .form_list li a span.color{ color:#39a0f6;}
 .form_container .find_btn{ float:right; width:114px; background:url(/assets/btn_bg.png) no-repeat 0 0; border:none; margin:0 13px 0 0; padding:14px 0 14px 0; text-align:center; font-size:17px; line-height:19px; color:#000; cursor:pointer; font-weight:bold; text-shadow:0px 1px 1px #fff;}
+.form_container .social_network{ float:right; width:120px; border:none; margin:0 13px 0 0; padding:14px 0 14px 0; text-align:center; font-size:17px; line-height:19px; color:#000; cursor:pointer; font-weight:bold; text-shadow:0px 1px 1px #fff;}
 .btm_search_detail{float:right; width:100%; text-align:right; padding:14px 0 0 0;}
 .btm_search_detail .simple_search{padding:0 0 2px 0px; text-decoration:none; color:#5b5b5b; color:#39a0f6; border-bottom:1px dotted #39a0f6; font-size:14px; line-height:16px;}
 .btm_search_detail .simple_search span{ padding:0 0 0 4px;}
@@ -1029,7 +1030,7 @@ body.color{ background:#fff;}
 .top_box .left_box h2{ float:left; width:100%; font-size:36px; line-height:38px; color:#39a0f6;}
 .top_box .left_box h3{ float:left; width:100%; font-size:16px; line-height:18px; color:#445566; padding:8px 0 0 0;}
 .top_box .left_box h3 span{ color:#a6abba;}
-.fb_con{float:left; margin:13px 0 10px 0; background:#fff; width:150px; padding:4px 0 4px 5px; font-size:12px; line-height:14px; color:#3b3b3b; position:relative;}
+.fb_con{float:left; margin:13px 0 10px 0; background:#fff; width:161px; padding:4px 0 4px 5px; font-size:12px; line-height:14px; color:#3b3b3b; position:relative;}
 .fb_con img{ position:absolute; right:-10px; top:0px;}
 .top_box .left_box .text_detail{float:left; width:100%; font-size:14px; line-height:16px; color:#acb1b4;}
 .top_box .right_box{float:left; width:158px; border:1px solid #dcdcdc; background:#eff0f3; padding:21px 35px;}

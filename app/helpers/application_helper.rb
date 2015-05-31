@@ -22,4 +22,12 @@ module ApplicationHelper
     user.mailbox.inbox(:unread => true).count
   end
 
+  def current_user_has_fb_access_token?
+    AccessToken.where("user_id =? AND social_network =?", current_user.id, "F").first.present? ? true : false
+  end
+
+  def current_user_has_tw_access_token?
+    AccessToken.where("user_id =? AND social_network =?", current_user.id, "T").first.present? ? true : false
+  end
+
 end

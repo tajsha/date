@@ -14,10 +14,31 @@ class AnswersController < ApplicationController
     if @question.update_attributes(params[:question])
       conversation = @question.conversation
       conversation.move_to_trash(current_user)
+      post_to_social_network
       flash[:notice] = "Your Answer has been posted to Your Profile."
       redirect_to conversations_path
     else
       render :new
+    end
+  end
+
+  private
+
+  def post_to_social_network
+    if params["twitter"]
+      access_token = AccessToken.find_by_user_id_and_social_network(current_user.id, 'T')
+      @client = Twitter::REST::Client.new do |config|
+          config.consumer_key = "awkQ6gu5lvZuBjAt5yQMCKuVS"
+          config.consumer_secret = "CQEwuVlBkA4L17DcXp1jiXLWLGEsFOHV1cX6cUjWDfpqrZhbpV"
+          config.access_token = access_token.access_token
+          config.access_token_secret = access_token.access_secret
+      end
+      complete_msg = @question.question+"__"+@question.answer
+      @display_message = complete_msg.length <= 110 ? complete_msg : complete_msg[0..39] + '...'
+      @con_url = conversation_url(@question.conversation.id)
+      @client.update("#{@display_message} #{@con_url}")
+    elsif params["facebook"]
+
     end
   end
 end
