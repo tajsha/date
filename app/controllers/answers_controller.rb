@@ -38,7 +38,15 @@ class AnswersController < ApplicationController
       @con_url = conversation_url(@question.conversation.id)
       @client.update("#{@display_message} #{@con_url}")
     elsif params["facebook"]
-
+      access_token = AccessToken.find_by_user_id_and_social_network(current_user.id, 'F')
+      api = Koala::Facebook::API.new(access_token.access_token)
+      post_details = {
+                      :name => @question.question,
+                      :picture => "http://ask.fm/images/155x155.png",
+                      :link => "http://areyoutaken.com",
+                      :description => @question.answer
+                     }
+      api.put_wall_post("", post_details)
     end
   end
 end

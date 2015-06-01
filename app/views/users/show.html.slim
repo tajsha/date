@@ -81,7 +81,7 @@
                 img alt="" src="/assets/fb_link.png" /
             -else
               span.fb_con
-                | Connect to Facebook
+                = link_to 'Connect to Facebook', '/auth/facebook'
             - if current_user_has_tw_access_token?
               span.fb_con
                 | Twitter Connected

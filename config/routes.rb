@@ -50,6 +50,9 @@ Dating::Application.routes.draw do
     get :return
   end
 
+  get '/auth/facebook', as: "auth_provider"
+  get '/auth/facebook/callback', to: 'facebooks#callback'
+
   match '/paypal/ipn' => 'notifications#create', :via => [:get, :post], :as => 'notifications_create'
   
   resources :admin
