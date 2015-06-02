@@ -13,6 +13,10 @@
               = logged_in_user.username
             =image_tag "profile_link_img.png", class: 'img', style: 'vertical-align: 16px;'
 		  ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="position:relative; margin-top: -2px;"
+		    - unless Subscription.exists?(user_id: current_user.try(:id) || -1, cancelled: nil)
+                li role="presentation"
+                  a role="menuitem" tabindex="-1" href="#{new_subscription_url}" style="font-weight: bold; color: red;"
+                    'Upgrade
 			li role="presentation"
 			  a role="menuitem" tabindex="-1" href="#{user_url(current_user)}"
 				'My Profile
