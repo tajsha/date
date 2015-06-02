@@ -1,4 +1,4 @@
-- sender = conversation.last_sender
+- sender = (@user.mailbox.sentbox.map(&:id).include? conversation.id) ? conversation.receipts.where("receiver_id <> #{@user.id}").first.receiver : conversation.last_sender
 - message = conversation.last_message
 - receipts = conversation.receipts.recipient(@user).is_unread
 - is_unread = receipts.count > 0 ? true : false
