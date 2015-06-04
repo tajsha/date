@@ -20,7 +20,9 @@ end
   def destroy
     @letsgo = Letsgo.find(params[:id])
     @letsgo.destroy
-    redirect_to :back
+	@letsgos = current_user.letsgos.paginate(page:1, :per_page => 3)
+	flash[:notice] = "Date deleted successfully."
+    render :partial => 'letsgo', :layout => nil
   end
   
   def index    
