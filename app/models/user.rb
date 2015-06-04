@@ -61,10 +61,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :username
   validates_presence_of :username
   validates_format_of :username, :with => /\A[a-zA-Z0-9]+\Z/, :message => "should only contain letters or numbers"
-  validates :password, :presence => true,
-                       :confirmation => true,
-                       :length => {:within => 6..40},
-                       :on => :create
+  validates :password, :length => {:within => 6..40}, :on => :create
   before_create { generate_token(:auth_token) }
   ROLES = %w[admin user guest banned]
   scope :except_user, ->(user) { where('users.id != ?', user.id)}
