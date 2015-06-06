@@ -104,19 +104,20 @@
               = @user.location.try(:city)
               ',
               = @user.location.try(:state)
-            - if current_user_has_fb_access_token?
-              span.fb_con
-                | Facebook Connected
-                img alt="" src="/assets/fb_link.png" /
-            -else
-              span.fb_con
-                = link_to 'Connect to Facebook', '/auth/facebook'
-            - if current_user_has_tw_access_token?
-              span.fb_con
-                | Twitter Connected
-            - else
-              span.fb_con
-                = link_to 'Connect to Twitter', authorize_twitter_url(:target_profile_id => current_user.id)
+            - if @user == current_user
+              - if current_user_has_fb_access_token?
+                span.fb_con
+                  | Facebook Connected
+                  img alt="" src="/assets/fb_link.png" /
+              -else
+                span.fb_con
+                  = link_to 'Connect to Facebook', '/auth/facebook'
+              - if current_user_has_tw_access_token?
+                span.fb_con
+                  | Twitter Connected
+              - else
+                span.fb_con
+                  = link_to 'Connect to Twitter', authorize_twitter_url(:target_profile_id => current_user.id)
             span.text_detail
               | joined 
               = distance_of_time_in_words_to_now(@user.created_at) 
