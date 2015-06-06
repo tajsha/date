@@ -122,6 +122,10 @@ class User < ActiveRecord::Base
     def paid?
       subscriptions.where(cancelled: nil).exists?
     end
+
+    def admin?
+      self.role == 'admin'
+    end
     
     def reg?
       !subscription.cancelled? if subscription
