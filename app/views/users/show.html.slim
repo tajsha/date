@@ -27,37 +27,66 @@
             h4
               | Career: 
               span.color
-               = best_in_place @user, :career,  nil: 'What earns you money?'
+               - if current_user.admin? or current_user == @user
+                 = best_in_place @user, :career,  nil: 'What earns you money?'
+               - else
+                 = @user.career
             h4
               | Education: 
-              span.color 
-                = best_in_place @user, :education, nil: 'What is your education level?', :type => :select, :collection => [["High school", "High school"], ["Some college", "Some college"], ["Undergraduate", "Undergraduate"], ["Bachelor's", "Bachelor's"], ["Master's", "Master's"], ["PhD", "PhD"], ["Business school", "Business school"], ["Law school", "Law school"], ["Medical school", "Medical school"]]
+              span.color
+                - if current_user.admin? or current_user == @user
+                  = best_in_place @user, :education, nil: 'What is your education level?', :type => :select, :collection => [["High school", "High school"], ["Some college", "Some college"], ["Undergraduate", "Undergraduate"], ["Bachelor's", "Bachelor's"], ["Master's", "Master's"], ["PhD", "PhD"], ["Business school", "Business school"], ["Law school", "Law school"], ["Medical school", "Medical school"]]
+                - else
+                  = @user.education
             h4
               | Ethnicity: 
-              span.color 
-               = best_in_place @user, :ethnicity, nil: 'What is your ethnicity?', :type => :select, :collection => [["Asian", "Asian"], ["Black", "Black"], ["Biracial", "Biracial" ], ["Indian", "Indian"], ["Hispanic/Latin", "Hispanic/Latin"], ["Middle Eastern", "Middle Eastern"], ["Native American", "Native American"], ["Pacific Islander", "Pacific Islander"], ["White", "White"], ["Other", "Other"]]
+              span.color
+                - if current_user.admin? or current_user == @user
+                  = best_in_place @user, :ethnicity, nil: 'What is your ethnicity?', :type => :select, :collection => [["Asian", "Asian"], ["Black", "Black"], ["Biracial", "Biracial" ], ["Indian", "Indian"], ["Hispanic/Latin", "Hispanic/Latin"], ["Middle Eastern", "Middle Eastern"], ["Native American", "Native American"], ["Pacific Islander", "Pacific Islander"], ["White", "White"], ["Other", "Other"]]
+                - else
+                  = @user.ethnicity
             h4
               | Religion: 
-              span.color 
-                =best_in_place @user, :religion, nil: 'What is your faith?', :type => :select, :collection => [["Agnostic", "Agnostic"], ["Atheist", "Atheist"], ["Christian", "Christian"], ["Catholic", "Catholic"], ["Buddhist", "Buddhist"], ["Hindu", "Hindu"], ["Jewish", "Jewish"], ["Muslim", "Muslim"], ["Spiritual without affiliation", "Spiritual without affiliation"], ["Other", "Other"], ["None", "None"], ["Prefer not to say", "Prefer not to say"]]
+              span.color
+                - if current_user.admin? or current_user == @user
+                  = best_in_place @user, :religion, nil: 'What is your faith?', :type => :select, :collection => [["Agnostic", "Agnostic"], ["Atheist", "Atheist"], ["Christian", "Christian"], ["Catholic", "Catholic"], ["Buddhist", "Buddhist"], ["Hindu", "Hindu"], ["Jewish", "Jewish"], ["Muslim", "Muslim"], ["Spiritual without affiliation", "Spiritual without affiliation"], ["Other", "Other"], ["None", "None"], ["Prefer not to say", "Prefer not to say"]]
+                - else
+                  = @user.religion
             h4
               | Politics: 
-              span.color 
-                = best_in_place @user, :politics, nil: 'How important is this to you?', :type => :select, :collection => [["Very Important", "Very Important"], ["Somewhat Important", "Somewhat Important"], ["Not Important", "Not Important"]]
+              span.color
+                - if current_user.admin? or current_user == @user
+                  = best_in_place @user, :politics, nil: 'How important is this to you?', :type => :select, :collection => [["Very Important", "Very Important"], ["Somewhat Important", "Somewhat Important"], ["Not Important", "Not Important"]]
+                - else
+                  = @user.politics
             h4
               | Children: 
-              span.color 
-                = best_in_place @user, :children, nil: 'Do you have or wants kids?', :type => :select, :collection => [["Yes, they live with me", "Yes, they live with me"], ["I want kids now", "I want kids now"], ["I want one someday", "I want one someday"], ["Not for me", "Not for me"]]
+              span.color
+                - if current_user.admin? or current_user == @user
+                  = best_in_place @user, :children, nil: 'Do you have or wants kids?', :type => :select, :collection => [["Yes, they live with me", "Yes, they live with me"], ["I want kids now", "I want kids now"], ["I want one someday", "I want one someday"], ["Not for me", "Not for me"]]
+                - else
+                  = @user.children
             h4
               | Does User Smoke: 
-              span.color = best_in_place @user, :user_smoke, nil: 'Select how often you smoke', :type => :select, :collection => [["Often smokes", "Often smokes"], ["Sometimes smokes", "Sometimes smokes"], ["Never smoke", "Never smoke"]]
+              span.color
+                - if current_user.admin? or current_user == @user
+                  = best_in_place @user, :user_smoke, nil: 'Select how often you smoke', :type => :select, :collection => [["Often smokes", "Often smokes"], ["Sometimes smokes", "Sometimes smokes"], ["Never smoke", "Never smoke"]]
+                - else
+                  = @user.user_smoke
             h4
               | Does User Drink: 
-              span.color = best_in_place @user, :user_drink, nil: 'Select how much you drink', :type => :select, :collection => [["Often drinks", "Often drinks"], ["Sometimes drinks", "Sometimes drinks"], ["Never drinks", "Never drinks"]]
+              span.color
+                - if current_user.admin? or current_user == @user
+                  = best_in_place @user, :user_drink, nil: 'Select how much you drink', :type => :select, :collection => [["Often drinks", "Often drinks"], ["Sometimes drinks", "Sometimes drinks"], ["Never drinks", "Never drinks"]]
+                else
+                  = @user.user_drink
             h4
               | Height: 
-              span.color 
-                = best_in_place @user, :height ,nil: '0`0'
+              span.color
+                - if current_user.admin? or current_user == @user
+                  = best_in_place @user, :height ,nil: '0`0'
+                - else
+                  = @user.height
             .corner_bg
               img alt="" src="/assets/side_curv.png" /
       .right_sec
@@ -75,18 +104,30 @@
               = @user.location.try(:city)
               ',
               = @user.location.try(:state)
-            span.fb_con
-              | Facebook Connected
-              img alt="" src="/assets/fb_link.png" /
+            - if @user == current_user
+              - if current_user_has_fb_access_token?
+                span.fb_con
+                  | Facebook Connected
+                  img alt="" src="/assets/fb_link.png" /
+              -else
+                span.fb_con
+                  = link_to 'Connect to Facebook', '/auth/facebook'
+              - if current_user_has_tw_access_token?
+                span.fb_con
+                  | Twitter Connected
+              - else
+                span.fb_con
+                  = link_to 'Connect to Twitter', authorize_twitter_url(:target_profile_id => current_user.id)
             span.text_detail
               | joined 
               = distance_of_time_in_words_to_now(@user.created_at) 
               '&nbsp;ago
-              strong Last online #{distance_of_time_in_words_to_now(@user.updated_at)} ago
+              strong Last online #{distance_of_time_in_words_to_now(@user.updated_at).gsub(/\d+/, 'few')} ago
 
           .lets_go
             - if @user.letsgos.any?
-              = render '/letsgos/letsgo'
+              .list
+                = render '/letsgos/letsgo'
             -elsif @user != current_user
               b #{@user.username} has not posted any dates yet.
               br
@@ -120,7 +161,7 @@
             /     span = @user.average_response_time
           - if @user.letsgos.any? || current_user?(@user)
             .testimonial_box
-              - if current_user == @user
+              - if current_user == @user or current_user.admin?
                   = best_in_place @user, :about_me, :type => :textarea, :place_holder => 'Describe yourself here'
               - else
                 - if @user.about_me
@@ -307,7 +348,27 @@ javascript:
       showCloseBtn: true
     });
     $('.add_date').magnificPopup({
-      showCloseBtn: true
+      showCloseBtn: true,
+      callbacks: {
+        open: function () {
+          $("#new_letsgo").on('submit', function () {
+            if ($("#letsgo_content").val() && $("#letsgo_tag").val())
+              return true;
+            if ($("#letsgo_content").val() == '') {
+              $("#letsgo_content").css('border', '1px solid red');
+            }else{
+              $("#letsgo_content").css('border', '');
+            }
+
+            if ($("#letsgo_tag").val() == '') {
+              $("#letsgo_tag").parent('div').css('border', '1px solid red');
+            }else{
+              $("#letsgo_tag").parent('div').css('border', '');
+            }
+            return false;
+          });
+        }
+      }
     });
     $('form#question_form').bind('ajax:success', function(evt, data, status, xhr){
       $.magnificPopup.close();
@@ -362,6 +423,24 @@ javascript:
                 url: URL,
                 type: "POST",
                 success: function (data, textStatus, jqXHR) {
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                  //if fails
+                }
+              });
+      return false;
+    });
+
+    $("li a#interested").on('click', function (e) {
+      e.preventDefault();
+      var ClickedLink = this ;
+      var URL = $(this).attr("href");
+      $.ajax(
+              {
+                url: URL,
+                type: "POST",
+                success: function (data, textStatus, jqXHR) {
+                  $(ClickedLink).replaceWith("<span>I'm Interested</span>");
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                   //if fails

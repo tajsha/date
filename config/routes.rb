@@ -45,7 +45,14 @@ Dating::Application.routes.draw do
       end
     end
 
-      
+  resource :twitter do
+    get :authorize
+    get :return
+  end
+
+  get '/auth/facebook', as: "auth_provider"
+  get '/auth/facebook/callback', to: 'facebooks#callback'
+
   match '/paypal/ipn' => 'notifications#create', :via => [:get, :post], :as => 'notifications_create'
   
   resources :admin

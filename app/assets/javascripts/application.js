@@ -141,7 +141,6 @@ $( document ).ready(function() {
 	
 	
 	$('.message_btn').click(function () {
-	  console.log("test test");
 	  var user_id = $(this).data('user');
 	  $('#user').val(user_id);
 	  var avatar_url = $("#image_" + user_id).attr('src');
@@ -161,13 +160,13 @@ $( document ).ready(function() {
 	  $("div.common_sec").html(html_content);
 	  Cufon.refresh();
 	})
+
       
 	
 });
  $( document ).ajaxComplete(function(event, xhr, settings) {
 	     var ct = xhr.getResponseHeader("content-type") || "";
 	     if (ct.indexOf('json') > -1) {
-			 console.log(xhr.responseText);
              var myArr = JSON.parse(xhr.responseText);
              if(myArr && myArr.notice.length) {
                  $(".notice_flash .flash_msg").text(myArr.notice);
@@ -178,5 +177,4 @@ $( document ).ready(function() {
              }
          }
 	});
-
 

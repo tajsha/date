@@ -1,15 +1,15 @@
 source 'https://rubygems.org'
 
-ruby '2.0.0'
+#ruby '2.0.0'
 gem 'rails', '4.0.0.rc1'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mailboxer', '0.11.0'
+gem 'mailboxer'
 gem 'paypal-recurring'
-gem 'thinking-sphinx'
-gem 'mysql2'
+gem 'thinking-sphinx', '3.1.0'
+gem 'mysql2', '0.3.13'
 gem 'carrierwave'
 gem 'jdbc-mysql'
 gem 'rmagick'
@@ -28,11 +28,12 @@ gem 'ancestry'
 gem 'stripe'
 gem 'slim-rails'
 gem 'whenever', require: false
-gem 'roadie', '~> 2.4'
+gem 'roadie'
 gem 'jquery-fileupload-rails'
 gem 'chartkick'
 gem 'groupdate'
 gem 'stripe_event'
+#gem 'client_side_validations'
 
 
 
@@ -84,3 +85,8 @@ group :test do
   gem 'guard-rspec'
   gem 'rb-fsevent'
 end
+
+  gem 'twitter'
+  gem 'oauth'
+  gem 'omniauth-facebook'
+  gem "koala", "~> 1.10.0rc"

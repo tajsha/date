@@ -465,4 +465,6 @@ color: white;
 
 .header_avatar {
  margin-top: -21px;
+ height: 40px;
+ width: 40px;
 }

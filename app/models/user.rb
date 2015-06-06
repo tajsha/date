@@ -40,6 +40,7 @@ class User < ActiveRecord::Base
   has_one :search
   has_many :photos
   has_many :letsgos, dependent: :destroy
+  has_many :interested_users_letsgos, dependent: :destroy
   belongs_to :default_photo, :class_name => "Photo"  
   belongs_to :location, :foreign_key => :zip_code, :primary_key => :zip_code
   has_many :notifications
@@ -61,10 +62,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :username
   validates_presence_of :username
   validates_format_of :username, :with => /\A[a-zA-Z0-9]+\Z/, :message => "should only contain letters or numbers"
-  validates :password, :presence => true,
-                       :confirmation => true,
-                       :length => {:within => 6..40},
-                       :on => :create
+  validates :password, :length => {:within => 6..40}, :on => :create
   before_create { generate_token(:auth_token) }
   ROLES = %w[admin user guest banned]
   scope :except_user, ->(user) { where('users.id != ?', user.id)}
@@ -123,6 +121,10 @@ class User < ActiveRecord::Base
     
     def paid?
       subscriptions.where(cancelled: nil).exists?
+    end
+
+    def admin?
+      self.role == 'admin'
     end
     
     def reg?

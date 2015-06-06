@@ -70,7 +70,7 @@ end
       session[:user_id] = @user.id
       redirect_to root_url, notice: "Thank you for signing up!"
     else
-      render "new"
+      render :action => "new", :layout => 'new_application'
     end
   end
 
