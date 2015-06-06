@@ -5,7 +5,11 @@
               <%= link_to "delete", letsgo, method: :delete, data: { confirm: "You sure?" }, remote: true, :class => 'letsgo_delete' %>
           <% end %>
           <% unless current_user?(letsgo.user) %>
-              <%= link_to "I'm Interested", interested_letsgo_path(letsgo), method: :message %> |
+              <% if current_user.interested_users_letsgos.where(:letsgo_id => letsgo.id).present? %>
+                <span>I'm Interested</span>
+              <% else %>
+                <%= link_to "I'm Interested", interested_letsgo_path(letsgo), method: :post, :id => "interested" %>
+              <% end %> |
               <%= link_to "repost", repost_letsgo_path(letsgo), method: :post, :id => "repost" %>
           <% end %>
         </div>

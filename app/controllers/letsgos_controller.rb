@@ -201,8 +201,12 @@ def repost
     @content = @letsgo.content
     @recipient = @letsgo.user
     @receipt = current_user.send_message(@recipient, "Let's go...#{@content}", "#{@current_user} is Interested in your date!")
+    iul = current_user.interested_users_letsgos.build
+		iul.user_id = current_user.id
+		iul.letsgo_id = @letsgo.id
+		iul.save!
     if request.xhr?
-		render :json => {:success => true}
+		render :json => {:notice => "Your message was sent"}
     else
 		redirect_to :back, notice: "Your message was sent"
 	end

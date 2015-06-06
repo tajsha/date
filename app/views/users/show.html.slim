@@ -400,6 +400,24 @@ javascript:
               });
       return false;
     });
+
+    $("li a#interested").on('click', function (e) {
+      e.preventDefault();
+      var ClickedLink = this ;
+      var URL = $(this).attr("href");
+      $.ajax(
+              {
+                url: URL,
+                type: "POST",
+                success: function (data, textStatus, jqXHR) {
+                  $(ClickedLink).replaceWith("<span>I'm Interested</span>");
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                  //if fails
+                }
+              });
+      return false;
+    });
     
      $("#upload").click(function(){
     

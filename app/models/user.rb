@@ -40,6 +40,7 @@ class User < ActiveRecord::Base
   has_one :search
   has_many :photos
   has_many :letsgos, dependent: :destroy
+  has_many :interested_users_letsgos, dependent: :destroy
   belongs_to :default_photo, :class_name => "Photo"  
   belongs_to :location, :foreign_key => :zip_code, :primary_key => :zip_code
   has_many :notifications
