@@ -133,7 +133,27 @@
 		});
 
         $('.add_date').magnificPopup({
-            showCloseBtn: true
+            showCloseBtn: true,
+            callbacks: {
+                open: function () {
+                    $("#new_letsgo").on('submit', function () {
+                        if ($("#letsgo_content").val() && $("#letsgo_tag").val())
+                            return true;
+                        if ($("#letsgo_content").val() == '') {
+                            $("#letsgo_content").css('border', '1px solid red');
+                        } else {
+                            $("#letsgo_content").css('border', '');
+                        }
+
+                        if ($("#letsgo_tag").val() == '') {
+                            $("#letsgo_tag").parent('div').css('border', '1px solid red');
+                        } else {
+                            $("#letsgo_tag").parent('div').css('border', '');
+                        }
+                        return false;
+                    });
+                }
+            }
         });
 	});
 	
