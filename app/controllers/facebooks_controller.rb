@@ -4,7 +4,8 @@ class FacebooksController < ApplicationController
     auth = request.env["omniauth.auth"]
     AccessToken.create(:user_id => current_user.id, :social_network => AccessToken::FACEBOOK,
                        :access_token => auth['credentials']['token'])
-    redirect_to :back
+    flash[:notice] = "You are successfully connected to Facebook."
+    redirect_to settings_user_url(current_user)
   end
 
 end

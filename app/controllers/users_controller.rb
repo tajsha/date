@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 end
   
   def settings
-    @user = User.find(params[:id])
+    @user = User.find_by(username: params[:id]) || User.find(params[:id])
     render layout: 'new_application'
   end
   
@@ -198,7 +198,19 @@ end
     @search = Search.new
     render :index, layout: 'new_application'
   end
-     
+
+  def disconnect_facebook
+    AccessToken.where("user_id =? AND social_network =?", current_user.id, "F").first.delete
+    flash[:notice] = "Disconnected From Facebook."
+    redirect_to :back
+  end
+
+  def disconnect_twitter
+    AccessToken.where("user_id =? AND social_network =?", current_user.id, "T").first.delete
+    flash[:notice] = "Disconnected From Twitter."
+    redirect_to :back
+  end
+
   private
     
     

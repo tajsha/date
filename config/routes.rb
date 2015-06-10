@@ -34,7 +34,9 @@ Dating::Application.routes.draw do
   get '/relationships/set_follow' => 'relationships#set_follow'
   get '/users/set_follow' => 'users#set_follow'
   get '/speed_dates' => 'users#speed_date'
-  
+  get '/disconnect_facebook' => 'users#disconnect_facebook'
+  get '/disconnect_twitter' => 'users#disconnect_twitter'
+
   post 'subscription_event' => "webhooks#subscription_event"
   
 

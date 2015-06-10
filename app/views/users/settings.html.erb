@@ -1,3 +1,6 @@
+<% if flash[:notice] %>
+    <p class="flash"><%= flash[:notice] %></p>
+<% end %>
 <div class="col-12">
 	<div class="sm_form_container">
 		<h1>Account Information</h1>
@@ -149,3 +152,26 @@
 	<% end %>
 	</div>
 </div>
+<div class="col-12">
+  <div class="sm_form_container">
+    <h1>Social Networks</h1>
+    <div class="row">
+      <% if current_user_has_tw_access_token? %>
+          <%= link_to 'Remove Twitter Connection', '/disconnect_twitter' %>
+      <% else %>
+        <%= link_to 'Connect to Twitter', authorize_twitter_url(:target_profile_id => current_user.id) %>
+      <% end %> |
+      <% if current_user_has_fb_access_token? %>
+          <%= link_to 'Remove Facebook Connection', '/disconnect_facebook' %>
+      <% else %>
+        <%= link_to 'Connect to Facebook', '/auth/facebook' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    if (window.opener) {
+        window.close()
+    }
+</script>
