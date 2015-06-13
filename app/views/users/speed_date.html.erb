@@ -132,6 +132,11 @@
 			});
 		});
 
+        $('form#new_letsgo').bind('ajax:success', function(evt, data, status, xhr){
+            $.magnificPopup.close();
+            $('p.flash').text(data.notice);
+        })
+
         $('.add_date').magnificPopup({
             showCloseBtn: true,
             callbacks: {

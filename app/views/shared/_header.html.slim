@@ -130,4 +130,9 @@ javascript:
     $('.header_upload_photo').magnificPopup({
       showCloseBtn: true
     });
+    
+    $('form#new_letsgo').bind('ajax:success', function (evt, data, status, xhr) {
+      $.magnificPopup.close();
+      $('p.flash').text(data.notice);
+    }
   });

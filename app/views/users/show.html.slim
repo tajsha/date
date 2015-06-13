@@ -326,7 +326,7 @@ javascript:
     $('.profile_btn').magnificPopup({
       showCloseBtn: true
     });
-    $('form#message_form').bind('ajax:success', function(evt, data, status, xhr){
+    $('form#message_form, form#new_letsgo').bind('ajax:success', function(evt, data, status, xhr){
       $.magnificPopup.close();
       $('p.flash').text(data.notice);
     })
