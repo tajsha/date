@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150326183821) do
+ActiveRecord::Schema.define(version: 20150604203735) do
+
+  create_table "access_tokens", force: true do |t|
+    t.integer  "user_id"
+    t.text     "access_token"
+    t.string   "access_secret"
+    t.string   "social_network", limit: 1
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "contacts", force: true do |t|
     t.string   "name"
@@ -61,6 +70,11 @@ ActiveRecord::Schema.define(version: 20150326183821) do
     t.datetime "updated_at"
     t.string   "name"
     t.integer  "gallery_id"
+  end
+
+  create_table "interested_users_letsgos", force: true do |t|
+    t.integer "user_id",   null: false
+    t.integer "letsgo_id", null: false
   end
 
   create_table "letsgos", force: true do |t|

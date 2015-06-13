@@ -963,7 +963,9 @@ body{ font-family:Arial, Helvetica, sans-serif; background:#f7f7f7;}
 .form_container .form_list li a span{ padding:0 0 0 3px;}
 .form_container .form_list li a span.color{ color:#39a0f6;}
 .form_container .find_btn{ float:right; width:114px; background:url(/assets/btn_bg.png) no-repeat 0 0; border:none; margin:0 13px 0 0; padding:14px 0 14px 0; text-align:center; font-size:17px; line-height:19px; color:#000; cursor:pointer; font-weight:bold; text-shadow:0px 1px 1px #fff;}
-.form_container .social_network{ float:right; width:120px; border:none; margin:0 13px 0 0; padding:14px 0 14px 0; text-align:center; font-size:17px; line-height:19px; color:#000; cursor:pointer; font-weight:bold; text-shadow:0px 1px 1px #fff;}
+.form_container .social_network{ float:right; width:140px; border:none; margin:0 13px 0 0; padding:14px 0 14px 0; text-align:center; font-size:17px; line-height:19px; color:#000; cursor:pointer; font-weight:bold; text-shadow:0px 1px 1px #fff;}
+.form_container .social_network a.jqTransformCheckbox{ margin: 0px;}
+.form_container .social_network a.jqTransformChecked{ margin: -4px 0px 0px 0px;}
 .btm_search_detail{float:right; width:100%; text-align:right; padding:14px 0 0 0;}
 .btm_search_detail .simple_search{padding:0 0 2px 0px; text-decoration:none; color:#5b5b5b; color:#39a0f6; border-bottom:1px dotted #39a0f6; font-size:14px; line-height:16px;}
 .btm_search_detail .simple_search span{ padding:0 0 0 4px;}
@@ -1772,25 +1774,8 @@ a.see_more{cursor: pointer}
 .message_delete {
     display: none;
     position: absolute;
-    height: 40px;
-    width: 40px;
-	padding: 20px;
-	background-color: white; 
-	margin-left: 750px;
-	margin-top: 20px;
+	padding: 10px 11px 11px 10px;
+	margin-left: 766px;
+	margin-top: 54px;
 	color: #929292;
-
-	/* outer shadows  (note the rgba is red, green, blue, alpha) */
-	-webkit-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.4); 
-	-moz-box-shadow: 0px 1px 6px rgba(23, 69, 88, .5);
-
-	/* rounded corners */
-	-webkit-border-radius: 12px;
-	-moz-border-radius: 7px; 
-	border-radius: 7px;
-
-	/* gradients */
-	background: -webkit-gradient(linear, left top, left bottom, 
-	color-stop(0%, white), color-stop(15%, white), color-stop(100%, #D7E9F5)); 
-	background: -moz-linear-gradient(top, white 0%, white 55%, #D5E4F3 130%); 
 }

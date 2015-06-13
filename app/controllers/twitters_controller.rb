@@ -31,7 +31,7 @@ class TwittersController < ApplicationController
     rescue Exception => e
       flash[:notice] = "Failed to connect Twitter."
     end
-    redirect_to user_url(current_user)
+    redirect_to settings_user_url(current_user)
   end
 
   protected
