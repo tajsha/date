@@ -72,6 +72,11 @@ class ImageUploader < CarrierWave::Uploader::Base
     process :resize_to_fill => [194, 207]
   end
 
+  version :inbox do
+    process :auto_orient
+    process :resize_to_fill => [77, 77]
+  end
+
   version :popup do
     process :auto_orient
     process :resize_to_fit => [500, 500]

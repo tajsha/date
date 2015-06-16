@@ -87,7 +87,7 @@
 </div>
 <div id = 'letsgo_form_div' class="mfp-hide">
   <center>
-      <div class="message_div">
+      <div class="message_div" style="padding-right: 28px;">
         <%= render 'letsgos/form' %>
       </div>
   </center>
@@ -131,6 +131,10 @@
 				}
 			});
 		});
+        $('form#new_letsgo').bind('ajax:success', function(evt, data, status, xhr){
+            $.magnificPopup.close();
+            $('p.flash').text(data.notice);
+        })
         $('.add_date').magnificPopup({
             showCloseBtn: true,
             callbacks: {
@@ -143,7 +147,6 @@
                         } else {
                             $("#letsgo_content").css('border', '');
                         }
-
                         if ($("#letsgo_tag").val() == '') {
                             $("#letsgo_tag").parent('div').css('border', '1px solid red');
                         } else {

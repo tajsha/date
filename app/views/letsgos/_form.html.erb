@@ -1,4 +1,4 @@
-<%= form_for(@letsgo) do |f| %>
+<%= form_for(@letsgo, remote: true) do |f| %>
     <div class = "form-group" style="margin-bottom: -15px; margin-top: 10px;">
       <%= label_tag :body, 'Post a Date', class: 'control-label' %>
     </div>

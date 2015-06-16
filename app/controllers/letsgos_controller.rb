@@ -4,12 +4,12 @@ class LetsgosController < ApplicationController
     @letsgo = current_user.letsgos.build(letsgo_params)
     if @letsgo.save
       flash[:notice] = "Date posted!"
-      redirect_to :back
-else
+			render :json => {:notice => flash[:notice]}
+		else
       flash[:notice] = "Date was not posted!"
-      redirect_to :back
-end
-end
+			render :json => {:notice => flash[:notice]}
+		end
+	end
 
 def show
   @letsgo = Letsgo.find(username: params[:id])
