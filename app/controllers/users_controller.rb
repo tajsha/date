@@ -203,13 +203,13 @@ end
   end
 
   def disconnect_facebook
-    AccessToken.where("user_id =? AND social_network =?", current_user.id, "F").first.delete
+    AccessToken.where("user_id =? AND social_network =?", current_user.id, "F").delete_all
     flash[:notice] = "Disconnected From Facebook."
     redirect_to :back
   end
 
   def disconnect_twitter
-    AccessToken.where("user_id =? AND social_network =?", current_user.id, "T").first.delete
+    AccessToken.where("user_id =? AND social_network =?", current_user.id, "T").delete_all
     flash[:notice] = "Disconnected From Twitter."
     redirect_to :back
   end

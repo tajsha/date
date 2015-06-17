@@ -23,19 +23,42 @@
 <% end %>
 
 <script type="text/javascript">
-  if(<%= current_user_has_fb_access_token? %> == false)
-  {
-      $("#facebook").click(function (e) {
-          if (this.checked) {
-              var left = (screen.width / 2) - (835 / 2);
-              var top = (screen.height / 2) - (625 / 2);
-              window.open('/auth/facebook', "", 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=' + 835 + ', height=' + 625 + ', top=' + top + ', left=' + left);
-              e.stopPropagation();
-              return true;
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId  : '1582975658618850',
+            status : true,
+            cookie : true, 
+            xfbml  : true 
+        });
+    };
 
-          }
-      });
-  }
+    (function(d) {
+        var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+        js = d.createElement('script'); js.id = id; js.async = true;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        d.getElementsByTagName('head')[0].appendChild(js);
+    }(document));
+
+    $(function() {
+        if(<%= current_user_has_fb_access_token? %> == false)
+        {
+            $("#facebook").click(function (e) {
+                if (this.checked) {
+                    FB.login(function(response) {
+                        if (response.authResponse) {                           
+                            $.getJSON('/auth/facebook/callback', function(json) {
+                                e.stopPropagation();
+                                return true;
+                            });
+                        }
+                    }, { scope: 'user_about_me, publish_actions, manage_pages' }); // These are the permissions you are requesting
+                }
+            });
+        }
+
+    });
+
+
   if(<%= current_user_has_tw_access_token? %> == false){
       $("#twitter").click(function(e) {
           if(this.checked) {
