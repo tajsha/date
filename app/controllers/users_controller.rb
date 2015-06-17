@@ -124,8 +124,11 @@ end
       current_user
     end
     params[:user].delete("user_id")
-    @user.update_attributes(params[:user])
-    respond_with @user
+    if @user.update_attributes(params[:user])
+      respond_with @user
+    else
+      render :action => 'settings', :layout => 'new_application'
+    end
   end
   
    def set_follow
