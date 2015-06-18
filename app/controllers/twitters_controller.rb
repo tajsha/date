@@ -5,7 +5,7 @@ class TwittersController < ApplicationController
   def authorize
     begin
       target_profile_id = params[:target_profile_id]
-      consumer = OAuth::Consumer.new("y4pr9PpCf7mfNmRL96ihVjVjc", "p5DT26br7IAlL1HNRZewgmw1PHNVqyjREFfKYIo6bv1U5PMgsm", :site => "https://api.twitter.com")
+      consumer = OAuth::Consumer.new("awkQ6gu5lvZuBjAt5yQMCKuVS", "CQEwuVlBkA4L17DcXp1jiXLWLGEsFOHV1cX6cUjWDfpqrZhbpV", :site => "https://api.twitter.com")
       request_token = consumer.get_request_token pin_auth_parameters(target_profile_id)
       session[:twitter_request_secret] = request_token.secret
       session[:twitter_request_token] = request_token.token
@@ -19,7 +19,7 @@ class TwittersController < ApplicationController
 
   def return
     begin
-      consumer = OAuth::Consumer.new("y4pr9PpCf7mfNmRL96ihVjVjc", "p5DT26br7IAlL1HNRZewgmw1PHNVqyjREFfKYIo6bv1U5PMgsm", :site => "https://api.twitter.com")
+      consumer = OAuth::Consumer.new("awkQ6gu5lvZuBjAt5yQMCKuVS", "CQEwuVlBkA4L17DcXp1jiXLWLGEsFOHV1cX6cUjWDfpqrZhbpV", :site => "https://api.twitter.com")
       request_token = OAuth::RequestToken.new(consumer, session[:twitter_request_token], session[:twitter_request_secret])
       access_token = request_token.get_access_token :oauth_verifier => params["oauth_verifier"]
       token = AccessToken.where("user_id =? AND social_network =?", current_user.id, AccessToken::TWITTER).first

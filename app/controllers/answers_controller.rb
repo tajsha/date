@@ -30,8 +30,8 @@ class AnswersController < ApplicationController
       begin
         access_token = AccessToken.find_by_user_id_and_social_network(current_user.id, 'T')
         @client = Twitter::REST::Client.new do |config|
-            config.consumer_key = "y4pr9PpCf7mfNmRL96ihVjVjc"
-            config.consumer_secret = "p5DT26br7IAlL1HNRZewgmw1PHNVqyjREFfKYIo6bv1U5PMgsm"
+            config.consumer_key = "awkQ6gu5lvZuBjAt5yQMCKuVS"
+            config.consumer_secret = "CQEwuVlBkA4L17DcXp1jiXLWLGEsFOHV1cX6cUjWDfpqrZhbpV"
             config.access_token = access_token.access_token
             config.access_token_secret = access_token.access_secret
         end
