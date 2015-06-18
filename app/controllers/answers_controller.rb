@@ -35,9 +35,9 @@ class AnswersController < ApplicationController
             config.access_token = access_token.access_token
             config.access_token_secret = access_token.access_secret
         end
-        complete_msg = @question.question+"__"+@question.answer
+        complete_msg = @question.question+" - "+@question.answer
         @display_message = complete_msg.length <= 110 ? complete_msg : complete_msg[0..39] + '...'
-        @con_url = conversation_url(@question.conversation.id)
+        @con_url = "http://areyoutaken.com"
         @client.update("#{@display_message} #{@con_url}")
       rescue Exception => e
         puts e.message
