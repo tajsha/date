@@ -44,7 +44,9 @@ class AnswersController < ApplicationController
         puts e.backtrace
         access_token.delete if access_token.present?
       end
-    elsif params["facebook"]
+    end
+
+    if params["facebook"]
       begin
         access_token = AccessToken.find_by_user_id_and_social_network(current_user.id, 'F')
         api = Koala::Facebook::API.new(access_token.access_token)
