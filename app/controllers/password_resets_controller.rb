@@ -1,5 +1,7 @@
 class PasswordResetsController < ApplicationController
+  skip_before_filter :user_loged_in
   def new
+    render layout: 'new_application'
   end
   
   def create
