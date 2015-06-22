@@ -11,11 +11,11 @@
               <%= f.submit "Respond", :class => 'find_btn', :style=>'margin:0' %>
               <div class="social_network">
                 <span style="margin-left: -22px;">Twitter</span>
-                <%= check_box_tag :twitter, true, current_user_has_tw_access_token? %>
+                <%= check_box_tag :twitter, true %>
               </div>
               <div class="social_network">
                 <span>Facebook</span>
-                <%= check_box_tag :facebook, true, current_user_has_fb_access_token? %>
+                <%= check_box_tag :facebook, true %>
               </div>
             </li>
 		</ul>
