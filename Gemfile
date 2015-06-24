@@ -33,6 +33,9 @@ gem 'jquery-fileupload-rails'
 gem 'chartkick'
 gem 'groupdate'
 gem 'stripe_event'
+gem 'pg'
+gem 'puma'
+
 #gem 'client_side_validations'
 
 

@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150604203735) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "access_tokens", force: true do |t|
     t.integer  "user_id"
     t.text     "access_token"
@@ -89,7 +92,7 @@ ActiveRecord::Schema.define(version: 20150604203735) do
   add_index "letsgos", ["user_id", "created_at"], name: "index_letsgos_on_user_id_and_created_at", using: :btree
 
   create_table "locations", force: true do |t|
-    t.string   "zip_code"
+    t.string   "zipcode"
     t.string   "city"
     t.string   "state"
     t.float    "latitude"
@@ -294,7 +297,7 @@ ActiveRecord::Schema.define(version: 20150604203735) do
     t.string   "email"
     t.string   "password_digest"
     t.string   "zip_code"
-    t.date     "birthday"
+    t.string   "birthday"
     t.string   "name"
     t.string   "username"
     t.string   "gender"
