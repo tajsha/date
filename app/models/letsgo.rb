@@ -5,10 +5,19 @@ class Letsgo < ActiveRecord::Base
   belongs_to :message
   belongs_to :sender,:class_name => 'User',:foreign_key => 'sender_id'
   belongs_to :recipient,:class_name => 'User',:foreign_key => 'recipient_id'
+  has_many :interested_users_letsgos, dependent: :destroy
   default_scope -> { order('created_at DESC') }
   validates :content, presence: true, length: { maximum: 360 }
   validates :user_id, presence: true
   scope :random, -> { order("RANDOM()") }
+  
+  after_save :set_user_delta_flag
+  after_destroy :set_user_delta_flag
+  
+  def set_user_delta_flag
+    user.delta = false
+    user.save!
+  end
   
   def self.total_male
     count_of_males = Letsgo.joins(:user).where(users: {gender: 'male'}).uniq.count

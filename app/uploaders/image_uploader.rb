@@ -3,8 +3,8 @@
 class ImageUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
-   # include CarrierWave::RMagick
-   include CarrierWave::MiniMagick
+  # include CarrierWave::RMagick
+  include CarrierWave::MiniMagick
 
   # Include the Sprockets helpers for Rails 3.1+ asset pipeline compatibility:
   # include Sprockets::Helpers::RailsHelper
@@ -32,61 +32,71 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Process files as they are uploaded:
   #process :scale => [200, 300]
   process :auto_orient
-  
+
   #
   # def scale(width, height)
   #   # do something
   # end
-  
-  
-  
+
+
+
   def resize_to_limit(width, height)
-        manipulate! do |img|
-          img.resize "#{width}x#{height}>"
-          img = yield(img) if block_given?
-          img
-        end
-      end
-      
-      def auto_orient
-         manipulate! do |image|
-           image.auto_orient
-           image
-         end
-       end
+    manipulate! do |img|
+      img.resize "#{width}x#{height}>"
+      img = yield(img) if block_given?
+      img
+    end
+  end
+
+  def auto_orient
+    manipulate! do |image|
+      image.auto_orient
+      image
+    end
+  end
 
 
   # Create different versions of your uploaded files:
-   version :thumb do
-     process :auto_orient
-     process :resize_to_fill => [162, 170]
-   end
+  version :thumb do
+    process :auto_orient
+    process :resize_to_fill => [162, 170]
+  end
 
-   version :avatar do
-     process :auto_orient
-     process :resize_to_fill => [77, 77]
-   end
-   
-   version :profile do
-     process :auto_orient
-     process :resize_to_fill => [194, 207]
-   end
-   
-   version :popup do
-     process :auto_orient
-     process :resize_to_fit => [500, 500]
-   end
+  version :avatar do
+    process :auto_orient
+    process :resize_to_fill => [50, 50]
+  end
 
-   version :box do
-     process :auto_orient
-     process :resize_to_fill => [194, 285]
-   end
-   
-   version :similar do
-     process :auto_orient
-     process :resize_to_fill => [194, 139]
-   end
-   
+  version :profile do
+    process :auto_orient
+    process :resize_to_fill => [194, 207]
+  end
+
+  version :inbox do
+    process :auto_orient
+    process :resize_to_fill => [77, 77]
+  end
+
+  version :popup do
+    process :auto_orient
+    process :resize_to_fit => [500, 500]
+  end
+
+  version :box do
+    process :auto_orient
+    process :resize_to_fill => [194, 285]
+  end
+
+  version :similar do
+    process :auto_orient
+    process :resize_to_fill => [194, 139]
+  end
+
+  version :speed do
+    process :auto_orient
+    process :resize_to_fill => [548, 530]
+  end
+
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   # def extension_white_list

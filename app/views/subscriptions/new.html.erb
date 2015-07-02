@@ -4,7 +4,7 @@
     <div class="plan">
       <%= image_tag "/assets/best1.png" %>
 
-      <h1><%= radio_button_tag :plan_id, '12', true %><label for="plan_id_12"><span><span></span></span></label>$13.50 a year</h1>
+      <h1><%= radio_button_tag "subscription[plan_id]", '12', (@subscription.plan.id == 12 ? true : false) %><label for="plan_id_12"><span><span></span></span></label>$13.50 a year</h1>
       <h2>12-Month Membership</h2>
       <p>2 FREE months!</p>
       <p>Send unlimited messages to any user</p>
@@ -12,7 +12,7 @@
 	  <p>Make real connections</p>
     </div>
     <div class="plan">
-      <h1><%= radio_button_tag :plan_id, '1' %><label for="plan_id_1"><span><span></span></span></label>$1.35 a month</h1>
+      <h1><%= radio_button_tag "subscription[plan_id]", '1', (@subscription.plan.id == 1 ? true : false) %><label for="plan_id_1"><span><span></span></span></label>$1.35 a month</h1>
       <h2>1-Month Membership</h2>
       <p>Send unlimited messages to any user</p>
 	  <p>Receive and read unlimited messages</p>
@@ -109,3 +109,9 @@
     <% end %>
   </div>
 </div>
+<script>
+  $("input[name='subscription[plan_id]']").on('change', function(){
+      window.location.assign("<%= new_subscription_url %>?plan_id="+$(this).val());
+  });
+
+</script>

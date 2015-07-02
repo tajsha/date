@@ -11,7 +11,6 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-//= require jquery.ui.all
 //= require jquery_ujs
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
@@ -92,3 +91,90 @@ function fix_select(selector) {
     $(selector).unwrap().removeClass('jqTransformHidden').jqTransSelect();
     $(selector).parent().css('zIndex', i);
 }
+
+function deleteMsg(id){
+	var ids = [];
+	ids.push(id);        
+	$.ajax({ type: "POST",  url:"/conversations/trash_all",  data:{ids: ids},
+	  success:function(data){
+		jQuery.each(ids, function (i, val) {
+		  $("div.outer#msg_"+val).remove();
+		});
+	  }
+	});
+}
+
+
+
+$( document ).ready(function() {
+	$("abbr.timeago").timeago();
+	window.asd = $('.SlectBox#relegion').SumoSelect({ 
+			placeholder: 'Relegion',
+			csvDispCount: 3 
+		});
+		
+	window.asd = $('.SlectBox#children').SumoSelect({ 
+			placeholder: 'Kids',
+			csvDispCount: 3 
+		});
+	window.asd = $('.SlectBox#ethnicity').SumoSelect({ 
+			placeholder: 'Ethnicity',
+			csvDispCount: 3 
+		});
+	window.asd = $('.SlectBox#gender').SumoSelect({ 
+		placeholder: 'Gender',
+		csvDispCount: 3 
+	});
+	
+	$('#header .main_dropdown').hover( function() { $('#header .main_dropdown .dropdown-menu').toggle(); } );
+    if($(".notice, .flash").text().length){
+          $(".notice_flash .flash_msg").text($(".notice, .flash").text());
+	      $(".notice_flash").show();
+	      setTimeout(function(){
+		    $(".notice_flash").hide();
+	      }, 5000);
+	}                 
+    $(".notice, .flash").hide();
+	$(".notice_flash .close").on('click', function(){
+	  $(".notice_flash").hide();
+	});
+	
+	
+	$('.message_btn').click(function () {
+	  var user_id = $(this).data('user');
+	  $('#user').val(user_id);
+	  var avatar_url = $("#image_" + user_id).attr('src');
+	  var username = $("#name_" + user_id).val();
+	  var age = $("#age_" + user_id).val();
+	  var gender = $("#gender_" + user_id).val();
+	  var sexuality = $("#sexuality_" + user_id).val();
+	  var city = $("#city_" + user_id).val();
+	  var state = $("#state_" + user_id).val();
+	  var html_content = "<div class=\"commoon_sec\">" +
+				  "<div class=\"left_sec\"><img alt=\"Popup baby\" src=\"" + avatar_url + "\"></div>" +
+				  "<div class=\"right_sec\" style=\"position:relative;\">" +
+				  "<div class=\"top_box\" style=\"position:absolute; border: 1px solid #cccccc; width: 456px; border-radius: 6px; height: 140px; background-color: #F7F7F7;\">" +
+				  "<div class=\"left_box\" style=\"float:right; text-align:left; width: 68%;\">" +
+				  "<h2>" + username + "</h2><h3>" + age + ", " + gender + ", " + sexuality + "</br>" +
+				  city + ", " + state + "</h3></div></div></div></div>";
+	  $("div.common_sec").html(html_content);
+	  Cufon.refresh();
+	})
+
+      
+	
+});
+ $( document ).ajaxComplete(function(event, xhr, settings) {
+	     var ct = xhr.getResponseHeader("content-type") || "";
+	     if (ct.indexOf('json') > -1) {
+             var myArr = JSON.parse(xhr.responseText);
+             if(myArr && myArr.notice.length) {
+                 $(".notice_flash .flash_msg").text(myArr.notice);
+                 $(".notice_flash").show();
+                 setTimeout(function () {
+                     $(".notice_flash").hide();
+                 }, 5000);
+             }
+         }
+	});
+

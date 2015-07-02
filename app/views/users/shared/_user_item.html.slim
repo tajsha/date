@@ -3,7 +3,7 @@ li
     .img_box
         = link_to user do
           - if user.avatar.present?
-          img alt="" src="#{user.avatar.try(:image_url, :similar)}" style=("width: 194px;height: 139px;")  /
+            img alt="" src="#{user.avatar.try(:image_url, :similar)}" style=("width: 194px;height: 139px;")  /
           - else
             img alt="no image" src="" style=("width: 194px;height: 139px;") /
     .img_detail

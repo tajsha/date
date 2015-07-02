@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141101224339) do
+ActiveRecord::Schema.define(version: 20150604203735) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "access_tokens", force: true do |t|
+    t.integer  "user_id"
+    t.text     "access_token"
+    t.string   "access_secret"
+    t.string   "social_network", limit: 1
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "contacts", force: true do |t|
     t.string   "name"
@@ -63,6 +75,11 @@ ActiveRecord::Schema.define(version: 20141101224339) do
     t.integer  "gallery_id"
   end
 
+  create_table "interested_users_letsgos", force: true do |t|
+    t.integer "user_id",   null: false
+    t.integer "letsgo_id", null: false
+  end
+
   create_table "letsgos", force: true do |t|
     t.string   "content"
     t.integer  "user_id"
@@ -75,7 +92,7 @@ ActiveRecord::Schema.define(version: 20141101224339) do
   add_index "letsgos", ["user_id", "created_at"], name: "index_letsgos_on_user_id_and_created_at", using: :btree
 
   create_table "locations", force: true do |t|
-    t.string   "zip_code"
+    t.string   "zipcode"
     t.string   "city"
     t.string   "state"
     t.float    "latitude"
@@ -247,6 +264,10 @@ ActiveRecord::Schema.define(version: 20141101224339) do
     t.datetime "updated_at"
     t.integer  "min_age"
     t.integer  "max_age"
+    t.boolean  "advanced",   default: false
+    t.text     "input_text"
+    t.integer  "user_id",                    null: false
+    t.string   "sexuality"
   end
 
   create_table "smailer_properties", force: true do |t|
@@ -276,7 +297,7 @@ ActiveRecord::Schema.define(version: 20141101224339) do
     t.string   "email"
     t.string   "password_digest"
     t.string   "zip_code"
-    t.date     "birthday"
+    t.string   "birthday"
     t.string   "name"
     t.string   "username"
     t.string   "gender"
@@ -304,13 +325,14 @@ ActiveRecord::Schema.define(version: 20141101224339) do
     t.integer  "age"
     t.integer  "default_photo_id"
     t.string   "time_zone"
-    t.integer  "avatar_id",              default: 8
+    t.integer  "avatar_id",              default: 1
     t.integer  "average_response_time"
     t.integer  "response_rate"
     t.integer  "response_total"
     t.integer  "plan_id"
     t.boolean  "no_email"
     t.string   "slug"
+    t.boolean  "delta",                  default: true, null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

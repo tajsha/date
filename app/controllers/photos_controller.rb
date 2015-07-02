@@ -11,10 +11,11 @@ class PhotosController < ApplicationController
   def create
     @photo = Photo.create(params[:photo])
     @photo.user = current_user
-    if @photo.save
+    if @photo.valid? and @photo.save!
       flash[:notice] = "Successfully created photos."
       redirect_to :back
     else
+      flash[:notice] = @photo.errors.messages[:base].first
       render :action => 'new'
     end
   end

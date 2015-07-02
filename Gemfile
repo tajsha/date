@@ -33,7 +33,12 @@ gem 'jquery-fileupload-rails'
 gem 'chartkick'
 gem 'groupdate'
 gem 'stripe_event'
-gem 'client_side_validations'
+gem 'pg'
+gem 'puma'
+gem 'rails_12factor'
+
+
+#gem 'client_side_validations'
 
 
 
@@ -85,3 +90,8 @@ group :test do
   gem 'guard-rspec'
   gem 'rb-fsevent'
 end
+
+  gem 'twitter'
+  gem 'oauth'
+  gem 'omniauth-facebook'
+  gem "koala", "~> 1.10.0rc"

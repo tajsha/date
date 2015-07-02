@@ -33,7 +33,7 @@ class PaypalPayment
         payer_id: @subscription.paypal_customer_token,
         description: @subscription.plan.name,
         amount: @subscription.plan.price,
-        ipn_url: "http://384eefef.ngrok.com/paypal/ipn",
+        ipn_url: "http://221f066f.ngrok.com/paypal/ipn",
         currency: "USD",
       )
       response = PayPal::Recurring.new(options).send(action)

@@ -1,4 +1,4 @@
-- sender = conversation.last_sender
+- sender = (@user.mailbox.sentbox.map(&:id).include? conversation.id) ? conversation.receipts.where("receiver_id <> #{@user.id}").first.receiver : conversation.last_sender
 - message = conversation.last_message
 - receipts = conversation.receipts.recipient(@user).is_unread
 - is_unread = receipts.count > 0 ? true : false
@@ -8,7 +8,7 @@
       img alt="" src="#{is_unread == true ? '/assets/un_read.png' : '/assets/read.png'}" /
       span.conversation_avatar style='margin: 16px 10px 0px 15px'
         =link_to "/users/#{sender.username}" do
-          img alt="" src="#{sender.avatar.image_url(:avatar)}" /
+          img alt="" src="#{sender.avatar.image_url(:inbox)}" /
       h5 = sender.username
       strong style='margin-left: 15px' 
         = sender.age
@@ -27,6 +27,9 @@
     .col_3
       strong = extract_date(message.created_at)
       small = extract_time(message.created_at)
-  form action="#" 
+  div.message_delete
+	a  href="javascript:void(0);" onclick="deleteMsg(#{conversation.id});" style="text-decoration: none; color: #929292;"
+	   img alt="" style="display: block; margin-left: auto; margin-right: auto;" src="/assets/del_icon.png" /
+  form action="#"
     fieldset
       input type="checkbox" class="conversation_checkbox" data-id="#{conversation.id}"

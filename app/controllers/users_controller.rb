@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_filter :user_loged_in, :except => [:index, :new, :create]
   respond_to :html, :json
   
   def age_group
@@ -7,8 +8,39 @@ class UsersController < ApplicationController
 end
   
   def settings
-    @user = User.find(params[:id])
+    @user = User.find_by(username: params[:id]) || User.find(params[:id])
     render layout: 'new_application'
+  end
+  
+  def speed_date
+    @letsgo = current_user.letsgos.build
+    user_ids = Letsgo.all.map(&:user_id).uniq
+    genders = if current_user.gender.downcase == 'male'
+				  if current_user.sexuality.downcase == 'gay'
+				    ["Male"]
+				  elsif current_user.sexuality.downcase == 'straight'
+				    ["Female"]
+				  else
+				    ["Male", "Female"]
+				  end
+				else
+				  if current_user.sexuality.downcase == 'gay'
+				    ["Female"]
+				  elsif current_user.sexuality.downcase == 'straight'
+				    ["Male"]
+				  else
+				    ["Male", "Female"]
+				  end
+				end
+		   user_ids = User.select(:id).where(["id IN (?) AND gender IN (?)", user_ids, genders]).map(&:id)
+           @users = if user_ids.present? 
+					   User.search(:geo => [current_user.latitude * Math::PI / 180.0, current_user.longitude * Math::PI / 180.0],
+						:with  => {:geodist => 0.0..100_000.0, :user_id => user_ids},
+						:order => 'geodist ASC', :without => {:user_id => current_user.id}).shuffle
+					else
+						[]
+					end
+	render layout: 'new_application'
   end
   
   def new
@@ -38,13 +70,13 @@ end
       session[:user_id] = @user.id
       redirect_to root_url, notice: "Thank you for signing up!"
     else
-      render "new"
+      render :action => "new", :layout => 'new_application'
     end
   end
 
   def show
     @user = User.find_by(username: params[:id])
-    @question = @user.questions.page(params[:page]).per_page(3)
+    @question = @user.questions.where("answer is not null").order("created_at DESC").page(params[:page]).per_page(3)
     @letsgos = @user.letsgos.paginate(page: params[:page], :per_page => 3)
     @letsgo = current_user.letsgos.build
     @similar_users = @user.similar.shuffle.first(8)
@@ -63,12 +95,14 @@ end
     @user = current_user
     @search = Search.new
     page = params[:page] || 1
+    @order = params[:order] || ['age', 'created_at', 'birthday', 'username'].shuffle.first
      if @user.present?
-		@users = User.search(:without => {:user_id => @user.id}, :page => page, :per_page => 4, :order => 'created_at DESC')
+		@users = User.search(:without => {:user_id => @user.id}, :page => page, :per_page => 4, :order => "#{@order} DESC")
 	 else
-		@users = User.search(:page => page, :per_page => 4, :order => 'created_at DESC')
+		@users = User.search(:page => page, :per_page => 4, :order => "#{@order} DESC")
 	 end
 	 
+	 @page = page	 
     if request.xhr?
 		render :partial => 'user', :layout => false, :collection => @users
     else
@@ -90,8 +124,24 @@ end
       current_user
     end
     params[:user].delete("user_id")
-    @user.update_attributes(params[:user])
-    respond_with @user
+    if @user.update_attributes(params[:user])
+      respond_with @user
+    else
+      render :action => 'settings', :layout => 'new_application'
+    end
+  end
+  
+   def set_follow
+    @user = User.find_by(username: params[:id])
+    friend = User.find_by(username: params[:id])
+    if current_user.following? friend
+		current_user.unfollow! friend 
+	else
+	    current_user.follow! friend 
+	end
+	respond_to do |format|
+      format.js {render '/users/set_follow.js'}
+    end
   end
     
   def follow
@@ -151,7 +201,19 @@ end
     @search = Search.new
     render :index, layout: 'new_application'
   end
-     
+
+  def disconnect_facebook
+    AccessToken.where("user_id =? AND social_network =?", current_user.id, "F").delete_all
+    flash[:notice] = "Disconnected From Facebook."
+    redirect_to :back
+  end
+
+  def disconnect_twitter
+    AccessToken.where("user_id =? AND social_network =?", current_user.id, "T").delete_all
+    flash[:notice] = "Disconnected From Twitter."
+    redirect_to :back
+  end
+
   private
     
     

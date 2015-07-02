@@ -8,7 +8,6 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require jquery.ui.all
  *= require_self
  *= require magnific-popup.css
  *= require style
@@ -205,7 +204,7 @@ img.profImg {
   position: absolute;
   border: 1px solid #918a8a;
   /*bottom: 50px;*/
-  top:1px;
+  top:-16px;
   right: -15px;
   /*z-index: -1;*/
 }
@@ -219,4 +218,253 @@ img.profImg {
     display: inline-block;
     padding: 2px 8px;
     background: url('/assets/ask_btn_bg.png') no-repeat scroll 45px 1px transparent;
+}
+
+.stream-card {
+background: #fdfaf5;
+border: solid 1px #dcd6cb;
+border-radius: 5px;
+margin: 0 0 20px 0;
+padding: 20px 20px 17px;
+position: relative;
+box-shadow: 0 1px 1px #e6e2da;
+font-family: "FreightTextPro",Baskerville,Georgia,serif;
+text-transform: none;
+list-style: none;
+position: relative;
+width: 570px;
+}
+
+.media:last-child {
+margin-bottom: 0;
+}
+
+.media, .media-content {
+overflow: hidden;
+zoom: 1;
+}
+
+.media .media-snapshot {
+float: left;
+margin-right: 20px;
+}
+
+a:active, a:visited {
+color: #39b4d5;
+}
+
+.media .media-snapshot .media-avatar {
+display: block;
+}
+
+.stream-card img {
+border-radius: 5px;
+}
+img {
+border: 0;
+-ms-interpolation-mode: bicubic;
+}
+
+.media-snapshot .show-quickview {
+background-color: #39b4d5;
+border-bottom-right-radius: 5px;
+color: #fff;
+display: none;
+height: 20px;
+margin-left: 70px;
+margin-top: -30px;
+opacity: .7;
+padding: 5px;
+position: absolute;
+width: 20px;
+}
+.media .media-snapshot .media-meta {
+margin-top: 10px;
+}
+.media-meta {
+margin: 0;
+}
+.media-meta dt {
+font-family: "FreightTextPro",Baskerville,Georgia,serif;
+text-transform: none;
+font-size: 18px;
+line-height: 1.4;
+margin: 0;
+max-width: 100px;
+}
+.media-meta dt, .media-meta dd {
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+.media-meta dd {
+font-family: "FetteEngD",Tahoma,Geneva,sans-serif;
+text-transform: uppercase;
+color: #9e9789;
+display: block;
+font-size: 15px;
+line-height: 1.2;
+margin-left: 0;
+}
+.media .media-snapshot .media-meta {
+margin-top: 10px;
+}
+.media-meta dt, .media-meta dd {
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+.media, .media-content {
+overflow: hidden;
+zoom: 1;
+}
+.stream-card .card-content {
+font-size: 18px;
+margin-right: 20px;
+margin-bottom: 15px;
+min-height: 55px;
+position: relative;
+top: -2px;
+}
+
+.stream-card .card-header {
+font-family: "FetteEngD",Tahoma,Geneva,sans-serif;
+text-transform: uppercase;
+font-size: 18px;
+margin-bottom: 10px;
+margin-top: 0;
+}
+
+.haw-leader {
+font-family: "FetteEngD",Tahoma,Geneva,sans-serif;
+text-transform: uppercase;
+color: #39b4d5;
+font-size: 18px;
+line-height: 1;
+margin-bottom: 6px;
+padding: 0 2px 0 0;
+}
+
+.icon-haw-quote::before {
+content: "q";
+}
+
+[class^="icon-"]::before, [class*=" icon-"]::before {
+font-size: 130%;
+line-height: .5;
+position: relative;
+top: 2px;
+}
+
+.button.processing::before, .new_form input.button.processing::before, .new_form button.button.processing::before, .new_form .ui-datepicker .ui-datepicker-header .ui-datepicker-prev, .new_form .ui-datepicker .ui-datepicker-header .ui-datepicker-next, [class^="icon-"]::before, [class*=" icon-"]::before, .stream-container.loading:before, .loading-indicator .spinner:before {
+font-family: "HAWDating";
+font-style: normal;
+speak: none;
+text-transform: none;
+}
+
+.stream-card .card-content {
+font-size: 18px;
+margin-right: 20px;
+margin-bottom: 15px;
+min-height: 55px;
+position: relative;
+top: -2px;
+}
+
+.stream-card .card-actions {
+margin-bottom: 2px;
+}
+
+.column-container:after, #premium-upgrade-modal .confirm:after, .stream-card .card-info:after, .stream-card .card-actions:after, .daily-dates-thumbs:after, .new-tabs:after, .btn-group:after, .inbox-controls:after, .new-search .actions:after, .profile-basics:after, .user-basics .sliders:after, .user-answers .editing:after {
+clear: both;
+content: " ";
+display: block;
+font-size: 0;
+height: 0;
+visibility: hidden;
+}
+
+.right {
+float: right;
+margin-left: 15px;
+}
+
+blockquote {
+quotes:"\201C" "\201D";
+}
+blockquote:before, blockquote:after {
+font:bold 45px/1px Times, serif;
+color:#15abcd;
+position:absolute;
+}
+blockquote:before {
+content:open-quote;
+margin:15px 0 0 -25px;
+}
+
+#header .dropdown-menu{
+width:140px; 
+top: 100%; 
+left: 0; 
+display: none;
+z-index: 1000; 
+float: left; 
+padding: 5px 0; 
+font-size: 13px;
+text-align: left; 
+list-style: none; 
+background-color: #f7f7f7; 
+-webkit-background-clip: padding-box; 
+background-clip: padding-box; 
+border: 1px solid #ccc; 
+border: 1px solid rgba(0,0,0,.15); 
+border-radius: 4px; 
+-webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175); 
+box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+#header .dropdown-menu li a {
+display: block;
+padding: 3px 20px;
+clear: both;
+font-weight: 400;
+line-height: 1.42857143;
+color: #333;
+white-space: nowrap;
+}
+#header .dropdown-menu li:hover{
+	background-color: blue;
+}
+#header .dropdown-menu li a:hover{
+ color: white;
+}
+
+#header .user_avatar {
+width: 26px;
+height: 26px;
+}
+
+.notice_flash {
+  position: fixed;
+  bottom: 0;
+  display: none;
+  right: 0;
+  width: 20%;
+  background: orange;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  z-index: 10000;
+}
+.notice_flash .close{
+	float: right;
+background-color: orange;
+border: none;
+color: white;
+}
+
+.header_avatar {
+ margin-top: -21px;
+ height: 40px;
+ width: 40px;
 }

@@ -1,7 +1,7 @@
 class Question < ActiveRecord::Base
     acts_as_messageable
     
-  attr_accessible :answer, :question, :sender_id, :recipient_id, :conversation_id
+  attr_accessible :answer, :question, :sender_id, :recipient_id, :conversation_id, :twitter, :facebook
   belongs_to :user
 
   belongs_to :sender,:class_name => 'User',:foreign_key => 'sender_id'

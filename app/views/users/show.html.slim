@@ -1,3 +1,6 @@
+- if flash[:notice]
+	p.flash
+	  = flash[:notice]
 .wrapper
   #profile_container
     .profile_top
@@ -24,37 +27,66 @@
             h4
               | Career: 
               span.color
-               = best_in_place @user, :career,  nil: 'What earns you money?'
+               - if current_user.admin? or current_user == @user
+                 = best_in_place @user, :career,  nil: 'What earns you money?'
+               - else
+                 = @user.career
             h4
               | Education: 
-              span.color 
-                = best_in_place @user, :education, nil: 'What is your education level?', :type => :select, :collection => [["High school", "High school"], ["Some college", "Some college"], ["Undergraduate", "Undergraduate"], ["Bachelor's", "Bachelor's"], ["Master's", "Master's"], ["PhD", "PhD"], ["Business school", "Business school"], ["Law school", "Law school"], ["Medical school", "Medical school"]]
+              span.color
+                - if current_user.admin? or current_user == @user
+                  = best_in_place @user, :education, nil: 'What is your education level?', :type => :select, :collection => [["High school", "High school"], ["Some college", "Some college"], ["Undergraduate", "Undergraduate"], ["Bachelor's", "Bachelor's"], ["Master's", "Master's"], ["PhD", "PhD"], ["Business school", "Business school"], ["Law school", "Law school"], ["Medical school", "Medical school"]]
+                - else
+                  = @user.education
             h4
               | Ethnicity: 
-              span.color 
-               = best_in_place @user, :ethnicity, nil: 'What is your ethnicity?', :type => :select, :collection => [["Asian", "Asian"], ["Black", "Black"], ["Biracial", "Biracial" ], ["Indian", "Indian"], ["Hispanic/Latin", "Hispanic/Latin"], ["Middle Eastern", "Middle Eastern"], ["Native American", "Native American"], ["Pacific Islander", "Pacific Islander"], ["White", "White"], ["Other", "Other"]]
+              span.color
+                - if current_user.admin? or current_user == @user
+                  = best_in_place @user, :ethnicity, nil: 'What is your ethnicity?', :type => :select, :collection => [["Asian", "Asian"], ["Black", "Black"], ["Biracial", "Biracial" ], ["Indian", "Indian"], ["Hispanic/Latin", "Hispanic/Latin"], ["Middle Eastern", "Middle Eastern"], ["Native American", "Native American"], ["Pacific Islander", "Pacific Islander"], ["White", "White"], ["Other", "Other"]]
+                - else
+                  = @user.ethnicity
             h4
               | Religion: 
-              span.color 
-                =best_in_place @user, :religion, nil: 'What is your faith?', :type => :select, :collection => [["Agnostic", "Agnostic"], ["Atheist", "Atheist"], ["Christian", "Christian"], ["Catholic", "Catholic"], ["Buddhist", "Buddhist"], ["Hindu", "Hindu"], ["Jewish", "Jewish"], ["Muslim", "Muslim"], ["Spiritual without affiliation", "Spiritual without affiliation"], ["Other", "Other"], ["None", "None"], ["Prefer not to say", "Prefer not to say"]]
+              span.color
+                - if current_user.admin? or current_user == @user
+                  = best_in_place @user, :religion, nil: 'What is your faith?', :type => :select, :collection => [["Agnostic", "Agnostic"], ["Atheist", "Atheist"], ["Christian", "Christian"], ["Catholic", "Catholic"], ["Buddhist", "Buddhist"], ["Hindu", "Hindu"], ["Jewish", "Jewish"], ["Muslim", "Muslim"], ["Spiritual without affiliation", "Spiritual without affiliation"], ["Other", "Other"], ["None", "None"], ["Prefer not to say", "Prefer not to say"]]
+                - else
+                  = @user.religion
             h4
               | Politics: 
-              span.color 
-                = best_in_place @user, :politics, nil: 'How important is this to you?', :type => :select, :collection => [["Very Important", "Very Important"], ["Somewhat Important", "Somewhat Important"], ["Not Important", "Not Important"]]
+              span.color
+                - if current_user.admin? or current_user == @user
+                  = best_in_place @user, :politics, nil: 'How important is this to you?', :type => :select, :collection => [["Very Important", "Very Important"], ["Somewhat Important", "Somewhat Important"], ["Not Important", "Not Important"]]
+                - else
+                  = @user.politics
             h4
               | Children: 
-              span.color 
-                = best_in_place @user, :children, nil: 'Do you have or wants kids?', :type => :select, :collection => [["Yes, they live with me", "Yes, they live with me"], ["I want kids now", "I want kids now"], ["I want kids now", "I want one someday"], ["Not for me", "Not for me"]]
+              span.color
+                - if current_user.admin? or current_user == @user
+                  = best_in_place @user, :children, nil: 'Do you have or wants kids?', :type => :select, :collection => [["Yes, they live with me", "Yes, they live with me"], ["I want kids now", "I want kids now"], ["I want one someday", "I want one someday"], ["Not for me", "Not for me"]]
+                - else
+                  = @user.children
             h4
               | Does User Smoke: 
-              span.color = best_in_place @user, :user_smoke, nil: 'Select how often you smoke', :type => :select, :collection => [["Often smokes", "Often smokes"], ["Sometimes smokes", "Sometimes smokes"], ["Never smoke", "Never smoke"]]
+              span.color
+                - if current_user.admin? or current_user == @user
+                  = best_in_place @user, :user_smoke, nil: 'Select how often you smoke', :type => :select, :collection => [["Often smokes", "Often smokes"], ["Sometimes smokes", "Sometimes smokes"], ["Never smoke", "Never smoke"]]
+                - else
+                  = @user.user_smoke
             h4
               | Does User Drink: 
-              span.color = best_in_place @user, :user_drink, nil: 'Select how much you drink', :type => :select, :collection => [["Often drinks", "Often drinks"], ["Sometimes drinks", "Sometimes drinks"], ["Never drinks", "Never drinks"]]
+              span.color
+                - if current_user.admin? or current_user == @user
+                  = best_in_place @user, :user_drink, nil: 'Select how much you drink', :type => :select, :collection => [["Often drinks", "Often drinks"], ["Sometimes drinks", "Sometimes drinks"], ["Never drinks", "Never drinks"]]
+                else
+                  = @user.user_drink
             h4
               | Height: 
-              span.color 
-                = best_in_place @user, :height ,nil: '0`0'
+              span.color
+                - if current_user.admin? or current_user == @user
+                  = best_in_place @user, :height ,nil: '0`0'
+                - else
+                  = @user.height
             .corner_bg
               img alt="" src="/assets/side_curv.png" /
       .right_sec
@@ -68,31 +100,38 @@
               ',
               = @user.sexuality
               '
-              span 
-                = @user.location.try(:city)
-                ',
-                = @user.location.try(:state)
-            span.fb_con
-              | Facebook Connected
-              img alt="" src="/assets/fb_link.png" /
+              br
+              = @user.location.try(:city)
+              ',
+              = @user.location.try(:state)
             span.text_detail
               | joined 
               = distance_of_time_in_words_to_now(@user.created_at) 
               '&nbsp;ago
-              strong Last online 4 hours ago
-          - if @user.letsgos.any? || current_user?(@user)
-            .lets_go   
-              = render '/letsgos/letsgo'
+              strong Last online #{distance_of_time_in_words_to_now(@user.updated_at).gsub(/\d+/, 'few')} ago
+
+          .lets_go
+            - if @user.letsgos.any?
+              .list
+                = render '/letsgos/letsgo'
+            -elsif @user != current_user
+              b #{@user.username} has not posted any dates yet.
               br
-              - if current_user?(@user)
-                .pull-right
-                  .profile_middle_container1 
-                    .ask_btn1
-                      -if @letsgos.blank?
-                        = link_to "Post First Date", '#', :class => "read_more_btn1 add_date", 'data-mfp-src'=>'#letsgo_form_div',:style => "text-decoration:none;color:#3f4244;"
-                      -else
-                        = link_to "Post Date", '#', :class => "read_more_btn1 add_date", 'data-mfp-src'=>'#letsgo_form_div', :style => "text-decoration:none;color:#3f4244;"
-                  
+              br
+              .pull-right
+                .profile_middle_container1
+                  .ask_btn1 style="background-position: center;"
+                    = link_to (@user.gender == 'Male' ? "Ask him out" : "Ask her out"), '#', :class => "read_more_btn1 add_date", 'data-mfp-src'=> '#ask_me', :style => "text-decoration:none;color:#3f4244;"
+            - if current_user?(@user)
+              br
+              .pull-right
+                .profile_middle_container1
+                  .ask_btn1 style="background-position: center;"
+                    -if @letsgos.blank?
+                      = link_to "Post First Date", '#', :class => "read_more_btn1 add_date", 'data-mfp-src'=>'#letsgo_form_div',:style => "text-decoration:none;color:#3f4244;"
+                    -else
+                      = link_to "Post Date", '#', :class => "read_more_btn1 add_date", 'data-mfp-src'=>'#letsgo_form_div', :style => "text-decoration:none;color:#3f4244;"
+
                  
         
             / span.pic_box3
@@ -106,24 +145,22 @@
             /   span.pic_detail3
             /     strong response rate:
             /     span = @user.average_response_time
+          - if @user.letsgos.any? || current_user?(@user)
             .testimonial_box
-              - if current_user == @user
-                - if @user.about_me
-                  = best_in_place @user, :about_me, :type => :textarea
-                - else
-                  Describe Describe yourself here
+              - if current_user == @user or current_user.admin?
+                  = best_in_place @user, :about_me, :type => :textarea, :place_holder => 'Describe yourself here'
               - else
                 - if @user.about_me
                   = @user.about_me
                 - else
                   = "#{@user.username} has not filled out their about me section yet"
-          -if @user.photos.present? == false
+          -if current_user?(@user) and @user.photos.present? == false
             .slider_container
               h4 Photos
               = form_for Photo.new do |f|
                 br
                 = f.file_field :image, multiple: true, name: "photo[image]", id: "input_file" , style: "display: none"
-                = link_to "Upload", '#', :class => "upload_image", :id => "upload"
+                = link_to "Upload", '#', :class => "upload_image upload", :id => "upload"
               script#template-upload[type="text/x-tmpl"]
                 |  <div class="upload"> {%=o.name%} <div class="progress"><div class="bar" style="width: 0%"></div></div> </div> 
           -else
@@ -137,20 +174,21 @@
                   li class="#{index > 2 ? 'hide' : ''}"
                     = link_to image_tag(photo.image_url(:thumb)), "#" + dom_id(photo)
                     div id="#{dom_id(photo)}" class="mfp-hide"
-                      center
-                        = image_tag(photo.image_url(:popup))
-                        - if  @user == current_user
-                          = button_to('Set as Profile Image', [:avatar, photo], class: 'btn')
-                          '
-                          = button_to "remove", photo, :confirm => 'Are you sure?', :method => :delete, class: 'btn'
-                          = form_for Photo.new do |f|
-                            = f.label :image, "Upload photos:"
-                            = f.file_field :image, multiple: true, name: "photo[image]"
-                          script#template-upload type="text/x-tmpl" 
-                            .upload
-                              | {%=o.name%}
-                              .progress
-                                .bar style=("width: 0%") 
+					  - if @user == current_user
+		                  center
+		                    = image_tag(photo.image_url(:popup))
+		                    - if  @user == current_user
+		                      = button_to('Set as Profile Image', [:avatar, photo], class: 'btn')
+		                      '
+		                      = button_to "remove", photo, :confirm => 'Are you sure?', :method => :delete, class: 'btn'
+		                      = form_for Photo.new do |f|
+		                        = f.label :image, "Upload photos:"
+		                        = f.file_field :image, multiple: true, name: "photo[image]"
+		                      script#template-upload type="text/x-tmpl" 
+		                        .upload
+		                          | {%=o.name%}
+		                          .progress
+		                            .bar style=("width: 0%") 
                           
                       - unless @user == current_user
                         .form
@@ -158,17 +196,29 @@
                             .col.col2
                               .large
                                 center
-                                  .message_div
+                                  = image_tag(photo.image_url(:popup))
+                                  .message_div.send-a-message-div style="height:120px;"
                                     h3 
                                      = form_tag messages_path, method: :post, remote: true, class:'form-horizontal',id: 'message_form', role: 'form'
                                        = hidden_field_tag :user, @user.id
                                        .form-group
                                          = hidden_field_tag :subject, "#{@current_user} messaged you", class: 'form-control' 
                                        .form-group
-                                         = label_tag :body, 'Send a Message', class: 'control-label'
-                                         = text_field :body, nil, placeholder: "Hi, I like your picture and figured I should write you a message and say...", class: 'form-control' 
+                                         = label_tag :body, 'Send a Message', class: 'control-label', style: "margin-bottom:1px;"
+										 - if  @user == current_user
+										   = button_to('Set as Profile Image', [:avatar, photo], class: 'btn')									  
+										   = button_to "remove", photo, :confirm => 'Are you sure?', :method => :delete, class: 'btn'
+										   = form_for Photo.new do |f|
+											 = f.label :image, "Upload photos:"
+											 = f.file_field :image, multiple: true, name: "photo[image]"
+											 script#template-upload type="text/x-tmpl" 
+											   .upload
+											   | {%=o.name%}
+											   .progress
+											   .bar style=("width: 0%") 
+                                         = text_area_tag :body, nil, placeholder: "Hi, I like your picture and figured I should write you a message and say...", class: 'form-control', style: "height:20px;" 
                                        br
-                                       = submit_tag 'Send Message', class: 'btn btn-primary'
+                                       = submit_tag 'Send', class: 'btn btn-primary send-a-message'
               a.right_arrow href="#" 
                 img alt="" src="/assets/right_arrow.png" /
     .profile_middle_container
@@ -195,32 +245,54 @@
           = render '/users/shared/user_item', :user => user
 #message_me.mfp-hide 
   center
-    .message_div
+    .message_div.send-a-message-div
       = form_tag messages_path, method: :post, remote: true, class:'form-horizontal',id: 'message_form', role: 'form'
         = hidden_field_tag :user, @user.id
         .form-group
           = hidden_field_tag :subject, "#{@current_user} messaged you", class: 'form-control' 
         .form-group
           = label_tag :body, 'Your Message', class: 'control-label'
+          hr
+            .commoon_sec
+              .left_sec
+                = image_tag(@user.avatar.try(:image_url,:profile))
+              .right_sec style="position:relative;"
+                .top_box style="position:absolute; border: 1px solid #cccccc; width: 456px; border-radius: 6px; height: 140px; background-color: #F7F7F7;"
+                  .left_box style="float:right; text-align:left; width: 68%;"
+                    h2 = @user.username
+                    h3
+                      = @user.age
+                      ',
+                      = @user.gender
+                      ',
+                      = @user.sexuality
+                      '
+                      br
+                      = @user.location.try(:city)
+                      ',
+                      = @user.location.try(:state)
           = text_area_tag :body, nil, placeholder: "Hi, I like your picture and figured I should write you a message and say...", class: 'form-control' 
         br
-        = submit_tag 'Send Message', class: 'btn btn-primary'
+        = submit_tag 'Send', class: 'btn btn-primary'
 #ask_me.mfp-hide 
           center
             .message_div
-              = form_tag url_for(:controller => 'messages', :action => 'askout'), :method => 'post'
+              = form_tag url_for(:controller => 'messages', :action => 'askout'), :method => 'post', :id => 'ask_me_form'
+                .form-group style="margin-bottom: -15px; margin-top: 10px;"
+                  = label_tag :body, (@user.gender == 'Male' ? 'Ask Him Out' : 'Ask Her Out'), class: 'control-label'
+                hr
                 = hidden_field_tag :user, @user.id
                 .form-group
                   = hidden_field_tag :subject, "#{@current_user} asked you out on a date", class: 'form-control' 
                 .form-group
-                  = label_tag :body, 'Your Message', class: 'control-label'
-                  = text_area_tag :body, nil, placeholder: "Hi, I like your picture and figured I should write you a message and say...", class: 'form-control' 
+                  = label_tag :body, 'Let\'s Go..', class: 'control-label', style: "position: absolute; margin-left: -187px; color: #353334; font-size: 15px; margin-top: 4px;"
+                  = text_area_tag :body, nil, placeholder: "Hi, I like your picture and figured I should write you a message and say...", class: 'form-control', style: 'height:57px; padding-top: 25px;'
                 br
-                = submit_tag 'Send Message', class: 'btn btn-primary'
+                = submit_tag 'Send', class: 'btn btn-primary ask-me'
 - if current_user.present?
   #question_me.mfp-hide 
     center
-      .message_div
+      .message_div.ask_me
         = form_for Question.new, class: 'question_form form-horizontal', role: 'form' do |f|
           .form-group
             = f.text_field :question, {:placeholder => 'Please add your question...',class:'form-control'}
@@ -236,7 +308,7 @@
       .message_div#follow_user
   #letsgo_form_div.mfp-hide
     center
-      .message_div
+      .message_div style="padding-right: 52px;"
         = render 'letsgos/form'
 javascript:
   $(document).ready(function () {
@@ -246,21 +318,47 @@ javascript:
         gallery: { enabled: true },
         showCloseBtn: true
     });
-    $('.img_box1').magnificPopup();
+    $('.img_box1').click(function(){
+		var user_id = "#{@user.avatar.present? ? @user.avatar.id : ''}" ;
+        if(user_id.length)
+		  $("a[href='#photo_" +user_id+ "']").trigger('click');
+    });
     $('.profile_btn').magnificPopup({
       showCloseBtn: true
     });
-    $('form#message_form').bind('ajax:success', function(evt, data, status, xhr){
-      $.magnificPopup.close()  
+    $('form#message_form, form#new_letsgo').bind('ajax:success', function(evt, data, status, xhr){
+      $.magnificPopup.close();
+      $('p.flash').text(data.notice);
     })
     $('.ask_btn').magnificPopup({
       showCloseBtn: true
     });
     $('.add_date').magnificPopup({
-      showCloseBtn: true
+      showCloseBtn: true,
+      callbacks: {
+        open: function () {
+          $("#new_letsgo").on('submit', function () {
+            if ($("#letsgo_content").val() && $("#letsgo_tag").val())
+              return true;
+            if ($("#letsgo_content").val() == '') {
+              $("#letsgo_content").css('border', '1px solid red');
+            }else{
+              $("#letsgo_content").css('border', '');
+            }
+
+            if ($("#letsgo_tag").val() == '') {
+              $("#letsgo_tag").parent('div').css('border', '1px solid red');
+            }else{
+              $("#letsgo_tag").parent('div').css('border', '');
+            }
+            return false;
+          });
+        }
+      }
     });
     $('form#question_form').bind('ajax:success', function(evt, data, status, xhr){
-      $.magnificPopup.close()  
+      $.magnificPopup.close();
+      $('p.flash').text(data.notice);
     })
     $('.report_btn').magnificPopup()
     $('.right_arrow').click(function(e){
@@ -282,7 +380,60 @@ javascript:
         })
         $('#current_index').val(next_index)
       }
-    })
+    });
+    $("#new_question, #ask_me_form").submit(function(e){
+     e.preventDefault();
+     var postData = $(this).serializeArray();
+     var formURL = $(this).attr("action");
+     $.ajax(
+		{
+			url : formURL,
+			type: "POST",
+			data : postData,
+			success:function(data, textStatus, jqXHR) 
+			{
+				$.magnificPopup.close();
+			},
+			error: function(jqXHR, textStatus, errorThrown) 
+			{
+				//if fails      
+			}
+		});
+    });
+
+    $("li a#repost").on('click', function (e) {
+      e.preventDefault();
+      var URL = $(this).attr("href");
+      $.ajax(
+              {
+                url: URL,
+                type: "POST",
+                success: function (data, textStatus, jqXHR) {
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                  //if fails
+                }
+              });
+      return false;
+    });
+
+    $("li a#interested").on('click', function (e) {
+      e.preventDefault();
+      var ClickedLink = this ;
+      var URL = $(this).attr("href");
+      $.ajax(
+              {
+                url: URL,
+                type: "POST",
+                success: function (data, textStatus, jqXHR) {
+                  $(ClickedLink).replaceWith("<span>I'm Interested</span>");
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                  //if fails
+                }
+              });
+      return false;
+    });
     
      $("#upload").click(function(){
     
@@ -319,4 +470,5 @@ javascript:
   $('a.see_more').click(function(){
     $('.letsgo_li').removeClass('hide');
     $(this).parent().remove();
-  })
+  });
+

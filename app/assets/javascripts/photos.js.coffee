@@ -15,3 +15,4 @@ jQuery ->
         data.context.find('.bar').css('width', progress + '%')
     stop: (e, data) ->
       $('.upload').hide()
+      location.reload();

@@ -1,3 +1,5 @@
+p.flash
+  = flash[:notice]
 .wrapper
   #top_sec
     .msg_row
@@ -83,7 +85,21 @@ javascript:
         prefill: false
       },
       function(){
+		$('.converation').click(function(e) {
+		  var href;
+		  href = $(this).data('href');
+		  if (!$('.conversation_avatar').is(e.target)) {
+			return window.location = href;
+		  }
+		});
         $('input[type=checkbox]').jqTransCheckBox();
+        $(".outer").hover(
+			  function() {
+				$( this ).find("div.message_delete").show();
+			  }, function() {
+				$( this ).find("div.message_delete").hide();
+			  }
+			);
        }
        );
     }
@@ -105,9 +121,30 @@ javascript:
         prefill: false
       },
        function(){
+       $('.converation').click(function(e) {
+		  var href;
+		  href = $(this).data('href');
+		  if (!$('.conversation_avatar').is(e.target)) {
+			return window.location = href;
+		  }
+		});
         $('input[type=checkbox]').jqTransCheckBox();
+        $(".outer").hover(
+			  function() {
+				$( this ).find("div.message_delete").show();
+			  }, function() {
+				$( this ).find("div.message_delete").hide();
+			  }
+			);
        }
       );
     }
+    
+    $(".outer").hover(
+	  function() {
+		$( this ).find("div.message_delete").show();
+	  }, function() {
+		$( this ).find("div.message_delete").hide();
+	  }
+	);
   })
-  
